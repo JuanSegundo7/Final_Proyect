@@ -13,6 +13,9 @@ export default function Home() {
   }, [dispatch])
 
   return (
-    <Form />
+    // <Form />
+    <div>
+      <p>Home</p>
+    </div>
   )
 }
