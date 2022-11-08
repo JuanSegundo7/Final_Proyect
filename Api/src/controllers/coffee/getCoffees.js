@@ -13,8 +13,6 @@ if (orderedbyname && orderedbyname.toUpperCase()==="ASC") sortOptions.push(["nam
 if (orderedbystock && orderedbystock.toUpperCase()==="DES") sortOptions.push(["stock", -1])
 if (orderedbystock && orderedbystock.toUpperCase()==="ASC") sortOptions.push(["stock"])
 
-console.log("mi ordenamiento:",sortOptions)
-
   try {
     const resp = await Coffee.find({ name: new RegExp(name, 'i') }).sort(sortOptions);
     return resp;
