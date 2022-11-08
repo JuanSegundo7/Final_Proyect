@@ -13,9 +13,9 @@ const Header = () => {
             </nav>
             <nav className='nav'>
                 <img src={logo} alt="logo"/>
-                {/* <Link to='create'> */}
+                <Link to='create'>
                     <SlUserFemale className='icono'/> 
-                {/* </Link> */}
+                </Link>
             </nav>
         </header>
     );
