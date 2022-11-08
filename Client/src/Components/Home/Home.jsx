@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCoffees } from "../../redux/Actions/Actions";
 import { Card } from "../Card/Card";
+import Detail from "../Detail/DetailProducts";
 //import Form from "../Form/Form";
 import "./Home.css";
 
@@ -15,9 +16,9 @@ export default function Home() {
   }, [dispatch]);
 
   return (
-
     <section id="Products">
       {/* <Form /> */}
+      <Detail />
       <div className="cardHome">
         {allCoffees.length &&
           allCoffees.map((cardCoffe) => {
@@ -39,5 +40,4 @@ export default function Home() {
       </div>
     </section>
   );
-
 }
