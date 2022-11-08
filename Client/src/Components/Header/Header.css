@@ -3,6 +3,19 @@
     justify-content: center;
 }
 
+#back-video{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: 100%;
+    z-index: -1;
+}
+
+#Header p{
+    color: #fff;
+}
+
 #span{
     font-weight: bolder;
 }
@@ -10,7 +23,7 @@
     display:flex;
     justify-content: space-between;
     height: 90px;
-    background-color: black;
+    background: transparent;
 }
 
 .icono{
