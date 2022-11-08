@@ -16,7 +16,7 @@ export default function Home() {
 
   return (
 
-    <div>
+    <section id="Products">
       {/* <Form /> */}
       <div className="cardHome">
         {allCoffees.length &&
@@ -37,7 +37,7 @@ export default function Home() {
             );
           })}
       </div>
-    </div>
+    </section>
   );
 
 }

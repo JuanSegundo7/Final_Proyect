@@ -29,10 +29,17 @@
 #Header h1{
     color: #fff;
     font-size: 140px;
-    margin: 0 3em;
+    margin: 0;
     font-family: 'Lobster', cursive;
     text-align: center;
     cursor: pointer;
+}
+
+#Header h2, #Header p{
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+    text-align: center;
 }
 
 #span{
@@ -77,6 +84,17 @@
     width: 100%;
     filter: brightness(0) invert(1);
     height: auto;
+}
+
+#Flex-info{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+#Flex-info p{
+    margin: 0 0.5em;
 }
 
 
