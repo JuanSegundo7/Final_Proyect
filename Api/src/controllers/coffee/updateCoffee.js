@@ -1,4 +1,4 @@
-const { Coffee } = require('../db');
+const { Coffee } = require('../../db');
 const ObjectId = require('mongoose').Types.ObjectId;
 
 const updateCoffee = async function (_id,data) {

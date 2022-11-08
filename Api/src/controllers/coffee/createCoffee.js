@@ -1,4 +1,4 @@
-const { Coffee } = require("../db.js")
+const { Coffee } = require("../../db.js")
 
 const createCoffee = async function (data) {
 
