@@ -1,4 +1,4 @@
-const { Coffee } = require("../db.js")
+const { Coffee } = require("../../db.js")
 
 const deleteCoffees = async function (_id) {
 
