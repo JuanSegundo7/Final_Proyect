@@ -1,34 +1,28 @@
 const { Router } = require('express');
 const router = Router();
-// const createCoffee = require("../controllers/coffee/createCoffee.js");
-// const getCoffees = require("../controllers/coffee/getCoffees.js");
-// const deleteCoffee = require("../controllers/coffee/deleteCoffee.js");
-// const getCoffeeByName = require("../controllers/coffee/getCoffeeByName.js");
-// const updateCoffee = require("../controllers/coffee/updateCoffee.js");
 const getProducts = require("../controllers/product/getProducts.js");
-const createProduct = require("../controllers/product/createProduct.js")
-const deleteProduct = require("../controllers/product/deleteProduct.js")
-const getProductByName = require("../controllers/product/getProductByName.js")
+const createProduct = require("../controllers/product/createProduct.js");
+const deleteProduct = require("../controllers/product/deleteProduct.js");
+const getProductById = require("../controllers/product/getProductById.js");
 
 router.get("/" , async (req,res) =>{
-    const{name} = req.query;
-    if(name){
         try {
-            const respuesta = await getProductByName(name);
+            const respuesta = await getProducts(req.query);
             res.send(respuesta);
         } catch (unError) {
             res.status(400).send(unError.message);
         }
-    }
-    else{
-        try {
-            const respuesta = await getProducts();
-            res.send(respuesta);
-        } catch (unError) {
-            res.status(400).send(unError.message);
-        }
-    }
 } )
+
+router.get("/:_id", async (req,res) =>{
+    try {
+        const{_id} = req.params;
+        const respuesta = await getProductById(_id);
+        res.send(respuesta)
+    } catch (unError) {
+        res.status(400).send(unError.message)
+    }
+})
 
 router.post("/" , async (req,res) =>{
     try {
