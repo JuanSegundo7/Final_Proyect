@@ -2,6 +2,23 @@ const { Router } = require('express');
 const router = Router();
 const createCoffee = require("../controllers/createCoffee.js");
 const getCoffees = require("../controllers/getCoffees.js");
+const deleteCoffee = require("../controllers/deleteCoffee.js");
+const getCoffeeByName = require("../controllers/getCoffeeByName.js");
+const updateCoffee = require("../controllers/updateCoffee.js");
+
+router.put("/:_id", async (req, res) => {
+    
+    const { _id } = req.params;
+    //const { name, description, origin, type, stock, category} = req.body;
+    
+    try{
+        let respuesta = await updateCoffee(_id,req.body);
+        res.send(respuesta);
+    }catch(unError){
+        res.status(400).send(unError.message);
+    }
+    
+})
 
 router.post("/", async function (req, res){
 
@@ -14,14 +31,37 @@ router.post("/", async function (req, res){
 });
 
 router.get("/", async function (req,res){
+    const { name } = req.query;
+    
+    if (name){
+        try{
+            const respuesta = await getCoffeeByName(name);
+            res.send(respuesta);
+        }catch(unError){
+            res.status(400).send(unError.message);
+        }  
+    }
+    else{
+        try {
+            const respuesta = await getCoffees();
+            res.send(respuesta);
+        }catch(unError){
+            res.status(400).send(unError.message);
+        }   
+    }
+    
+});
+
+router.delete("/:_id", async (req, res) => {
+
     try{
-        const respuesta = await getCoffees();
-        res.send(respuesta)
+        //console.log("soy params:",req.params);
+        const respuesta = await deleteCoffee(req.params._id);
+        res.send(respuesta);
     }catch(unError){
         res.status(400).send(unError.message)
     }
-});
-
+  });
 
 /* 
 
