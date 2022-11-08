@@ -5,7 +5,7 @@ import logo from "./img/coffee.png";
 import { Link } from "react-router-dom";
 
 const Header = () => {
-  return (
+ return (
     <header id="Header">
       <video
         id="back-video"
@@ -46,7 +46,5 @@ const Header = () => {
       <h1>Tiger Coffee</h1>
     </header>
   );
-};
-
-
+  }
 export default Header;
