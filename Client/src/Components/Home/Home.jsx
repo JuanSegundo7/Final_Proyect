@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCoffees } from "../../redux/Actions/Actions";
 import { Card } from "../Card/Card";
-import Form from "../Form/Form";
+//import Form from "../Form/Form";
 import "./Home.css";
 
 export default function Home() {
@@ -17,7 +17,7 @@ export default function Home() {
   return (
 
     <div>
-      <Form />
+      {/* <Form /> */}
       <div className="cardHome">
         {allCoffees.length &&
           allCoffees.map((cardCoffe) => {
