@@ -15,6 +15,7 @@ export default function Home() {
   }, [dispatch]);
 
   return (
+
     <div>
       <Form />
       <div className="cardHome">
@@ -38,4 +39,5 @@ export default function Home() {
       </div>
     </div>
   );
+
 }

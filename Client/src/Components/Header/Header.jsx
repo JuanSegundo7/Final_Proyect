@@ -1,3 +1,4 @@
+
 import React from "react";
 import "./Header.css";
 import logo from "./img/coffee.png";
@@ -46,5 +47,6 @@ const Header = () => {
     </header>
   );
 };
+
 
 export default Header;
