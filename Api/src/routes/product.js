@@ -7,6 +7,7 @@ const router = Router();
 // const updateCoffee = require("../controllers/coffee/updateCoffee.js");
 const getProducts = require("../controllers/product/getProducts.js");
 const createProduct = require("../controllers/product/createProduct.js")
+const deleteProduct = require("../controllers/product/deleteProduct.js")
 
 router.get("/" , async (req,res) =>{
     try {
@@ -18,7 +19,6 @@ router.get("/" , async (req,res) =>{
 } )
 
 router.post("/" , async (req,res) =>{
-
     try {
         const respuesta = await createProduct(req.body);
         res.send(respuesta)
@@ -26,6 +26,16 @@ router.post("/" , async (req,res) =>{
         res.status(400).send(unError.message);
     }
 })
+
+
+router.delete("/:_id", async (req, res) => {
+    try {
+        const respuesta = await deleteProduct(req.params._id);
+        res.send(respuesta);
+    } catch (unError) {
+        res.status(400).send(unError.message)
+    }
+});
 
 
 module.exports = router;
