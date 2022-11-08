@@ -16,7 +16,6 @@ export const getCoffees = () => {
     console.log(error.message, "Error en action");
   }
 };
-//asd
 
 export const postCoffes = (payload) => {
   return function (dispatch) {
