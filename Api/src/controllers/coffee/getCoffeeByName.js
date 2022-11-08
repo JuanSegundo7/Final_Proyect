@@ -1,4 +1,4 @@
-const { Coffee } = require('../db');
+const { Coffee } = require('../../db');
 
 const getCoffeeByName = async function (coffeeName) {
     

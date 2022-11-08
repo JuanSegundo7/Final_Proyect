@@ -1,10 +1,10 @@
 const { Router } = require('express');
 const router = Router();
-const createCoffee = require("../controllers/createCoffee.js");
-const getCoffees = require("../controllers/getCoffees.js");
-const deleteCoffee = require("../controllers/deleteCoffee.js");
-const getCoffeeByName = require("../controllers/getCoffeeByName.js");
-const updateCoffee = require("../controllers/updateCoffee.js");
+const createCoffee = require("../controllers/coffee/createCoffee.js");
+const getCoffees = require("../controllers/coffee/getCoffees.js");
+const deleteCoffee = require("../controllers/coffee/deleteCoffee.js");
+const getCoffeeByName = require("../controllers/coffee/getCoffeeByName.js");
+const updateCoffee = require("../controllers/coffee/updateCoffee.js");
 
 router.put("/:_id", async (req, res) => {
     
