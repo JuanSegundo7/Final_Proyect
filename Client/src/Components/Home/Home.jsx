@@ -13,6 +13,8 @@ export default function Home() {
   }, [dispatch])
 
   return (
-    <Form />
+    <section id="Home">
+      <p>hola</p>
+    </section>
   )
 }
