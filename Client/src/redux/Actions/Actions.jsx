@@ -2,6 +2,7 @@ import axios from "axios";
 export const GET_COFFES = "GET_COFFES";
 export const POST_CAFFEE = "POST_CAFFEE";
 export const DELETE_COFFEE = "DELETE_COFFEE";
+export const ABOUT = "ABOUT";
 
 export const getCoffees = () => {
   try {
@@ -35,3 +36,11 @@ export const postCoffes = (payload) => {
 export const deleteCoffee = (id) => {
   return { type: DELETE_COFFEE, id };
 };
+
+// export const about = (payload) => {
+//   console.log('action',payload)
+//   return{
+//     type:ABOUT,
+//     payload
+//   }
+// }
