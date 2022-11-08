@@ -7,61 +7,61 @@ const getCoffeeByName = require("../controllers/coffee/getCoffeeByName.js");
 const updateCoffee = require("../controllers/coffee/updateCoffee.js");
 
 router.put("/:_id", async (req, res) => {
-    
+
     const { _id } = req.params;
     //const { name, description, origin, type, stock, category} = req.body;
-    
-    try{
-        let respuesta = await updateCoffee(_id,req.body);
+
+    try {
+        let respuesta = await updateCoffee(_id, req.body);
         res.send(respuesta);
-    }catch(unError){
+    } catch (unError) {
         res.status(400).send(unError.message);
     }
-    
+
 })
 
-router.post("/", async function (req, res){
+router.post("/", async function (req, res) {
 
-    try{
+    try {
         const respuesta = await createCoffee(req.body);
         res.send(respuesta);
-    }catch(unError){
+    } catch (unError) {
         res.status(400).send(unError.message);
     }
 });
 
-router.get("/", async function (req,res){
+router.get("/", async function (req, res) {
     const { name } = req.query;
-    
-    if (name){
-        try{
+
+    if (name) {
+        try {
             const respuesta = await getCoffeeByName(name);
             res.send(respuesta);
-        }catch(unError){
+        } catch (unError) {
             res.status(400).send(unError.message);
-        }  
+        }
     }
-    else{
+    else {
         try {
             const respuesta = await getCoffees();
             res.send(respuesta);
-        }catch(unError){
+        } catch (unError) {
             res.status(400).send(unError.message);
-        }   
+        }
     }
-    
+
 });
 
 router.delete("/:_id", async (req, res) => {
 
-    try{
+    try {
         //console.log("soy params:",req.params);
         const respuesta = await deleteCoffee(req.params._id);
         res.send(respuesta);
-    }catch(unError){
+    } catch (unError) {
         res.status(400).send(unError.message)
     }
-  });
+});
 
 /* 
 
@@ -85,7 +85,7 @@ router.get("/", async function (req,res){
         }   
     }
     
-});     */ 
+});     */
 
 
 /* router.get("/:idPais", async function (req,res){
