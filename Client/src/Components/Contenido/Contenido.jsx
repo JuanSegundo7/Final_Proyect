@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategory, getCoffees } from "../../redux/Actions/Actions";
 import { Card } from "../Card/Card";
@@ -10,11 +10,24 @@ export default function Contenido() {
     const allCoffees = useSelector((state) => state.allCoffees);
     const allCagetory = useSelector((state) => state.category);
   
+    const [price, setPrice] = useState({
+      min:'1',
+      max:'5000'
+    })    
+
     useEffect(() => {
       dispatch(getCoffees());
       dispatch(getCategory())
     }, [dispatch]);
 
+    function handlePriceMin(e){
+      e.preventDefault()
+      setPrice({...price, min:e.target.value})
+    }
+    function handlePriceMax(e){
+      e.preventDefault()
+      setPrice({...price, max:e.target.value})
+    }
 
   return (
     <div id="Contenido">
@@ -28,10 +41,25 @@ export default function Contenido() {
               </select>
             </div>
             <div>
-              <select>
+              {/* <select>
                 <option>Min</option>
                 <option>Max</option>
-              </select>
+              </select> */}
+              <input 
+              type='range'
+              min='1'
+              max='5000'
+              onChange={(e) => handlePriceMin(e)}
+              />
+              <input 
+              type='range'
+              min='1'
+              max='5000'
+              onChange={(e) => handlePriceMax(e)}
+              />
+              {
+                <span>From {price.min} to {price.max} USD</span>
+              }
             </div>
             <div>
               <select>
