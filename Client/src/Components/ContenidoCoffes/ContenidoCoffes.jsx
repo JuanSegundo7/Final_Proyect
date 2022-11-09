@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { coffeeNameAZ, coffeeNameZA, getCategory, getCoffees } from "../../redux/Actions/Actions";
+import { coffeeNameAZ, coffeeNameZA, coffeeStockAsc, coffeeStockDes, getCategory, getCoffees } from "../../redux/Actions/Actions";
 import { Card } from "../Card/Card";
 import "./Contenido.css";
 
@@ -38,14 +38,23 @@ export default function ContenidoCoffes() {
       }
     }
 
+    function orderStock(e){
+      if(e.target.value === 'ASC'){
+        dispatch(coffeeStockAsc())
+      } else if(e.target.value === 'DSC'){
+        dispatch(coffeeStockDes())
+      }
+    }
+
   return (
     <div id="Contenido">
       <section id="Products">
         <div className="filters">
           <div className="menuFilters">
             <div>
+              <p>Order By Name</p>
               <select onChange={(e) => orderName(e)}>
-                <option>FILTER</option>
+                {/* <option disabled>Order By Name</option> */}
                 <option value='ASC'> A-Z </option>
                 <option value='DESC'>Z-A</option>
               </select>
@@ -76,10 +85,16 @@ export default function ContenidoCoffes() {
               </select>
             </div>
             <div>
+              <select onChange={(e) => orderStock(e)}>
+                <option value='ASC'> Menos Stock</option>
+                <option value='DSC'> Mas Stock</option>
+              </select>
+            </div>
+            {/* <div>
               <select>
                 <option>Mas Vendidos</option>
               </select>
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -89,12 +104,12 @@ export default function ContenidoCoffes() {
               return (
                 <div key={cardCoffe._id}>
                   <Card
+                    img={cardCoffe.image.url}
                     key={cardCoffe._id}
                     _id={cardCoffe._id}
                     name={cardCoffe.name}
                     origin={cardCoffe.origin}
                     type={cardCoffe.type}
-                    // img={cardCoffe.image.url}
                   />
                 </div>
               );
