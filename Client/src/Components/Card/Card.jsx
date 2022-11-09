@@ -7,7 +7,7 @@ export function Card(props) {
   return (
     <div className="cardContainer">
       <div id="card" key={props._id}>
-        <Link to={"coffee/" + props._id}>
+        <Link to={props._id}>
           <p>{props.name}</p>
         </Link>
         <p>{props.category}</p>
