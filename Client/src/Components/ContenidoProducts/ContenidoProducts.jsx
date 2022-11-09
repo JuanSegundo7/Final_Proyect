@@ -9,6 +9,8 @@ export default function ContenidoProducts() {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.allProducts);
 
+  console.log(allProducts)
+
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
@@ -27,7 +29,8 @@ export default function ContenidoProducts() {
                 // description={product.description}
                 type={product.type}
                 brand={product.brand}
-                // img={product.image.url}
+                img={product.image.url}
+
               />
             </div>
           );

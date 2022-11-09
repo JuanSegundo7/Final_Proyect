@@ -13,6 +13,10 @@ import {
   GET_COFFEE_BY_NAME,
   ORDER_PRODUCTS_A_Z,
   ORDER_PRODUCTS_Z_A,
+  ORDER_COFFEE_STOCK_ASC,
+  ORDER_COFFEE_STOCK_DSC,
+
+
 } from "../Actions/Actions";
 
 const initialState = {
@@ -90,6 +94,16 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allCoffees: action.payload,
       };
+    case ORDER_COFFEE_STOCK_ASC:
+      return{
+        ...state,
+        allCoffees:action.payload,
+      }
+    case ORDER_COFFEE_STOCK_DSC:
+      return{
+        ...state,
+        allCoffees:action.payload,
+      }
 
     case ORDER_PRODUCTS_A_Z:
       return {

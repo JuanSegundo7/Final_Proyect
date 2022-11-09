@@ -4,7 +4,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const createCoffee = async function (data) {
 
-  const { name, description, origin, type, stock, category, image } = data;
+  const { name, description, origin, price, type, stock, category, image } = data;
 
 //Data Validation
 if ((typeof(name)!=="string") || (!name.length)){
@@ -19,9 +19,13 @@ if ((typeof(origin)!=="string") || (!origin.length)){
   throw new Error("Error: Coffee origin cannot be empty and must be of text type.")
 }
 
+if ((typeof(price)!=="number") || (!(price>0))){
+  throw new Error("Error: Price must be a number and higher than 0.")
+}
+  
 const typeOptions = ["En Grano", "Molienda Gruesa", "Molienda Media", "Molienda Fina"];
 if (!typeOptions.includes(type)){
-  throw new Error("Error: Coffee type not valid.")
+  throw new Error("Error: Price must be a number and higher than 0.")
 }
 
 if (typeof(stock)!=="number")
@@ -61,6 +65,7 @@ else{
       name: name.toLowerCase(),
       description,
       origin,
+      price,
       type,
       stock,
       category,
