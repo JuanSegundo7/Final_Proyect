@@ -2,7 +2,7 @@ import axios from "axios";
 export const GET_COFFES = "GET_COFFES";
 export const POST_CAFFEE = "POST_CAFFEE";
 export const DELETE_COFFEE = "DELETE_COFFEE";
-export const DETAIL_PRODUCT = "DETAIL_PRODUCT";
+export const DETAIL_PRODUCTS = "DETAIL_PRODUCTS";
 export const DETAIL_COFFEE = "DETAIL_COFFEE";
 export const ABOUT = "ABOUT";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
@@ -54,6 +54,12 @@ export const cleanDetail = () => {
 export const getProducts = () => (dispatch) => {
   return axios(`http://localhost:3001/products`)
     .then((res) => dispatch({ type: GET_PRODUCTS, payload: res.data }))
+    .catch((err) => console.log(err.message));
+};
+
+export const detailProduct = (id) => (dispatch) => {
+  return axios(`http://localhost:3001/products/${id}`)
+    .then((res) => dispatch({ type: DETAIL_PRODUCTS, payload: res.data }))
     .catch((err) => console.log(err.message));
 };
 

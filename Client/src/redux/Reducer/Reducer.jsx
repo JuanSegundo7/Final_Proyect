@@ -13,6 +13,7 @@ const initialState = {
   allCoffees: [],
   about: false,
   detailCoffee: {},
+  detailProduct: {},
   allProducts: [],
 };
 
@@ -50,6 +51,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allProducts: action.payload,
+      };
+
+    case DETAIL_PRODUCTS:
+      return {
+        ...state,
+        detailProduct: action.payload,
       };
     // case ABOUT:
     //   console.log('reducer', action.payload)
