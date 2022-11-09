@@ -9,7 +9,6 @@ import './App.css';
 function App() {
   return (
     <BrowserRouter>
-      {/* <About /> */}
       <Header />
       <main>
           <Switch />
