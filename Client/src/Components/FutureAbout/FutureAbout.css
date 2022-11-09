@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+#Header {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+#Container {
+    padding: 0 8%;
+}
+
+#back-video{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    filter: brightness(70%);
+    z-index: -1;
+}
+
+
+#Header p{
+    color: #fff;
+}
+
+#Header h1{
+    color: #fff;
+    font-size: 140px;
+    margin: 0;
+    font-family: 'Lobster', cursive;
+    text-align: center;
+    cursor: pointer;
+}
+
+#Header h2, #Header p{
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+    text-align: center;
+}
+
+#span{
+    font-weight: bolder;
+}
+
+#flex-svgs{
+    margin-top: 0.5em;
+    display: flex;
+    width: 6em;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.svg{
+    fill: #fff;
+    width: 1.8em;
+    cursor: pointer;
+}
+
+#cart{
+    width: 2.2em;
+}
+
+.nav{
+    display:flex;
+    justify-content: space-between;
+    height: 5em;
+    background: transparent;
+    padding: 2em 0;
+}
+
+.nav figure{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.nav img{
+    max-width: 3.5em;
+    width: 100%;
+    filter: brightness(0) invert(1);
+    height: auto;
+}
+
+#Flex-info{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+#Flex-info p{
+    margin: 0 0.5em;
+}
+
+#Products{
+    height: 100vh;
+}
+
