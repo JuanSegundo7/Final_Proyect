@@ -5,10 +5,10 @@ import "./Home.css";
 
 export default function Home() {
   return (
-    <>
-      {/* <ContenidoCoffes /> */}
+  <>
+      {/* <ContenidoCoffes /> /}
       <ContenidoProducts />
-      {/* <About /> */}
+      {/ <About /> */}
     </>
   );
 }
