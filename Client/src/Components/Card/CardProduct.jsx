@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function CardProduct(props) {
   return (
     <div key={props._id}>
-      <Link to={"products/" + props._id}>
+      <Link to={props._id}>
         <p>{props.name}</p>
       </Link>
       <p>{props.description}</p>

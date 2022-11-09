@@ -8,8 +8,12 @@ import {
   CLEAN_DETAIL,
   GET_PRODUCTS,
   GET_CATEGORY,
+
   ORDERCOFFEES_AZ,
   ORDERCOFFEES_ZA,
+
+  GET_COFFEE_BY_NAME,
+
 } from "../Actions/Actions";
 
 const initialState = {
@@ -68,6 +72,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         category: action.payload,
       };
+
     case ORDERCOFFEES_AZ:{
       // console.log('llegue reducer', action.payload)
       return{
@@ -80,6 +85,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allCoffees:action.payload
       }
+
+    case GET_COFFEE_BY_NAME:
+      return {
+        ...state,
+        allCoffees: action.payload,
+      };
+
     default:
       return {
         ...state,

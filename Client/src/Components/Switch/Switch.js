@@ -6,15 +6,17 @@ import Home from "../Home/Home";
 import DetailCoffee from "../Detail/DetailCoffee";
 import DetailProducts from "../Detail/DetailProducts";
 import ContenidoCoffes from "../ContenidoCoffes/ContenidoCoffes";
+import ContenidoProducts from "../ContenidoProducts/ContenidoProducts";
 
 const SwitchRouter = () => {
   return (
     <Routes>
       <Route exact path="/" element={<Home />} />
       <Route exact path="/coffees" element={<ContenidoCoffes />} />
+      <Route exact path="/products" element={<ContenidoProducts />} />
       <Route exact path="/create" element={<Form />} />
-      <Route exact path="/coffee/:id" element={<DetailCoffee />} />
-      <Route exact path="/products/:id" element={<DetailProducts />} />
+      <Route path="coffees/:id" element={<DetailCoffee />} />
+      <Route path="products/:id" element={<DetailProducts />} />
     </Routes>
   );
 };
