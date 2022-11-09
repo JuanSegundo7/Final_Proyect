@@ -54,6 +54,17 @@
     background-color: var(--brown);
 }
 
+.dropdown-content::-webkit-scrollbar{
+    width: 5px;
+}
+
+.dropdown-content::-webkit-scrollbar-thumb{
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+
 .dropdown:hover, .dropdown-content a:hover {cursor: pointer}
 
 

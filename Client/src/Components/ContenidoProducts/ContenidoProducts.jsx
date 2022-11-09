@@ -27,7 +27,7 @@ export default function ContenidoProducts() {
                 description={product.description}
                 type={product.type}
                 brand={product.brand}
-                //img={product.image.url}
+                img={product.image.url}
               />
             </div>
           );
