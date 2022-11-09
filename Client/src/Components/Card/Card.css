@@ -3,13 +3,12 @@
   border-radius: 10px;
 }
 
-
-.cardContainer{
-	margin: 15px;
-	overflow: hidden;
+.cardContainer {
+  margin: 15px;
+  overflow: hidden;
 }
 
-.imgCard{
-  width:100px;
+.imgCard {
+  width: 100px;
   height: 100px;
 }

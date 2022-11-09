@@ -26,7 +26,7 @@ export default function () {
   };
 
   return (
-    <div id="Contenido">
+    <div id="container">
       <section id="Products">
         <div className="filteres">
           <div className="menuFilters">
@@ -38,13 +38,17 @@ export default function () {
               </select>
             </div>
             <div className="filterPrice">
+              MIN:
               <input
+                name="min"
                 type="range"
                 min="1"
                 max="5000"
                 onChange={(e) => handlerPrice(e)}
               />
+              MAX:
               <input
+                name="max"
                 type="range"
                 min="1"
                 max="5000"

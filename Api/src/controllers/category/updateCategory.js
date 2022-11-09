@@ -8,7 +8,7 @@ const { name } = data;   //esto es req.params
 //Data Validation
 if (!ObjectId.isValid(_id)) throw new Error ("No valid _id type provided for category!") 
 
-if ((typeof(name)!=="string") || (!name.length)){
+if (name && ((typeof(name)!=="string") || (!name.length))){
   throw new Error("Error: Category Name cannot be empty and must be of text type.")
 }
 
