@@ -11,6 +11,8 @@ export const GET_CATEGORY = "GET_CATEGORY";
 export const ORDERCOFFEES_AZ = "ORDERCOFFEES_AZ";
 export const ORDERCOFFEES_ZA = "ORDERCOFFEES_ZA"
 export const GET_COFFEE_BY_NAME = "GET_COFFEE_BY_NAME";
+export const ORDER_COFFEE_STOCK_ASC = 'ORDER_COFFEE_STOCK_ASC';
+export const ORDER_COFFEE_STOCK_DSC = "ORDER_COFFEE_STOCK_DSC";
 
 
 const baseUrl = `http://localhost:3001/`;
@@ -113,3 +115,22 @@ export const coffeeNameZA = () => (dispatch) => {
   .catch((error) => console.log(error.message))
 }
 
+export const coffeeStockAsc = () => (dispatch) => {
+  return axios(`http://localhost:3001/coffees?orderedbystock=asc`)
+  .then((res) => 
+  dispatch({
+    type:ORDER_COFFEE_STOCK_ASC,
+    payload:res.data
+  }))
+  .catch((error) => console.log(error.message))
+}
+
+export const coffeeStockDes = () => (dispatch) => {
+  return axios(`http://localhost:3001/coffees?orderedbystock=des`)
+  .then((res) => 
+  dispatch({
+    type:ORDER_COFFEE_STOCK_DSC,
+    payload:res.data
+  }))
+  .catch((error) => console.log(error.message))
+}
