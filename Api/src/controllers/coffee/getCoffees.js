@@ -14,7 +14,8 @@ if (orderedbystock && orderedbystock.toUpperCase()==="DES") sortOptions.push(["s
 if (orderedbystock && orderedbystock.toUpperCase()==="ASC") sortOptions.push(["stock"])
 
   try {
-    const resp = await Coffee.find({ name: new RegExp(name, 'i') }).sort(sortOptions);
+    const resp = await Coffee.find({ name: new RegExp(name, 'i') }).sort(sortOptions)
+    .populate("image").populate("category");
     return resp;
   }catch (unError){
     throw new Error(unError)

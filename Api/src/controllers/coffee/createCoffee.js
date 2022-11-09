@@ -1,9 +1,9 @@
-const { Coffee, Category } = require("../../db.js");
+const { Coffee, Category, Image } = require("../../db.js");
 
 
 const createCoffee = async function (data) {
 
-  const { name, description, origin, type, stock, category } = data;
+  const { name, description, origin, type, stock, category, image } = data;
 
 //Data Validation
 if ((typeof(name)!=="string") || (!name.length)){
@@ -37,6 +37,15 @@ catch(unError){
   throw new Error(unError.message)
 }
 
+try{
+  let resp = await Image.findById(image)
+  if (!resp) throw new Error(`Image id:${image} not found in the Database!`)
+}
+catch(unError){
+  throw new Error(unError.message)
+}
+
+
 //Si no tuve ningún error, creo el café.
   try {
     const newCoffee =  await Coffee.create({
@@ -45,7 +54,8 @@ catch(unError){
       origin,
       type,
       stock,
-      category
+      category,
+      image
     });
     return newCoffee;
 
