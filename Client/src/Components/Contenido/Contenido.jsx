@@ -7,7 +7,6 @@ import './Contenido.css'
 export default function Contenido() {
     const dispatch = useDispatch();
     const allCoffees = useSelector((state) => state.allCoffees);
-    //const about = useSelector((state) => state.about)
   
     useEffect(() => {
       dispatch(getCoffees());

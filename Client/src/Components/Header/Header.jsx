@@ -55,9 +55,7 @@ const Header = () => {
         <p>|</p>
 
             <Link to="About" activeClass="active"spy={true}smooth={true}duration={700}offset={-100}>
-
                 <h2>About</h2>
-
             </Link>
       </article>
     </header>
