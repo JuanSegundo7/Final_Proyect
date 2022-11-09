@@ -5,6 +5,14 @@ import { Card } from "../Card/Card";
 import "./Contenido.css";
 
 export default function Contenido() {
+<<<<<<< HEAD
+    const dispatch = useDispatch();
+    const allCoffees = useSelector((state) => state.allCoffees);
+  
+    useEffect(() => {
+      dispatch(getCoffees());
+    }, [dispatch]);
+=======
   const dispatch = useDispatch();
   const allCoffees = useSelector((state) => state.allCoffees);
   //const about = useSelector((state) => state.about)
@@ -12,6 +20,7 @@ export default function Contenido() {
   useEffect(() => {
     dispatch(getCoffees());
   }, [dispatch]);
+>>>>>>> fd00b2deb32c5cb08320f98b9a2f3a56d7c34dad
 
   return (
     <div id="Contenido">
