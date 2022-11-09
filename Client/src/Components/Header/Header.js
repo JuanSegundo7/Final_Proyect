@@ -1,13 +1,19 @@
-import React from 'react';
-import logo from './img/coffee.png'
+import React from "react";
+import logo from "./img/coffee.png";
 import { Link } from "react-scroll";
-import Dropdown from '../Dropdown/Dropdown'
+import Dropdown from "../Dropdown/Dropdown";
 import { Link as Navigator } from "react-router-dom";
 import "./Header.css";
 
 const Header = () => {
-
-    const Coffee = {array: [{id: 1, name:"Black"}, {id: 2, name:"Lungo"}, {id: 2, name:"Expresso"}], name: "Coffe"}
+  const Coffee = {
+    array: [
+      { id: 1, name: "Black" },
+      { id: 2, name: "Lungo" },
+      { id: 2, name: "Expresso" },
+    ],
+    name: "Coffe",
+  };
     
     return (
         <header>
