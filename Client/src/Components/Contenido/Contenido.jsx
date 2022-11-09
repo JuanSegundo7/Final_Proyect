@@ -14,7 +14,7 @@ export default function Contenido() {
   }, [dispatch]);
 
   return (
-    <div className="contenido">
+    <div id="Contenido">
       <section id="Products">
         <div className="filters">
           <div className="menuFilters">
@@ -42,6 +42,23 @@ export default function Contenido() {
             </div>
           </div>
         </div>
+        <div>
+          <select>
+            <option>Min</option>
+            <option>Max</option>
+          </select>
+        </div>
+        <div>
+          <select>
+            <option>Category</option>
+          </select>
+        </div>
+        <div>
+          <select>
+            <option>Mas Vendidos</option>
+          </select>
+        </div>
+
         <div className="cardHome">
           {allCoffees.length &&
             allCoffees.map((cardCoffe) => {
