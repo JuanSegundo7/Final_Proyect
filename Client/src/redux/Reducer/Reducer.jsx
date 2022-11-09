@@ -8,6 +8,7 @@ import {
   CLEAN_DETAIL,
   GET_PRODUCTS,
   GET_CATEGORY,
+  GET_COFFEE_BY_NAME,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -66,6 +67,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         category: action.payload,
+      };
+    case GET_COFFEE_BY_NAME:
+      return {
+        ...state,
+        allCoffees: action.payload,
       };
     default:
       return {

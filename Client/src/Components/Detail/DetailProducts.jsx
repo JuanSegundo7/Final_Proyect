@@ -20,6 +20,7 @@ export default function DetailProduct() {
 
   return (
     <div key={product._id}>
+      {/* <img src={product.image && product.image.url}></img> */}
       <p>{product.name}</p>
       <p>{product.description}</p>
       <p>{product.stock}</p>

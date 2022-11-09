@@ -8,6 +8,7 @@ export const ABOUT = "ABOUT";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_CATEGORY = "GET_CATEGORY";
+export const GET_COFFEE_BY_NAME = "GET_COFFEE_BY_NAME";
 
 const baseUrl = `http://localhost:3001/`;
 
@@ -42,6 +43,20 @@ export const postCoffes = (payload) => {
 
 export const deleteCoffee = (id) => {
   return { type: DELETE_COFFEE, id };
+};
+
+export const getCoffeesByName = (name) => {
+  try {
+    return async function (dispatch) {
+      let json = await axios.get(`${baseUrl}coffees?name=${name}`);
+      return dispatch({
+        type: GET_COFFEE_BY_NAME,
+        payload: json.data,
+      });
+    };
+  } catch (error) {
+    console.log(error.message, "Error en action");
+  }
 };
 
 export const detailCoffees = (id) => (dispatch) => {
