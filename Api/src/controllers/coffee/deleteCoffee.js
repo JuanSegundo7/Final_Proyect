@@ -1,6 +1,6 @@
 const { Coffee } = require("../../db.js")
 
-const deleteCoffees = async function (_id) {
+const deleteCoffee = async function (_id) {
 
     try{  
       
@@ -19,4 +19,4 @@ const deleteCoffees = async function (_id) {
       
 }
 
-module.exports = deleteCoffees;
+module.exports = deleteCoffee;

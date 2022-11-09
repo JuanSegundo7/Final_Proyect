@@ -11,7 +11,8 @@ const getProducts = async function(data) {
     if (orderedbystock && orderedbystock.toUpperCase()==="ASC") sortOptions.push(["stock", 1])
 
     try {
-        const allProducts = await Product.find({ name: new RegExp(name, 'i') }).sort(sortOptions);
+        const allProducts = await Product.find({ name: new RegExp(name, 'i') }).sort(sortOptions)
+        .populate("image");
         return allProducts;
     } catch (unError) {
         throw new Error(unError);
