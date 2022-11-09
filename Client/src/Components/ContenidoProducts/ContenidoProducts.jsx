@@ -17,10 +17,9 @@ export default function ContenidoProducts() {
       {allProducts.length &&
         allProducts.map((product) => {
           return (
-            <div className="cardProduct">
+            <div className="cardProduct" key={product._id}>
               <CardProduct
                 _id={product._id}
-                key={product._id}
                 name={product.name}
                 stock={product.stock}
                 description={product.description}
