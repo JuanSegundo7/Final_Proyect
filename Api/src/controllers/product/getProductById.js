@@ -1,8 +1,8 @@
 const {Product} = require("../../db.js");
 
-const getProductById = async function(_id){
+const getProductById = async function(id){
     try {
-        const response = Product.find({_id});
+        const response = Product.findById(id.toUpperCase());
         if(!response) throw new Error("No product matches the informed id...");
         return response;
     } catch (unError) {
