@@ -8,6 +8,8 @@ export const ABOUT = "ABOUT";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_CATEGORY = "GET_CATEGORY";
+export const ORDERCOFFEES_AZ = "ORDERCOFFEES_AZ";
+export const ORDERCOFFEES_ZA = "ORDERCOFFEES_ZA"
 
 const baseUrl = `http://localhost:3001/`;
 
@@ -74,3 +76,24 @@ export const getCategory = () => (dispatch) => {
     })
   );
 };
+
+export const coffeeNameAZ = () => (dispatch) => {
+  return axios(`http://localhost:3001/coffees?orderedbyname=asc`)
+  .then((res) => 
+  dispatch({
+    type:ORDERCOFFEES_AZ,
+    payload:res.data
+  }))
+  .catch((error) => console.log(error.message))
+}
+
+export const coffeeNameZA = () => (dispatch) => {
+  return axios(`http://localhost:3001/coffees?orderedbyname=des`)
+  .then((res) => 
+  dispatch({
+    type:ORDERCOFFEES_ZA,
+    payload:res.data
+  }))
+  .catch((error) => console.log(error.message))
+}
+

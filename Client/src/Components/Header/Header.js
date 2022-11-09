@@ -7,16 +7,16 @@ import "./Header.css";
 import { useSelector } from "react-redux";
 
 const Header = () => {
-    const allCagetory = useSelector((state) => state.category);
+    // const allCagetory = useSelector((state) => state.category);
 
-    const Categories = {array: allCagetory, name: "Categories"}
+    // const Categories = {array: allCagetory, name: "Categories"}
 
 
   const Coffee = {
     array: [
       { id: 1, name: "Black" },
       { id: 2, name: "Lungo" },
-      { id: 2, name: "Expresso" },
+      { id: 3, name: "Expresso" },
     ],
     name: "Coffe",
   };
@@ -59,7 +59,7 @@ const Header = () => {
             </nav>
             <nav id="Categorys">
                 <ul id="Categorys">
-                    <li><Dropdown info={Categories}/></li>
+                    {/* <li><Dropdown info={Categories}/></li> */}
                     <li><Dropdown info={Coffee}/></li>
                     <li><Dropdown info={Coffee}/></li>
                     <li><Dropdown info={Product}/></li>

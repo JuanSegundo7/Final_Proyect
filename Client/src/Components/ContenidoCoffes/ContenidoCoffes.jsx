@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategory, getCoffees } from "../../redux/Actions/Actions";
+import { coffeeNameAZ, coffeeNameZA, getCategory, getCoffees } from "../../redux/Actions/Actions";
 import { Card } from "../Card/Card";
 import "./Contenido.css";
 
@@ -24,9 +24,18 @@ export default function ContenidoCoffes() {
       e.preventDefault()
       setPrice({...price, min:e.target.value})
     }
+
     function handlePriceMax(e){
       e.preventDefault()
       setPrice({...price, max:e.target.value})
+    }
+
+    function orderName(e){
+      if(e.target.value === 'ASC'){
+        dispatch(coffeeNameAZ())
+      } else if(e.target.value === 'DESC'){
+        dispatch(coffeeNameZA())
+      }
     }
 
   return (
@@ -35,16 +44,13 @@ export default function ContenidoCoffes() {
         <div className="filters">
           <div className="menuFilters">
             <div>
-              <select>
-                <option>A-Z</option>
-                <option>Z-A</option>
+              <select onChange={(e) => orderName(e)}>
+                <option>FILTER</option>
+                <option value='ASC'> A-Z </option>
+                <option value='DESC'>Z-A</option>
               </select>
             </div>
-            <div>
-              {/* <select>
-                <option>Min</option>
-                <option>Max</option>
-              </select> */}
+            <div className="filterPrice">
               <input 
               type='range'
               min='1'

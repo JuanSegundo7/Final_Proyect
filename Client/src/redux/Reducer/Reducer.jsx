@@ -8,15 +8,16 @@ import {
   CLEAN_DETAIL,
   GET_PRODUCTS,
   GET_CATEGORY,
+  ORDERCOFFEES_AZ,
+  ORDERCOFFEES_ZA,
 } from "../Actions/Actions";
 
 const initialState = {
   allCoffees: [],
-  about: false,
-  detailCoffee: {},
-  detailProduct: {},
   allProducts: [],
   category: [],
+  detailCoffee: {},
+  detailProduct: {},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -67,6 +68,18 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         category: action.payload,
       };
+    case ORDERCOFFEES_AZ:{
+      // console.log('llegue reducer', action.payload)
+      return{
+        ...state,
+        allCoffees: action.payload, 
+      }
+    }
+    case ORDERCOFFEES_ZA:
+      return{
+        ...state,
+        allCoffees:action.payload
+      }
     default:
       return {
         ...state,
