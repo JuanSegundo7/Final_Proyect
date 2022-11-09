@@ -10,7 +10,7 @@ if ((typeof(name)!=="string") || (!name.length)){
 }
 
   try {
-    const newCategory =  await Category.create({name});
+    const newCategory =  await Category.create({name: name.toLowerCase()});
     return newCategory;
 
   }catch (unError){
