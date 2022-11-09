@@ -1,26 +1,20 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCoffees } from "../../redux/Actions/Actions";
+import { getCategory, getCoffees } from "../../redux/Actions/Actions";
 import { Card } from "../Card/Card";
 import "./Contenido.css";
 
 export default function Contenido() {
-<<<<<<< HEAD
+
     const dispatch = useDispatch();
     const allCoffees = useSelector((state) => state.allCoffees);
+    const allCagetory = useSelector((state) => state.category);
   
     useEffect(() => {
       dispatch(getCoffees());
+      dispatch(getCategory())
     }, [dispatch]);
-=======
-  const dispatch = useDispatch();
-  const allCoffees = useSelector((state) => state.allCoffees);
-  //const about = useSelector((state) => state.about)
 
-  useEffect(() => {
-    dispatch(getCoffees());
-  }, [dispatch]);
->>>>>>> fd00b2deb32c5cb08320f98b9a2f3a56d7c34dad
 
   return (
     <div id="Contenido">
@@ -41,7 +35,10 @@ export default function Contenido() {
             </div>
             <div>
               <select>
-                <option>Category</option>
+                {
+                  allCagetory && allCagetory.map((c) => <option key={c.name}>{c.name}</option>)
+                }
+                {/* <option>Category</option> */}
               </select>
             </div>
             <div>
@@ -50,22 +47,6 @@ export default function Contenido() {
               </select>
             </div>
           </div>
-        </div>
-        <div>
-          <select>
-            <option>Min</option>
-            <option>Max</option>
-          </select>
-        </div>
-        <div>
-          <select>
-            <option>Category</option>
-          </select>
-        </div>
-        <div>
-          <select>
-            <option>Mas Vendidos</option>
-          </select>
         </div>
 
         <div className="cardHome">

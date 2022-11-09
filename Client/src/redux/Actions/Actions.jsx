@@ -7,11 +7,14 @@ export const DETAIL_COFFEE = "DETAIL_COFFEE";
 export const ABOUT = "ABOUT";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const GET_PRODUCTS = "GET_PRODUCTS";
+export const GET_CATEGORY = "GET_CATEGORY";
+
+const baseUrl = `http://localhost:3001/`
 
 export const getCoffees = () => {
   try {
     return async function (dispatch) {
-      let json = await axios.get(`http://localhost:3001/coffees`);
+      let json = await axios.get(`${baseUrl}coffees`);
       return dispatch({
         type: GET_COFFES,
         payload: json.data,
@@ -25,7 +28,7 @@ export const getCoffees = () => {
 export const postCoffes = (payload) => {
   return function (dispatch) {
     axios
-      .post(`http://localhost:3001/coffees`, payload)
+      .post(`${baseUrl}coffees`, payload)
       .then((res) => {
         dispatch({
           type: POST_CAFFEE,
@@ -42,7 +45,7 @@ export const deleteCoffee = (id) => {
 };
 
 export const detailCoffees = (id) => (dispatch) => {
-  return axios(`http://localhost:3001/coffees/${id}`)
+  return axios(`${baseUrl}coffees/${id}`)
     .then((res) => dispatch({ type: DETAIL_COFFEE, payload: res.data }))
     .catch((err) => console.log(err.message));
 };
@@ -52,21 +55,21 @@ export const cleanDetail = () => {
 };
 
 export const getProducts = () => (dispatch) => {
-  return axios(`http://localhost:3001/products`)
+  return axios(`${baseUrl}products`)
     .then((res) => dispatch({ type: GET_PRODUCTS, payload: res.data }))
     .catch((err) => console.log(err.message));
 };
 
 export const detailProduct = (id) => (dispatch) => {
-  return axios(`http://localhost:3001/products/${id}`)
+  return axios(`${baseUrl}products/${id}`)
     .then((res) => dispatch({ type: DETAIL_PRODUCTS, payload: res.data }))
     .catch((err) => console.log(err.message));
 };
 
-// export const about = (payload) => {
-//   console.log('action',payload)
-//   return{
-//     type:ABOUT,
-//     payload
-//   }
-// }
+export const getCategory = () => (dispatch) => {
+  return axios(`${baseUrl}categories`)
+  .then((res) => dispatch({
+    type:GET_CATEGORY, 
+    payload:res.data
+  }))
+}
