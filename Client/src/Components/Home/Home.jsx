@@ -1,12 +1,11 @@
 import React from "react";
-import ContenidoProducts from "../ContenidoProducts/ContenidoProducts";
-import About from "../About/About";
 import "./Home.css";
+import Carrousel from "../Carrousel/Carrousel"
 
 export default function Home() {
   return (
-    <section>
-
+    <section id="Home">
+      <Carrousel />
     </section>
   );
 }
