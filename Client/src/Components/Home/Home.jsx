@@ -1,5 +1,4 @@
 import React from "react";
-import Contenido from "../Contenido/Contenido";
 import ContenidoProducts from "../ContenidoProducts/ContenidoProducts";
 import About from "../About/About";
 import "./Home.css";
@@ -7,7 +6,7 @@ import "./Home.css";
 export default function Home() {
   return (
     <>
-      <Contenido />
+      {/* <ContenidoCoffes /> */}
       <ContenidoProducts />
       <About />
     </>

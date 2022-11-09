@@ -1,7 +1,7 @@
 import {
   DELETE_COFFEE,
   GET_COFFES,
-  POST_CAFFEE,
+  POST_COFFEE,
   DETAIL_COFFEE,
   ABOUT,
   DETAIL_PRODUCTS,
@@ -28,7 +28,7 @@ const rootReducer = (state = initialState, action) => {
         allCoffees: action.payload,
         about: false,
       };
-    case POST_CAFFEE:
+    case POST_COFFEE:
       console.log("redurer post", action.payload);
       return {
         ...state,
