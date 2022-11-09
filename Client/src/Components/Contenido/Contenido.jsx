@@ -14,7 +14,7 @@ export default function Contenido() {
     }, [dispatch]);
 
   return (
-    <div className='contenido'>
+    <div id='Contenido'>
         <section id="Products">
             <div className='filters'>
                 <div className='menuFilters'>

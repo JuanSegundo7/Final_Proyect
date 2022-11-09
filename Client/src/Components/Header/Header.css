@@ -1,49 +1,50 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
-
-#Header {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-}
-
-#Container {
-    padding: 0 8%;
-}
-
-#back-video{
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    filter: brightness(70%);
-    z-index: -1;
-}
-
-
-#Header p{
-    color: #fff;
-}
-
-#Header h1{
-    color: #fff;
-    font-size: 140px;
+#ship{
+    background-color: var(--brown);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin: 0;
-    font-family: 'Lobster', cursive;
-    text-align: center;
-    cursor: pointer;
+    height: 2em;
+    padding: 0.2em 0;
 }
 
-#Header h2, #Header p{
+#ship p {
     color: #fff;
-    font-size: 30px;
-    cursor: pointer;
-    text-align: center;
+    font-size: 20px;
 }
 
-#span{
-    font-weight: bolder;
+#ship span{
+    font-weight: bold;
+    margin: 0 0.3em;
+}
+
+.svg{
+    fill: var(--background-color-top);
+    width: 1.8em;
+    cursor: pointer;
+}
+
+.nav{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 5em;
+    padding: 0 5%;
+    background: transparent;
+}
+
+.nav img{
+    max-width: 3.5em;
+    width: 100%;
+    filter: brightness(0);
+    height: auto;
+}
+
+.nav form{
+    display: flex;
+    width: 100%;
+    max-width: 20em;
 }
 
 #flex-svgs{
@@ -54,50 +55,43 @@
     justify-content: space-between;
 }
 
-.svg{
-    fill: #fff;
-    width: 1.8em;
-    cursor: pointer;
-}
-
 #cart{
     width: 2.2em;
 }
 
-.nav{
-    display:flex;
-    justify-content: space-between;
-    height: 5em;
-    background: transparent;
-    padding: 2em 0;
-}
-
-.nav figure{
+#search{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.nav img{
-    max-width: 3.5em;
+    align-self: center;
     width: 100%;
-    filter: brightness(0) invert(1);
-    height: auto;
-}
-
-#Flex-info{
-    display: flex;
-    width: 100%;
-    justify-content: center;
+    max-width: 20em;
+    justify-content: flex-start;
     align-items: center;
+    border-radius: 50px 0 0 50px;
+    padding: 10px 15px;
+    box-shadow: 0 2.5px 7.5px rgb(0 0 0 / 10%);
+    border: none;
 }
 
-#Flex-info p{
-    margin: 0 0.5em;
+#search:focus{
+    outline: none;
 }
 
-#Products{
-    height: 100vh;
+#search-button{
+    border-radius: 0 50px 50px 0;
+    height: 40px;
+    border: none;
+    transition: 0.5s;
 }
 
+#search-button svg {
+    fill: #fff;
+    width: 25px;
+    height: 25px;
+}
+
+#search-button:hover{
+    cursor: pointer;
+    color: #fff;
+    background-color: var(--brown);
+    transition: 0.5s;
+}
