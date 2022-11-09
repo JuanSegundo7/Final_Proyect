@@ -16,7 +16,7 @@ const initialState = {
   detailCoffee: {},
   detailProduct: {},
   allProducts: [],
-  category:[]
+  category: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -46,7 +46,9 @@ const rootReducer = (state = initialState, action) => {
       };
     case CLEAN_DETAIL:
       return {
+        ...state,
         detailCoffee: {},
+        detailProduct: {},
       };
 
     case GET_PRODUCTS:
@@ -63,8 +65,8 @@ const rootReducer = (state = initialState, action) => {
     case GET_CATEGORY:
       return {
         ...state,
-        category:action.payload
-      }
+        category: action.payload,
+      };
     default:
       return {
         ...state,

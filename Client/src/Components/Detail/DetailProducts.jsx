@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { detailProduct } from "../../redux/Actions/Actions";
+import { cleanDetail, detailProduct } from "../../redux/Actions/Actions";
 
 export default function DetailProduct() {
   const dispatch = useDispatch();
@@ -12,6 +12,10 @@ export default function DetailProduct() {
 
   useEffect(() => {
     dispatch(detailProduct(idProduct.id));
+
+    return () => {
+      dispatch(cleanDetail()); // para que se limpie el estado de detalle cuando lo saco y caundo aprete otro se ponga el nuevo y no qeude ese dilay del anterior
+    };
   }, [dispatch]);
 
   return (
