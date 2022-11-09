@@ -1,16 +1,16 @@
-import Switch from './Components/Switch/Switch'
-import Header from './Components/Header/Header'
-import Footer from './Components/Footer/Footer'
-import {BrowserRouter} from 'react-router-dom';
+import Switch from "./Components/Switch/Switch";
+import Header from "./Components/Header/Header";
+import Footer from "./Components/Footer/Footer";
+import { BrowserRouter } from "react-router-dom";
 
-import './App.css';
+import "./App.css";
 
 function App() {
   return (
     <BrowserRouter>
       <Header />
       <main>
-          <Switch />
+        <Switch />
       </main>
       <Footer />
     </BrowserRouter>
