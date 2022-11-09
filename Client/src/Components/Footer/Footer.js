@@ -1,10 +1,13 @@
 import React from 'react';
+import "./Footer.css"
+import logo from "../Header/img/coffee.png"
 
 const Footer = () => {
     return (
-        <div id="Footer">
-            <p>Footer</p>
-        </div>
+        <footer id="Footer">
+            <img id="logo-footer" src={logo} />
+            <h1>Tiger Coffee</h1>
+        </footer>
     );
 }
 
