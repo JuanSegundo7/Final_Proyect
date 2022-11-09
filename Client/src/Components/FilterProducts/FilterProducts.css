@@ -1,0 +1,38 @@
+.filterPrice {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#Products {
+  display: flex;
+}
+
+#Contenido {
+  width: 100%;
+  height: 100vh;
+  margin: 2.5em 0;
+}
+
+.filteres {
+  width: 100%;
+  box-shadow: 0 2.5px 7.5px rgb(0 0 0 / 20%);
+  border-radius: 15px;
+  margin: 1em;
+  height: 100vh;
+}
+
+.menuFilters {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.menuFilters div {
+  margin: 0.5em 0;
+}

@@ -1,33 +1,68 @@
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "../ContenidoCoffes/Contenido.css";
+import { productNameAZ, productNameZA } from "../../redux/Actions/Actions";
+import "./FilterProducts.css";
 
 export default function () {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.allProducts);
+  const [input, setInput] = useState({
+    min: "",
+    max: "",
+  });
 
   const handlerPrice = (e) => {
-    console.log(e.target.value, "es el value");
+    e.preventDefault();
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
+
+  const handlerOrdered = (e) => {
+    e.preventDefault();
+    e.target.value === "ASC"
+      ? dispatch(productNameAZ(e.target.value))
+      : dispatch(productNameZA(e.target.value));
   };
 
   return (
     <div id="Contenido">
       <section id="Products">
-        <div className="filters">
+        <div className="filteres">
           <div className="menuFilters">
-            <select>
-              <option value="ASC">A-Z</option>
-              <option value="DES">Z-A</option>
-            </select>
+            <div>
+              <select onChange={(e) => handlerOrdered(e)}>
+                <option>FILTER</option>
+                <option value="ASC"> A-Z </option>
+                <option value="DESC">Z-A</option>
+              </select>
+            </div>
+            <div className="filterPrice">
+              <input
+                type="range"
+                min="1"
+                max="5000"
+                onChange={(e) => handlerPrice(e)}
+              />
+              <input
+                type="range"
+                min="1"
+                max="5000"
+                onChange={(e) => handlerPrice(e)}
+              />
+              {
+                <span>
+                  From {input.min} to {input.max} USD
+                </span>
+              }
+            </div>
+            <div>
+              <select>
+                <option>Mas Vendidos</option>
+              </select>
+            </div>
           </div>
         </div>
-        <input
-          type="range"
-          min="0"
-          max="50000"
-          onChange={(e) => handlerPrice(e)}
-        />
       </section>
     </div>
   );
