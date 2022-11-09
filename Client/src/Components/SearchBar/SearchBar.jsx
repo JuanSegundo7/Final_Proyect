@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCoffeesByName } from "../../redux/Actions/Actions";
+import "./SearchBar.css"
 
 export default function SearchBar() {
   //const [input, setInput] = useState("");
