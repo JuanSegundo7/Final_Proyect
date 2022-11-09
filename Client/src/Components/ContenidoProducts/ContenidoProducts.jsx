@@ -8,6 +8,8 @@ export default function ContenidoProducts() {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.allProducts);
 
+  console.log(allProducts)
+
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
