@@ -1,11 +1,12 @@
-
 import React from "react";
 import "./Header.css";
 import logo from "./img/coffee.png";
 import { Link } from "react-scroll";
 import { Link as Navigator } from "react-router-dom";
 
+
 const Header = () => {
+
  return (
     <header id="Header">
       <video
@@ -17,10 +18,7 @@ const Header = () => {
         muted
       />
       <div id="Container">
-        {/* <nav className='nav-top'>
-                <p><span id='span'>Envíos Gratis </span> a todo el país en compras mayores a 
-                <span id='span'> $5000</span></p>
-             </nav> */}
+
         <nav className="nav">
           <figure>
             <img src={logo} alt="logo" />
@@ -47,10 +45,20 @@ const Header = () => {
         </nav>
       </div>
       <h1>Tiger Coffee</h1>
+
       <article id="Flex-info">
-        <Link to="Products" activeClass="active"spy={true}smooth={true}duration={700}offset={-100}><h2>Products</h2></Link>
+
+        <Link to="Products" activeClass="active"spy={true}smooth={true}duration={700}offset={-100}>
+            <h2>Products</h2>
+        </Link>
+
         <p>|</p>
-        <h2>About</h2>
+
+            <Link to="About" activeClass="active"spy={true}smooth={true}duration={700}offset={-100}>
+
+                <h2>About</h2>
+
+            </Link>
       </article>
     </header>
   );

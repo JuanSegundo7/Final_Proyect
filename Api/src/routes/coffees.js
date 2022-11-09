@@ -4,7 +4,7 @@ const createCoffee = require("../controllers/coffee/createCoffee.js");
 const getCoffees = require("../controllers/coffee/getCoffees.js");
 const deleteCoffee = require("../controllers/coffee/deleteCoffee.js");
 const updateCoffee = require("../controllers/coffee/updateCoffee.js");
-
+const getCoffeeById = require("../controllers/coffee/getCoffeeById");
 
 router.get("/", async function (req,res){
     
@@ -16,6 +16,16 @@ router.get("/", async function (req,res){
     }catch(unError){
         res.status(400).send(unError.message);
     }      
+});
+
+router.get("/:_idcoffee", async function (req,res){
+    const { _idcoffee } = req.params;
+    try {
+        const respuesta = await getCoffeeById(_idcoffee);
+        res.send(respuesta)
+    }catch(unError){
+        res.status(400).send(unError.message)
+    }
 });
 
 router.put("/:_id", async (req, res) => {
@@ -53,40 +63,5 @@ router.delete("/:_id", async (req, res) => {
     }
   });
 
-/* 
-
-router.get("/", async function (req,res){
-    const { name } = req.query;
-    
-    if (name){
-        try{
-            const respuesta = await getCountryByName(name);
-            res.send(respuesta);
-        }catch(unError){
-            res.status(400).send(unError.message);
-        }  
-    }
-    else{
-        try {
-            const respuesta = await getAllCountries();
-            res.send(respuesta);
-        }catch(unError){
-            res.status(400).send(unError.message);
-        }   
-    }
-    
-});     */ 
-
-
-/* router.get("/:idPais", async function (req,res){
-    const {idPais} = req.params;
-    try {
-        const respuesta = await getCountryById(idPais);
-        res.send(respuesta)
-    }catch(unError){
-        res.status(400).send(unError.message)
-    }
-});
- */
 
 module.exports = router;

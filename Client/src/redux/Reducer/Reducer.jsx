@@ -1,7 +1,19 @@
-import { DELETE_COFFEE, GET_COFFES, POST_CAFFEE } from "../Actions/Actions";
+import {
+  DELETE_COFFEE,
+  GET_COFFES,
+  POST_CAFFEE,
+  DETAIL_COFFEE,
+  ABOUT,
+  DETAIL_PRODUCTS,
+  CLEAN_DETAIL,
+  GET_PRODUCTS,
+} from "../Actions/Actions";
 
 const initialState = {
   allCoffees: [],
+  about: false,
+  detailCoffee: {},
+  allProducts: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -10,6 +22,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allCoffees: action.payload,
+        about: false,
       };
     case POST_CAFFEE:
       console.log("redurer post", action.payload);
@@ -22,6 +35,35 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
       };
+
+    case DETAIL_COFFEE:
+      return {
+        ...state,
+        detailCoffee: action.payload,
+      };
+    case CLEAN_DETAIL:
+      return {
+        detailCoffee: {},
+      };
+
+    case GET_PRODUCTS:
+      return {
+        ...state,
+        allProducts: action.payload,
+      };
+    // case ABOUT:
+    //   console.log('reducer', action.payload)
+    //   if(action.payload === true){
+    //     return{
+    //       ...state,
+    //       about: true
+    //     }
+    //   } else{
+    //     return{
+    //       ...state,
+    //       about: false
+    //     }
+    //   }
     default:
       return {
         ...state,
