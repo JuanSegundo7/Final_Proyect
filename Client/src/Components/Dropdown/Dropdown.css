@@ -18,6 +18,18 @@ display: inline-block;
     z-index: 15;
 }
 
+.dropbtn a{
+    color: #000;
+    padding: 0.2em 0.5em;
+    border-radius: 12px;
+    background-color: var(--brown);
+    text-decoration: none;
+}
+
+.dropbtn p{
+    margin: 0;
+}
+
 .dropdown-limit{
     min-height: 50px;
 }
@@ -45,6 +57,7 @@ display: inline-block;
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
     background-color: var(--brown);
+    color: #fff;
     transition: all 0.5s;
 }
 

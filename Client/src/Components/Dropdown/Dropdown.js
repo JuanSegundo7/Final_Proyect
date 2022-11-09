@@ -1,8 +1,9 @@
 import React from 'react';
 import "./Dropdown.css";
 import { useDispatch, useSelector } from "react-redux";
+import {Link} from "react-router-dom"
 
-export default function Dropdown({info}) {
+export default function Dropdown({info, path}) {
   const {array, name} = info
   const dispatch = useDispatch()
 
@@ -12,7 +13,7 @@ export default function Dropdown({info}) {
 
   return (
     <div className="dropdown">
-      <div className="dropbtn"><p>{name}</p></div>
+      <div className="dropbtn"><p><Link to={`${path}`}>{name}</Link></p></div>
       <div className="dropdown-content">
         <div className="dropdown-limit">
         {array.length > 0 && array.map((array) => {
