@@ -8,12 +8,10 @@ export const ABOUT = "ABOUT";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_CATEGORY = "GET_CATEGORY";
-<<<<<<< HEAD
 export const ORDERCOFFEES_AZ = "ORDERCOFFEES_AZ";
 export const ORDERCOFFEES_ZA = "ORDERCOFFEES_ZA"
-=======
 export const GET_COFFEE_BY_NAME = "GET_COFFEE_BY_NAME";
->>>>>>> 07b507ca974434cbc791803ca0639d04c0cf96cf
+
 
 const baseUrl = `http://localhost:3001/`;
 
