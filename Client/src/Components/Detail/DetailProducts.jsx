@@ -6,19 +6,13 @@ import { detailProduct } from "../../redux/Actions/Actions";
 
 export default function DetailProduct() {
   const dispatch = useDispatch();
-  let product = useSelector((state) => state.detailProduct);
+  const product = useSelector((state) => state.detailProduct);
   const idProduct = useParams();
+  console.log(product, "es product");
 
   useEffect(() => {
     dispatch(detailProduct(idProduct.id));
   }, [dispatch]);
-
-  if (Array.isArray(product)) {
-    // el detalle de los productos me venia en un array
-    product = product.find((e) => {
-      return e;
-    });
-  }
 
   return (
     <div key={product._id}>

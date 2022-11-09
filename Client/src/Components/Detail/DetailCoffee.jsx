@@ -8,6 +8,7 @@ export default function DetailCoffee() {
   const dispatch = useDispatch();
   const detail = useSelector((state) => state.detailCoffee);
   const idCoffee = useParams();
+  console.log(detail, "es detail");
 
   useEffect(() => {
     dispatch(detailCoffees(idCoffee.id));
@@ -15,9 +16,10 @@ export default function DetailCoffee() {
 
   return (
     <div>
+      <img src={detail.image.url} alt={`image coffe: ${detail.name}`}></img>
       <p>{detail.name}</p>
       <p>{detail.description}</p>
-      <p>{detail.category}</p>
+      <p>{detail.category.name}</p>
       <p>{detail.type}</p>
       <p>{detail.origin}</p>
       <p>{detail.stock}</p>
