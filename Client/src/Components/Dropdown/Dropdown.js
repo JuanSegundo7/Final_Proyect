@@ -15,7 +15,7 @@ export default function Dropdown({info}) {
       <div className="dropbtn"><p>{name}</p></div>
       <div className="dropdown-content">
         <div className="dropdown-limit">
-        {array.map((array) => {
+        {array.length > 0 && array.map((array) => {
           return (
             <a key={array.id} value={array.name} onClick={handleClick}>{array.name}</a>
             )

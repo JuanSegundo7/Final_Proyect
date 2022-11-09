@@ -1,7 +1,9 @@
-import Switch from "./Components/Switch/Switch";
-import Header from "./Components/Header/Header";
-import Footer from "./Components/Footer/Footer";
-import { BrowserRouter } from "react-router-dom";
+import Switch from './Components/Switch/Switch'
+import About from './Components/FutureAbout/FutureAbout'
+import Header from './Components/Header/Header'
+import Footer from './Components/Footer/Footer'
+import {BrowserRouter} from 'react-router-dom';
+
 
 import "./App.css";
 

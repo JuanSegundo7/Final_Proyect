@@ -1,6 +1,6 @@
 
 import React from "react";
-import "./Header.css";
+import "./FutureAbout.css";
 import logo from "./img/coffee.png";
 import { Link } from "react-scroll";
 import { Link as Navigator } from "react-router-dom";
