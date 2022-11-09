@@ -4,8 +4,14 @@ import { Link } from "react-scroll";
 import Dropdown from "../Dropdown/Dropdown";
 import { Link as Navigator } from "react-router-dom";
 import "./Header.css";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+    const allCagetory = useSelector((state) => state.category);
+
+    const Categories = {array: allCagetory, name: "Categories"}
+
+
   const Coffee = {
     array: [
       { id: 1, name: "Black" },
@@ -14,7 +20,12 @@ const Header = () => {
     ],
     name: "Coffe",
   };
-    
+  
+  const Product ={
+    array: [],
+    name:'Product'
+  }
+
     return (
         <header>
             <div id="ship">
@@ -48,9 +59,11 @@ const Header = () => {
             </nav>
             <nav id="Categorys">
                 <ul id="Categorys">
+                    <li><Dropdown info={Categories}/></li>
                     <li><Dropdown info={Coffee}/></li>
                     <li><Dropdown info={Coffee}/></li>
-                    <li><Dropdown info={Coffee}/></li>
+                    <li><Dropdown info={Product}/></li>
+                    <li><Dropdown info={Product}/></li>
                 </ul>
             </nav>
         </header>

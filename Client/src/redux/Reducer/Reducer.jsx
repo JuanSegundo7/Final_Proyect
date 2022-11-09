@@ -7,6 +7,7 @@ import {
   DETAIL_PRODUCTS,
   CLEAN_DETAIL,
   GET_PRODUCTS,
+  GET_CATEGORY,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
   detailCoffee: {},
   detailProduct: {},
   allProducts: [],
+  category:[]
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -58,19 +60,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         detailProduct: action.payload,
       };
-    // case ABOUT:
-    //   console.log('reducer', action.payload)
-    //   if(action.payload === true){
-    //     return{
-    //       ...state,
-    //       about: true
-    //     }
-    //   } else{
-    //     return{
-    //       ...state,
-    //       about: false
-    //     }
-    //   }
+    case GET_CATEGORY:
+      return {
+        ...state,
+        category:action.payload
+      }
     default:
       return {
         ...state,
