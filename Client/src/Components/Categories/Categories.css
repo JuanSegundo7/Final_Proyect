@@ -1,0 +1,21 @@
+
+#Categorys ul{
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0 2em;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+#Categorys li{
+    list-style-type: none;
+    font-size: 20px;
+    position: relative;
+    text-transform: capitalize;
+    color: #515151;
+}
+
+#Categorys li:hover{
+    cursor: pointer;
+}
