@@ -1,4 +1,5 @@
 const { Coffee, Category, Image } = require("../../db.js");
+const ObjectId = require('mongoose').Types.ObjectId;
 
 
 const createCoffee = async function (data) {
@@ -29,27 +30,35 @@ else  //si efectivamente ES un numero
   if (!((stock>=0) && (Number.isInteger(stock))))
   throw new Error("Error: Stock must be 0 or an integer number.")
 
-try{
-  let resp = await Category.findById(category)
-  if (!resp) throw new Error(`Category id:${category} not found in the Database!`)
-}
-catch(unError){
-  throw new Error(unError.message)
+
+if (!ObjectId.isValid(category)) throw new Error ("No valid _id type provided!")
+else{
+    try{
+      let resp = await Category.findById(category)
+      if (!resp) throw new Error(`Category id:${category} not found in the Database!`)
+    }
+    catch(unError){
+      throw new Error(unError.message)
+    }
 }
 
-try{
-  let resp = await Image.findById(image)
-  if (!resp) throw new Error(`Image id:${image} not found in the Database!`)
+if (!ObjectId.isValid(image)) throw new Error ("No valid _id type provided!")
+else{
+    try{
+      let resp = await Image.findById(image)
+      if (!resp) throw new Error(`Image id:${image} not found in the Database!`)
+    }
+    catch(unError){
+      throw new Error(unError.message)
+    }
 }
-catch(unError){
-  throw new Error(unError.message)
-}
-
 
 //Si no tuve ningún error, creo el café.
   try {
     const newCoffee =  await Coffee.create({
-      name,
+      //lo hago porque mongoose de momento no realiza ordenamientos case insensitive, 
+      //entonces voy a guarda en mi DB, todo en minusculas
+      name: name.toLowerCase(),
       description,
       origin,
       type,
