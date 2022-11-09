@@ -1,13 +1,14 @@
 const {Product} = require("../../db.js");
 
 const createProduct = async function(data){
-    const{name, description , stock , brand} = data;
+    const{name, description , stock , brand, image} = data;
     try {
         const newProduct = await Product.create({
             name, 
             description, 
             stock, 
-            brand
+            brand,
+            image
         })
         return newProduct;
         

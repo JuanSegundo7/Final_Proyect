@@ -9,7 +9,7 @@ export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_CATEGORY = "GET_CATEGORY";
 
-const baseUrl = `http://localhost:3001/`
+const baseUrl = `http://localhost:3001/`;
 
 export const getCoffees = () => {
   try {
@@ -67,9 +67,10 @@ export const detailProduct = (id) => (dispatch) => {
 };
 
 export const getCategory = () => (dispatch) => {
-  return axios(`${baseUrl}categories`)
-  .then((res) => dispatch({
-    type:GET_CATEGORY, 
-    payload:res.data
-  }))
-}
+  return axios(`${baseUrl}categories`).then((res) =>
+    dispatch({
+      type: GET_CATEGORY,
+      payload: res.data,
+    })
+  );
+};

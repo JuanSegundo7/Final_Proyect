@@ -11,6 +11,10 @@ const CoffeeSchema = mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "Category" //Esta es la forma de hacer las cosas con Mongoose y BBDD no relacionales.
+    },
+    image: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Image"
     }
   },
   {versionKey: false}
