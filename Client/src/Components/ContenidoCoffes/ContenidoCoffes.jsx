@@ -4,7 +4,7 @@ import { getCategory, getCoffees } from "../../redux/Actions/Actions";
 import { Card } from "../Card/Card";
 import "./Contenido.css";
 
-export default function Contenido() {
+export default function ContenidoCoffes() {
 
     const dispatch = useDispatch();
     const allCoffees = useSelector((state) => state.allCoffees);
@@ -88,6 +88,7 @@ export default function Contenido() {
                     name={cardCoffe.name}
                     origin={cardCoffe.origin}
                     type={cardCoffe.type}
+                    // img={cardCoffe.image.url}
                   />
                 </div>
               );
