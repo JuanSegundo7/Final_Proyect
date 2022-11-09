@@ -13,7 +13,7 @@ export default function Dropdown({info, path}) {
 
   return (
     <div className="dropdown">
-      <div className="dropbtn"><p><Link to={`${path}`}>{name}</Link></p></div>
+      <div className="dropbtn"><Link to={`${path}`}>{name}</Link></div>
       <div className="dropdown-content">
         <div className="dropdown-limit">
         {array.length > 0 && array.map((array) => {
