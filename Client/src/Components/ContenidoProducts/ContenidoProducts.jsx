@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/Actions/Actions";
 import CardProduct from "../Card/CardProduct";
+import FilterProducts from "../FilterProducts/FilterProducts";
 import "./ContenidoProducts.css";
 
 export default function ContenidoProducts() {
@@ -14,6 +15,7 @@ export default function ContenidoProducts() {
 
   return (
     <div id="Products">
+      <FilterProducts />
       {allProducts.length &&
         allProducts.map((product) => {
           return (
