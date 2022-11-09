@@ -9,5 +9,6 @@ mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.b5w0juw.mongo
 module.exports = {
   Coffee: require("./models/Coffee.js"),
   Product: require("./models/Product.js"),
-  Category: require("./models/Category.js")
+  Category: require("./models/Category.js"),
+  Image: require("./models/Image.js"),
 };
