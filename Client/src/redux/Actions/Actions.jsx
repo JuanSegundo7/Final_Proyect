@@ -1,6 +1,6 @@
 import axios from "axios";
 export const GET_COFFES = "GET_COFFES";
-export const POST_CAFFEE = "POST_CAFFEE";
+export const POST_COFFEE = "POST_COFFEE";
 export const DELETE_COFFEE = "DELETE_COFFEE";
 export const DETAIL_PRODUCTS = "DETAIL_PRODUCTS";
 export const DETAIL_COFFEE = "DETAIL_COFFEE";
@@ -31,7 +31,7 @@ export const postCoffes = (payload) => {
       .post(`${baseUrl}coffees`, payload)
       .then((res) => {
         dispatch({
-          type: POST_CAFFEE,
+          type: POST_COFFEE,
           payload: res.data,
         });
         console.log("action post", res);

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./Card.css";
 
 export function Card(props) {
+  // console.log(props)
   return (
     <div className="cardContainer">
       <div id="card" key={props._id}>
@@ -15,6 +16,7 @@ export function Card(props) {
         <p>{props.origin}</p>
         <p>{props.stock}</p>
         <p>{props.type}</p>
+        {/* <img src={props.img} alt="img not found" className='imgCard'/> */}
       </div>
     </div>
   );

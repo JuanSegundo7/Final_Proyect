@@ -11,6 +11,7 @@ export default function CardProduct(props) {
       <p>{props.brand}</p>
       <p>{props.stock}</p>
       <p>{props.type}</p>
+      {/* <img src={props.img.url} alt="img not found"/> */}
     </div>
   );
 }
