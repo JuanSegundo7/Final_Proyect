@@ -27,7 +27,7 @@ export default function () {
 
   return (
     <div id="container">
-      <section id="Products">
+      <section id="ProductsP">
         <div className="filteres">
           <div className="menuFilteres">
             <div>
