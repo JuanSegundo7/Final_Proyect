@@ -26,7 +26,6 @@ export default function ContenidoProducts() {
                 _id={product._id}
                 name={product.name}
                 stock={product.stock}
-                // description={product.description}
                 type={product.type}
                 brand={product.brand}
                 img={product.image.url}
