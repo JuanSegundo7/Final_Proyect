@@ -3,20 +3,25 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const updateCategory = async function (_id,data) {
     
-const { name } = data;   //esto es req.params
+let { name } = data;   //esto es req.params
 
 //Data Validation
 if (!ObjectId.isValid(_id)) throw new Error ("No valid _id type provided for category!") 
 
-if (name && ((typeof(name)!=="string") || (!name.length))){
-  throw new Error("Error: Category Name cannot be empty and must be of text type.")
+if (name){
+  if ((typeof(name)!=="string") || (!name.length)){
+    throw new Error("Error: Category name cannot be empty and must be of text type.")
+  }else{
+    name = name.toLowerCase();
+  }
 }
+
 
 //Si no encuentro error alguno, actualizo el/los dato/s.
   try{
  
     const filter = { _id };
-    const update = { name: name.toLowerCase() };
+    const update = { name };
     let resp = await Category.findOneAndUpdate(filter, update, {
         new: true
       });
