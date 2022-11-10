@@ -1,12 +1,20 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { postCoffes } from '../../redux/Actions/Actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCategory, postCoffes } from '../../redux/Actions/Actions';
 import "./Form.css"
 
 const Form = () => {
-
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getCategory())
+    },[])
+    
+    const allCategory = useSelector((state) => state.category);
+
+    const allCategory2 = allCategory.filter((c) => c.type == "Coffee Maker");
 
     const [input, setInput] = useState({
         name: '',
@@ -34,8 +42,7 @@ const Form = () => {
 
     const regExName = new RegExp("^[a-zA-Z ]+$");
 
-    let category = ['categoria 1','categoria 2','categoria 3','categoria 4']
-    let type = ['type 1', 'type 2', 'type 3', 'type 4']
+
 
     const handleName = (e) => {
         if(e.target.value.length === 0 || e.target.value === ''){
@@ -176,7 +183,8 @@ const Form = () => {
             {error.price && <span>{error.price}</span>}
 
             <select onChange={(e) => handleCategory(e)} disabled={disabled.category}>
-                {category.map((c) => <option key={c}>{c}</option>)}
+                
+                {allCategory2 && allCategory2.map((c) => <option key={c.name}>{c.name}</option>)}
             </select>
             <span>
 
@@ -185,14 +193,14 @@ const Form = () => {
                 </ul>
             </span>
 
-            <select onChange={(e) => handleType(e)}>
-                {type.map((t) => <option key={t}>{t}</option>)}
+            {/* <select onChange={(e) => handleType(e)}>
+                {allCategory.map((t) => <option key={t.type}>{t.type}</option>)}
             </select>
             <span>
                 <ul>
                     {input.type && <span>{input.type}</span>}
                 </ul>
-            </span>
+            </span> */}
             <input
             name="stock" 
             type="number" 
