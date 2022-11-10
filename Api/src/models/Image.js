@@ -4,7 +4,8 @@ const  ImageSchema = mongoose.Schema({
     url:{
         type : String,
         required : true
-    }
+    },
+    name: String
 },
 {versionKey: false})
 
