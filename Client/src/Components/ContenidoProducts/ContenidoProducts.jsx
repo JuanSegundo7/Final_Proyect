@@ -16,30 +16,29 @@ export default function ContenidoProducts() {
 
   return (
     <div id="Contenido">
-    <section id="Products">
+      <section id="Products">
+        <FilterCoffees value="products" />
 
-      <FilterCoffees value='products'/>
-     
-      <div className="cardHome">
-           {allProducts.length &&
-          allProducts.map((product) => {
-            return (
-              <div className="cardProducts" key={product._id}>
-                <CardProduct
-                  _id={product._id}
-                  name={product.name}
-                  // stock={product.stock}
-                  price={"$" + product.price}
-                  type={product.type}
-                  brand={product.brand}
-                  // img={product.image.url}
-                />
-              </div>
-            );
-          })}
-      </div>
-    </section>
-  </div>
+        <div className="cardHome">
+          {allProducts.length &&
+            allProducts.map((product) => {
+              return (
+                <div className="cardProducts" key={product._id}>
+                  <CardProduct
+                    _id={product._id}
+                    name={product.name}
+                    // stock={product.stock}
+                    price={"$" + product.price}
+                    type={product.type}
+                    brand={product.brand}
+                    img={product.image.url}
+                  />
+                </div>
+              );
+            })}
+        </div>
+      </section>
+    </div>
     // <div>
     //   <div>
     //     {/* <FilterProducts /> */}
