@@ -3,7 +3,6 @@ import {
   GET_COFFES,
   POST_COFFEE,
   DETAIL_COFFEE,
-  ABOUT,
   DETAIL_PRODUCTS,
   CLEAN_DETAIL,
   GET_PRODUCTS,
@@ -15,14 +14,25 @@ import {
   ORDER_PRODUCTS_Z_A,
   ORDER_COFFEE_STOCK_ASC,
   ORDER_COFFEE_STOCK_DSC,
+  FILTER_COFFE_MIN,
+  FILTER_COFFE_MAX,
 } from "../Actions/Actions";
 
 const initialState = {
   allCoffees: [],
+  allCoffees2:[],
+  filters: [],
+  filters2: [],
+
   allProducts: [],
-  category: [],
+  allProducts2: [],
+  filtersProduct: [],
+  filtersProduct2: [],
+
   detailCoffee: {},
+  category: [],
   detailProduct: {},
+  filterCoffe:[]
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -31,7 +41,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allCoffees: action.payload,
-        about: false,
+        allCoffees2: action.payload,
       };
     case POST_COFFEE:
       console.log("redurer post", action.payload);
@@ -61,6 +71,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allProducts: action.payload,
+        allProducts2: action.payload
       };
 
     case DETAIL_PRODUCTS:
@@ -103,17 +114,121 @@ const rootReducer = (state = initialState, action) => {
         allCoffees: action.payload,
       };
 
-      case ORDER_PRODUCTS_A_Z:
-        return {
-          ...state,
-          allProducts: action.payload,
-        };
-      case ORDER_PRODUCTS_Z_A:
-        return {
-          ...state,
-          allProducts: action.payload,
-        };
-      
+    case ORDER_PRODUCTS_A_Z:
+      return {
+        ...state,
+        allProducts: action.payload,
+      };
+    case ORDER_PRODUCTS_Z_A:
+      return {
+        ...state,
+        allProducts: action.payload,
+      };
+    // case FILTER_RANGE:
+    //   const { array } = action.payload;
+    //   const { max } = action.payload;
+    //   const { min } = action.payload;
+
+    //   const maxFinal = max === undefined ? state.max : max;
+    //   const minFinal = min === undefined ? state.min : min;
+
+    //   // const arrTotal = array.filter((e) => {
+    //   //   return e.price >= minFinal && e.price <= maxFinal;
+    //   // });
+    //   console.log(state.max, "max");
+    //   console.log(state.min, "min");
+    //   return {
+    //     ...state,
+    //     // allProducts: arrTotal,
+    //     max: max,
+    //     min: min,
+    //   };
+
+    case FILTER_COFFE_MIN:
+
+      if(action.payload.value == 'coffee'){
+        let aux2 = []
+ 
+        if(!state.filters2.length){
+          const filtrado = state.allCoffees2.filter((c) => action.payload.min <= c.price)
+          filtrado.map((ele) => aux2.push(ele))
+ 
+        } else {
+ 
+          const filter2 = state.filters2.filter((c) => action.payload.min <= c.price)
+          filter2.map((ele) => aux2.push(ele))
+ 
+        }
+ 
+       return{
+         ...state,
+         allCoffees:aux2
+       }
+
+      } else if (action.payload.value == 'products'){
+        console.log('entre products')
+        let aux2 = []
+ 
+        if(!state.filtersProduct2.length){
+          const filtrado = state.allProducts2.filter((c) => action.payload.min <= c.price)
+          filtrado.map((ele) => aux2.push(ele))
+ 
+        } else {
+ 
+          const filter2 = state.filtersProduct2.filter((c) => action.payload.min <= c.price)
+          filter2.map((ele) => aux2.push(ele))
+ 
+        }
+ 
+       return{
+         ...state,
+         allProducts:aux2
+       }
+      }
+
+    case FILTER_COFFE_MAX: 
+    if(action.payload.value === 'coffee'){
+
+      let aux = []
+
+      if(!state.filtersProduct.length){
+
+        const filtradoMax = state.allCoffees2.filter((c) => action.payload.max >= c.price)
+        filtradoMax.map((ele) => aux.push(ele))
+
+      } else {
+
+        const filter2 = state.filtersProduct.filter((c) => action.payload.max >= c.price)
+        filter2.map((ele) => aux.push(ele))
+
+      }
+
+      return{
+        ...state,
+        filtersProduct2:aux,
+        allCoffees: aux
+      }
+    } else if (action.payload.value == 'products'){
+      let aux = []
+ 
+      if(!state.filters.length){
+        const filtrado = state.allProducts2.filter((c) => action.payload.max >= c.price)
+        filtrado.map((ele) => aux.push(ele))
+
+      } else {
+
+        const filter2 = state.filters.filter((c) => action.payload.max >= c.price)
+        filter2.map((ele) => aux.push(ele))
+
+      }
+
+     return{
+       ...state,
+       allProducts:aux
+     }
+    }
+
+
     default:
       return {
         ...state,

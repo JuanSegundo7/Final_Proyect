@@ -11,10 +11,10 @@ const Categories = () => {
         dispatch(getCategory())
     },[])
 
-    const allCagetory = useSelector((state) => state.category);
+    const allCategory = useSelector((state) => state.category);
     
     const Categories = { 
-        array: allCagetory, 
+        array: allCategory, 
         name: "Categories" 
     };
 
