@@ -8,7 +8,7 @@ const updateImage = async function(id,data){
             url
         }
         const respuesta = await Image.findByIdAndUpdate(id,update);
-        if (!resp) return "No image match has been found..."
+        // if (!resp) return "No image match has been found..."
         return respuesta;
         
     } catch (unError) {
