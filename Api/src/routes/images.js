@@ -10,8 +10,7 @@ router.get('/', async(req,res)=>{
 })
 
 router.post('/', async (req,res)=>{
-    const {url} = req.body;
-    const response = await createImage(url);
+    const response = await createImage(req.body);
     res.send(response);
 })
 
