@@ -103,7 +103,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allCoffees:action.payload,
       }
-
+      
     default:
       return {
         ...state,
