@@ -111,12 +111,14 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allProducts: action.payload,
+      }
       };
     case ORDER_PRODUCTS_Z_A:
       return {
         ...state,
         allProducts: action.payload,
       };
+
     case FILTER_RANGE:
       const { array } = action.payload;
       const { max } = action.payload;
