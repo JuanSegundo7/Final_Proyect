@@ -3,6 +3,7 @@ const router = Router();
 const getProducts = require("../controllers/product/getProducts.js");
 const createProduct = require("../controllers/product/createProduct.js");
 const deleteProduct = require("../controllers/product/deleteProduct.js");
+const updateProduct = require("../controllers/product/updateProduct.js")
 const getProductById = require("../controllers/product/getProductById.js");
 
 router.get("/" , async (req,res) =>{
@@ -22,6 +23,18 @@ router.get("/:_id", async (req,res) =>{
     } catch (unError) {
         res.status(400).send(unError.message)
     }
+})
+
+router.put("/:_id", async (req, res) => {
+    const { _id } = req.params;
+    console.log(req.params);
+    try{
+        let respuesta = await updateProduct(_id,req.body);
+        res.send(respuesta);
+    }catch(unError){
+        res.status(400).send(unError.message);
+    }
+    
 })
 
 router.post("/" , async (req,res) =>{
