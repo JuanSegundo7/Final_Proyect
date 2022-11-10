@@ -4,9 +4,10 @@ const CoffeeSchema = mongoose.Schema(
   { name: {type: String, required: true},
     description: {type: String, required: true},
     origin: {type: String, required: true},
-    type: {type: String, 
+    price: {type: Number, required: true},
+    type: {type: String, required: true, 
       enum : ["En Grano", "Molienda Gruesa", "Molienda Media", "Molienda Fina"]},
-    stock: Number,
+    stock: {type: Number, required: true},
     category: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -15,6 +16,10 @@ const CoffeeSchema = mongoose.Schema(
     image: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Image"
+    },
+    brand: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Brand"
     }
   },
   {versionKey: false}

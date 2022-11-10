@@ -1,10 +1,10 @@
-const { Coffee, Category, Image } = require("../../db.js");
+const { Coffee, Category, Image, Brand } = require("../../db.js");
 const ObjectId = require('mongoose').Types.ObjectId;
 
 
 const createCoffee = async function (data) {
 
-  const { name, description, origin, type, stock, category, image } = data;
+  const { name, description, origin, price, type, stock, category, image, brand } = data;
 
 //Data Validation
 if ((typeof(name)!=="string") || (!name.length)){
@@ -19,9 +19,13 @@ if ((typeof(origin)!=="string") || (!origin.length)){
   throw new Error("Error: Coffee origin cannot be empty and must be of text type.")
 }
 
+if ((typeof(price)!=="number") || (!(price>0))){
+  throw new Error("Error: Price must be a number and higher than 0.")
+}
+  
 const typeOptions = ["En Grano", "Molienda Gruesa", "Molienda Media", "Molienda Fina"];
 if (!typeOptions.includes(type)){
-  throw new Error("Error: Coffee type not valid.")
+  throw new Error("Error: Wrong coffee type.")
 }
 
 if (typeof(stock)!=="number")
@@ -31,7 +35,7 @@ else  //si efectivamente ES un numero
   throw new Error("Error: Stock must be 0 or an integer number.")
 
 
-if (!ObjectId.isValid(category)) throw new Error ("No valid _id type provided!")
+if (!ObjectId.isValid(category)) throw new Error ("No valid _id type provided for category!")
 else{
     try{
       let resp = await Category.findById(category)
@@ -42,7 +46,7 @@ else{
     }
 }
 
-if (!ObjectId.isValid(image)) throw new Error ("No valid _id type provided!")
+if (!ObjectId.isValid(image)) throw new Error ("No valid _id type provided for image!")
 else{
     try{
       let resp = await Image.findById(image)
@@ -53,6 +57,18 @@ else{
     }
 }
 
+if (!ObjectId.isValid(brand)) throw new Error ("No valid _id type provided for brand!")
+else{
+    try{
+      let resp = await Brand.findById(brand)
+      if (!resp) throw new Error(`Brand id:${brand} not found in the Database!`)
+    }
+    catch(unError){
+      throw new Error(unError.message)
+    }
+}
+
+
 //Si no tuve ningún error, creo el café.
   try {
     const newCoffee =  await Coffee.create({
@@ -61,10 +77,12 @@ else{
       name: name.toLowerCase(),
       description,
       origin,
+      price,
       type,
       stock,
       category,
-      image
+      image,
+      brand
     });
     return newCoffee;
 

@@ -11,4 +11,5 @@ module.exports = {
   Product: require("./models/Product.js"),
   Category: require("./models/Category.js"),
   Image: require("./models/Image.js"),
+  Brand: require("./models/Brand.js")
 };

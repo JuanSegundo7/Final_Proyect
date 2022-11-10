@@ -9,11 +9,12 @@ export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_CATEGORY = "GET_CATEGORY";
 export const ORDERCOFFEES_AZ = "ORDERCOFFEES_AZ";
-export const ORDERCOFFEES_ZA = "ORDERCOFFEES_ZA"
+export const ORDERCOFFEES_ZA = "ORDERCOFFEES_ZA";
 export const GET_COFFEE_BY_NAME = "GET_COFFEE_BY_NAME";
-export const ORDER_COFFEE_STOCK_ASC = 'ORDER_COFFEE_STOCK_ASC';
+export const ORDER_PRODUCTS_A_Z = "ORDER_PRODUCTS_A_Z";
+export const ORDER_PRODUCTS_Z_A = "ORDER_PRODUCTS_Z_A";
+export const ORDER_COFFEE_STOCK_ASC = "ORDER_COFFEE_STOCK_ASC";
 export const ORDER_COFFEE_STOCK_DSC = "ORDER_COFFEE_STOCK_DSC";
-
 
 const baseUrl = `http://localhost:3001/`;
 
@@ -97,40 +98,56 @@ export const getCategory = () => (dispatch) => {
 
 export const coffeeNameAZ = () => (dispatch) => {
   return axios(`http://localhost:3001/coffees?orderedbyname=asc`)
-  .then((res) => 
-  dispatch({
-    type:ORDERCOFFEES_AZ,
-    payload:res.data
-  }))
-  .catch((error) => console.log(error.message))
-}
+    .then((res) =>
+      dispatch({
+        type: ORDERCOFFEES_AZ,
+        payload: res.data,
+      })
+    )
+    .catch((error) => console.log(error.message));
+};
 
 export const coffeeNameZA = () => (dispatch) => {
   return axios(`http://localhost:3001/coffees?orderedbyname=des`)
-  .then((res) => 
-  dispatch({
-    type:ORDERCOFFEES_ZA,
-    payload:res.data
-  }))
-  .catch((error) => console.log(error.message))
-}
+    .then((res) =>
+      dispatch({
+        type: ORDERCOFFEES_ZA,
+        payload: res.data,
+      })
+    )
+    .catch((error) => console.log(error.message));
+};
+
+export const productNameAZ = () => (dispatch) => {
+  return axios(`${baseUrl}products?orderedbyname=ASC`)
+    .then((res) => dispatch({ type: ORDER_PRODUCTS_A_Z, payload: res.data }))
+    .catch((err) => console.log(err.message));
+};
+
+export const productNameZA = () => (dispatch) => {
+  return axios(`${baseUrl}products?orderedbyname=DES`)
+    .then((res) => dispatch({ type: ORDER_PRODUCTS_A_Z, payload: res.data }))
+    .catch((err) => console.log(err.message));
+};
 
 export const coffeeStockAsc = () => (dispatch) => {
   return axios(`http://localhost:3001/coffees?orderedbystock=asc`)
-  .then((res) => 
-  dispatch({
-    type:ORDER_COFFEE_STOCK_ASC,
-    payload:res.data
-  }))
-  .catch((error) => console.log(error.message))
-}
+    .then((res) =>
+      dispatch({
+        type: ORDER_COFFEE_STOCK_ASC,
+        payload: res.data,
+      })
+    )
+    .catch((error) => console.log(error.message));
+};
 
 export const coffeeStockDes = () => (dispatch) => {
   return axios(`http://localhost:3001/coffees?orderedbystock=des`)
-  .then((res) => 
-  dispatch({
-    type:ORDER_COFFEE_STOCK_DSC,
-    payload:res.data
-  }))
-  .catch((error) => console.log(error.message))
-}
+    .then((res) =>
+      dispatch({
+        type: ORDER_COFFEE_STOCK_DSC,
+        payload: res.data,
+      })
+    )
+    .catch((error) => console.log(error.message));
+};
