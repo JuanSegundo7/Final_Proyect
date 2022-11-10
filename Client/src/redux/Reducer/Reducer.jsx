@@ -15,8 +15,6 @@ import {
   ORDER_PRODUCTS_Z_A,
   ORDER_COFFEE_STOCK_ASC,
   ORDER_COFFEE_STOCK_DSC,
-
-
 } from "../Actions/Actions";
 
 const initialState = {
@@ -95,15 +93,15 @@ const rootReducer = (state = initialState, action) => {
         allCoffees: action.payload,
       };
     case ORDER_COFFEE_STOCK_ASC:
-      return{
+      return {
         ...state,
-        allCoffees:action.payload,
-      }
+        allCoffees: action.payload,
+      };
     case ORDER_COFFEE_STOCK_DSC:
-      return{
+      return {
         ...state,
-        allCoffees:action.payload,
-      }
+        allCoffees: action.payload,
+      };
 
     case ORDER_PRODUCTS_A_Z:
       return {
