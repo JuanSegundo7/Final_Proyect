@@ -11,6 +11,7 @@ export default function CardProduct(props) {
         </Link>
         <p>{props.description}</p>
         <p>{props.brand}</p>
+        <p>{props.price}</p>
         <p>{props.stock}</p>
         <p>{props.type}</p>
       </div>

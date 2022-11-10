@@ -32,7 +32,10 @@ export default function DetailProduct() {
         <div className="description">
           <p>{product.description}</p>
         </div>
-        <p>{product.stock}</p>
+        <p>
+          <span>{"$ " + product.price}</span>
+        </p>
+        <p>{"Stock:" + product.stock}</p>
         <p>{product.type}</p>
         <p>{product.brand}</p>
       </div>
