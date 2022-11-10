@@ -12,7 +12,7 @@ if ((typeof(name)!=="string") || (!name.length)){
 
 //este linea inicial la pongo porque image no es un campo obligatorio de Brand
 if (image){
-  if (!ObjectId.isValid(image)) throw new Error ("No valid _id type provided for image!")
+  if ((typeof(image)!=="string") || (!ObjectId.isValid(image))) throw new Error ("No valid _id type provided for image!")
   else{
       try{
         let resp = await Image.findById(image)
