@@ -24,14 +24,3 @@ else return resp;
 
 
 module.exports = updateProduct;
-
-
-// let resp = await Coffee.findOneAndUpdate(filter, update, {new: true});
-// if (!resp) return "No coffee match has been found..."
-// else return resp;
-
-// }catch(unError){
-//     throw new Error(unError.message)
-// }    
-
-// }

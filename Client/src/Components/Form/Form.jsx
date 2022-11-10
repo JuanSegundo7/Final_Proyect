@@ -111,6 +111,8 @@ const Form = () => {
             category: e.target.value
           })
     }
+
+
     const handleType = (e) => {
         setInput({
             ...input,
@@ -118,6 +120,7 @@ const Form = () => {
           })
     }
 
+    
     const handleStock = (e) => {
         if(e.target.value.length === 0 || e.target.value === ''){
             setError({...error, stock:'You must enter a stock!!'})

@@ -16,7 +16,12 @@ export const ORDER_PRODUCTS_Z_A = "ORDER_PRODUCTS_Z_A";
 export const ORDER_COFFEE_STOCK_ASC = "ORDER_COFFEE_STOCK_ASC";
 export const ORDER_COFFEE_STOCK_DSC = "ORDER_COFFEE_STOCK_DSC";
 export const FILTER_RANGE = "FILTER_RANGE";
+<<<<<<< HEAD
 export const FILTER_RANGE_MAX = "FILTER_RANGE_MAX";
+=======
+export const FILTER_COFFE_MIN = "FILTER_COFFE_MIN"
+export const FILTER_COFFE_MAX = "FILTER_COFFE_MAX"
+>>>>>>> e8ac64157ff6b1bdedad6578d2c7672fd3eb4e16
 
 const baseUrl = `http://localhost:3001/`;
 
@@ -165,3 +170,27 @@ export const filterMax = (max) => (dispatch) => {
 export const filterAll = () => (dispatch) => {
   return dispatch({ type: "FILTER_ALL" });
 };
+
+
+
+
+
+export const filterCoffeMin = (min, value) => {
+  //console.log( min, value) //x ahora solo me traigo el valor del precio, tengo que ver si tambien me envio el array de cafes renderizados
+  return function (dispatch) {
+    return dispatch({
+      type:FILTER_COFFE_MIN,
+      payload: { min, value}
+    })
+  };
+};
+
+export const filterCoffeMax = (max, value) => { //x ahora solo me traigo el valor del precio, tengo que ver si tambien me envio el array de cafes renderizados
+  return function (dispatch) {
+    return dispatch({
+      type:FILTER_COFFE_MAX,
+      payload: {max, value}
+    })
+  };
+};
+

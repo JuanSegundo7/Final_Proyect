@@ -44,7 +44,7 @@ if (stock){
 }
 
 if (category){
-  if (!ObjectId.isValid(category)) throw new Error ("No valid _id type provided for category!")
+  if ((typeof(category)!=="string") || (!ObjectId.isValid(category))) throw new Error ("No valid _id type provided for category!")
   else{
       try{
         let resp = await Category.findById(category)
@@ -57,7 +57,7 @@ if (category){
 }
 
 if (image){
-  if (!ObjectId.isValid(image)) throw new Error ("No valid _id type provided for image!")
+  if ((typeof(image)!=="string") ||(!ObjectId.isValid(image))) throw new Error ("No valid _id type provided for image!")
   else{
       try{
         let resp = await Image.findById(image)
@@ -70,7 +70,7 @@ if (image){
 }
 
 if (brand){
-  if (!ObjectId.isValid(brand)) throw new Error ("No valid _id type provided for brand!")
+  if ((typeof(brand)!=="string") || (!ObjectId.isValid(brand))) throw new Error ("No valid _id type provided for brand!")
   else{
       try{
         let resp = await Brand.findById(brand)

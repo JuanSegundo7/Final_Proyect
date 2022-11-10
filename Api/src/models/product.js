@@ -15,6 +15,11 @@ const ProductSchema = mongoose.Schema(
         image:{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Image"
+        },
+        category:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Category",
+            required: true
         }
     },
     {versionKey: false}
