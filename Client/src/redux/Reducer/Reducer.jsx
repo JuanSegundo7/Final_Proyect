@@ -118,31 +118,13 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allProducts: action.payload,
-      };
+      }
+      
     case ORDER_PRODUCTS_Z_A:
       return {
         ...state,
         allProducts: action.payload,
       };
-    // case FILTER_RANGE:
-    //   const { array } = action.payload;
-    //   const { max } = action.payload;
-    //   const { min } = action.payload;
-
-    //   const maxFinal = max === undefined ? state.max : max;
-    //   const minFinal = min === undefined ? state.min : min;
-
-    //   // const arrTotal = array.filter((e) => {
-    //   //   return e.price >= minFinal && e.price <= maxFinal;
-    //   // });
-    //   console.log(state.max, "max");
-    //   console.log(state.min, "min");
-    //   return {
-    //     ...state,
-    //     // allProducts: arrTotal,
-    //     max: max,
-    //     min: min,
-    //   };
 
     case FILTER_COFFE_MIN:
 
