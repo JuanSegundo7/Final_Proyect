@@ -6,12 +6,12 @@ import {
   productNameZA,
   filterMax,
   filterMin,
+  filterAll,
 } from "../../redux/Actions/Actions";
 import "./FilterProducts.css";
 
 export default function () {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.allProducts);
   // const category = useSelector((state) => state.category);
   const min = useSelector((state) => state.min);
   const max = useSelector((state) => state.max);
@@ -25,13 +25,15 @@ export default function () {
     e.preventDefault();
     // setInput({ ...input, [e.target.name]: e.target.value });
     // dispatch
-    dispatch(filterMin(e.target.value, products));
+    dispatch(filterMin(e.target.value));
+    dispatch(filterAll());
   };
 
   const handlerPriceMax = (e) => {
     e.preventDefault();
     // setInput({ ...input, [e.target.name]: e.target.value });
-    dispatch(filterMax(e.target.value, products));
+    dispatch(filterMax(e.target.value));
+    dispatch(filterAll());
   };
 
   const handlerOrdered = (e) => {
@@ -58,9 +60,9 @@ export default function () {
               <input
                 name="min"
                 type="range"
-                min="1"
-                max="5000"
-                // value={min}
+                // min="1"
+                max="1000"
+                value={min}
                 onChange={(e) => handlerPriceMin(e)}
               />
               MAX:
@@ -68,13 +70,13 @@ export default function () {
                 name="max"
                 type="range"
                 min="1"
-                // value={max}
+                value={max}
                 max="5000"
                 onChange={(e) => handlerPriceMax(e)}
               />
               {
                 <span>
-                  From {min} to {max} USD
+                  From {min && min} to {max && max} USD
                 </span>
               }
             </div>

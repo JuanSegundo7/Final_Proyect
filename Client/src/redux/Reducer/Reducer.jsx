@@ -16,11 +16,13 @@ import {
   ORDER_COFFEE_STOCK_ASC,
   ORDER_COFFEE_STOCK_DSC,
   FILTER_RANGE,
+  FILTER_RANGE_MAX,
 } from "../Actions/Actions";
 
 const initialState = {
   allCoffees: [],
   allProducts: [],
+  allProducts2: [],
   filters: [],
   category: [],
   detailCoffee: {},
@@ -65,6 +67,8 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allProducts: action.payload,
+        filters: action.payload,
+        allProducts2: action.payload,
       };
 
     case DETAIL_PRODUCTS:
@@ -118,23 +122,46 @@ const rootReducer = (state = initialState, action) => {
         allProducts: action.payload,
       };
     case FILTER_RANGE:
-      const { array } = action.payload;
-      const { max } = action.payload;
       const { min } = action.payload;
+      const aux = state.allProducts2;
 
-      const maxFinal = max === undefined ? state.max : max;
-      const minFinal = min === undefined ? state.min : min;
-
-      // const arrTotal = array.filter((e) => {
-      //   return e.price >= minFinal && e.price <= maxFinal;
-      // });
-      console.log(state.max, "max");
       console.log(state.min, "min");
+      const filterMin = aux.filter((p) => p.price >= state.min);
+      console.log(filterMin, "filterMin-----");
       return {
         ...state,
-        // allProducts: arrTotal,
-        max: max,
         min: min,
+        filters: filterMin,
+        // allProducts: state.filters,
+      };
+
+    case FILTER_RANGE_MAX:
+      const { max } = action.payload;
+      const aux1 = state.filters;
+
+      console.log(state.max, "--max-------");
+      const filterMax = aux1.filter((p) => p.price <= state.max);
+      console.log(filterMax, "filterMaxxx-----");
+
+      return {
+        ...state,
+        max: max,
+        filters: filterMax,
+        // allProducts: state.filters,
+      };
+
+    case "FILTER_ALL":
+      // const aux = state.filters;
+
+      // const filteredMin = aux.filter((p) => p.price >= state.min);
+      // const filteredMax = aux.filter((p) => p.price <= state.max);
+      // console.log(filteredMin, "es filteredMin");
+      // console.log(filteredMax, "es filteredMax");
+      // const filteredAll = [...filteredMin, ...filteredMax];
+      // console.log(filteredAll, "es filtered all");
+      return {
+        ...state,
+        allProducts: state.filters,
       };
 
     default:

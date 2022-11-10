@@ -16,6 +16,7 @@ export const ORDER_PRODUCTS_Z_A = "ORDER_PRODUCTS_Z_A";
 export const ORDER_COFFEE_STOCK_ASC = "ORDER_COFFEE_STOCK_ASC";
 export const ORDER_COFFEE_STOCK_DSC = "ORDER_COFFEE_STOCK_DSC";
 export const FILTER_RANGE = "FILTER_RANGE";
+export const FILTER_RANGE_MAX = "FILTER_RANGE_MAX";
 
 const baseUrl = `http://localhost:3001/`;
 
@@ -153,10 +154,14 @@ export const coffeeStockDes = () => (dispatch) => {
     .catch((error) => console.log(error.message));
 };
 
-export const filterMin = (min, array) => (dispatch) => {
-  return dispatch({ type: FILTER_RANGE, payload: { min, array } });
+export const filterMin = (min) => (dispatch) => {
+  return dispatch({ type: FILTER_RANGE, payload: { min } });
 };
 
-export const filterMax = (max, array) => (dispatch) => {
-  return dispatch({ type: FILTER_RANGE, payload: { max, array } });
+export const filterMax = (max) => (dispatch) => {
+  return dispatch({ type: FILTER_RANGE_MAX, payload: { max } });
+};
+
+export const filterAll = () => (dispatch) => {
+  return dispatch({ type: "FILTER_ALL" });
 };
