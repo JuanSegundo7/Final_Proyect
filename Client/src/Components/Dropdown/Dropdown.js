@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Dropdown.css";
-import { useDispatch, useSelector } from "react-redux";
-import {Link} from "react-router-dom"
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom"
 
 export default function Dropdown({info, path}) {
   const {array, name} = info
@@ -13,12 +13,12 @@ export default function Dropdown({info, path}) {
 
   return (
     <div className="dropdown">
-      <div className="dropbtn"><Link to={`${path}`}>{name}</Link></div>
+      <Link to={`${name}`}><div className="dropbtn">{name}</div></Link>
       <div className="dropdown-content">
         <div className="dropdown-limit">
         {array.length > 0 && array.map((array) => {
           return (
-            <a key={array.id} value={array.name} onClick={handleClick}>{array.name}</a>
+            <Link to={`${path}/${array.name}`}><a key={array.id} value={array.name} onClick={handleClick}>{array.name}</a></Link>
             )
           })}
           </div>
