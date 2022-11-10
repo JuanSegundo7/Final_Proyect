@@ -1,0 +1,39 @@
+.filterPrice {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#ProductsP {
+  display: flex;
+  margin-top: 30%;
+}
+
+#container {
+  width: 30%;
+  margin-left: -150px;
+  /* margin-right: 50px; */
+}
+
+.filteres {
+  width: 100%;
+  height: 400px;
+  box-shadow: 0 2.5px 7.5px rgb(0 0 0 / 20%);
+  border-radius: 15px;
+}
+
+/* .menuFilters {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+} */
+
+.menuFilteres div {
+  margin: 0.5em 0;
+  /* height: 400px; */
+}

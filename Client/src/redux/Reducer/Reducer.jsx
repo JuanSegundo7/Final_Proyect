@@ -8,14 +8,13 @@ import {
   CLEAN_DETAIL,
   GET_PRODUCTS,
   GET_CATEGORY,
-
   ORDERCOFFEES_AZ,
   ORDERCOFFEES_ZA,
-
   GET_COFFEE_BY_NAME,
+  ORDER_PRODUCTS_A_Z,
+  ORDER_PRODUCTS_Z_A,
   ORDER_COFFEE_STOCK_ASC,
   ORDER_COFFEE_STOCK_DSC,
-
 } from "../Actions/Actions";
 
 const initialState = {
@@ -75,18 +74,18 @@ const rootReducer = (state = initialState, action) => {
         category: action.payload,
       };
 
-    case ORDERCOFFEES_AZ:{
+    case ORDERCOFFEES_AZ: {
       // console.log('llegue reducer', action.payload)
-      return{
+      return {
         ...state,
-        allCoffees: action.payload, 
-      }
+        allCoffees: action.payload,
+      };
     }
     case ORDERCOFFEES_ZA:
-      return{
+      return {
         ...state,
-        allCoffees:action.payload
-      }
+        allCoffees: action.payload,
+      };
 
     case GET_COFFEE_BY_NAME:
       return {
@@ -94,16 +93,27 @@ const rootReducer = (state = initialState, action) => {
         allCoffees: action.payload,
       };
     case ORDER_COFFEE_STOCK_ASC:
-      return{
+      return {
         ...state,
-        allCoffees:action.payload,
-      }
+        allCoffees: action.payload,
+      };
     case ORDER_COFFEE_STOCK_DSC:
-      return{
+      return {
         ...state,
-        allCoffees:action.payload,
+        allCoffees: action.payload,
+      };
+
+    case ORDER_PRODUCTS_A_Z:
+      return {
+        ...state,
+        allProducts: action.payload,
       }
-      
+      };
+    case ORDER_PRODUCTS_Z_A:
+      return {
+        ...state,
+        allProducts: action.payload,
+      };
     default:
       return {
         ...state,

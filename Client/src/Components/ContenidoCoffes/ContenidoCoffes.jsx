@@ -102,7 +102,6 @@ export default function ContenidoCoffes() {
           {allCoffees.length &&
             allCoffees.map((cardCoffe) => {
               return (
-                <div key={cardCoffe._id}>
                   <Card
                     img={cardCoffe.image.url}
                     key={cardCoffe._id}
@@ -111,7 +110,6 @@ export default function ContenidoCoffes() {
                     origin={cardCoffe.origin}
                     type={cardCoffe.type}
                   />
-                </div>
               );
             })}
         </div>
