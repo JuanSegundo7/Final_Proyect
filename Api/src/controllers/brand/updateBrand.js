@@ -17,8 +17,8 @@ if (name){
   }
 }
 
-if (image){
-  if (!ObjectId.isValid(image)) throw new Error ("No valid _id type provided for image!")
+if (image){ 
+  if ((typeof(image)!=="string") || (!ObjectId.isValid(image))) throw new Error ("No valid _id type provided for image!")
   else{
       try{
         let resp = await Image.findById(image)

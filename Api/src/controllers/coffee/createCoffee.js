@@ -29,13 +29,13 @@ if (!typeOptions.includes(type)){
 }
 
 if (typeof(stock)!=="number")
-  throw new Error("Error: Stock must be 0 or an integer number.")
+  throw new Error("Error: Stock must be an integer number higher than 0.")
 else  //si efectivamente ES un numero
   if (!((stock>=0) && (Number.isInteger(stock))))
-  throw new Error("Error: Stock must be 0 or an integer number.")
+  throw new Error("Error: Stock must be an integer number higher than 0.")
 
 
-if (!ObjectId.isValid(category)) throw new Error ("No valid _id type provided for category!")
+if ((typeof(category)!=="string") || (!ObjectId.isValid(category))) throw new Error ("No valid _id type provided for category!")
 else{
     try{
       let resp = await Category.findById(category)
@@ -46,7 +46,7 @@ else{
     }
 }
 
-if (!ObjectId.isValid(image)) throw new Error ("No valid _id type provided for image!")
+if ((typeof(image)!=="string") || (!ObjectId.isValid(image))) throw new Error ("No valid _id type provided for image!")
 else{
     try{
       let resp = await Image.findById(image)
@@ -57,7 +57,7 @@ else{
     }
 }
 
-if (!ObjectId.isValid(brand)) throw new Error ("No valid _id type provided for brand!")
+if ((typeof(brand)!=="string") || (!ObjectId.isValid(brand))) throw new Error ("No valid _id type provided for brand!")
 else{
     try{
       let resp = await Brand.findById(brand)
