@@ -1,17 +1,22 @@
-const { Coffee, Category, Image } = require('../../db');
+const { Coffee, Category, Image, Brand } = require('../../db');
 const ObjectId = require('mongoose').Types.ObjectId;
 
 const updateCoffee = async function (_id,data) {
     
-const { name, description, origin, price, type, stock, category, image} = data;   //esto es req.params
+const { description, origin, price, type, stock, category, image, brand} = data;   //esto es req.params
+let { name } = data;  //voy a necesitar cambiar nombre a minusculas, por eso no lo defino como constante.
 
 //Data Validation
 
 //consulto si es válido el tipo de dato provisto como ID.
 if (!ObjectId.isValid(_id)) throw new Error ("No valid _id type provided for coffee!") 
 
- if (name && ((typeof(name)!=="string") || (!name.length))){
-  throw new Error("Error: Coffee Name cannot be empty and must be of text type.")
+if (name){
+  if ((typeof(name)!=="string") || (!name.length)){
+    throw new Error("Error: Coffee name cannot be empty and must be of text type.")
+  }else{
+    name = name.toLowerCase();
+  }
 }
 
 if (description && ((typeof(description)!=="string") || (!description.length))){
@@ -64,19 +69,33 @@ if (image){
   }
 }
 
+if (brand){
+  if (!ObjectId.isValid(brand)) throw new Error ("No valid _id type provided for brand!")
+  else{
+      try{
+        let resp = await Brand.findById(brand)
+        if (!resp) throw new Error(`Brand id:${brand} not found in the Database!`)
+      }
+      catch(unError){
+        throw new Error(unError.message)
+      }
+  }
+}
 
 //si no encuentro error alguno, actualizo el/los dato/s.
   try{
  
     const filter = { _id };
     const update = { 
-      name: name,//.toLowerCase(), 
+      name, 
       description, 
       origin, 
       price, 
       type, 
       stock, 
-      category
+      category,
+      image,
+      brand
      };
 
     let resp = await Coffee.findOneAndUpdate(filter, update, {new: true});
