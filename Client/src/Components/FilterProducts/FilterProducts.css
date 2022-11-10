@@ -9,12 +9,13 @@
 
 #Products {
   display: flex;
+  margin-top: 30%;
 }
 
 #container {
   width: 30%;
-  margin-left: -50px;
-  margin-right: 50px;
+  margin-left: -150px;
+  /* margin-right: 50px; */
 }
 
 .filteres {
@@ -32,6 +33,7 @@
   width: 100%;
 } */
 
-.menuFilters div {
+.menuFilteres div {
   margin: 0.5em 0;
+  /* height: 400px; */
 }

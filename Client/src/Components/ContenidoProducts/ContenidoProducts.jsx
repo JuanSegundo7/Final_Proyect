@@ -9,30 +9,32 @@ export default function ContenidoProducts() {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.allProducts);
 
-  console.log(allProducts);
-
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
 
   return (
-    <div id="Products">
-      <FilterProducts />
-      {allProducts.length &&
-        allProducts.map((product) => {
-          return (
-            <div className="cardProducts" key={product._id}>
-              <CardProduct
-                _id={product._id}
-                name={product.name}
-                stock={product.stock}
-                type={product.type}
-                brand={product.brand}
-                img={product.image.url}
-              />
-            </div>
-          );
-        })}
+    <div>
+      <div>
+        <FilterProducts />
+      </div>
+      <div className="Products">
+        {allProducts.length &&
+          allProducts.map((product) => {
+            return (
+              <div className="cardProducts" key={product._id}>
+                <CardProduct
+                  _id={product._id}
+                  name={product.name}
+                  // stock={product.stock}
+                  type={product.type}
+                  brand={product.brand}
+                  img={product.image.url}
+                />
+              </div>
+            );
+          })}
+      </div>
     </div>
   );
 }

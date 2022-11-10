@@ -6,7 +6,8 @@ import "./FilterProducts.css";
 
 export default function () {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.allProducts);
+  const category = useSelector((state) => state.category);
+  console.log(category, "esto es category");
   const [input, setInput] = useState({
     min: "",
     max: "",
@@ -28,10 +29,10 @@ export default function () {
     <div id="container">
       <section id="Products">
         <div className="filteres">
-          <div className="menuFilters">
+          <div className="menuFilteres">
             <div>
               <select onChange={(e) => handlerOrdered(e)}>
-                <option>FILTER</option>
+                <option>Order</option>
                 <option value="ASC"> A-Z </option>
                 <option value="DESC">Z-A</option>
               </select>
@@ -61,7 +62,10 @@ export default function () {
             </div>
             <div>
               <select>
-                <option>Mas Vendidos</option>
+                <option value="all">Category</option>
+                <option value="all">Category 1</option>
+                <option value="all">Category 2</option>
+                <option value="all">Category 3</option>
               </select>
             </div>
           </div>

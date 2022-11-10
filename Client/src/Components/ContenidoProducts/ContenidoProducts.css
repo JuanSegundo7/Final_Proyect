@@ -1,13 +1,10 @@
-.cardProducts {
-  /* height: 30%; */
-  /* border: 2px solid black;
-  border-radius: 10px; */
-  /* margin-top: 6%; */
-  justify-content: space-between;
-  /* width: 80%; */
-  /* display: inline-grid; */
+.Products {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  margin-right: -20%;
+  margin-left: 20%;
+  margin-top: -47%;
 }
-
-/* #Products {
-  /* display: flex; 
-} */
