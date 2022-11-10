@@ -15,7 +15,7 @@ if (orderedbystock && orderedbystock.toUpperCase()==="ASC") sortOptions.push(["s
 
   try {
     const resp = await Coffee.find({ name: new RegExp(name, 'i') }).sort(sortOptions)
-    .populate("image").populate("category");
+    .populate("image").populate("category").populate("brand");
     return resp;
   }catch (unError){
     throw new Error(unError)
