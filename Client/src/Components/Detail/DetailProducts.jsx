@@ -3,12 +3,13 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { cleanDetail, detailProduct } from "../../redux/Actions/Actions";
+import "./Detail.css";
 
 export default function DetailProduct() {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.detailProduct);
   const idProduct = useParams();
-  console.log(product, "es product");
+  console.log(product, "------------products-----");
 
   useEffect(() => {
     dispatch(detailProduct(idProduct.id));
@@ -19,13 +20,22 @@ export default function DetailProduct() {
   }, [dispatch]);
 
   return (
-    <div key={product._id}>
-      {/* <img src={product.image && product.image.url}></img> */}
-      <p>{product.name}</p>
-      <p>{product.description}</p>
-      <p>{product.stock}</p>
-      <p>{product.type}</p>
-      <p>{product.brand}</p>
+    <div key={product._id} className="containerDetail">
+      <div className="imgDiv">
+        <img
+          src={product.image && product.image.url}
+          className="imgDetail"
+        ></img>
+      </div>
+      <div className="text">
+        <p>{product.name}</p>
+        <div className="description">
+          <p>{product.description}</p>
+        </div>
+        <p>{product.stock}</p>
+        <p>{product.type}</p>
+        <p>{product.brand}</p>
+      </div>
     </div>
   );
 }
