@@ -70,6 +70,7 @@
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
+    top: 2.5em;
     right: 0;
     display: block;
     border-radius: 12px;

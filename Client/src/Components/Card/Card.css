@@ -1,14 +1,31 @@
 #card {
-  border: 2px solid black;
-  border-radius: 10px;
-}
-
-.cardContainer {
-  margin: 15px;
-  overflow: hidden;
+  box-shadow: 0 2.5px 7.5px rgb(0 0 0 / 20%);
+  border-radius: 15px;
+  width: 200px;
+  display: flex;
+  height: auto;
+  padding: 1em;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .imgCard {
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  height: auto;
 }
+
+#a_card{
+  text-decoration: none;
+  color: #000;
+}
+
+#name{
+  font-weight: bold;
+  font-size: 24px;
+  margin: 0;
+}
+
+#origin{
+  margin: 0.3em;
+  font-size: 20px;
+};
