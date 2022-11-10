@@ -17,15 +17,6 @@ const Categories = () => {
         array: allCagetory, 
         name: "Categories" 
     };
-
-    const Coffee = {
-        array: [
-            { id: 1, name: "Black" },
-            { id: 2, name: "Lungo" },
-            { id: 3, name: "Expresso" },
-        ],
-        name: "Coffees",
-    };
     
     const Products = {
         array: [],
@@ -56,10 +47,7 @@ const Categories = () => {
         <nav id="Categorys">
             <ul id="Categorys">
                 <li>
-                    <Dropdown info={Categories} path="/coffees" />
-                </li>
-                <li>
-                    <Dropdown info={Coffee} path="/coffees"/>
+                    <Dropdown info={Categories} path="/coffees"/>
                 </li>
                 <li>
                     <Dropdown info={Products} path="/products"/>
@@ -70,9 +58,9 @@ const Categories = () => {
                 <li>
                     <Dropdown info={Cleaning} path="/products/cleaning-kits"/>
                 </li>
-                <li>
+                {/* <li>
                     <Dropdown info={Combos} path="/coffee/combos"/>
-                </li>
+                </li> */}
                 <li>
                     <Dropdown info={Brands} path="/brands"/>
                 </li>
