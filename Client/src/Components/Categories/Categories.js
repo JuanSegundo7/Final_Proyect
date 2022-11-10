@@ -3,6 +3,7 @@ import "./Categories.css"
 import Dropdown from "../Dropdown/Dropdown";
 import { useSelector, useDispatch } from "react-redux";
 import { getCategory } from "../../redux/Actions/Actions";
+import { Link } from "react-router-dom"
 
 const Categories = () => {
     const dispatch = useDispatch()
@@ -12,24 +13,18 @@ const Categories = () => {
     },[])
 
     const allCategory = useSelector((state) => state.category);
-    
-    const Categories = { 
-        array: allCategory, 
-        name: "Categories" 
-    };
 
-    const Coffee = {
-        array: [
-            { id: 1, name: "Black" },
-            { id: 2, name: "Lungo" },
-            { id: 3, name: "Expresso" },
-        ],
-        name: "Coffees",
+    const coffeeMaker = allCategory.filter(coffe => coffe.type === "Coffee Maker")
+    const coffees = allCategory.filter(coffe => coffe.type === "Coffee")
+
+    const Coffees = { 
+        array: coffees, 
+        name: "Coffees" 
     };
     
-    const Products = {
+    const Accesories = {
         array: [],
-        name: "Products",
+        name: "Accesories",
     };
 
     const Brands = {
@@ -37,29 +32,21 @@ const Categories = () => {
         name: "Brands",
     };
 
-    const Cleaning = {
+    const Products = {
         array: [],
-        name: "Cleaning Kits",
-    };
-
-    const Combos = {
-        array: [],
-        name: "Combos",
+        name: "Products",
     };
 
     const CoffeeMaker = {
-        array: [],
-        name: "Coffee Maker",
+        array: coffeeMaker,
+        name: "Coffee-Maker",
     };
 
     return (
         <nav id="Categorys">
             <ul id="Categorys">
                 <li>
-                    <Dropdown info={Categories} path="/coffees" />
-                </li>
-                <li>
-                    <Dropdown info={Coffee} path="/coffees"/>
+                    <Link to="/coffees"><Dropdown info={Coffees} path="/coffees"/></Link>
                 </li>
                 <li>
                     <Dropdown info={Products} path="/products"/>
@@ -68,10 +55,7 @@ const Categories = () => {
                     <Dropdown info={CoffeeMaker} path="/products/coffee-maker"/>
                 </li>
                 <li>
-                    <Dropdown info={Cleaning} path="/products/cleaning-kits"/>
-                </li>
-                <li>
-                    <Dropdown info={Combos} path="/coffee/combos"/>
+                    <Dropdown info={Accesories} path="/products/accesories"/>
                 </li>
                 <li>
                     <Dropdown info={Brands} path="/brands"/>
