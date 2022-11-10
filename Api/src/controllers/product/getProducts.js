@@ -12,7 +12,7 @@ const getProducts = async function(data) {
 
     try {
         const allProducts = await Product.find({ name: new RegExp(name, 'i') }).sort(sortOptions)
-        .populate("image");
+        .populate("image").populate("brand").populate("category");
         return allProducts;
     } catch (unError) {
         throw new Error(unError);
