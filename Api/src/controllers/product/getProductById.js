@@ -3,7 +3,7 @@ const {Product} = require("../../db.js");
 const getProductById = async function(id){
     try {
         const response = await Product.findById(id)
-        .populate("image").populate("brand");
+        .populate("image").populate("brand").populate("category");
 
         if(!response) throw new Error("No product matches the informed id...");
         return response;
