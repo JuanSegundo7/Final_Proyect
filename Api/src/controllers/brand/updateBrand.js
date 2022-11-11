@@ -17,16 +17,9 @@ if (name){
   }
 }
 
-if (image){ 
-  if ((typeof(image)!=="string") || (!ObjectId.isValid(image))) throw new Error ("No valid _id type provided for image!")
-  else{
-      try{
-        let resp = await Image.findById(image)
-        if (!resp) throw new Error(`Image id:${image} not found in the Database!`)
-      }
-      catch(unError){
-        throw new Error(unError.message)
-      }
+if (image){
+  if ((typeof(image)!=="string") || (!image.length)){
+    throw new Error("Error: Brand image must be of text type.")
   }
 }
 
