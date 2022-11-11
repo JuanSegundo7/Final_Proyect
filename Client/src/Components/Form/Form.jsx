@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCategory, postCoffes } from '../../redux/Actions/Actions';
+import { postProduct } from '../../redux/Actions/Actions';
 import "./Form.css"
 
 /*
@@ -28,14 +28,6 @@ import "./Form.css"
     */
 const Form = () => {
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getCategory())
-    },[])
-    
-    const allCategory = useSelector((state) => state.category);
-
-    const allCategory2 = allCategory.filter((c) => c.type == "Coffee");
 
     const [input, setInput] = useState({
         name: '',
@@ -165,7 +157,7 @@ const Form = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         if(!error.name && !error.category && !error.description && !error.origin && !error.price && !error.stock && input.category && input.type){
-            dispatch(postCoffes(input))
+            // dispatch(postCoffes(input))
             alert('Cafe creado perrrito malvado')
         } else{
             alert('Faltan llenar campos perreque')
@@ -205,7 +197,7 @@ const Form = () => {
 
             <select onChange={(e) => handleCategory(e)} disabled={disabled.category}>
                 
-                {allCategory2 && allCategory2.map((c) => <option key={c.name}>{c.name}</option>)}
+                {/* {allCategory2 && allCategory2.map((c) => <option key={c.name}>{c.name}</option>)} */}
             </select>
             <span>
 

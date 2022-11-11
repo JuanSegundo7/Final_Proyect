@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { cleanDetail, detailProduct } from "../../redux/Actions/Actions";
 import "./Detail.css";
 
 export default function DetailProduct() {
@@ -10,13 +9,13 @@ export default function DetailProduct() {
   const product = useSelector((state) => state.detailProduct);
   const idProduct = useParams();
 
-  useEffect(() => {
-    dispatch(detailProduct(idProduct.id));
+  // useEffect(() => {
+  //   dispatch(detailProduct(idProduct.id));
 
-    return () => {
-      dispatch(cleanDetail()); // para que se limpie el estado de detalle cuando lo saco y caundo aprete otro se ponga el nuevo y no qeude ese dilay del anterior
-    };
-  }, [dispatch]);
+  //   return () => {
+  //     dispatch(cleanDetail()); // para que se limpie el estado de detalle cuando lo saco y caundo aprete otro se ponga el nuevo y no qeude ese dilay del anterior
+  //   };
+  // }, [dispatch]);
 
   return (
     <div key={product._id} className="containerDetail">

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategory, getCoffees } from "../../redux/Actions/Actions";
+// import { getCategory, getCoffees } from "../../redux/Actions/Actions";
 import { Card } from "../Card/Card";
 import FilterCoffees from "../FilterCoffees/FilterCoffees";
 import "./Contenido.css";
@@ -9,10 +9,10 @@ export default function ContenidoCoffes() {
   const dispatch = useDispatch();
   const allCoffees = useSelector((state) => state.allCoffees);
 
-  useEffect(() => {
-    // dispatch(getCoffees());
-    dispatch(getCategory());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   // dispatch(getCoffees());
+  //   dispatch(getCategory());
+  // }, [dispatch]);
 
   return (
     <div id="Contenido">

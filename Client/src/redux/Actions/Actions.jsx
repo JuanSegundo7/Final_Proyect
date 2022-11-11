@@ -1,13 +1,13 @@
 import axios from "axios";
-export const GET_PRODUCTS = "GET_COFFES";
-export const POST_COFFEE = "POST_COFFEE";
-export const DELETE_COFFEE = "DELETE_COFFEE";
-export const DETAIL_PRODUCTS = "DETAIL_PRODUCTS";
-export const DETAIL_COFFEE = "DETAIL_COFFEE";
-export const ABOUT = "ABOUT";
+
+// PRODUCTS
+
+export const GET_PRODUCTS = "GET_PRODUCTS";
+export const GET_ONE_PRODUCT = "GET_ONE_PRODUCT";
+export const POST_PRODUCT = "POST_PRODUCT";
+export const DELETE_PRODUCT = "DELETE_PRODUCT";
+export const GET_PRODUCT_BY_QUERY = "GET_PRODUCT_BY_QUERY";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
-export const GET_CATEGORY = "GET_CATEGORY";
-export const GET_COFFEE_BY_NAME = "GET_COFFEE_BY_NAME";
 
 // FILTERS
 
@@ -23,17 +23,19 @@ export const GET_COFFEE_BY_NAME = "GET_COFFEE_BY_NAME";
 
 const baseUrl = `http://localhost:3001/products`;
 
-export const getProducts = () => {
+
+// PRODUCTS
+
+// TODOS LOS PRODUCTOS: CAFES, MAQUINAS, ACCESORIOS, OTROS
+
+export const getProducts = async () => {
   try {
     return async function (dispatch) {
-      let json = await axios.get(`${baseUrl}`);
-      return dispatch({
-        type: GET_PRODUCTS,
-        payload: json.data,
-      });
+      await axios.get(`${baseUrl}`)
+      .then(data => dispatch({type: GET_PRODUCTS, payload: data.data}))
     };
   } catch (error) {
-    console.log(error.message, "Error en action");
+    console.log(`${error}`);
   }
 };
 
@@ -43,25 +45,25 @@ export const postProduct = (payload) => {
       .post(`${baseUrl}`, payload)
       .then((res) => {
         dispatch({
-          type: POST_COFFEE,
-          payload: res.data,
+          type: POST_PRODUCT,
+          // payload: res.data,
         });
-        console.log("action post", res);
       })
       .catch((error) => console.log("error", error));
   };
 };
 
-export const deleteCoffee = (id) => {
-  return { type: DELETE_COFFEE, id };
-};
+// dispatch(getProductsByQuery("name, orderbyName, category", "ASC"))
 
-export const getCoffeesByName = (name) => {
+// `${baseUrl}products?orderedbyname=ASC`
+
+export const getProductByQuery = (info, name, value) => {
   try {
     return async function (dispatch) {
-      let json = await axios.get(`${baseUrl}coffees?name=${name}`);
+      let json = await axios.get(`${baseUrl}?${info}=${value}`); // category=coffee
       return dispatch({
-        type: GET_COFFEE_BY_NAME,
+        type: GET_PRODUCT_BY_QUERY,
+        value: `${name}${value}`,
         payload: json.data,
       });
     };
@@ -70,11 +72,23 @@ export const getCoffeesByName = (name) => {
   }
 };
 
-export const detailCoffees = (id) => (dispatch) => {
-  return axios(`${baseUrl}coffees/${id}`)
-    .then((res) => dispatch({ type: DETAIL_COFFEE, payload: res.data }))
-    .catch((err) => console.log(err.message));
+
+// dispatch(getOneProduct(id)) - Detail
+
+export const getOneProduct = (id) => async (dispatch) => {
+  try{
+    await axios.get(`${baseUrl}/${id}`)
+    .then(data => dispatch({type: GET_ONE_PRODUCT, payload: data.data}))
+  }catch(e){
+    console.log(e)
+  }
 };
+
+export const deleteProduct = (id) => {
+  return { type: DELETE_PRODUCT, id };
+};
+
+
 
 export const cleanDetail = () => {
   return { type: CLEAN_DETAIL };
@@ -112,67 +126,67 @@ export const cleanDetail = () => {
 //     .catch((error) => console.log(error.message));
 // };
 
-export const productNameAZ = () => (dispatch) => {
-  return axios(`${baseUrl}products?orderedbyname=ASC`)
-    .then((res) => dispatch({ type: ORDER_PRODUCTS_A_Z, payload: res.data }))
-    .catch((err) => console.log(err.message));
-};
+// export const productNameAZ = () => (dispatch) => {
+//   return axios(`${baseUrl}products?orderedbyname=ASC`)
+//     .then((res) => dispatch({ type: ORDER_PRODUCTS_A_Z, payload: res.data }))
+//     .catch((err) => console.log(err.message));
+// };
 
-export const productNameZA = () => (dispatch) => {
-  return axios(`${baseUrl}products?orderedbyname=DES`)
-    .then((res) => dispatch({ type: ORDER_PRODUCTS_A_Z, payload: res.data }))
-    .catch((err) => console.log(err.message));
-};
+// export const productNameZA = () => (dispatch) => {
+//   return axios(`${baseUrl}products?orderedbyname=DES`)
+//     .then((res) => dispatch({ type: ORDER_PRODUCTS_A_Z, payload: res.data }))
+//     .catch((err) => console.log(err.message));
+// };
 
-export const coffeeStockAsc = () => (dispatch) => {
-  return axios(`http://localhost:3001/coffees?orderedbystock=asc`)
-    .then((res) =>
-      dispatch({
-        type: ORDER_COFFEE_STOCK_ASC,
-        payload: res.data,
-      })
-    )
-    .catch((error) => console.log(error.message));
-};
+// export const coffeeStockAsc = () => (dispatch) => {
+//   return axios(`http://localhost:3001/coffees?orderedbystock=asc`)
+//     .then((res) =>
+//       dispatch({
+//         type: ORDER_COFFEE_STOCK_ASC,
+//         payload: res.data,
+//       })
+//     )
+//     .catch((error) => console.log(error.message));
+// };
 
-export const coffeeStockDes = () => (dispatch) => {
-  return axios(`http://localhost:3001/coffees?orderedbystock=des`)
-    .then((res) =>
-      dispatch({
-        type: ORDER_COFFEE_STOCK_DSC,
-        payload: res.data,
-      })
-    )
-    .catch((error) => console.log(error.message));
-};
+// export const coffeeStockDes = () => (dispatch) => {
+//   return axios(`http://localhost:3001/coffees?orderedbystock=des`)
+//     .then((res) =>
+//       dispatch({
+//         type: ORDER_COFFEE_STOCK_DSC,
+//         payload: res.data,
+//       })
+//     )
+//     .catch((error) => console.log(error.message));
+// };
 
-export const filterMin = (min) => (dispatch) => {
-  return dispatch({ type: FILTER_RANGE, payload: { min } });
-};
+// export const filterMin = (min) => (dispatch) => {
+//   return dispatch({ type: FILTER_RANGE, payload: { min } });
+// };
 
 
-export const filterAll = () => (dispatch) => {
-  return dispatch({ type: "FILTER_ALL" });
-};
+// export const filterAll = () => (dispatch) => {
+//   return dispatch({ type: "FILTER_ALL" });
+// };
 
-export const filterCoffeMin = (min, value) => {
-  //console.log( min, value) //x ahora solo me traigo el valor del precio, tengo que ver si tambien me envio el array de cafes renderizados
-  return function (dispatch) {
-    return dispatch({
-      type: FILTER_COFFE_MIN,
-      payload: { min, value },
-    });
-  };
-};
+// export const filterCoffeMin = (min, value) => {
+//   //console.log( min, value) //x ahora solo me traigo el valor del precio, tengo que ver si tambien me envio el array de cafes renderizados
+//   return function (dispatch) {
+//     return dispatch({
+//       type: FILTER_COFFE_MIN,
+//       payload: { min, value },
+//     });
+//   };
+// };
 
-export const filterCoffeMax = (max, value) => {
-  //x ahora solo me traigo el valor del precio, tengo que ver si tambien me envio el array de cafes renderizados
-  return function (dispatch) {
-    return dispatch({
-      type: FILTER_COFFE_MAX,
-      payload: { max, value },
-    });
-  };
-};
+// export const filterCoffeMax = (max, value) => {
+//   //x ahora solo me traigo el valor del precio, tengo que ver si tambien me envio el array de cafes renderizados
+//   return function (dispatch) {
+//     return dispatch({
+//       type: FILTER_COFFE_MAX,
+//       payload: { max, value },
+//     });
+//   };
+// };
 
-//http://localhost:3001/brands?category=coffee
+// //http://localhost:3001/brands?category=coffee

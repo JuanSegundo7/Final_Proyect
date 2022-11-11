@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { coffeeNameAZ, coffeeNameZA, coffeeStockAsc, coffeeStockDes, filterCoffeMax, filterCoffeMin, getCategory, getCoffees } from '../../redux/Actions/Actions';
+// import { coffeeNameAZ, coffeeNameZA, coffeeStockAsc, coffeeStockDes, filterCoffeMax, filterCoffeMin, getCategory, getCoffees } from '../../redux/Actions/Actions';
 
 export default function ({value}) {
     const dispatch = useDispatch();
@@ -12,39 +12,34 @@ export default function ({value}) {
         max:1500
       })
 
-      useEffect(() => {
-        dispatch(getCoffees());
-        dispatch(getCategory())
-      }, [dispatch]);
-
-    function handlePriceMin(e){
-        e.preventDefault()
-        setPrice({...price, min:e.target.value})
-        dispatch(filterCoffeMin(e.target.value, value))
-      }
+    // function handlePriceMin(e){
+    //     e.preventDefault()
+    //     setPrice({...price, min:e.target.value})
+    //     dispatch(filterCoffeMin(e.target.value, value))
+    //   }
   
-      function handlePriceMax(e){
-        e.preventDefault()
-        setPrice({...price, max:e.target.value})
-        dispatch(filterCoffeMax(e.target.value, value)) 
-        //-> ver si quiero mandar ya desde aca el array(el estado global de cafes o hacerlo desde el reducer)
-      }
+    //   function handlePriceMax(e){
+    //     e.preventDefault()
+    //     setPrice({...price, max:e.target.value})
+    //     dispatch(filterCoffeMax(e.target.value, value)) 
+    //     //-> ver si quiero mandar ya desde aca el array(el estado global de cafes o hacerlo desde el reducer)
+    //   }
   
-      function orderName(e){
-        if(e.target.value === 'ASC'){
-          dispatch(coffeeNameAZ())
-        } else if(e.target.value === 'DESC'){
-          dispatch(coffeeNameZA())
-        }
-      }
+    //   function orderName(e){
+    //     if(e.target.value === 'ASC'){
+    //       dispatch(coffeeNameAZ())
+    //     } else if(e.target.value === 'DESC'){
+    //       dispatch(coffeeNameZA())
+    //     }
+    //   }
   
-      function orderStock(e){
-        if(e.target.value === 'ASC'){
-          dispatch(coffeeStockAsc())
-        } else if(e.target.value === 'DSC'){
-          dispatch(coffeeStockDes())
-        }
-      }
+    //   function orderStock(e){
+    //     if(e.target.value === 'ASC'){
+    //       dispatch(coffeeStockAsc())
+    //     } else if(e.target.value === 'DSC'){
+    //       dispatch(coffeeStockDes())
+    //     }
+    //   }
 
   return (
     <div>
@@ -52,7 +47,7 @@ export default function ({value}) {
           <div className="menuFilters">
             <div>
               <p>Order By Name</p>
-              <select onChange={(e) => orderName(e)}>
+              <select onChange={(e) => console.log(e)}>
                 <option value='ASC'> A-Z </option>
                 <option value='DESC'>Z-A</option>
               </select>
@@ -63,7 +58,7 @@ export default function ({value}) {
               min='1'
               max='1500'
               value={price.min}
-              onChange={(e) => handlePriceMin(e)}
+              onChange={(e) => console.log(e)}
               />
 
               <input 
@@ -71,7 +66,7 @@ export default function ({value}) {
               min='1'
               max='1500'
               value={price.max}
-              onChange={(e) => handlePriceMax(e)}
+              onChange={(e) => console.log(e)}
               />
               {
                 <span>From {price.min} to {price.max} USD</span>
@@ -86,7 +81,7 @@ export default function ({value}) {
               </select>
             </div>
             <div>
-              <select onChange={(e) => orderStock(e)}>
+              <select onChange={(e) => console.log(e)}>
                 <option value='ASC'> Menos Stock</option>
                 <option value='DSC'> Mas Stock</option>
               </select>
