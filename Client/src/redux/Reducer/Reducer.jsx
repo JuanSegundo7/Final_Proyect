@@ -20,7 +20,7 @@ import {
 
 const initialState = {
   allCoffees: [],
-  allCoffees2:[],
+  allCoffees2: [],
   filters: [],
   filters2: [],
 
@@ -32,7 +32,7 @@ const initialState = {
   detailCoffee: {},
   category: [],
   detailProduct: {},
-  filterCoffe:[]
+  filterCoffe: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -71,7 +71,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allProducts: action.payload,
-        allProducts2: action.payload
+        allProducts2: action.payload,
       };
 
     case DETAIL_PRODUCTS:
@@ -118,8 +118,8 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allProducts: action.payload,
-      }
-      
+      };
+
     case ORDER_PRODUCTS_Z_A:
       return {
         ...state,
@@ -127,89 +127,88 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case FILTER_COFFE_MIN:
+      if (action.payload.value == "coffee") {
+        let aux2 = [];
 
-      if(action.payload.value == 'coffee'){
-        let aux2 = []
- 
-        if(!state.filters2.length){
-          const filtrado = state.allCoffees2.filter((c) => action.payload.min <= c.price)
-          filtrado.map((ele) => aux2.push(ele))
- 
+        if (!state.filters2.length) {
+          const filtrado = state.allCoffees2.filter(
+            (c) => action.payload.min <= c.price
+          );
+          filtrado.map((ele) => aux2.push(ele));
         } else {
- 
-          const filter2 = state.filters2.filter((c) => action.payload.min <= c.price)
-          filter2.map((ele) => aux2.push(ele))
- 
+          const filter2 = state.filters2.filter(
+            (c) => action.payload.min <= c.price
+          );
+          filter2.map((ele) => aux2.push(ele));
         }
- 
-       return{
-         ...state,
-         allCoffees:aux2
-       }
 
-      } else if (action.payload.value == 'products'){
-        console.log('entre products')
-        let aux2 = []
- 
-        if(!state.filtersProduct2.length){
-          const filtrado = state.allProducts2.filter((c) => action.payload.min <= c.price)
-          filtrado.map((ele) => aux2.push(ele))
- 
+        return {
+          ...state,
+          allCoffees: aux2,
+        };
+      } else if (action.payload.value == "products") {
+        console.log("entre products");
+        let aux2 = [];
+
+        if (!state.filtersProduct2.length) {
+          const filtrado = state.allProducts2.filter(
+            (c) => action.payload.min <= c.price
+          );
+          filtrado.map((ele) => aux2.push(ele));
         } else {
- 
-          const filter2 = state.filtersProduct2.filter((c) => action.payload.min <= c.price)
-          filter2.map((ele) => aux2.push(ele))
- 
+          const filter2 = state.filtersProduct2.filter(
+            (c) => action.payload.min <= c.price
+          );
+          filter2.map((ele) => aux2.push(ele));
         }
- 
-       return{
-         ...state,
-         allProducts:aux2
-       }
+
+        return {
+          ...state,
+          allProducts: aux2,
+        };
       }
 
-    case FILTER_COFFE_MAX: 
-    if(action.payload.value === 'coffee'){
+    case FILTER_COFFE_MAX:
+      if (action.payload.value === "coffee") {
+        let aux = [];
 
-      let aux = []
+        if (!state.filtersProduct.length) {
+          const filtradoMax = state.allCoffees2.filter(
+            (c) => action.payload.max >= c.price
+          );
+          filtradoMax.map((ele) => aux.push(ele));
+        } else {
+          const filter2 = state.filtersProduct.filter(
+            (c) => action.payload.max >= c.price
+          );
+          filter2.map((ele) => aux.push(ele));
+        }
 
-      if(!state.filtersProduct.length){
+        return {
+          ...state,
+          filtersProduct2: aux,
+          allCoffees: aux,
+        };
+      } else if (action.payload.value == "products") {
+        let aux = [];
 
-        const filtradoMax = state.allCoffees2.filter((c) => action.payload.max >= c.price)
-        filtradoMax.map((ele) => aux.push(ele))
+        if (!state.filters.length) {
+          const filtrado = state.allProducts2.filter(
+            (c) => action.payload.max >= c.price
+          );
+          filtrado.map((ele) => aux.push(ele));
+        } else {
+          const filter2 = state.filters.filter(
+            (c) => action.payload.max >= c.price
+          );
+          filter2.map((ele) => aux.push(ele));
+        }
 
-      } else {
-
-        const filter2 = state.filtersProduct.filter((c) => action.payload.max >= c.price)
-        filter2.map((ele) => aux.push(ele))
-
+        return {
+          ...state,
+          allProducts: aux,
+        };
       }
-
-      return{
-        ...state,
-        filtersProduct2:aux,
-        allCoffees: aux
-      }
-    } else if (action.payload.value == 'products'){
-      let aux = []
- 
-      if(!state.filters.length){
-        const filtrado = state.allProducts2.filter((c) => action.payload.max >= c.price)
-        filtrado.map((ele) => aux.push(ele))
-
-      } else {
-
-        const filter2 = state.filters.filter((c) => action.payload.max >= c.price)
-        filter2.map((ele) => aux.push(ele))
-
-      }
-
-     return{
-       ...state,
-       allProducts:aux
-     }
-    }
-
 
     default:
       return {
