@@ -6,36 +6,32 @@ import FilterCoffees from "../FilterCoffees/FilterCoffees";
 import "./Contenido.css";
 
 export default function ContenidoCoffes() {
+  const dispatch = useDispatch();
+  const allCoffees = useSelector((state) => state.allCoffees);
 
-    const dispatch = useDispatch();
-    const allCoffees = useSelector((state) => state.allCoffees);
-
-    useEffect(() => {
-      dispatch(getCoffees());
-      dispatch(getCategory())
-    }, [dispatch]);
-
-
+  useEffect(() => {
+    // dispatch(getCoffees());
+    dispatch(getCategory());
+  }, [dispatch]);
 
   return (
     <div id="Contenido">
       <section id="Products">
+        <FilterCoffees value="coffee" />
 
-        <FilterCoffees value='coffee'/>
-       
         <div className="cardHome">
           {allCoffees.length &&
             allCoffees.map((cardCoffe) => {
               return (
-                  <Card
-                    img={cardCoffe.image.url}
-                    key={cardCoffe._id}
-                    _id={cardCoffe._id}
-                    name={cardCoffe.name}
-                    origin={cardCoffe.origin}
-                    type={cardCoffe.type}
-                    price={cardCoffe.price}
-                  />
+                <Card
+                  img={cardCoffe.image.url}
+                  key={cardCoffe._id}
+                  _id={cardCoffe._id}
+                  name={cardCoffe.name}
+                  origin={cardCoffe.origin}
+                  type={cardCoffe.type}
+                  price={cardCoffe.price}
+                />
               );
             })}
         </div>
