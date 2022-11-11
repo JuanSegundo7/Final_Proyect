@@ -14,7 +14,11 @@ export default function ContenidoGrain() {
 
   const all = [...allCoffee, ...allProducts];
 
-  const final = all.filter((value) => value.type.toLowerCase() === params);
+  //console.log(all)
+
+  const final = all.filter((value) => value.category.name === params);
+  //CHICOS, ACA LES CAMBIE UN ERROR QUE TENIAN, ESTABAN ACCEDIENDO MAL A LA INFO
+  //value.type.toLowerCase() === params
   return (
     <div>
       {final.length ? (
