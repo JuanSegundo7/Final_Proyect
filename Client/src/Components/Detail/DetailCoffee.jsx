@@ -8,7 +8,6 @@ export default function DetailCoffee() {
   const dispatch = useDispatch();
   const detail = useSelector((state) => state.detailCoffee);
   const idCoffee = useParams();
-  console.log(detail, "es detail");
 
   useEffect(() => {
     dispatch(detailCoffees(idCoffee.id));
