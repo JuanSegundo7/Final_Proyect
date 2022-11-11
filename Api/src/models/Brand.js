@@ -3,10 +3,7 @@ const mongoose = require('mongoose');
 const BrandSchema = mongoose.Schema(
   { 
     name: {type: String, required: true},
-    image: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Image"
-    },
+    image: String
   },
   {versionKey: false}
   );

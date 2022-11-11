@@ -186,3 +186,5 @@ export const filterCoffeMax = (max, value) => {
     });
   };
 };
+
+//http://localhost:3001/brands?category=coffee

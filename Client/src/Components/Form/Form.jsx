@@ -5,6 +5,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCategory, postCoffes } from '../../redux/Actions/Actions';
 import "./Form.css"
 
+/*
+        LA CREACION DE CAFE Y PRODUCTOS VAN A ESTAR EN RENDERIZADOS DISTINTOS
+
+    NAME -> STRING
+    DESCRIPTION -> STRING
+    ORIGIN -> STRING (SIN SELECT)
+    CATEGORY DE TIPO DE CAFE(MOLIENDA GRUESA, EN GRANO, ETC...) -> STRING (VA A SER UN SELECT) CAFE.TYPE -> AHI ENCUENTRO EL TIPO DE CAFE
+    PRECIO -> VA A SER UN NUMERO
+    STOCK -> NUMERO
+
+    MARCAS -> STRING (LE PONEMOS SELECT? SI O NO, A CHARLAR)
+    VA A SER UN SELECT, QUE VA A PEGARLE A UNA RUTA DEL BACK QUE ME TRAIGO SOLO LA DE LOS CAFES
+    
+    (ESTA EN BRAND, IMG Y NAME)
+
+    IMAGEN -> STRING -> PODRIAMOS PENSAR QUE SEA UN SELECT CON UN NOMBRE DESCRIBIENDO QUE IMAGEN VA A SER, TODAVIA FALTA DEFINIR BIEN COMO LO VAMOS A HACER
+
+    *ESTO VA A ESTAR EN OTRO RENDERRIZADO, PARA CREAR UN PRODUCTO*
+
+    CATEGORY DE SI ES UN PRODUCTO O ES UN CAFE-> STRING (VA A SER UN SELECT) CAFE.CATEGORY.TYPE AHI ENCUENTRO   EL TIPO, SI ES CAFE O PRODUCTO
+    */
 const Form = () => {
     const dispatch = useDispatch();
 
@@ -14,7 +35,7 @@ const Form = () => {
     
     const allCategory = useSelector((state) => state.category);
 
-    const allCategory2 = allCategory.filter((c) => c.type == "Coffee Maker");
+    const allCategory2 = allCategory.filter((c) => c.type == "Coffee");
 
     const [input, setInput] = useState({
         name: '',
@@ -193,14 +214,6 @@ const Form = () => {
                 </ul>
             </span>
 
-            {/* <select onChange={(e) => handleType(e)}>
-                {allCategory.map((t) => <option key={t.type}>{t.type}</option>)}
-            </select>
-            <span>
-                <ul>
-                    {input.type && <span>{input.type}</span>}
-                </ul>
-            </span> */}
             <input
             name="stock" 
             type="number" 

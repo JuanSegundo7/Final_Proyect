@@ -128,86 +128,116 @@ const rootReducer = (state = initialState, action) => {
 
     case FILTER_COFFE_MIN:
       if (action.payload.value == "coffee") {
+
         let aux2 = [];
 
         if (!state.filters2.length) {
-          const filtrado = state.allCoffees2.filter(
-            (c) => action.payload.min <= c.price
-          );
+
+          const filtrado = state.allCoffees2.filter((c) => action.payload.min <= c.price);
           filtrado.map((ele) => aux2.push(ele));
+          return {
+            ...state,
+            filters:aux2,
+            allCoffees: aux2,
+          };
+
         } else {
-          const filter2 = state.filters2.filter(
-            (c) => action.payload.min <= c.price
-          );
+
+          const filter2 = state.filters2.filter((c) => action.payload.min <= c.price);
           filter2.map((ele) => aux2.push(ele));
+
+          return {
+            ...state,
+            //filters:aux2,
+            allCoffees: aux2,
+          };
         }
 
-        return {
-          ...state,
-          allCoffees: aux2,
-        };
+
       } else if (action.payload.value == "products") {
-        console.log("entre products");
-        let aux2 = [];
+
+        let aux3 = [];
 
         if (!state.filtersProduct2.length) {
-          const filtrado = state.allProducts2.filter(
-            (c) => action.payload.min <= c.price
-          );
-          filtrado.map((ele) => aux2.push(ele));
+
+          const filtrado = state.allProducts2.filter((c) => action.payload.min <= c.price);
+          filtrado.map((ele) => aux3.push(ele));
+
+          return {
+            ...state,
+            filtersProduct:aux3,
+            allProducts: aux3,
+          };
+
         } else {
-          const filter2 = state.filtersProduct2.filter(
-            (c) => action.payload.min <= c.price
-          );
-          filter2.map((ele) => aux2.push(ele));
+
+          const filter2 = state.filtersProduct2.filter((c) => action.payload.min <= c.price);
+          filter2.map((ele) => aux3.push(ele));
+
+          return {
+            ...state,
+            //filtersProduct:aux2,
+            allProducts: aux3,
+          };
         }
 
-        return {
-          ...state,
-          allProducts: aux2,
-        };
       }
 
     case FILTER_COFFE_MAX:
       if (action.payload.value === "coffee") {
-        let aux = [];
 
-        if (!state.filtersProduct.length) {
-          const filtradoMax = state.allCoffees2.filter(
-            (c) => action.payload.max >= c.price
-          );
-          filtradoMax.map((ele) => aux.push(ele));
-        } else {
-          const filter2 = state.filtersProduct.filter(
-            (c) => action.payload.max >= c.price
-          );
-          filter2.map((ele) => aux.push(ele));
-        }
-
-        return {
-          ...state,
-          filtersProduct2: aux,
-          allCoffees: aux,
-        };
-      } else if (action.payload.value == "products") {
         let aux = [];
 
         if (!state.filters.length) {
-          const filtrado = state.allProducts2.filter(
-            (c) => action.payload.max >= c.price
-          );
-          filtrado.map((ele) => aux.push(ele));
+
+          const filtradoMax = state.allCoffees2.filter((c) => action.payload.max >= c.price);
+          filtradoMax.map((ele) => aux.push(ele));
+
+          return {
+            ...state,
+            filters2: aux,
+            allCoffees: aux,
+          };
+
         } else {
-          const filter2 = state.filters.filter(
-            (c) => action.payload.max >= c.price
-          );
+
+          const filter2 = state.filters.filter((c) => action.payload.max >= c.price);
           filter2.map((ele) => aux.push(ele));
+
+          return {
+            ...state,
+            //filters2: aux,
+            allCoffees: aux,
+          };
         }
 
-        return {
-          ...state,
-          allProducts: aux,
-        };
+
+      } else if (action.payload.value == "products") {
+        let aux = [];
+
+        if (!state.filtersProduct.length) {
+
+          const filtrado = state.allProducts2.filter((c) => action.payload.max >= c.price);
+          filtrado.map((ele) => aux.push(ele));
+
+          return {
+            ...state,
+            filtersProduct2:aux,
+            allProducts: aux,
+          };
+
+        } else {
+
+          const filter2 = state.filtersProduct.filter((c) => action.payload.max >= c.price);
+          filter2.map((ele) => aux.push(ele));
+
+          return {
+            ...state,
+            //filtersProduct2:aux,
+            allProducts: aux,
+          };
+        }
+
       }
 
     default:
@@ -218,3 +248,4 @@ const rootReducer = (state = initialState, action) => {
 };
 
 export default rootReducer;
+

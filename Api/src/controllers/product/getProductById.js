@@ -1,15 +1,19 @@
-const {Product} = require("../../db.js");
+const { Product } = require('../../db.js');
+const getProductById = async function (productId) {
+    
+  try{
+    const resp = await Product.findById(productId)
+    .populate("category").populate("image").populate("brand");
+    //.populate("activities",["name","season"]);
 
-const getProductById = async function(id){
-    try {
-        const response = await Product.findById(id)
-        .populate("image").populate("brand").populate("category");
+    if (!resp) throw new Error("No product matches the informed id...")
+  
+    return resp;
 
-        if(!response) throw new Error("No product matches the informed id...");
-        return response;
-    } catch (unError) {
-        throw new Error(unError);
-    }
-}
-
-module.exports = getProductById
+  }catch(unError){
+    throw new Error(unError)
+  }    
+    
+  }
+    
+module.exports = getProductById;

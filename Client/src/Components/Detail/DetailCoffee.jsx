@@ -22,7 +22,7 @@ export default function DetailCoffee() {
       <img
         src={detail.image && detail.image.url}
         alt={`image coffe: ${detail.name}`}
-      ></img>
+      />
       <p>{detail.name}</p>
       <p>{detail.description}</p>
       <p>{detail.category && detail.category.name}</p>
