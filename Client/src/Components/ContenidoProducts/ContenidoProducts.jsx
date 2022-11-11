@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/Actions/Actions";
 import CardProduct from "../Card/CardProduct";
 import FilterCoffees from "../FilterCoffees/FilterCoffees";
-//import FilterProducts from "../FilterProducts/FilterProducts";
 import "../ContenidoCoffes/Contenido.css";
 
 export default function ContenidoProducts() {
