@@ -12,6 +12,9 @@ export const CLEAN_DETAIL = "CLEAN_DETAIL";
 // FILTERS
 export const FILTER_BRAND = "FILTER_BRAND";
 
+// BRANDS
+export const GET_BRANDS = "GET_BRANDS";
+
 // export const ORDERCOFFEES_AZ = "ORDERCOFFEES_AZ";
 // export const ORDERCOFFEES_ZA = "ORDERCOFFEES_ZA";
 // export const ORDER_PRODUCTS_A_Z = "ORDER_PRODUCTS_A_Z";
@@ -22,7 +25,7 @@ export const FILTER_BRAND = "FILTER_BRAND";
 // export const FILTER_COFFE_MIN = "FILTER_COFFE_MIN";
 // export const FILTER_COFFE_MAX = "FILTER_COFFE_MAX";
 
-const baseUrl = `http://localhost:3001/products`;
+const baseUrl = `http://localhost:3001/`;
 
 // PRODUCTS
 
@@ -30,7 +33,7 @@ const baseUrl = `http://localhost:3001/products`;
 
 export const getProducts = () => async (dispatch) => {
   try {
-    const { data } = await axios.get(`${baseUrl}`);
+    const { data } = await axios.get(`${baseUrl}products`);
     dispatch({ type: GET_PRODUCTS, payload: data });
   } catch (error) {
     console.log(`${error}`);
@@ -40,7 +43,7 @@ export const getProducts = () => async (dispatch) => {
 export const postProduct = (payload) => {
   return function (dispatch) {
     axios
-      .post(`${baseUrl}`, payload)
+      .post(`${baseUrl}products`, payload)
       .then((res) => {
         dispatch({
           type: POST_PRODUCT,
@@ -58,7 +61,7 @@ export const postProduct = (payload) => {
 export const getProductByQuery = (info, name, value) => {
   try {
     return async function (dispatch) {
-      let json = await axios.get(`${baseUrl}?${info}=${value}`); // category=coffee
+      let json = await axios.get(`${baseUrl}products?${info}=${value}`); // category=coffee
       return dispatch({
         type: GET_PRODUCT_BY_QUERY,
         value: `${name}${value}`,
@@ -75,7 +78,7 @@ export const getProductByQuery = (info, name, value) => {
 export const getOneProduct = (id) => async (dispatch) => {
   try {
     await axios
-      .get(`${baseUrl}/${id}`)
+      .get(`${baseUrl}products/${id}`)
       .then((data) => dispatch({ type: GET_ONE_PRODUCT, payload: data.data }));
   } catch (e) {
     console.log(e);
@@ -88,6 +91,17 @@ export const deleteProduct = (id) => {
 
 export const cleanDetail = () => {
   return { type: CLEAN_DETAIL };
+};
+
+// BRANDS
+
+export const getBrands = () => async (dispatch) => {
+  try {
+    const { data } = await axios.get(`${baseUrl}brands`);
+    dispatch({ type: GET_BRANDS, payload: data });
+  } catch (error) {
+    console.log(`${error}`);
+  }
 };
 
 export const filterBrands = (value) => (dispatch) => {

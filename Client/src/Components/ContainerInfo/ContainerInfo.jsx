@@ -1,27 +1,36 @@
 import React, { useEffect } from "react";
 import FilterCoffees from "../FilterCoffees/FilterCoffees";
 import { Card } from "../Card/Card";
-
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Error from "../Card/imgs/error.webp";
 import "./ContainerInfo.css";
 
 export default function ContainerInfo({ info, effect }) {
+  const {params} = useParams();
   const dispatch = useDispatch();
-  const allCoffees = useSelector((state) => state[info]);
+  const allProducts = useSelector((state) => state[info]);
 
-  useEffect(() => {
-    dispatch(effect());
-  }, [dispatch]);
+
+  // PROTOTIPO CON PARAMS, LO MEJOR SERIA BUSCAR LA FORMA DE CONSEGUIR LA INFO DEL BACK POR MARCA
+
+  // const paramsArray = allProducts.filter(product => product.brand.name.includes(params))
+
+  // console.log(paramsArray)
+
+  // console.log(params)
+
+  // useEffect(() => {
+  //   dispatch(effect());
+  // }, [dispatch]);
 
   return (
     <div id="Contenido">
       <section id="Products">
         <FilterCoffees value="coffee" />
-
         <div className="cardHome">
-          {allCoffees.length &&
-            allCoffees.map((cardCoffe) => {
+          {allProducts.length &&
+            allProducts.map((cardCoffe) => {
               return (
                 <Card
                   img={

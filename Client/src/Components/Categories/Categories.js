@@ -7,10 +7,10 @@ import { Link } from "react-router-dom";
 
 const Categories = () => {
   const dispatch = useDispatch();
-  const allCategory = useSelector((state) => state.category);
+  const allCategory = useSelector((state) => state.CategoriesCoffee);
+  const brands = useSelector((state) => state.Brands);
 
-  // const coffeeMaker = allCategory.filter(coffe => coffe.type === "Coffee Maker")
-  // const coffees = allCategory.filter(coffe => coffe.type === "Coffee")
+  console.log(allCategory);
 
   const Coffees = {
     array: [],
@@ -23,7 +23,7 @@ const Categories = () => {
   };
 
   const Brands = {
-    array: [],
+    array: brands,
     name: "Brands",
   };
 
@@ -45,9 +45,9 @@ const Categories = () => {
             <Dropdown info={Coffees} path="/coffees" />
           </Link>
         </li>
-        {/* <li>
+        <li>
           <Dropdown info={Products} path="/products" />
-        </li> */}
+        </li>
         <li>
           <Dropdown info={CoffeeMaker} path="/products/coffee-maker" />
         </li>
