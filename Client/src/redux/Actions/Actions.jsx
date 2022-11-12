@@ -10,6 +10,7 @@ export const GET_PRODUCT_BY_QUERY = "GET_PRODUCT_BY_QUERY";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 
 // FILTERS
+export const FILTER_BRAND = "FILTER_BRAND";
 
 // export const ORDERCOFFEES_AZ = "ORDERCOFFEES_AZ";
 // export const ORDERCOFFEES_ZA = "ORDERCOFFEES_ZA";
@@ -23,15 +24,14 @@ export const CLEAN_DETAIL = "CLEAN_DETAIL";
 
 const baseUrl = `http://localhost:3001/products`;
 
-
 // PRODUCTS
 
 // TODOS LOS PRODUCTOS: CAFES, MAQUINAS, ACCESORIOS, OTROS
 
 export const getProducts = () => async (dispatch) => {
   try {
-      const {data} = await axios.get(`${baseUrl}`)
-      dispatch({type: GET_PRODUCTS, payload: data})
+    const { data } = await axios.get(`${baseUrl}`);
+    dispatch({ type: GET_PRODUCTS, payload: data });
   } catch (error) {
     console.log(`${error}`);
   }
@@ -70,15 +70,15 @@ export const getProductByQuery = (info, name, value) => {
   }
 };
 
-
 // dispatch(getOneProduct(id)) - Detail
 
 export const getOneProduct = (id) => async (dispatch) => {
-  try{
-    await axios.get(`${baseUrl}/${id}`)
-    .then(data => dispatch({type: GET_ONE_PRODUCT, payload: data.data}))
-  }catch(e){
-    console.log(e)
+  try {
+    await axios
+      .get(`${baseUrl}/${id}`)
+      .then((data) => dispatch({ type: GET_ONE_PRODUCT, payload: data.data }));
+  } catch (e) {
+    console.log(e);
   }
 };
 
@@ -86,12 +86,13 @@ export const deleteProduct = (id) => {
   return { type: DELETE_PRODUCT, id };
 };
 
-
-
 export const cleanDetail = () => {
   return { type: CLEAN_DETAIL };
 };
 
+export const filterBrands = (value) => (dispatch) => {
+  return dispatch({ type: FILTER_BRAND, payload: value });
+};
 
 // export const getCategory = () => (dispatch) => {
 //   return axios(`${baseUrl}categories`).then((res) =>
@@ -161,7 +162,6 @@ export const cleanDetail = () => {
 // export const filterMin = (min) => (dispatch) => {
 //   return dispatch({ type: FILTER_RANGE, payload: { min } });
 // };
-
 
 // export const filterAll = () => (dispatch) => {
 //   return dispatch({ type: "FILTER_ALL" });

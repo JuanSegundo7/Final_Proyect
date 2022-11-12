@@ -3,14 +3,17 @@ import FilterCoffees from "../FilterCoffees/FilterCoffees";
 import { Card } from "../Card/Card";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../redux/Actions/Actions"
-import Error from "../Card/imgs/error.webp"
+import Error from "../Card/imgs/error.webp";
 import "./ContainerInfo.css";
 
-export default function ContainerInfo({info, effect}) {
+export default function ContainerInfo({ info, effect }) {
   const dispatch = useDispatch();
   const allCoffees = useSelector((state) => state[info]);
-  
+
+  useEffect(() => {
+    dispatch(effect());
+  }, [dispatch]);
+
   return (
     <div id="Contenido">
       <section id="Products">
@@ -21,7 +24,11 @@ export default function ContainerInfo({info, effect}) {
             allCoffees.map((cardCoffe) => {
               return (
                 <Card
-                  img={!cardCoffe.image || cardCoffe.image === null ? Error : cardCoffe.image.url}
+                  img={
+                    !cardCoffe.image || cardCoffe.image === null
+                      ? Error
+                      : cardCoffe.image.url
+                  }
                   key={cardCoffe._id}
                   _id={cardCoffe._id}
                   name={cardCoffe.name}
