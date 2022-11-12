@@ -17,6 +17,7 @@ export default function ContenidoGrain() {
   const final = all.filter((value) => value.category.name === params);
   //CHICOS, ACA LES CAMBIE UN ERROR QUE TENIAN, ESTABAN ACCEDIENDO MAL A LA INFO
   //value.type.toLowerCase() === params
+  console.log(final);
   return (
     <div>
       {final.length ? (

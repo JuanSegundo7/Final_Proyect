@@ -4,7 +4,8 @@ import {
   POST_PRODUCT,
   DELETE_PRODUCT,
   GET_PRODUCT_BY_QUERY,
-  CLEAN_DETAIL
+  CLEAN_DETAIL,
+  FILTER_BRAND,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -12,7 +13,7 @@ const initialState = {
   Product: {},
   Categories: [],
   Brands: [],
-  
+
   ProductASC: [],
   ProductDES: [],
   ProductStockASC: [],
@@ -22,8 +23,10 @@ const initialState = {
 
   CategoriesAccesories: [],
   CategoriesCoffee: [],
-  CategoriesCoffeMaker: [],
+  CategoriesCoffeeMaker: [],
   CategoriesOthers: [],
+
+  Filters: [],
 
   // allProducts: [],
   // allProducts2: [],
@@ -36,7 +39,9 @@ const rootReducer = (state = initialState, action) => {
     case GET_PRODUCTS:
       return {
         ...state,
-        Products: action.payload
+        Products: action.payload,
+        Brands: action.payload,
+        Filters: action.payload,
       };
     case GET_ONE_PRODUCT:
       return {
@@ -60,70 +65,85 @@ const rootReducer = (state = initialState, action) => {
         ...state,
       };
 
-    case GET_PRODUCT_BY_QUERY: 
-      switch(action.value){
-          case "ProductASC": {
-            return {
-              ...state,
-              ProductASC: action.payload
-            }
-          }
-          case "ProductDES": {
-            return {
-              ...state,
-              ProductDES: action.payload
-            }
-          }
-          case "StockASC": {
-            return {
-              ...state,
-              ProductStockASC: action.payload
-            }
-          }
-          case "StockDES": {
-            return {
-              ...state,
-              ProductStockDES: action.payload
-            }
-          }
-          case "PriceASC": {
-            return {
-              ...state,
-              ProductPriceASC: action.payload
-            }
-          }
-          case "PriceDES": {
-            return {
-              ...state,
-              ProductPriceDES: action.payload
-            }
-          }
-          case "coffee": {
-            return {
-              ...state,
-              CategoriesCoffee: action.payload
-            }
-          }
-          case "coffee-maker": {
-            return {
-              ...state,
-              CategoriesCoffeeMaker: action.payload
-            }
-          }
-          case "accessories": {
-            return {
-              ...state,
-              CategoriesAccesories: action.payload
-            }
-          }
-          case "others": {
-            return {
-              ...state,
-              CategoriesOthers: action.payload
-            }
-          }
-          default: return { ...state }
+    case GET_PRODUCT_BY_QUERY:
+      switch (action.value) {
+        case "ProductASC": {
+          return {
+            ...state,
+            ProductASC: action.payload,
+          };
+        }
+        case "ProductDES": {
+          return {
+            ...state,
+            ProductDES: action.payload,
+          };
+        }
+        case "StockASC": {
+          return {
+            ...state,
+            ProductStockASC: action.payload,
+          };
+        }
+        case "StockDES": {
+          return {
+            ...state,
+            ProductStockDES: action.payload,
+          };
+        }
+        case "PriceASC": {
+          return {
+            ...state,
+            ProductPriceASC: action.payload,
+          };
+        }
+        case "PriceDES": {
+          return {
+            ...state,
+            ProductPriceDES: action.payload,
+          };
+        }
+        case "coffee": {
+          return {
+            ...state,
+            CategoriesCoffee: action.payload,
+          };
+        }
+        case "coffee-maker": {
+          return {
+            ...state,
+            CategoriesCoffeeMaker: action.payload,
+          };
+        }
+        case "accessories": {
+          return {
+            ...state,
+            CategoriesAccesories: action.payload,
+          };
+        }
+        case "others": {
+          return {
+            ...state,
+            CategoriesOthers: action.payload,
+          };
+        }
+        case "modo barista":
+          return {
+            ...state,
+            Brands: action.payload,
+          };
+        default:
+          return { ...state };
       }
+    case FILTER_BRAND:
+      const filterBrand = state.Filters.filter((coffee) => {
+        return coffee.brand?.name === action.payload;
+      });
+      console.log(filterBrand, "filterBrand");
+      return {
+        ...state,
+        Brands: filterBrand,
+      };
 
     // case FILTER_COFFE_MIN:
     //   if (action.payload.value == "coffee") {
@@ -151,7 +171,6 @@ const rootReducer = (state = initialState, action) => {
     //         allCoffees: aux2,
     //       };
     //     }
-
 
     //   } else if (action.payload.value == "products") {
 
@@ -210,7 +229,6 @@ const rootReducer = (state = initialState, action) => {
     //       };
     //     }
 
-
     //   } else if (action.payload.value == "products") {
     //     let aux = [];
 
@@ -247,4 +265,3 @@ const rootReducer = (state = initialState, action) => {
 };
 
 export default rootReducer;
-
