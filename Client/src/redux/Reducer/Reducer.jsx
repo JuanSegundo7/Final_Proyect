@@ -36,8 +36,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_PRODUCTS:
       return {
         ...state,
-        allCoffees: action.payload,
-        allCoffees2: action.payload,
+        Products: action.payload
       };
     case GET_ONE_PRODUCT:
       return {
@@ -62,45 +61,69 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case GET_PRODUCT_BY_QUERY: 
-        switch(action.value){
-            case "ProductASC": {
-              return {
-                ...state,
-                ProductASC: action.payload
-              }
+      switch(action.value){
+          case "ProductASC": {
+            return {
+              ...state,
+              ProductASC: action.payload
             }
-            case "ProductDES": {
-              return {
-                ...state,
-                ProductDES: action.payload
-              }
+          }
+          case "ProductDES": {
+            return {
+              ...state,
+              ProductDES: action.payload
             }
-            case "StockASC": {
-              return {
-                ...state,
-                ProductStockASC: action.payload
-              }
+          }
+          case "StockASC": {
+            return {
+              ...state,
+              ProductStockASC: action.payload
             }
-            case "StockDES": {
-              return {
-                ...state,
-                ProductStockDES: action.payload
-              }
+          }
+          case "StockDES": {
+            return {
+              ...state,
+              ProductStockDES: action.payload
             }
-            case "PriceASC": {
-              return {
-                ...state,
-                ProductPriceASC: action.payload
-              }
+          }
+          case "PriceASC": {
+            return {
+              ...state,
+              ProductPriceASC: action.payload
             }
-            case "PriceDES": {
-              return {
-                ...state,
-                ProductPriceDES: action.payload
-              }
+          }
+          case "PriceDES": {
+            return {
+              ...state,
+              ProductPriceDES: action.payload
             }
-            default: return { ...state }
-        }
+          }
+          case "coffee": {
+            return {
+              ...state,
+              CategoriesCoffee: action.payload
+            }
+          }
+          case "coffee-maker": {
+            return {
+              ...state,
+              CategoriesCoffeeMaker: action.payload
+            }
+          }
+          case "accessories": {
+            return {
+              ...state,
+              CategoriesAccesories: action.payload
+            }
+          }
+          case "others": {
+            return {
+              ...state,
+              CategoriesOthers: action.payload
+            }
+          }
+          default: return { ...state }
+      }
 
     // case FILTER_COFFE_MIN:
     //   if (action.payload.value == "coffee") {

@@ -9,6 +9,7 @@ const Categories = () => {
     const dispatch = useDispatch()
     const allCategory = useSelector((state) => state.category);
 
+
     // const coffeeMaker = allCategory.filter(coffe => coffe.type === "Coffee Maker")
     // const coffees = allCategory.filter(coffe => coffe.type === "Coffee")
 

@@ -28,12 +28,10 @@ const baseUrl = `http://localhost:3001/products`;
 
 // TODOS LOS PRODUCTOS: CAFES, MAQUINAS, ACCESORIOS, OTROS
 
-export const getProducts = async () => {
+export const getProducts = () => async (dispatch) => {
   try {
-    return async function (dispatch) {
-      await axios.get(`${baseUrl}`)
-      .then(data => dispatch({type: GET_PRODUCTS, payload: data.data}))
-    };
+      const {data} = await axios.get(`${baseUrl}`)
+      dispatch({type: GET_PRODUCTS, payload: data})
   } catch (error) {
     console.log(`${error}`);
   }
