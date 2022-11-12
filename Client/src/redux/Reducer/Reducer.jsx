@@ -5,6 +5,7 @@ import {
   DELETE_PRODUCT,
   GET_PRODUCT_BY_QUERY,
   CLEAN_DETAIL,
+  GET_BRANDS,
   FILTER_BRAND,
 } from "../Actions/Actions";
 
@@ -40,7 +41,6 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         Products: action.payload,
-        Brands: action.payload,
         Filters: action.payload,
       };
     case GET_ONE_PRODUCT:
@@ -127,23 +127,31 @@ const rootReducer = (state = initialState, action) => {
             CategoriesOthers: action.payload,
           };
         }
-        case "modo barista":
-          return {
-            ...state,
-            Brands: action.payload,
-          };
+        // case "modo barista":
+        //   return {
+        //     ...state,
+        //     Brands: action.payload,
+        //   };
         default:
           return { ...state };
       }
-    case FILTER_BRAND:
-      const filterBrand = state.Filters.filter((coffee) => {
-        return coffee.brand?.name === action.payload;
-      });
-      console.log(filterBrand, "filterBrand");
+
+    case GET_BRANDS: {
       return {
         ...state,
-        Brands: filterBrand,
+        Brands: action.payload,
       };
+    }
+
+    // case FILTER_BRAND:
+    //   const filterBrand = state.Filters.filter((coffee) => {
+    //     return coffee.brand?.name === action.payload;
+    //   });
+    //   console.log(filterBrand, "filterBrand");
+    //   return {
+    //     ...state,
+    //     Brands: filterBrand,
+    //   };
 
     // case FILTER_COFFE_MIN:
     //   if (action.payload.value == "coffee") {

@@ -9,14 +9,16 @@ export default function ({ value }) {
   // const allCagetory = useSelector((state) => state.category);
   const Brands = useSelector((state) => state.Brands);
 
+  console.log(Brands)
+
   const [price, setPrice] = useState({
     min: 1,
     max: 1500,
   });
 
-  const handlerBrand = (e) => {
-    dispatch(filterBrands(e.target.value));
-  };
+  // const handlerBrand = (e) => {
+  //   dispatch(filterBrands(e.target.value));
+  // };
 
   // function handlePriceMin(e){
   //     e.preventDefault()
@@ -82,10 +84,10 @@ export default function ({ value }) {
           </div>
           <div>
             {/* habria que hacer un select harcodeado para que no repita de nuevo los mismos */}
-            <select onChange={(e) => handlerBrand(e)}>
+          <select>
               {Brands &&
                 Brands.map((c) => (
-                  <option key={c.brand?.name}>{c.brand?.name}</option>
+                  <option key={c.name}>{c.name}</option>
                 ))}
             </select>
           </div>

@@ -5,23 +5,16 @@ import Home from "../Home/Home";
 import DetailCoffee from "../Detail/DetailCoffee";
 import DetailProducts from "../Detail/DetailProducts";
 import ContainerInfo from "../ContainerInfo/ContainerInfo";
-import { getProductByQuery, getProducts } from "../../redux/Actions/Actions";
 
 const SwitchRouter = () => {
   return (
     <Routes>
       <Route exact path="/" element={<Home />} />
-      <Route
-        exact
-        path="/coffees"
-        element={
-          <ContainerInfo info="CategoriesCoffee" effect={getProductByQuery} />
-        }
-      />
+      <Route exact path="/coffees" element={ <ContainerInfo info="CategoriesCoffee"  /> }/>
       <Route
         exact
         path="/products"
-        element={<ContainerInfo info="Products" effect={getProductByQuery} />}
+        element={<ContainerInfo info="Products" />}
       />
       <Route
         exact
@@ -29,7 +22,6 @@ const SwitchRouter = () => {
         element={
           <ContainerInfo
             info="CategoriesCoffeeMaker"
-            effect={getProductByQuery}
           />
         }
       />
@@ -37,13 +29,19 @@ const SwitchRouter = () => {
         exact
         path="/products/accesories"
         element={
-          <ContainerInfo info="CategoriesAccesories" effect={getProducts} />
+          <ContainerInfo info="CategoriesAccesories" />
         }
       />
       <Route
         exact
         path="/brands"
-        element={<ContainerInfo info="Brands" effect={getProducts} />}
+        element={<ContainerInfo info="Brands" />}
+      />
+
+      <Route
+        exact
+        path="/brands/:params"
+        element={<ContainerInfo />}
       />
       <Route exact path="/create" element={<Form />} />
       <Route path="/coffees/:id" element={<DetailCoffee />} />
