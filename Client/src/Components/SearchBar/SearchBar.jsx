@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCoffeesByName } from "../../redux/Actions/Actions";
 import "./SearchBar.css"
 
 export default function SearchBar() {
@@ -8,9 +7,7 @@ export default function SearchBar() {
   const dispatch = useDispatch();
   //   const coffees = useSelector((state) => state.allCoffees);
 
-  const handlerCoffee = (e) => {
-    dispatch(getCoffeesByName(e.target.value));
-  };
+
 
   return (
     <form>
@@ -18,7 +15,7 @@ export default function SearchBar() {
         id="search"
         autoComplete="off"
         type="text"
-        onChange={(e) => handlerCoffee(e)}
+        onChange={(e) => console.log(e)}
       ></input>
       <button id="search-button">
         <svg id="search-icon" className="search-icon" viewBox="0 0 24 24">

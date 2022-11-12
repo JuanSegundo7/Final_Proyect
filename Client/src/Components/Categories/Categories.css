@@ -7,6 +7,11 @@
     margin-bottom: 25px;
 }
 
+#Categorys a{
+    text-decoration: none;
+    color: #fff;
+}
+
 #Categorys li{
     list-style-type: none;
     font-size: 20px;

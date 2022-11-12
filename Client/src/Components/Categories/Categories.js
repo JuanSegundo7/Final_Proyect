@@ -2,23 +2,19 @@ import React, {useEffect} from 'react';
 import "./Categories.css"
 import Dropdown from "../Dropdown/Dropdown";
 import { useSelector, useDispatch } from "react-redux";
-import { getCategory } from "../../redux/Actions/Actions";
+// import { getCategory } from "../../redux/Actions/Actions";
 import { Link } from "react-router-dom"
 
 const Categories = () => {
     const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(getCategory())
-    },[])
-
     const allCategory = useSelector((state) => state.category);
 
-    const coffeeMaker = allCategory.filter(coffe => coffe.type === "Coffee Maker")
-    const coffees = allCategory.filter(coffe => coffe.type === "Coffee")
+
+    // const coffeeMaker = allCategory.filter(coffe => coffe.type === "Coffee Maker")
+    // const coffees = allCategory.filter(coffe => coffe.type === "Coffee")
 
     const Coffees = { 
-        array: coffees, 
+        array: [], 
         name: "Coffees" 
     };
     
@@ -38,7 +34,7 @@ const Categories = () => {
     };
 
     const CoffeeMaker = {
-        array: coffeeMaker,
+        array: [],
         name: "Coffee-Maker",
     };
 

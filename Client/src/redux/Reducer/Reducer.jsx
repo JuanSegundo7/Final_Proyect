@@ -1,244 +1,243 @@
 import {
-  DELETE_COFFEE,
-  GET_COFFES,
-  POST_COFFEE,
-  DETAIL_COFFEE,
-  DETAIL_PRODUCTS,
-  CLEAN_DETAIL,
   GET_PRODUCTS,
-  GET_CATEGORY,
-  ORDERCOFFEES_AZ,
-  ORDERCOFFEES_ZA,
-  GET_COFFEE_BY_NAME,
-  ORDER_PRODUCTS_A_Z,
-  ORDER_PRODUCTS_Z_A,
-  ORDER_COFFEE_STOCK_ASC,
-  ORDER_COFFEE_STOCK_DSC,
-  FILTER_COFFE_MIN,
-  FILTER_COFFE_MAX,
+  GET_ONE_PRODUCT,
+  POST_PRODUCT,
+  DELETE_PRODUCT,
+  GET_PRODUCT_BY_QUERY,
+  CLEAN_DETAIL
 } from "../Actions/Actions";
 
 const initialState = {
-  allCoffees: [],
-  allCoffees2: [],
-  filters: [],
-  filters2: [],
+  Products: [],
+  Product: {},
+  Categories: [],
+  Brands: [],
+  
+  ProductASC: [],
+  ProductDES: [],
+  ProductStockASC: [],
+  ProductStockDES: [],
+  ProductPriceASC: [],
+  ProductPriceDES: [],
 
-  allProducts: [],
-  allProducts2: [],
-  filtersProduct: [],
-  filtersProduct2: [],
+  CategoriesAccesories: [],
+  CategoriesCoffee: [],
+  CategoriesCoffeMaker: [],
+  CategoriesOthers: [],
 
-  detailCoffee: {},
-  category: [],
-  detailProduct: {},
-  filterCoffe: [],
+  // allProducts: [],
+  // allProducts2: [],
+  // filtersProduct: [],
+  // filtersProduct2: [],
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_COFFES:
+    case GET_PRODUCTS:
       return {
         ...state,
-        allCoffees: action.payload,
-        allCoffees2: action.payload,
+        Products: action.payload
       };
-    case POST_COFFEE:
+    case GET_ONE_PRODUCT:
+      return {
+        ...state,
+        detailCoffee: action.payload,
+      };
+    case POST_PRODUCT:
       console.log("redurer post", action.payload);
       return {
         ...state,
         allCoffees: [...state.allCoffees, action.payload],
       };
-    case DELETE_COFFEE:
-      console.log(action.id, "es el id");
-      return {
-        ...state,
-      };
+    // case DELETE_PRODUCT:
+    //   console.log(action.id, "es el id");
+    //   return {
+    //     ...state,
+    //   };
 
-    case DETAIL_COFFEE:
-      return {
-        ...state,
-        detailCoffee: action.payload,
-      };
     case CLEAN_DETAIL:
       return {
         ...state,
-        detailCoffee: {},
-        detailProduct: {},
       };
 
-    case GET_PRODUCTS:
-      return {
-        ...state,
-        allProducts: action.payload,
-        allProducts2: action.payload,
-      };
-
-    case DETAIL_PRODUCTS:
-      return {
-        ...state,
-        detailProduct: action.payload,
-      };
-    case GET_CATEGORY:
-      return {
-        ...state,
-        category: action.payload,
-      };
-
-    case ORDERCOFFEES_AZ: {
-      // console.log('llegue reducer', action.payload)
-      return {
-        ...state,
-        allCoffees: action.payload,
-      };
-    }
-    case ORDERCOFFEES_ZA:
-      return {
-        ...state,
-        allCoffees: action.payload,
-      };
-
-    case GET_COFFEE_BY_NAME:
-      return {
-        ...state,
-        allCoffees: action.payload,
-      };
-    case ORDER_COFFEE_STOCK_ASC:
-      return {
-        ...state,
-        allCoffees: action.payload,
-      };
-    case ORDER_COFFEE_STOCK_DSC:
-      return {
-        ...state,
-        allCoffees: action.payload,
-      };
-
-    case ORDER_PRODUCTS_A_Z:
-      return {
-        ...state,
-        allProducts: action.payload,
-      };
-
-    case ORDER_PRODUCTS_Z_A:
-      return {
-        ...state,
-        allProducts: action.payload,
-      };
-
-    case FILTER_COFFE_MIN:
-      if (action.payload.value == "coffee") {
-
-        let aux2 = [];
-
-        if (!state.filters2.length) {
-
-          const filtrado = state.allCoffees2.filter((c) => action.payload.min <= c.price);
-          filtrado.map((ele) => aux2.push(ele));
-          return {
-            ...state,
-            filters:aux2,
-            allCoffees: aux2,
-          };
-
-        } else {
-
-          const filter2 = state.filters2.filter((c) => action.payload.min <= c.price);
-          filter2.map((ele) => aux2.push(ele));
-
-          return {
-            ...state,
-            //filters:aux2,
-            allCoffees: aux2,
-          };
-        }
-
-
-      } else if (action.payload.value == "products") {
-
-        let aux3 = [];
-
-        if (!state.filtersProduct2.length) {
-
-          const filtrado = state.allProducts2.filter((c) => action.payload.min <= c.price);
-          filtrado.map((ele) => aux3.push(ele));
-
-          return {
-            ...state,
-            filtersProduct:aux3,
-            allProducts: aux3,
-          };
-
-        } else {
-
-          const filter2 = state.filtersProduct2.filter((c) => action.payload.min <= c.price);
-          filter2.map((ele) => aux3.push(ele));
-
-          return {
-            ...state,
-            //filtersProduct:aux2,
-            allProducts: aux3,
-          };
-        }
-
+    case GET_PRODUCT_BY_QUERY: 
+      switch(action.value){
+          case "ProductASC": {
+            return {
+              ...state,
+              ProductASC: action.payload
+            }
+          }
+          case "ProductDES": {
+            return {
+              ...state,
+              ProductDES: action.payload
+            }
+          }
+          case "StockASC": {
+            return {
+              ...state,
+              ProductStockASC: action.payload
+            }
+          }
+          case "StockDES": {
+            return {
+              ...state,
+              ProductStockDES: action.payload
+            }
+          }
+          case "PriceASC": {
+            return {
+              ...state,
+              ProductPriceASC: action.payload
+            }
+          }
+          case "PriceDES": {
+            return {
+              ...state,
+              ProductPriceDES: action.payload
+            }
+          }
+          case "coffee": {
+            return {
+              ...state,
+              CategoriesCoffee: action.payload
+            }
+          }
+          case "coffee-maker": {
+            return {
+              ...state,
+              CategoriesCoffeeMaker: action.payload
+            }
+          }
+          case "accessories": {
+            return {
+              ...state,
+              CategoriesAccesories: action.payload
+            }
+          }
+          case "others": {
+            return {
+              ...state,
+              CategoriesOthers: action.payload
+            }
+          }
+          default: return { ...state }
       }
 
-    case FILTER_COFFE_MAX:
-      if (action.payload.value === "coffee") {
+    // case FILTER_COFFE_MIN:
+    //   if (action.payload.value == "coffee") {
 
-        let aux = [];
+    //     let aux2 = [];
 
-        if (!state.filters.length) {
+    //     if (!state.filters2.length) {
 
-          const filtradoMax = state.allCoffees2.filter((c) => action.payload.max >= c.price);
-          filtradoMax.map((ele) => aux.push(ele));
+    //       const filtrado = state.allCoffees2.filter((c) => action.payload.min <= c.price);
+    //       filtrado.map((ele) => aux2.push(ele));
+    //       return {
+    //         ...state,
+    //         filters:aux2,
+    //         allCoffees: aux2,
+    //       };
 
-          return {
-            ...state,
-            filters2: aux,
-            allCoffees: aux,
-          };
+    //     } else {
 
-        } else {
+    //       const filter2 = state.filters2.filter((c) => action.payload.min <= c.price);
+    //       filter2.map((ele) => aux2.push(ele));
 
-          const filter2 = state.filters.filter((c) => action.payload.max >= c.price);
-          filter2.map((ele) => aux.push(ele));
-
-          return {
-            ...state,
-            //filters2: aux,
-            allCoffees: aux,
-          };
-        }
+    //       return {
+    //         ...state,
+    //         //filters:aux2,
+    //         allCoffees: aux2,
+    //       };
+    //     }
 
 
-      } else if (action.payload.value == "products") {
-        let aux = [];
+    //   } else if (action.payload.value == "products") {
 
-        if (!state.filtersProduct.length) {
+    //     let aux3 = [];
 
-          const filtrado = state.allProducts2.filter((c) => action.payload.max >= c.price);
-          filtrado.map((ele) => aux.push(ele));
+    //     if (!state.filtersProduct2.length) {
 
-          return {
-            ...state,
-            filtersProduct2:aux,
-            allProducts: aux,
-          };
+    //       const filtrado = state.allProducts2.filter((c) => action.payload.min <= c.price);
+    //       filtrado.map((ele) => aux3.push(ele));
 
-        } else {
+    //       return {
+    //         ...state,
+    //         filtersProduct:aux3,
+    //         allProducts: aux3,
+    //       };
 
-          const filter2 = state.filtersProduct.filter((c) => action.payload.max >= c.price);
-          filter2.map((ele) => aux.push(ele));
+    //     } else {
 
-          return {
-            ...state,
-            //filtersProduct2:aux,
-            allProducts: aux,
-          };
-        }
+    //       const filter2 = state.filtersProduct2.filter((c) => action.payload.min <= c.price);
+    //       filter2.map((ele) => aux3.push(ele));
 
-      }
+    //       return {
+    //         ...state,
+    //         //filtersProduct:aux2,
+    //         allProducts: aux3,
+    //       };
+    //     }
+
+    //   }
+
+    // case FILTER_COFFE_MAX:
+    //   if (action.payload.value === "coffee") {
+
+    //     let aux = [];
+
+    //     if (!state.filters.length) {
+
+    //       const filtradoMax = state.allCoffees2.filter((c) => action.payload.max >= c.price);
+    //       filtradoMax.map((ele) => aux.push(ele));
+
+    //       return {
+    //         ...state,
+    //         filters2: aux,
+    //         allCoffees: aux,
+    //       };
+
+    //     } else {
+
+    //       const filter2 = state.filters.filter((c) => action.payload.max >= c.price);
+    //       filter2.map((ele) => aux.push(ele));
+
+    //       return {
+    //         ...state,
+    //         //filters2: aux,
+    //         allCoffees: aux,
+    //       };
+    //     }
+
+
+    //   } else if (action.payload.value == "products") {
+    //     let aux = [];
+
+    //     if (!state.filtersProduct.length) {
+
+    //       const filtrado = state.allProducts2.filter((c) => action.payload.max >= c.price);
+    //       filtrado.map((ele) => aux.push(ele));
+
+    //       return {
+    //         ...state,
+    //         filtersProduct2:aux,
+    //         allProducts: aux,
+    //       };
+
+    //     } else {
+
+    //       const filter2 = state.filtersProduct.filter((c) => action.payload.max >= c.price);
+    //       filter2.map((ele) => aux.push(ele));
+
+    //       return {
+    //         ...state,
+    //         //filtersProduct2:aux,
+    //         allProducts: aux,
+    //       };
+    //     }
+
+    //   }
 
     default:
       return {
