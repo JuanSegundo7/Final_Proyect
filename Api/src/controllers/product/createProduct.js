@@ -4,7 +4,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const createProduct = async function (data) {
 
-  const { name, description, origin, price, grinding_type, stock, category, image, brand } = data;
+  let { name, description, origin, price, grinding_type, stock, category, image, brand } = data;
 
 //Data Validation
 if ((typeof(name)!=="string") || (!name.length)){
@@ -47,26 +47,36 @@ else{
     }
 }
 
-if ((typeof(image)!=="string") || (!ObjectId.isValid(image))) throw new Error ("No valid _id type provided for image!")
-else{
-    try{
-      let resp = await Image.findById(image)
-      if (!resp) throw new Error(`Image id:${image} not found in the Database!`)
-    }
-    catch(unError){
-      throw new Error(unError.message)
-    }
+if (image){
+  if ((typeof(image)!=="string") || (!ObjectId.isValid(image))) throw new Error ("No valid _id type provided for image!")
+  else{
+      try{
+        let resp = await Image.findById(image)
+        if (!resp) throw new Error(`Image id:${image} not found in the Database!`)
+      }
+      catch(unError){
+        throw new Error(unError.message)
+      }
+  }
+}else{
+  image=undefined;
 }
 
-if ((typeof(brand)!=="string") || (!ObjectId.isValid(brand))) throw new Error ("No valid _id type provided for brand!")
-else{
-    try{
-      let resp = await Brand.findById(brand)
-      if (!resp) throw new Error(`Brand id:${brand} not found in the Database!`)
-    }
-    catch(unError){
-      throw new Error(unError.message)
-    }
+if (brand){
+  //console.log("tengo algo")
+  if ((typeof(brand)!=="string") ||  (!ObjectId.isValid(brand))) throw new Error ("No valid _id type provided for brand!")
+  else{
+      try{
+        let resp = await Brand.findById(brand)
+        if (!resp) throw new Error(`Brand id:${brand} not found in the Database!`)
+      }
+      catch(unError){
+        throw new Error(unError.message)
+      }
+  }
+}else{
+  brand=undefined;
+  //console.log("no tengo nada")
 }
 
 
