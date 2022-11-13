@@ -2,7 +2,7 @@ import React from "react";
 import "./Dropdown.css";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { getProductByQuery } from "../../redux/Actions/Actions";
+import { getBrands, getProductByQuery } from "../../redux/Actions/Actions";
 
 export default function Dropdown({ info, path }) {
   const { array, name } = info;
@@ -13,10 +13,14 @@ export default function Dropdown({ info, path }) {
     dispatch(getProductByQuery("brand", "brand", value));
   };
 
+  const handleReset = () => {
+    dispatch(getBrands());
+  };
+
   return (
     <div className="dropdown">
       <Link to={`${path}`}>
-        <div className="dropbtn" onClick={array}>
+        <div className="dropbtn" onClick={handleReset}>
           {name}
         </div>
       </Link>
