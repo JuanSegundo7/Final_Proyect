@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./SearchBar.css"
+import { getProductByQuery } from "../../redux/Actions/Actions";
+import "./SearchBar.css";
 
 export default function SearchBar() {
   //const [input, setInput] = useState("");
   const dispatch = useDispatch();
-  //   const coffees = useSelector((state) => state.allCoffees);
+  const products = useSelector((state) => state.Products);
 
-
+  const Search = (e) => {
+    const input = e.target.value;
+    dispatch(getProductByQuery("name", "", input));
+  };
 
   return (
     <form>
@@ -15,7 +19,7 @@ export default function SearchBar() {
         id="search"
         autoComplete="off"
         type="text"
-        onChange={(e) => console.log(e)}
+        onChange={(e) => Search(e)}
       ></input>
       <button id="search-button">
         <svg id="search-icon" className="search-icon" viewBox="0 0 24 24">

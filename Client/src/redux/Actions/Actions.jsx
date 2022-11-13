@@ -14,11 +14,14 @@ export const FILTER_BRAND = "FILTER_BRAND";
 
 // BRANDS
 export const GET_BRANDS = "GET_BRANDS";
+// export const GET_BRAND_BY_QUERY = "GET_BRANDS_BY_QUERY";
+
+//ORDERS
+export const ORDER_PRODUCTS_A_Z = "ORDER_PRODUCTS_A_Z";
+export const ORDER_PRODUCTS_Z_A = "ORDER_PRODUCTS_Z_A";
 
 // export const ORDERCOFFEES_AZ = "ORDERCOFFEES_AZ";
 // export const ORDERCOFFEES_ZA = "ORDERCOFFEES_ZA";
-// export const ORDER_PRODUCTS_A_Z = "ORDER_PRODUCTS_A_Z";
-// export const ORDER_PRODUCTS_Z_A = "ORDER_PRODUCTS_Z_A";
 // export const ORDER_COFFEE_STOCK_ASC = "ORDER_COFFEE_STOCK_ASC";
 // export const ORDER_COFFEE_STOCK_DSC = "ORDER_COFFEE_STOCK_DSC";
 // export const FILTER_RANGE = "FILTER_RANGE";
@@ -64,7 +67,8 @@ export const getProductByQuery = (info, name, value) => {
       let json = await axios.get(`${baseUrl}products?${info}=${value}`); // category=coffee
       return dispatch({
         type: GET_PRODUCT_BY_QUERY,
-        value: `${name}${value}`,
+        value: `${value}`,
+        name: `${name}`,
         payload: json.data,
       });
     };
@@ -108,6 +112,13 @@ export const filterBrands = (value) => (dispatch) => {
   return dispatch({ type: FILTER_BRAND, payload: value });
 };
 
+// export const getBrandByQuery = (brand) => (dispatch) => {
+//   console.log(brand, "es brand en action");
+//   return axios(`${baseUrl}products?brand=${brand}`)
+//     .then((res) => dispatch({ type: GET_BRAND_BY_QUERY, payload: res.data }))
+//     .catch((error) => console.log(error));
+// };
+
 // export const getCategory = () => (dispatch) => {
 //   return axios(`${baseUrl}categories`).then((res) =>
 //     dispatch({
@@ -115,28 +126,6 @@ export const filterBrands = (value) => (dispatch) => {
 //       payload: res.data,
 //     })
 //   );
-// };
-
-// export const coffeeNameAZ = () => (dispatch) => {
-//   return axios(`http://localhost:3001/coffees?orderedbyname=asc`)
-//     .then((res) =>
-//       dispatch({
-//         type: ORDERCOFFEES_AZ,
-//         payload: res.data,
-//       })
-//     )
-//     .catch((error) => console.log(error.message));
-// };
-
-// export const coffeeNameZA = () => (dispatch) => {
-//   return axios(`http://localhost:3001/coffees?orderedbyname=des`)
-//     .then((res) =>
-//       dispatch({
-//         type: ORDERCOFFEES_ZA,
-//         payload: res.data,
-//       })
-//     )
-//     .catch((error) => console.log(error.message));
 // };
 
 // export const productNameAZ = () => (dispatch) => {

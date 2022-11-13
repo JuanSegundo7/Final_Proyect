@@ -5,23 +5,26 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Error from "../Card/imgs/error.webp";
 import "./ContainerInfo.css";
+import { getProductByQuery } from "../../redux/Actions/Actions";
 
 export default function ContainerInfo({ info, effect }) {
-  const {params} = useParams();
+  const { name } = useParams();
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state[info]);
-
+  console.log(allProducts, "estpoe es allProducts");
 
   // PROTOTIPO CON PARAMS, LO MEJOR SERIA BUSCAR LA FORMA DE CONSEGUIR LA INFO DEL BACK POR MARCA
 
-  // const paramsArray = allProducts.filter(product => product.brand.name.includes(params))
+  // const paramsArray = allProducts.filter((product) => {
+  //   return product.brand.name === name;
+  // });
 
-  // console.log(paramsArray)
+  // console.log(paramsArray, "estp es paramsArray");
 
-  // console.log(params)
+  // console.log(name, "estoe s paramas");
 
   // useEffect(() => {
-  //   dispatch(effect());
+  //   dispatch(getProductByQuery());
   // }, [dispatch]);
 
   return (
@@ -38,6 +41,7 @@ export default function ContainerInfo({ info, effect }) {
                       ? Error
                       : cardCoffe.image.url
                   }
+                  img2={cardCoffe.image && cardCoffe.image}
                   key={cardCoffe._id}
                   _id={cardCoffe._id}
                   name={cardCoffe.name}

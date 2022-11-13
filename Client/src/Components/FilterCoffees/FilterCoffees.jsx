@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { coffeeNameAZ, coffeeNameZA, coffeeStockAsc, coffeeStockDes, filterCoffeMax, filterCoffeMin, getCategory, getCoffees } from '../../redux/Actions/Actions';
-import { filterBrands } from "../../redux/Actions/Actions";
+import { getProductByQuery } from "../../redux/Actions/Actions";
+// import {
+//   coffeeStockAsc,
+//   coffeeStockDes,
+//   filterCoffeMax,
+//   filterCoffeMin,
+//   getCategory,
+//   getCoffees,
+// } from "../../redux/Actions/Actions";
 
 export default function ({ value }) {
   const dispatch = useDispatch();
@@ -9,7 +16,7 @@ export default function ({ value }) {
   // const allCagetory = useSelector((state) => state.category);
   const Brands = useSelector((state) => state.Brands);
 
-  console.log(Brands)
+  // console.log(Brands)
 
   const [price, setPrice] = useState({
     min: 1,
@@ -33,13 +40,10 @@ export default function ({ value }) {
   //     //-> ver si quiero mandar ya desde aca el array(el estado global de cafes o hacerlo desde el reducer)
   //   }
 
-  //   function orderName(e){
-  //     if(e.target.value === 'ASC'){
-  //       dispatch(coffeeNameAZ())
-  //     } else if(e.target.value === 'DESC'){
-  //       dispatch(coffeeNameZA())
-  //     }
-  //   }
+  function orderName(e) {
+    console.log("hola");
+    dispatch(getProductByQuery("orderedbyname", "Product", e.target.value));
+  }
 
   //   function orderStock(e){
   //     if(e.target.value === 'ASC'){
@@ -55,9 +59,9 @@ export default function ({ value }) {
         <div className="menuFilters">
           <div>
             <p>Order By Name</p>
-            <select onChange={(e) => console.log(e)}>
+            <select onChange={(e) => orderName(e)}>
               <option value="ASC"> A-Z </option>
-              <option value="DESC">Z-A</option>
+              <option value="DES">Z-A</option>
             </select>
           </div>
           <div className="filterPrice">
@@ -84,11 +88,9 @@ export default function ({ value }) {
           </div>
           <div>
             {/* habria que hacer un select harcodeado para que no repita de nuevo los mismos */}
-          <select>
+            <select>
               {Brands &&
-                Brands.map((c) => (
-                  <option key={c.name}>{c.name}</option>
-                ))}
+                Brands.map((c) => <option key={c.name}>{c.name}</option>)}
             </select>
           </div>
           <div>

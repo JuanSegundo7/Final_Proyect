@@ -7,6 +7,8 @@ import {
   CLEAN_DETAIL,
   GET_BRANDS,
   FILTER_BRAND,
+  ORDER_PRODUCTS_A_Z,
+  ORDER_PRODUCTS_Z_A,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -14,6 +16,7 @@ const initialState = {
   Product: {},
   Categories: [],
   Brands: [],
+  BrandsCopy: [],
 
   ProductASC: [],
   ProductDES: [],
@@ -46,7 +49,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_ONE_PRODUCT:
       return {
         ...state,
-        detailCoffee: action.payload,
+        Product: action.payload,
       };
     case POST_PRODUCT:
       console.log("redurer post", action.payload);
@@ -63,10 +66,11 @@ const rootReducer = (state = initialState, action) => {
     case CLEAN_DETAIL:
       return {
         ...state,
+        Product: {},
       };
 
     case GET_PRODUCT_BY_QUERY:
-      switch (action.value) {
+      switch (action.name) {
         case "ProductASC": {
           return {
             ...state,
@@ -127,11 +131,21 @@ const rootReducer = (state = initialState, action) => {
             CategoriesOthers: action.payload,
           };
         }
-        // case "modo barista":
-        //   return {
-        //     ...state,
-        //     Brands: action.payload,
-        //   };
+
+        case "brand": {
+          return {
+            ...state,
+            Brands: action.payload,
+          };
+        }
+
+        case "name": {
+          return {
+            ...state,
+            Products: action.payload,
+          };
+        }
+
         default:
           return { ...state };
       }
@@ -140,6 +154,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         Brands: action.payload,
+        BrandsCopy: action.payload,
       };
     }
 
