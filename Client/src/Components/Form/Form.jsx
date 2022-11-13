@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-/* import { postProduct } from '../../redux/Actions/Actions'; */
+import { postProduct } from '../../redux/Actions/Actions';
 import "./Form.css";
 
 
@@ -23,22 +23,28 @@ const Form = () => {
         brand:'Brand'
     })
 
+    //I will set some of these fields as having an error by default, since all of these fields are
+    //presented as empty and THAT's an error per se.
     const [error, setError] = useState({
-        name:'',
-        description:'',
+        name:'You must enter a name!!',
+        description:'You must enter a description!!',
         origin:'',
-        price:'',
+        price:'You must enter a price!!',
         grinding_type:'',
-        stock:'',
+        stock:'You must enter a stock!!',
         category:'invalid category',    //default value if nothing was selected
         image:'',
         brand:''   //brand is not a required field, therefore I will no set a default value here
     })
 
+/***********************************Enable and Disable Buttons Local States***************************/
+
     //Enable the form submit button only if there are no errors....
     const [disableSubmit, setDisableSubmit] = useState(true);
+    const [disableOriginAndGrinding, setDisableOriginAndGrinding] = useState(true);
 
-    /***********************************ERRORS VALIDATION*****************************************/
+/***********************************Handlers and Errors Validation************************************/
+
     const regExName = new RegExp("^[a-zA-Z ]+$");
 
     const handleName = (e) => {
@@ -60,11 +66,11 @@ const Form = () => {
 
     const handleDescription = (e) => {
         if(e.target.value === '' || e.target.value.length === 0){
-            setError({...error, description:'You must enter a description'})
+            setError({...error, description:'You must enter a description!!'})
           }
           else if(e.target.value.length > 0){
             if(e.target.value.length >= 150){
-                console.log(e.target.value.length)
+                //console.log(e.target.value.length)
               setError({...error, description:'The description should not have more than 150 characters'})
             } else{
                 setError({...error, description:''})
@@ -87,8 +93,7 @@ const Form = () => {
             } else{
                 setError({...error, origin:''})
             }
-        } 
-        
+        }  
         setInput({
             ...input,
             origin: e.target.value
@@ -132,6 +137,13 @@ const Form = () => {
     }
 
     const handleCategory = (e) => {
+        if (searchCategoryById(e.target.value).name==="coffee"){
+            //console.log("I am a Coffee!!!")
+            //setDisableOriginAndGrinding(false);
+        }
+        else{
+            //setDisableOriginAndGrinding(true);
+        }
         setInput({
             ...input,
             category: e.target.value
@@ -149,24 +161,25 @@ const Form = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        /* dispatch(createActivity({
-        "name":activityName,
-        "difficulty":parseInt(difficulty),
-        "duration":parseInt(duration),
-        "season":season,
-        "countries":countriesSelected
-        })); */
-        //alert("A New Activity Has Been Created!");
-        //history.push("/countries");
-        /* if(!error.name && !error.description && !error.origin && !error.price && !error.grinding_type && !error.stock && !error.category && input.image && input.brand){
-            setEnableSubmit(true);
-        } else{
-            setEnableSubmit(false)
-        } */
+        /* dispatch(postProduct({
+        "name":input.name,
+        "description":input.description,
+        "origin":input.origin,
+        "price":input.price,
+        "grinding_type":input.grinding_type,
+        "stock":input.stock,
+        "category":input.category,
+        "image":input.image,
+        "brand":input.brand
+        }));
+
+        alert("A New Product Has Been Created!"); */
     }
 
+/*********************Enabling or disabling the submit button whether I have errors or not************/
+
     useEffect(()=>{
-        if(!error.name && !error.description && !error.price && !error.origin && !error.stock && !error.category /*    && !error.grinding_type   && input.image && input.brand */){
+        if(!error.name && !error.description && !error.price && !error.origin && !error.stock && !error.category && !error.input.brand && !error.grinding_type && !error.input.image){
             setDisableSubmit(false);
             console.log("no hay error",error)
         }else{
@@ -175,31 +188,20 @@ const Form = () => {
         }
        },[input])
 
-    /* if(!error.name && !error.description && !error.origin && !error.price && !error.grinding_type && !error.stock && !error.category && input.image && input.brand){
-        setDisableSubmit(false)
-    }else{
-        setDisableSubmit(true)
-    } */
+/**********************************************Functions***********************************************/
 
-    useEffect(()=>{
-        //console.log(input.category)
-        /* if (input.category!=="Category"){
-            setDisableSubmit(false);
-        }else{
-            setDisableSubmit(true);
-        } */
-       },[/* input.category */])
-      
-       //Deshabilito el botón si countriesSelected está vacío.
-       /* useEffect(()=>{
-        if (!countriesSelected.length){
-          setEnableButton(false);
-          setErrorCountries("At least One Country Must be Selected");
+       function searchCategoryById (_id){
+        let match = "";
+        if (allCategories && allCategories.length){
+          for (let i=0;i<allCategories.length;i++){
+            if (allCategories[i]._id===_id){
+              match = allCategories[i];
+            }
           }
-          else{
-              setErrorCountries("");
-          }
-       },[countriesSelected]) */
+        }
+        //console.log(match) //I return the full category object, not only it's name.
+        return match;
+      } 
 
 /**********************************************Render***********************************************/
     return (
@@ -243,14 +245,16 @@ const Form = () => {
                 {allBrands.map(unaOpcion=><option value={unaOpcion._id} key={unaOpcion._id}>{unaOpcion.name}</option>)}
             </select>
 
-            <input 
+            <input
+            disabled={disableOriginAndGrinding} 
             name="origin" 
             type="text" 
             placeholder="Origin (Optional)" 
             onChange={(e) => handleOrigin(e)}/>
             {error.origin && <span>{error.origin}</span>}
 
-            <input 
+            <input
+            disabled={disableOriginAndGrinding} 
             name="grinding_type" 
             type="text" 
             placeholder="Grinding Type (Optional)" 
