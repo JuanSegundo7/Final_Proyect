@@ -8,6 +8,7 @@ import {
   getProductByQuery,
   getProducts,
   getBrands,
+  getCategories
 } from "./redux/Actions/Actions";
 
 import "./App.css";
@@ -28,8 +29,11 @@ function App() {
     dispatch(getProductByQuery("category", "accessories", "accessories"));
     dispatch(getProductByQuery("category", "others", "others"));
     dispatch(getBrands());
+    dispatch(getCategories());
     // dispatch(getProductByQuery("brand", "", "hario"));
   }, [dispatch]);
+
+
 
   return (
     <BrowserRouter>
