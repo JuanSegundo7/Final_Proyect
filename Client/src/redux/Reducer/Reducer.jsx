@@ -52,12 +52,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         Product: action.payload,
       };
-    case POST_PRODUCT:
-      console.log("redurer post", action.payload);
-      return {
-        ...state,
-        allCoffees: [...state.allCoffees, action.payload],
-      };
+    //case POST_PRODUCT:
+      //console.log("reducer post", action.payload);
+      //return {
+        //...state,
+        //allCoffees: [...state.allCoffees, action.payload],
+      //};
     // case DELETE_PRODUCT:
     //   console.log(action.id, "es el id");
     //   return {

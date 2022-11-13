@@ -46,16 +46,13 @@ export const getProducts = () => async (dispatch) => {
 };
 
 export const postProduct = (payload) => {
-  return function (dispatch) {
-    axios
-      .post(`${baseUrl}products`, payload)
-      .then((res) => {
-        dispatch({
-          type: POST_PRODUCT,
-          // payload: res.data,
-        });
-      })
-      .catch((error) => console.log("error", error));
+  return async function (dispatch) {
+    try{
+      var response = await axios.post(`${baseUrl}products`, payload);
+      return response;
+    }catch(error){
+      console.log("error", error);
+    }
   };
 };
 
