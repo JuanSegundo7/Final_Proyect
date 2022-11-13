@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductByQuery, filter } from "../../redux/Actions/Actions";
-import "./Filter.css"
+import "./Filter.css";
 // import {
 //   coffeeStockAsc,
 //   coffeeStockDes,
@@ -13,59 +14,74 @@ import "./Filter.css"
 
 export default function ({ info }) {
   const dispatch = useDispatch();
+  const location = useLocation();
   //const allCoffees = useSelector((state) => state.allCoffees);
   // const allCagetory = useSelector((state) => state.category);
   const Brands = useSelector((state) => state.Brands);
-
-  // console.log(Brands)
 
   const [price, setPrice] = useState({
     min: 1,
     max: 200,
   });
 
-
-
+  useEffect(() => {
+    setPrice({
+      min: 1,
+      max: 200,
+    });
+  }, [location.pathname]);
   // const handlerBrand = (e) => {
   //   dispatch(filterBrands(e.target.value));
   // };
 
-  
-  
   function orderName(e) {
-    const value = e.target.value
-    if(value == 'DES'){
+    const value = e.target.value;
+    if (value == "DES") {
       switch (info) {
         case "CategoriesCoffee": {
-          dispatch(getProductByQuery("category", "coffee", "coffee", "orderedbyname=DES", ""));
+          dispatch(
+            getProductByQuery(
+              "category",
+              "coffee",
+              "coffee",
+              "orderedbyname=DES",
+              ""
+            )
+          );
         }
       }
-    }else{
+    } else {
       switch (info) {
         case "CategoriesCoffee": {
-          dispatch(getProductByQuery("category", "coffee", "coffee", "orderedbyname=ASC"));
+          dispatch(
+            getProductByQuery(
+              "category",
+              "coffee",
+              "coffee",
+              "orderedbyname=ASC"
+            )
+          );
         }
       }
     }
-    
-  }
-  
-  function handlePriceMin(e){
-    e.preventDefault()
-    setPrice({...price, min: parseInt(e.target.value)})
-    dispatch(filter(price, info))
   }
 
-  function handlePriceMax(e){
-    e.preventDefault()
-    setPrice({...price, max: parseInt(e.target.value)})
-    dispatch(filter(price, info))
+  function handlePriceMin(e) {
+    e.preventDefault();
+    setPrice({ ...price, min: parseInt(e.target.value) });
+    dispatch(filter(price, info));
+  }
+
+  function handlePriceMax(e) {
+    e.preventDefault();
+    setPrice({ ...price, max: parseInt(e.target.value) });
+    dispatch(filter(price, info));
     //-> ver si quiero mandar ya desde aca el array(el estado global de cafes o hacerlo desde el reducer)
   }
   //   function orderStock(e){
-    //     if(e.target.value === 'ASC'){
-      //       dispatch(coffeeStockAsc())
-      //     } else if(e.target.value === 'DSC'){
+  //     if(e.target.value === 'ASC'){
+  //       dispatch(coffeeStockAsc())
+  //     } else if(e.target.value === 'DSC'){
   //       dispatch(coffeeStockDes())
   //     }
   //   }
