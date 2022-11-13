@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import FilterCoffees from "../FilterCoffees/FilterCoffees";
+import Filter from "../Filter/Filter";
 import { Card } from "../Card/Card";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,21 +10,28 @@ import { useState } from "react";
 import Paginated from "../Paginated/Paginated";
 
 export default function ContainerInfo({ info }) {
-  const allProducts = useSelector((state) => state[info]);
+  const allProducts = useSelector((state) => state[info]); 
+  const Filtered = useSelector((state) => state.Filtered); 
+  const FilterBoolean = useSelector((state) => state.Filter); 
+  const updateFilter = useSelector((state) => state.updateFilter); 
+
+  
   const [currentPage, setCurrentPage] = useState(1);
   const [productPerPage, setProductPerPage] = useState(8);
   const indexLastProduct = productPerPage * currentPage;
   const indexFirstProduct = indexLastProduct - productPerPage;
-
+  
   const products = allProducts.slice(indexFirstProduct, indexLastProduct);
-
+  
+  const filteredOrNot = FilterBoolean ? Filtered.slice(indexFirstProduct, indexLastProduct) : products;
+    
   const paginated = (number) => {
     setCurrentPage(number);
   };
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [allProducts]);
+  }, [filteredOrNot, updateFilter]);
 
   return (
     <div id="Contenido">
@@ -36,10 +43,10 @@ export default function ContainerInfo({ info }) {
         currentPage={currentPage}
       />
       <section id="Products">
-        <FilterCoffees value="coffee" />
+        <Filter info={info} />
         <div className="cardHome">
-          {products.length &&
-            products.map((cardCoffe) => {
+          {filteredOrNot.length ?
+            filteredOrNot.map((cardCoffe) => {
               return (
                 <Card
                   img={
@@ -56,7 +63,7 @@ export default function ContainerInfo({ info }) {
                   price={cardCoffe.price}
                 />
               );
-            })}
+            }) : <h1>Hola</h1>}
         </div>
       </section>
     </div>

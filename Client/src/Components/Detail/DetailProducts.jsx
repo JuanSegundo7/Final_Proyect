@@ -19,30 +19,23 @@ export default function DetailProduct() {
   }, [dispatch]);
 
   return (
-    <div className="containerDetail">
+    <article id="containerDetail">
       {Object.keys(product).length ? (
-        <div>
-          <div className="imgDiv">
-            <img
-              src={product.image && product.image.url}
-              className="imgDetail"
-            ></img>
-          </div>
-          <div>
-            <p>Name: {product.name}</p>
+        <>
+            <img src={product.image && product.image.url} className="imgDetail" />
+            <p>{product.name}</p>
             <p>
               <span>${product.price}</span>
             </p>
-            <p>Stock: {product.stock}</p>
-            <p>Description: {product.description}</p>
-            <p>Grinding type{product.grinding_type}</p>
-            <p>Brand: {product.brand.name}</p>
-            <p>Category: {product.category.name}</p>
-          </div>
-        </div>
+            <p>{"Stock:" + product.stock}</p>
+            <p>{product.description}</p>
+            <p>{product.grinding_type}</p>
+            <p>{!product.brand ? "There is not name provided" : product.brand.name }</p>
+            <p>{product.category.name}</p>
+        </>
       ) : (
         <h1>Sorry there was an error :(</h1>
       )}
-    </div>
+    </article>
   );
 }

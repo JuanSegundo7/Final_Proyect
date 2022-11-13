@@ -17,9 +17,9 @@ export function Card(props) {
           }}
         />
       </Link>
-      <p id="name">{props.name}</p>
+      <p id="name">{props.name ? props.name : "There is not name provided"}</p>
       <p id="origin">{props.origin}</p>
-      <p>{props.price}</p>
+      <p>US$ {props.price}</p>
       <input type="submit" className="button" value="Add to cart" />
     </div>
   );
