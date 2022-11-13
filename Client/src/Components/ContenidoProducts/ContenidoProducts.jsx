@@ -22,7 +22,7 @@ export default function ContenidoProducts() {
           {allProducts.length &&
             allProducts.map((product) => {
               return (
-                <div className="cardProducts" key={product._id}>
+                <div className="cardProducts">
                   <CardProduct
                     _id={product._id}
                     name={product.name}
