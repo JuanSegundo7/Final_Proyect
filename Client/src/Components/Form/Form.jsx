@@ -1,13 +1,13 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { postProduct } from '../../redux/Actions/Actions';
+import { useNavigate} from 'react-router-dom';
 import "./Form.css";
 
 
 const Form = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const allCategories = useSelector((initialState) => initialState.Categories);  
     const allBrands = useSelector((initialState) => initialState.Brands);  
 
@@ -16,7 +16,7 @@ const Form = () => {
         description:'',
         origin:'',
         price:'',
-        grinding_type:'',
+        grindingtype:'',
         stock:'',
         image:'',
         category:'Category',
@@ -30,12 +30,12 @@ const Form = () => {
         description:'You must enter a description!!',
         origin:'',
         price:'You must enter a price!!',
-        grinding_type:'',
+        grindingtype:'',
         stock:'You must enter a stock!!',
-        category:'invalid category',    //default value if nothing was selected
+        category:'Invalid category!!',    //default value if nothing was selected
         image:'',
-        brand:''   //brand is not a required field, therefore I will no set a default value here
-    })
+        brand:'',   //brand is not a required field, therefore I will no set a default value here
+    });
 
 /***********************************Enable and Disable Buttons Local States***************************/
 
@@ -70,7 +70,6 @@ const Form = () => {
           }
           else if(e.target.value.length > 0){
             if(e.target.value.length >= 150){
-                //console.log(e.target.value.length)
               setError({...error, description:'The description should not have more than 150 characters'})
             } else{
                 setError({...error, description:''})
@@ -83,16 +82,14 @@ const Form = () => {
     }
 
     const handleOrigin = (e) => {
-        if(e.target.value.length === 0 || e.target.value === ''){
-            setError({...error, origin:'You must enter an origin!!'})
-            return
-        }
-        else if (e.target.value.length > 0){
+        if (e.target.value.length > 0){
             if(!regExName.test(e.target.value)){
                 setError({...error, origin:'The origin cannot have signs'})
             } else{
                 setError({...error, origin:''})
             }
+        }else{
+            setError({...error, origin:''})
         }  
         setInput({
             ...input,
@@ -101,12 +98,12 @@ const Form = () => {
     }
 
     const handlePrice = (e) => {
-        if(e.target.value.length === 0 || e.target.value === ''){
-            setError({...error, price:'You must enter a price!!'})
-          }
-        if(e.target.value.length > 0){
+        
+        if(!e.target.value.length || parseInt(e.target.value)<0){
+            setError({...error, price:'You must enter a price and it must be higher than 0!!'})
+          }else{
             setError({...error, price:''})
-        }
+          }
         setInput({
             ...input,
             price: e.target.value
@@ -116,38 +113,40 @@ const Form = () => {
     const handleGrindingType = (e) => {
         if (e.target.value.length > 0){
             if(!regExName.test(e.target.value)){
-                setError({...error, grinding_type:'The grinding type cannot have signs'})
+                setError({...error, grindingtype:'The grinding type cannot have signs'})
             } else{
-                setError({...error, grinding_type:''})
+                setError({...error, grindingtype:''})
             }
-        } 
+        }else{
+            setError({...error, grindingtype:''})
+        }
+        setInput({
+            ...input,
+            grindingtype: e.target.value
+          })  
     }
     
     const handleStock = (e) => {
-        if(e.target.value.length === 0 || e.target.value === ''){
-            setError({...error, stock:'You must enter a stock!!'})
-          }
-          if(e.target.value.length > 0){
+        if(!e.target.value.length || parseInt(e.target.value)<0){
+            setError({...error, stock:'You must enter a stock and it must be higher than 0!!'})
+          }else{
             setError({...error, stock:''})
-        }
+          }
+          
         setInput({
             ...input,
             stock:e.target.value
         })
     }
-
+    
     const handleCategory = (e) => {
-        if (searchCategoryById(e.target.value).name==="coffee"){
-            //console.log("I am a Coffee!!!")
-            //setDisableOriginAndGrinding(false);
+        const fullCategory = searchCategoryById(e.target.value);
+        if (fullCategory.name==="coffee"){
+            setDisableOriginAndGrinding(false);
+        }else{
+            setDisableOriginAndGrinding(true);
         }
-        else{
-            //setDisableOriginAndGrinding(true);
-        }
-        setInput({
-            ...input,
-            category: e.target.value
-          })
+        setInput({...input,category: e.target.value}) 
         setError({...error, category:''})
     }
 
@@ -160,31 +159,43 @@ const Form = () => {
     } 
 
     const handleSubmit = (e) => {
+        if (input.brand==='Brand'){
+            input.brand='';
+        }
         e.preventDefault();
-        /* dispatch(postProduct({
+        dispatch(postProduct({
         "name":input.name,
         "description":input.description,
         "origin":input.origin,
-        "price":input.price,
-        "grinding_type":input.grinding_type,
-        "stock":input.stock,
+        "price":parseInt(input.price),
+        "grindingtype":input.grindingtype,
+        "stock":parseInt(input.stock),
         "category":input.category,
         "image":input.image,
         "brand":input.brand
         }));
 
-        alert("A New Product Has Been Created!"); */
+        navigate("/");
     }
 
 /*********************Enabling or disabling the submit button whether I have errors or not************/
 
     useEffect(()=>{
-        if(!error.name && !error.description && !error.price && !error.origin && !error.stock && !error.category && !error.input.brand && !error.grinding_type && !error.input.image){
+        if(!error.name && 
+           !error.description && 
+           !error.price && 
+           !error.origin && 
+           !error.stock && 
+           !error.category &&
+           !error.grindingtype &&
+           !error.brand &&
+           !error.image
+           ){
             setDisableSubmit(false);
-            console.log("no hay error",error)
+            //console.log("no error",error)
         }else{
             setDisableSubmit(true);
-            console.log("SI hay error",error)
+            //console.log("there is at least 1 error",error)
         }
        },[input])
 
@@ -222,14 +233,16 @@ const Form = () => {
 
             <input 
             name="price" 
-            type="number" 
+            type="number"
+            min="0" 
             placeholder="Price" 
             onChange={(e) => handlePrice(e)}/>
             {error.price && <span>{error.price}</span>}
 
             <input
             name="stock" 
-            type="number" 
+            type="number"
+            min="0" 
             placeholder="Stock" 
             onChange={(e) => handleStock(e)}
             />
@@ -255,11 +268,18 @@ const Form = () => {
 
             <input
             disabled={disableOriginAndGrinding} 
-            name="grinding_type" 
+            name="grindingtype" 
             type="text" 
             placeholder="Grinding Type (Optional)" 
             onChange={(e) => handleGrindingType(e)}/>
-            {error.grinding_type && <span>{error.grinding_type}</span>}
+            {error.grindingtype && <span>{error.grindingtype}</span>}
+
+            <input
+            disabled={true} 
+            name="image" 
+            type="text" 
+            placeholder="Upload a Photo (Optional)" />
+            {error.image && <span>{error.image}</span>}
 
             <br></br>
             <button type="submit" disabled={disableSubmit}>Create Product</button>
