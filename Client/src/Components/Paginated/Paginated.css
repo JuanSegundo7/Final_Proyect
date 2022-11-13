@@ -10,11 +10,37 @@
   height: 30px;
   border: none;
   border-radius: 5px;
-  background-color: var(--grey);
+  background-color: var(--brown);
   cursor: pointer;
 }
 
 #buttonPag:hover {
+  background-color: var(--brown);
+  transition: 1s;
+}
+
+#buttonPag:focus {
+  background-color: var(--brown);
+  transition: 1s;
+}
+
+#buttonPag2 {
+  padding: auto;
+  margin: 0.5% 1%;
+  width: 50px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--grey);
+  cursor: pointer;
+}
+
+#buttonPag2:hover {
+  background-color: var(--brown);
+  transition: 1s;
+}
+
+#buttonPag2:focus {
   background-color: var(--brown);
   transition: 1s;
 }

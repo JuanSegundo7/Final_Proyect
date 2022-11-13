@@ -47,10 +47,10 @@ export const getProducts = () => async (dispatch) => {
 
 export const postProduct = (payload) => {
   return async function (dispatch) {
-    try{
+    try {
       var response = await axios.post(`${baseUrl}products`, payload);
       return response;
-    }catch(error){
+    } catch (error) {
       console.log("error", error);
     }
   };
@@ -113,16 +113,15 @@ export const filterBrands = (value) => (dispatch) => {
 
 // CATEGORIES
 
-export function getCategories(){
-  return async function(dispatch){
-      var response = await axios.get(`${baseUrl}categories`);
-      console.log(response.data)
-        return dispatch({
-            type: "GET_CATEGORIES",
-            payload: response.data
-        })}
+export function getCategories() {
+  return async function (dispatch) {
+    var response = await axios.get(`${baseUrl}categories`);
+    return dispatch({
+      type: "GET_CATEGORIES",
+      payload: response.data,
+    });
+  };
 }
-
 
 // export const getBrandByQuery = (brand) => (dispatch) => {
 //   console.log(brand, "es brand en action");
