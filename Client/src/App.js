@@ -8,7 +8,7 @@ import {
   getProductByQuery,
   getProducts,
   getBrands,
-  getCategories
+  getCategories,
 } from "./redux/Actions/Actions";
 
 import "./App.css";
@@ -18,12 +18,12 @@ function App() {
 
   useEffect(() => {
     dispatch(getProducts());
-    dispatch(getProductByQuery("orderedbyname", "Product", "ASC"));
-    dispatch(getProductByQuery("orderedbyname", "Product", "DES"));
-    dispatch(getProductByQuery("orderedbystock", "StockASC", "ASC"));
-    dispatch(getProductByQuery("orderedbystock", "StockDES", "DES"));
-    dispatch(getProductByQuery("orderedbyprice", "PriceASC", "ASC"));
-    dispatch(getProductByQuery("orderedbyprice", "PriceDES", "DES"));
+    // dispatch(getProductByQuery("orderedbyname", "Product", "ASC"));
+    // dispatch(getProductByQuery("orderedbyname", "Product", "DES"));
+    // dispatch(getProductByQuery("orderedbystock", "StockASC", "ASC"));
+    // dispatch(getProductByQuery("orderedbystock", "StockDES", "DES"));
+    // dispatch(getProductByQuery("orderedbyprice", "PriceASC", "ASC"));
+    // dispatch(getProductByQuery("orderedbyprice", "PriceDES", "DES"));
     dispatch(getProductByQuery("category", "coffee", "coffee"));
     dispatch(getProductByQuery("category", "coffee-maker", "coffee-maker"));
     dispatch(getProductByQuery("category", "accessories", "accessories"));
@@ -32,8 +32,6 @@ function App() {
     dispatch(getCategories());
     // dispatch(getProductByQuery("brand", "", "hario"));
   }, [dispatch]);
-
-
 
   return (
     <BrowserRouter>

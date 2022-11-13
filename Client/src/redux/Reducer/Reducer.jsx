@@ -10,6 +10,7 @@ import {
   FILTER_BRAND,
   ORDER_PRODUCTS_A_Z,
   ORDER_PRODUCTS_Z_A,
+  CLEAN_DETAIL_BY_NAME,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -18,6 +19,7 @@ const initialState = {
   Categories: [],
   Brands: [],
   BrandsCopy: [],
+  ByName: [],
 
   ProductASC: [],
   ProductDES: [],
@@ -53,11 +55,11 @@ const rootReducer = (state = initialState, action) => {
         Product: action.payload,
       };
     //case POST_PRODUCT:
-      //console.log("reducer post", action.payload);
-      //return {
-        //...state,
-        //allCoffees: [...state.allCoffees, action.payload],
-      //};
+    //console.log("reducer post", action.payload);
+    //return {
+    //...state,
+    //allCoffees: [...state.allCoffees, action.payload],
+    //};
     // case DELETE_PRODUCT:
     //   console.log(action.id, "es el id");
     //   return {
@@ -141,9 +143,10 @@ const rootReducer = (state = initialState, action) => {
         }
 
         case "name": {
+          console.log(action.name, "hola");
           return {
             ...state,
-            Products: action.payload,
+            ByName: action.payload,
           };
         }
 
@@ -165,6 +168,12 @@ const rootReducer = (state = initialState, action) => {
         Categories: action.payload,
       };
     }
+
+    case CLEAN_DETAIL_BY_NAME:
+      return {
+        ...state,
+        ByName: [],
+      };
 
     // case FILTER_BRAND:
     //   const filterBrand = state.Filters.filter((coffee) => {

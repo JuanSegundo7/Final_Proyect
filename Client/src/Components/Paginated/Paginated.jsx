@@ -8,7 +8,6 @@ export default function Paginated({
   currentPage,
 }) {
   const numberPage = [];
-  console.log("es currentPage", numberPage);
 
   for (let i = 0; i < Math.ceil(products / productPerPage); i++) {
     numberPage.push(i + 1);
