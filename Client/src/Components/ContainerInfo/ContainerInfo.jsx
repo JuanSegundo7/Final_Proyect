@@ -33,6 +33,7 @@ export default function ContainerInfo({ info }) {
         productPerPage={productPerPage}
         products={allProducts.length}
         className="paginated"
+        currentPage={currentPage}
       />
       <section id="Products">
         <FilterCoffees value="coffee" />
@@ -51,7 +52,7 @@ export default function ContainerInfo({ info }) {
                   _id={cardCoffe._id}
                   name={cardCoffe.name}
                   origin={cardCoffe.origin}
-                  type={cardCoffe.type}
+                  type={cardCoffe.grinding_type}
                   price={cardCoffe.price}
                 />
               );

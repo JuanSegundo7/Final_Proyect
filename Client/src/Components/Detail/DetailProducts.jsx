@@ -25,7 +25,7 @@ export default function DetailProduct() {
             <img src={product.image && product.image.url} className="imgDetail" />
             <p>{product.name}</p>
             <p>
-              <span>{"$ " + product.price}</span>
+              <span>${product.price}</span>
             </p>
             <p>{"Stock:" + product.stock}</p>
             <p>{product.description}</p>
