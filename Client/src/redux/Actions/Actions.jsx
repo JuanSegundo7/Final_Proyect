@@ -13,6 +13,7 @@ export const CLEAN_DETAIL = "CLEAN_DETAIL";
 
 // FILTERS
 export const FILTER_BRAND = "FILTER_BRAND";
+export const FILTER = "FILTER";
 
 // BRANDS
 export const GET_BRANDS = "GET_BRANDS";
@@ -60,10 +61,10 @@ export const postProduct = (payload) => {
 
 // `${baseUrl}products?orderedbyname=ASC`
 
-export const getProductByQuery = (info, name, value) => {
+export const getProductByQuery = (info, name, value, order) => {
   try {
     return async function (dispatch) {
-      let json = await axios.get(`${baseUrl}products?${info}=${value}`); // category=coffee
+      let json = await axios.get(`${baseUrl}products?${info}=${value}&${order}`); // category=coffee
       return dispatch({
         type: GET_PRODUCT_BY_QUERY,
         value: `${value}`,
@@ -109,6 +110,10 @@ export const getBrands = () => async (dispatch) => {
 
 export const filterBrands = (value) => (dispatch) => {
   return dispatch({ type: FILTER_BRAND, payload: value });
+};
+
+export const filter = (value, info) => (dispatch) => {
+  return dispatch({ type: FILTER, info: info, value: value });
 };
 
 // CATEGORIES

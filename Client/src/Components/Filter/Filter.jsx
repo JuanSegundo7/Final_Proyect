@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductByQuery } from "../../redux/Actions/Actions";
+import { getProductByQuery, filter } from "../../redux/Actions/Actions";
+import "./Filter.css"
 // import {
 //   coffeeStockAsc,
 //   coffeeStockDes,
@@ -10,7 +11,7 @@ import { getProductByQuery } from "../../redux/Actions/Actions";
 //   getCoffees,
 // } from "../../redux/Actions/Actions";
 
-export default function ({ value }) {
+export default function ({ info }) {
   const dispatch = useDispatch();
   //const allCoffees = useSelector((state) => state.allCoffees);
   // const allCagetory = useSelector((state) => state.category);
@@ -20,35 +21,51 @@ export default function ({ value }) {
 
   const [price, setPrice] = useState({
     min: 1,
-    max: 1500,
+    max: 200,
   });
+
+
 
   // const handlerBrand = (e) => {
   //   dispatch(filterBrands(e.target.value));
   // };
 
-  // function handlePriceMin(e){
-  //     e.preventDefault()
-  //     setPrice({...price, min:e.target.value})
-  //     dispatch(filterCoffeMin(e.target.value, value))
-  //   }
-
-  //   function handlePriceMax(e){
-  //     e.preventDefault()
-  //     setPrice({...price, max:e.target.value})
-  //     dispatch(filterCoffeMax(e.target.value, value))
-  //     //-> ver si quiero mandar ya desde aca el array(el estado global de cafes o hacerlo desde el reducer)
-  //   }
-
+  
+  
   function orderName(e) {
-    console.log("hola");
-    dispatch(getProductByQuery("orderedbyname", "Product", e.target.value));
+    const value = e.target.value
+    if(value == 'DES'){
+      switch (info) {
+        case "CategoriesCoffee": {
+          dispatch(getProductByQuery("category", "coffee", "coffee", "orderedbyname=DES", ""));
+        }
+      }
+    }else{
+      switch (info) {
+        case "CategoriesCoffee": {
+          dispatch(getProductByQuery("category", "coffee", "coffee", "orderedbyname=ASC"));
+        }
+      }
+    }
+    
+  }
+  
+  function handlePriceMin(e){
+    e.preventDefault()
+    setPrice({...price, min: parseInt(e.target.value)})
+    dispatch(filter(price, info))
   }
 
+  function handlePriceMax(e){
+    e.preventDefault()
+    setPrice({...price, max: parseInt(e.target.value)})
+    dispatch(filter(price, info))
+    //-> ver si quiero mandar ya desde aca el array(el estado global de cafes o hacerlo desde el reducer)
+  }
   //   function orderStock(e){
-  //     if(e.target.value === 'ASC'){
-  //       dispatch(coffeeStockAsc())
-  //     } else if(e.target.value === 'DSC'){
+    //     if(e.target.value === 'ASC'){
+      //       dispatch(coffeeStockAsc())
+      //     } else if(e.target.value === 'DSC'){
   //       dispatch(coffeeStockDes())
   //     }
   //   }
@@ -68,17 +85,17 @@ export default function ({ value }) {
             <input
               type="range"
               min="1"
-              max="1500"
+              max="200"
               value={price.min}
-              onChange={(e) => console.log(e)}
+              onChange={(e) => handlePriceMin(e)}
             />
 
             <input
               type="range"
               min="1"
-              max="1500"
+              max="200"
               value={price.max}
-              onChange={(e) => console.log(e)}
+              onChange={(e) => handlePriceMax(e)}
             />
             {
               <span>
