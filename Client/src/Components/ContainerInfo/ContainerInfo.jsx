@@ -6,34 +6,38 @@ import { useDispatch, useSelector } from "react-redux";
 import Error from "../Card/imgs/error.webp";
 import "./ContainerInfo.css";
 import { getProductByQuery } from "../../redux/Actions/Actions";
+import { useState } from "react";
+import Paginated from "../Paginated/Paginated";
 
-export default function ContainerInfo({ info, effect }) {
-  const { name } = useParams();
-  const dispatch = useDispatch();
+export default function ContainerInfo({ info }) {
   const allProducts = useSelector((state) => state[info]);
-  console.log(allProducts, "estpoe es allProducts");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productPerPage, setProductPerPage] = useState(8);
+  const indexLastProduct = productPerPage * currentPage;
+  const indexFirstProduct = indexLastProduct - productPerPage;
 
-  // PROTOTIPO CON PARAMS, LO MEJOR SERIA BUSCAR LA FORMA DE CONSEGUIR LA INFO DEL BACK POR MARCA
+  const products = allProducts.slice(indexFirstProduct, indexLastProduct);
+  const paginated = (number) => {
+    setCurrentPage(number);
+  };
 
-  // const paramsArray = allProducts.filter((product) => {
-  //   return product.brand.name === name;
-  // });
-
-  // console.log(paramsArray, "estp es paramsArray");
-
-  // console.log(name, "estoe s paramas");
-
-  // useEffect(() => {
-  //   dispatch(getProductByQuery());
-  // }, [dispatch]);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [allProducts]);
 
   return (
     <div id="Contenido">
+      <Paginated
+        paginated={paginated}
+        productPerPage={productPerPage}
+        products={allProducts.length}
+        className="paginated"
+      />
       <section id="Products">
         <FilterCoffees value="coffee" />
         <div className="cardHome">
-          {allProducts.length &&
-            allProducts.map((cardCoffe) => {
+          {products.length &&
+            products.map((cardCoffe) => {
               return (
                 <Card
                   img={
