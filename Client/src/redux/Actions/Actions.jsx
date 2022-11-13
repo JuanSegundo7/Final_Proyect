@@ -1,7 +1,9 @@
 import axios from "axios";
 
-// PRODUCTS
+// CATEGORIES
+export const GET_CATEGORIES = "GET_CATEGORIES";
 
+// PRODUCTS
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_ONE_PRODUCT = "GET_ONE_PRODUCT";
 export const POST_PRODUCT = "POST_PRODUCT";
@@ -111,6 +113,19 @@ export const getBrands = () => async (dispatch) => {
 export const filterBrands = (value) => (dispatch) => {
   return dispatch({ type: FILTER_BRAND, payload: value });
 };
+
+// CATEGORIES
+
+export function getCategories(){
+  return async function(dispatch){
+      var response = await axios.get(`${baseUrl}categories`);
+      console.log(response.data)
+        return dispatch({
+            type: "GET_CATEGORIES",
+            payload: response.data
+        })}
+}
+
 
 // export const getBrandByQuery = (brand) => (dispatch) => {
 //   console.log(brand, "es brand en action");

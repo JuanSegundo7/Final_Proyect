@@ -6,6 +6,7 @@ import {
   GET_PRODUCT_BY_QUERY,
   CLEAN_DETAIL,
   GET_BRANDS,
+  GET_CATEGORIES,
   FILTER_BRAND,
   ORDER_PRODUCTS_A_Z,
   ORDER_PRODUCTS_Z_A,
@@ -155,6 +156,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         Brands: action.payload,
         BrandsCopy: action.payload,
+      };
+    }
+
+    case GET_CATEGORIES: {
+      return {
+        ...state,
+        Categories: action.payload,
       };
     }
 
