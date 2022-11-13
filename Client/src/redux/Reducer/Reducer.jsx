@@ -19,12 +19,12 @@ const initialState = {
   Brands: [],
   BrandsCopy: [],
 
-  ProductASC: [],
-  ProductDES: [],
-  ProductStockASC: [],
-  ProductStockDES: [],
-  ProductPriceASC: [],
-  ProductPriceDES: [],
+  // ProductASC: [],
+  // ProductDES: [],
+  // ProductStockASC: [],
+  // ProductStockDES: [],
+  // ProductPriceASC: [],
+  // ProductPriceDES: [],
 
   CategoriesAccesories: [],
   CategoriesCoffee: [],

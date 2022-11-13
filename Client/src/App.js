@@ -3,7 +3,7 @@ import Switch from "./Components/Switch/Switch";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import { BrowserRouter } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getProductByQuery,
   getProducts,
@@ -16,14 +16,18 @@ import "./App.css";
 function App() {
   const dispatch = useDispatch();
 
+  const price = useSelector(state => state.ProductPriceASC)
+
+  console.log(price);
+
   useEffect(() => {
     dispatch(getProducts());
-    dispatch(getProductByQuery("orderedbyname", "Product", "ASC"));
-    dispatch(getProductByQuery("orderedbyname", "Product", "DES"));
-    dispatch(getProductByQuery("orderedbystock", "StockASC", "ASC"));
-    dispatch(getProductByQuery("orderedbystock", "StockDES", "DES"));
-    dispatch(getProductByQuery("orderedbyprice", "PriceASC", "ASC"));
-    dispatch(getProductByQuery("orderedbyprice", "PriceDES", "DES"));
+    // dispatch(getProductByQuery("orderedbyname", "Product", "ASC"));
+    // dispatch(getProductByQuery("orderedbyname", "Product", "DES"));
+    // dispatch(getProductByQuery("orderedbystock", "StockASC", "ASC"));
+    // dispatch(getProductByQuery("orderedbystock", "StockDES", "DES"));
+    // dispatch(getProductByQuery("orderedbyprice", "PriceASC", "ASC"));
+    // dispatch(getProductByQuery("orderedbyprice", "PriceDES", "DES"));
     dispatch(getProductByQuery("category", "coffee", "coffee"));
     dispatch(getProductByQuery("category", "coffee-maker", "coffee-maker"));
     dispatch(getProductByQuery("category", "accessories", "accessories"));

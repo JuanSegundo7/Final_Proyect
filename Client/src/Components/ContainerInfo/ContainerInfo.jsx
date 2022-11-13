@@ -17,6 +17,7 @@ export default function ContainerInfo({ info }) {
   const indexFirstProduct = indexLastProduct - productPerPage;
 
   const products = allProducts.slice(indexFirstProduct, indexLastProduct);
+
   const paginated = (number) => {
     setCurrentPage(number);
   };

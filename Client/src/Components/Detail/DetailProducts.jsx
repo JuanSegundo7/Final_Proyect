@@ -19,16 +19,10 @@ export default function DetailProduct() {
   }, [dispatch]);
 
   return (
-    <div className="containerDetail">
+    <article id="containerDetail">
       {Object.keys(product).length ? (
-        <div>
-          <div className="imgDiv">
-            <img
-              src={product.image && product.image.url}
-              className="imgDetail"
-            ></img>
-          </div>
-          <div>
+        <>
+            <img src={product.image && product.image.url} className="imgDetail" />
             <p>{product.name}</p>
             <p>
               <span>{"$ " + product.price}</span>
@@ -36,13 +30,12 @@ export default function DetailProduct() {
             <p>{"Stock:" + product.stock}</p>
             <p>{product.description}</p>
             <p>{product.grinding_type}</p>
-            <p>{product.brand.name}</p>
+            <p>{!product.brand ? "There is not name provided" : product.brand.name }</p>
             <p>{product.category.name}</p>
-          </div>
-        </div>
+        </>
       ) : (
         <h1>Sorry there was an error :(</h1>
       )}
-    </div>
+    </article>
   );
 }

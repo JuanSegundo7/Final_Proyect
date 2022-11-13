@@ -22,7 +22,7 @@ const Header = () => {
         </figure>
         <SearchBar />
         <div id="flex-svgs">
-          <Navigator to="/create">
+          <Navigator to="/">
             <div className="svg-container">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
