@@ -27,9 +27,9 @@ const Categories = () => {
     name: "Brands",
   };
 
-  const Products = {
+  const Others = {
     array: [],
-    name: "Products",
+    name: "Others",
   };
 
   const CoffeeMaker = {
@@ -45,14 +45,15 @@ const Categories = () => {
             <Dropdown info={Coffees} path="/coffees" />
           </Link>
         </li>
-        {/* <li>
-          <Dropdown info={Products} path="/products" />
-        </li> */}
+
         <li>
           <Dropdown info={CoffeeMaker} path="/products/coffee-maker" />
         </li>
         <li>
           <Dropdown info={Accesories} path="/products/accesories" />
+        </li>
+        <li>
+          <Dropdown info={Others} path="/products/others" />
         </li>
         <li>
           <Dropdown info={Brands} path="/brands" />

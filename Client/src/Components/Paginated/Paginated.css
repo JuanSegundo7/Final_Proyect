@@ -1,0 +1,20 @@
+.containerPag {
+  margin-top: -2%;
+  margin-bottom: 1%;
+}
+
+#buttonPag {
+  padding: auto;
+  margin: 0.5% 1%;
+  width: 50px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--grey);
+  cursor: pointer;
+}
+
+#buttonPag:hover {
+  background-color: var(--brown);
+  transition: 1s;
+}

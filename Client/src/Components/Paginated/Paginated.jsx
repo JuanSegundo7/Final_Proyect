@@ -1,4 +1,5 @@
 import React from "react";
+import "./Paginated.css";
 
 export default function Paginated({ paginated, productPerPage, products }) {
   const numberPage = [];
@@ -8,12 +9,16 @@ export default function Paginated({ paginated, productPerPage, products }) {
   }
 
   return (
-    <div>
+    <div className="containerPag">
       <nav>
         {numberPage &&
           numberPage.map((number) => {
             return (
-              <button key={number} onClick={() => paginated(number)}>
+              <button
+                key={number}
+                onClick={() => paginated(number)}
+                id="buttonPag"
+              >
                 {number}
               </button>
             );
