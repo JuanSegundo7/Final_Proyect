@@ -17,6 +17,7 @@ export default function ContainerInfo({ info }) {
   const indexFirstProduct = indexLastProduct - productPerPage;
 
   const products = allProducts.slice(indexFirstProduct, indexLastProduct);
+
   const paginated = (number) => {
     setCurrentPage(number);
   };
@@ -32,6 +33,7 @@ export default function ContainerInfo({ info }) {
         productPerPage={productPerPage}
         products={allProducts.length}
         className="paginated"
+        currentPage={currentPage}
       />
       <section id="Products">
         <FilterCoffees value="coffee" />
@@ -50,7 +52,7 @@ export default function ContainerInfo({ info }) {
                   _id={cardCoffe._id}
                   name={cardCoffe.name}
                   origin={cardCoffe.origin}
-                  type={cardCoffe.type}
+                  type={cardCoffe.grinding_type}
                   price={cardCoffe.price}
                 />
               );
