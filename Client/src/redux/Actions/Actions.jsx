@@ -10,10 +10,12 @@ export const POST_PRODUCT = "POST_PRODUCT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const GET_PRODUCT_BY_QUERY = "GET_PRODUCT_BY_QUERY";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
-export const CLEAN_DETAIL_BY_NAME = "CLEAN_DETAIL_BY_NAME";
+export const CLEAN_FILTERED = "CLEAN_FILTERED";
+export const CLEAN_NAME = "CLEAN_NAME";
 
 // FILTERS
 export const FILTER_BRAND = "FILTER_BRAND";
+export const FILTER = "FILTER";
 
 // BRANDS
 export const GET_BRANDS = "GET_BRANDS";
@@ -61,11 +63,12 @@ export const postProduct = (payload) => {
 
 // `${baseUrl}products?orderedbyname=ASC`
 
-export const getProductByQuery = (info, name, value) => {
+export const getProductByQuery = (info, name, value, order) => {
   try {
     return async function (dispatch) {
-      let json = await axios.get(`${baseUrl}products?${info}=${value}`); // category=coffee
-      console.log(json.data, "en action");
+      let json = await axios.get(
+        `${baseUrl}products?${info}=${value}&${order}`
+      ); // category=coffee
       return dispatch({
         type: GET_PRODUCT_BY_QUERY,
         value: `${value}`,
@@ -113,6 +116,10 @@ export const filterBrands = (value) => (dispatch) => {
   return dispatch({ type: FILTER_BRAND, payload: value });
 };
 
+export const filter = (value, info) => (dispatch) => {
+  return dispatch({ type: FILTER, info: info, value: value });
+};
+
 // CATEGORIES
 
 export function getCategories() {
@@ -125,8 +132,12 @@ export function getCategories() {
   };
 }
 
+export const cleanFiltered = () => (dispatch) => {
+  return dispatch({ type: CLEAN_FILTERED });
+};
+
 export const cleanByName = () => (dispatch) => {
-  return dispatch({ type: CLEAN_DETAIL_BY_NAME });
+  return dispatch({ type: CLEAN_NAME });
 };
 
 // export const getBrandByQuery = (brand) => (dispatch) => {

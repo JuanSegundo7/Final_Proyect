@@ -13,7 +13,7 @@ const Categories = () => {
   // console.log(allCategory);
 
   const Coffees = {
-    array: [],
+    array: [{id: 1 , name:"Grinding"}, {id: 2 , name: "Grinding"}],
     name: "Coffees",
   };
 

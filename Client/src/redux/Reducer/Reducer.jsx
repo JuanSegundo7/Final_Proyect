@@ -7,10 +7,13 @@ import {
   CLEAN_DETAIL,
   GET_BRANDS,
   GET_CATEGORIES,
+  FILTER,
   FILTER_BRAND,
   ORDER_PRODUCTS_A_Z,
   ORDER_PRODUCTS_Z_A,
   CLEAN_DETAIL_BY_NAME,
+  CLEAN_FILTERED,
+  CLEAN_NAME,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -21,19 +24,21 @@ const initialState = {
   BrandsCopy: [],
   ByName: [],
 
-  ProductASC: [],
-  ProductDES: [],
-  ProductStockASC: [],
-  ProductStockDES: [],
-  ProductPriceASC: [],
-  ProductPriceDES: [],
+  // ProductASC: [],
+  // ProductDES: [],
+  // ProductStockASC: [],
+  // ProductStockDES: [],
+  // ProductPriceASC: [],
+  // ProductPriceDES: [],
 
   CategoriesAccesories: [],
   CategoriesCoffee: [],
   CategoriesCoffeeMaker: [],
   CategoriesOthers: [],
 
-  Filters: [],
+  Filtered: [],
+  Filter: false,
+  updateFilter: 1,
 
   // allProducts: [],
   // allProducts2: [],
@@ -47,7 +52,6 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         Products: action.payload,
-        Filters: action.payload,
       };
     case GET_ONE_PRODUCT:
       return {
@@ -169,11 +173,37 @@ const rootReducer = (state = initialState, action) => {
       };
     }
 
-    case CLEAN_DETAIL_BY_NAME:
+    case CLEAN_FILTERED:
+      return {
+        ...state,
+        Filtered: [],
+        Filter: false,
+        updateFilter: state.updateFilter + 1,
+      };
+
+    case CLEAN_NAME:
       return {
         ...state,
         ByName: [],
       };
+
+    // FILTER
+
+    case FILTER: {
+      const { min, max } = action.value;
+      const array = state[action.info];
+
+      // const copyCoffees = state[action.info]
+      const priceMin = array.filter((e) => e.price > min);
+      const priceFinal = priceMin.filter((e) => e.price < max);
+
+      return {
+        ...state,
+        Filtered: priceFinal,
+        updateFilter: state.updateFilter + 1,
+        Filter: true,
+      };
+    }
 
     // case FILTER_BRAND:
     //   const filterBrand = state.Filters.filter((coffee) => {

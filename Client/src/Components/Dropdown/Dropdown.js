@@ -16,6 +16,9 @@ export default function Dropdown({ info, path }) {
   const handleReset = () => {
     dispatch(getBrands());
     dispatch(getProductByQuery("category", "coffee", "coffee"));
+    dispatch(getProductByQuery("category", "coffee-maker", "coffee-maker"));
+    dispatch(getProductByQuery("category", "accessories", "accessories"));
+    dispatch(getProductByQuery("category", "others", "others"));
   };
 
   return (

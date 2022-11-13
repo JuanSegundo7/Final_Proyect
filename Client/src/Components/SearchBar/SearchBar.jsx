@@ -19,9 +19,7 @@ export default function SearchBar() {
   };
 
   useEffect(() => {
-    return () => {
-      dispatch(cleanByName()); // para que se limpie el estado de detalle cuando lo saco y caundo aprete otro se ponga el nuevo y no qeude ese dilay del anterior
-    };
+    dispatch(cleanByName("name"));
   }, [dispatch]);
 
   return (
