@@ -7,6 +7,8 @@ import {useSelector} from "react-redux"
 
 export default function Home() {
 
+  // hola
+
   const Coffees = useSelector((state) => state.CategoriesCoffee);
   const CoffeeMaker = useSelector((state) => state.CategoriesCoffeeMaker);
   const Accesories = useSelector((state) => state.CategoriesAccesories);
