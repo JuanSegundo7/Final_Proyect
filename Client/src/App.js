@@ -16,10 +16,6 @@ import "./App.css";
 function App() {
   const dispatch = useDispatch();
 
-  const price = useSelector((state) => state.ProductPriceASC);
-
-  console.log(price);
-
   useEffect(() => {
     dispatch(getProducts());
     // dispatch(getProductByQuery("orderedbyname", "Product", "ASC"));

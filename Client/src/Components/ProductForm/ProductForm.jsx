@@ -253,34 +253,38 @@ const Form = () => {
                     />
                     {error.stock && <span>{error.stock}</span>}
                 </fieldset>
+                
+                <fieldset className="product-flex-info">
+                <select onChange={handleCategory} value={input.category}>                  
+                    <option disabled>Category</option>
+                    {allCategories.map(unaOpcion=><option value={unaOpcion._id} key={unaOpcion._id}>{unaOpcion.name}</option>)}
+                </select>
+                </fieldset>
+                <fieldset className="product-flex-info">
+                <select onChange={handleBrand} value={input.brand}>                  
+                    <option disabled>Brand</option>
+                    {allBrands.map(unaOpcion=><option value={unaOpcion._id} key={unaOpcion._id}>{unaOpcion.name}</option>)}
+                </select>
+                </fieldset>
+                <fieldset className="product-flex-info">
+                    <input
+                    disabled={disableOriginAndGrinding} 
+                    name="origin" 
+                    type="text" 
+                    placeholder="Origin (Optional)" 
+                    onChange={(e) => handleOrigin(e)}/>
+                    {error.origin && <span>{error.origin}</span>}
+                </fieldset>
+                <fieldset className="product-flex-info">
+                    <input
+                    disabled={disableOriginAndGrinding} 
+                    name="grindingtype" 
+                    type="text"     
+                    placeholder="Grinding Type (Optional)" 
+                    onChange={(e) => handleGrindingType(e)}/>
+                    {error.grindingtype && <span>{error.grindingtype}</span>}
+                </fieldset>
             </fieldset>
-
-            <select onChange={handleCategory} value={input.category}>                  
-                <option disabled>Category</option>
-                {allCategories.map(unaOpcion=><option value={unaOpcion._id} key={unaOpcion._id}>{unaOpcion.name}</option>)}
-            </select>
-
-            <select onChange={handleBrand} value={input.brand}>                  
-                <option disabled>Brand</option>
-                {allBrands.map(unaOpcion=><option value={unaOpcion._id} key={unaOpcion._id}>{unaOpcion.name}</option>)}
-            </select>
-
-            <input
-            disabled={disableOriginAndGrinding} 
-            name="origin" 
-            type="text" 
-            placeholder="Origin (Optional)" 
-            onChange={(e) => handleOrigin(e)}/>
-            {error.origin && <span>{error.origin}</span>}
-
-            <input
-            disabled={disableOriginAndGrinding} 
-            name="grindingtype" 
-            type="text" 
-            placeholder="Grinding Type (Optional)" 
-            onChange={(e) => handleGrindingType(e)}/>
-            {error.grindingtype && <span>{error.grindingtype}</span>}
-
             <input
             disabled={true} 
             name="image" 
