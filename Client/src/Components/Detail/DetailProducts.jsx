@@ -29,7 +29,7 @@ export default function DetailProduct() {
               <h2>{product.name.toUpperCase()}</h2>
               <p>Price: US${product.price}</p>
               <p>{product.description}</p>
-              <p>Type: {product.grinding_type}</p>
+              <p>Type: {product.grinding_type ? product.grinding_type : <p>There is note type available</p>}</p>
               <p>Brand: {!product.brand ? "There is not name provided" : product.brand.name.toUpperCase() }</p>
               <p>Stock: {product.stock} units</p>
             </article>
