@@ -58,6 +58,7 @@ export default function ContainerInfo({ info }) {
         products={!ByName.length ? allProducts.length : ByName.length}
         className="paginated"
         currentPage={currentPage}
+        filteredOrNot={Filtered.length}
       />
       <section id="Products">
         <Filter info={info} />

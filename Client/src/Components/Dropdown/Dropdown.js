@@ -2,7 +2,11 @@ import React from "react";
 import "./Dropdown.css";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { getBrands, getProductByQuery } from "../../redux/Actions/Actions";
+import {
+  cleanFiltered,
+  getBrands,
+  getProductByQuery,
+} from "../../redux/Actions/Actions";
 
 export default function Dropdown({ info, path }) {
   const { array, name } = info;
@@ -19,6 +23,7 @@ export default function Dropdown({ info, path }) {
     dispatch(getProductByQuery("category", "coffee-maker", "coffee-maker"));
     dispatch(getProductByQuery("category", "accessories", "accessories"));
     dispatch(getProductByQuery("category", "others", "others"));
+    dispatch(cleanFiltered());
   };
 
   return (
