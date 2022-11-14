@@ -12,7 +12,7 @@ const SwitchRouter = () => {
       <Route
         exact
         path="/coffees"
-        element={<ContainerInfo info="CategoriesCoffee" />}
+        element={<ContainerInfo info="CategoriesCoffee" order="coffee" />}
       />
       <Route
         exact
@@ -22,17 +22,21 @@ const SwitchRouter = () => {
       <Route
         exact
         path="/products/coffee-maker"
-        element={<ContainerInfo info="CategoriesCoffeeMaker" />}
+        element={
+          <ContainerInfo info="CategoriesCoffeeMaker" order="coffee-maker" />
+        }
       />
       <Route
         exact
         path="/products/accesories"
-        element={<ContainerInfo info="CategoriesAccesories" />}
+        element={
+          <ContainerInfo info="CategoriesAccesories" order="accessories" />
+        }
       />
       <Route
         exact
         path="/products/others"
-        element={<ContainerInfo info="CategoriesOthers" />}
+        element={<ContainerInfo info="CategoriesOthers" order="others" />}
       />
       <Route exact path="/brands" element={<ContainerInfo info="Brands" />} />
 
