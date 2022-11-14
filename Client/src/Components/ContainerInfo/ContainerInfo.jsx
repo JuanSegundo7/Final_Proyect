@@ -12,7 +12,6 @@ import Paginated from "../Paginated/Paginated";
 export default function ContainerInfo({ info }) {
   const location = useLocation();
   const dispatch = useDispatch();
-  const { productID } = useParams();
   const allProducts = useSelector((state) => state[info]);
   const Filtered = useSelector((state) => state.Filtered);
   const FilterBoolean = useSelector((state) => state.Filter);
@@ -33,8 +32,6 @@ export default function ContainerInfo({ info }) {
     ? allProducts.slice(indexFirstProduct, indexLastProduct)
     : ByName.slice(indexFirstProduct, indexLastProduct);
 
-  // const products = allProducts.slice(indexFirstProduct, indexLastProduct);
-
   const filteredOrNot = FilterBoolean
     ? Filtered.slice(indexFirstProduct, indexLastProduct)
     : products;
@@ -53,14 +50,12 @@ export default function ContainerInfo({ info }) {
     };
   }, [dispatch, allProducts]);
 
-  // }, [filteredOrNot, updateFilter]);
-
   return (
     <div id="Contenido">
       <Paginated
         paginated={paginated}
         productPerPage={productPerPage}
-        products={allProducts.length}
+        products={!ByName.length ? allProducts.length : ByName.length}
         className="paginated"
         currentPage={currentPage}
       />
@@ -71,22 +66,22 @@ export default function ContainerInfo({ info }) {
             filteredOrNot.map((cardCoffe) => {
               return (
                 <Card
-                img={
-                  !cardCoffe.image || cardCoffe.image === null
-                  ? Error
-                  : cardCoffe.image.url
-                }
-                img2={cardCoffe.image && cardCoffe.image}
-                key={cardCoffe._id}
-                _id={cardCoffe._id}
-                name={cardCoffe.name}
-                origin={cardCoffe.origin}
-                type={cardCoffe.grinding_type}
-                price={cardCoffe.price}
-                brand={info}
+                  img={
+                    !cardCoffe.image || cardCoffe.image === null
+                      ? Error
+                      : cardCoffe.image.url
+                  }
+                  img2={cardCoffe.image && cardCoffe.image}
+                  key={cardCoffe._id}
+                  _id={cardCoffe._id}
+                  name={cardCoffe.name}
+                  origin={cardCoffe.origin}
+                  type={cardCoffe.grinding_type}
+                  price={cardCoffe.price}
+                  brand={info}
                 />
-                );
-              })
+              );
+            })
           ) : (
             <h1>Hola</h1>
           )}
