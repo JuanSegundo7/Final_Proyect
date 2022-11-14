@@ -25,6 +25,15 @@
   border-radius: 15px;
 }
 
+.filters select{
+  box-shadow: var(--shadow);
+  border: none;
+  margin-top: 1em;
+  border-radius: 25px;
+  padding: 0.5em;
+  width: 173px;
+}
+
 /* .menuFilters {
   display: flex;
   justify-content: center;
