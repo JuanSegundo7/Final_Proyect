@@ -1,11 +1,17 @@
-import React from "react";
+import React, {useState} from "react";
 import logo from "./img/coffee.png";
 import Categories from "../Categories/Categories";
 import { Link as Navigator } from "react-router-dom";
 import "./Header.css";
+import Login from "../Login/Login"
 import SearchBar from "../SearchBar/SearchBar";
 
 const Header = () => {
+  const [state, setState] = useState()
+
+  let login
+
+  if (state > 0) login = <Login close={setState} />
 
   return (
     <header>
@@ -22,7 +28,7 @@ const Header = () => {
         </figure>
         <SearchBar />
         <div id="flex-svgs">
-          <Navigator to="/">
+          <Navigator to="/" onClick={() => setState(1)}>
             <div className="svg-container">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -46,6 +52,7 @@ const Header = () => {
         </div>
       </nav>
       <Categories />
+      {login}
     </header>
   );
 };

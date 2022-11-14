@@ -7,6 +7,7 @@
   --brown: #D17721;
   --background-color-top: rgb(43, 43, 43);
   --grey: rgb(198,198,198);
+  --shadow: 0 2.5px 7.5px rgb(0 0 0 / 20%);
 }
 
 h1,p, h2{
