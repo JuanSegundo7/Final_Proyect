@@ -49,6 +49,49 @@ export default function ({ info }) {
             )
           );
         }
+
+        case "CategoriesAccesories": {
+          dispatch(
+            getProductByQuery(
+              "category",
+              "accessories",
+              "accessories",
+              "orderedbyname=DES"
+            )
+          );
+        }
+
+        case "CategoriesCoffeeMaker": {
+          dispatch(
+            getProductByQuery(
+              "category",
+              "coffee-maker",
+              "coffee-maker",
+              "orderedbyname=DES"
+            )
+          );
+        }
+
+        case "CategoriesOthers": {
+          dispatch(
+            getProductByQuery(
+              "category",
+              "others",
+              "others",
+              "orderedbyname=DES"
+            )
+          );
+        }
+        case "Brands": {
+          dispatch(
+            getProductByQuery(
+              "category",
+              "others",
+              "others",
+              "orderedbyname=DES"
+            )
+          );
+        }
       }
     } else {
       switch (info) {
@@ -58,6 +101,39 @@ export default function ({ info }) {
               "category",
               "coffee",
               "coffee",
+              "orderedbyname=ASC"
+            )
+          );
+        }
+
+        case "CategoriesAccesories": {
+          dispatch(
+            getProductByQuery(
+              "category",
+              "accessories",
+              "accessories",
+              "orderedbyname=ASC"
+            )
+          );
+        }
+
+        case "CategoriesCoffeeMaker": {
+          dispatch(
+            getProductByQuery(
+              "category",
+              "coffee-maker",
+              "coffee-maker",
+              "orderedbyname=ASC"
+            )
+          );
+        }
+
+        case "CategoriesOthers": {
+          dispatch(
+            getProductByQuery(
+              "category",
+              "others",
+              "others",
               "orderedbyname=ASC"
             )
           );
@@ -78,6 +154,110 @@ export default function ({ info }) {
     dispatch(filter(price, info));
     //-> ver si quiero mandar ya desde aca el array(el estado global de cafes o hacerlo desde el reducer)
   }
+
+  function handleOrderStock(e) {
+    const value = e.target.value;
+    if (value == "DES") {
+      switch (info) {
+        case "CategoriesCoffee": {
+          dispatch(
+            getProductByQuery(
+              "category",
+              "coffee",
+              "coffee",
+              "orderedbystock=DES",
+              ""
+            )
+          );
+        }
+
+        case "CategoriesCoffeeMaker": {
+          dispatch(
+            getProductByQuery(
+              "category",
+              "coffee-maker",
+              "coffee-maker",
+              "orderedbystock=DES",
+              ""
+            )
+          );
+        }
+
+        case "CategoriesOthers": {
+          dispatch(
+            getProductByQuery(
+              "category",
+              "others",
+              "others",
+              "orderedbystock=DES",
+              ""
+            )
+          );
+        }
+
+        case "CategoriesAccesories": {
+          dispatch(
+            getProductByQuery(
+              "category",
+              "accessories",
+              "accessories",
+              "orderedbystock=DES",
+              ""
+            )
+          );
+        }
+      }
+    } else {
+      switch (info) {
+        case "CategoriesCoffee": {
+          dispatch(
+            getProductByQuery(
+              "category",
+              "coffee",
+              "coffee",
+              "orderedbystock=ASC"
+            )
+          );
+        }
+
+        case "CategoriesCoffeeMaker": {
+          dispatch(
+            getProductByQuery(
+              "category",
+              "coffee-maker",
+              "coffee-maker",
+              "orderedbystock=ASC",
+              ""
+            )
+          );
+        }
+
+        case "CategoriesAccesories": {
+          dispatch(
+            getProductByQuery(
+              "category",
+              "accessories",
+              "accessories",
+              "orderedbystock=ASC"
+            )
+          );
+        }
+
+        case "CategoriesOthers": {
+          dispatch(
+            getProductByQuery(
+              "category",
+              "others",
+              "others",
+              "orderedbystock=ASC",
+              ""
+            )
+          );
+        }
+      }
+    }
+  }
+
   //   function orderStock(e){
   //     if(e.target.value === 'ASC'){
   //       dispatch(coffeeStockAsc())
@@ -119,17 +299,16 @@ export default function ({ info }) {
               </span>
             }
           </div>
-          <div>
-            {/* habria que hacer un select harcodeado para que no repita de nuevo los mismos */}
+          {/* <div>
             <select>
               {Brands &&
                 Brands.map((c) => <option key={c.name}>{c.name}</option>)}
             </select>
-          </div>
+          </div> */}
           <div>
-            <select onChange={(e) => console.log(e)}>
+            <select onChange={(e) => handleOrderStock(e)}>
               <option value="ASC"> Menos Stock</option>
-              <option value="DSC"> Mas Stock</option>
+              <option value="DES"> Mas Stock</option>
             </select>
           </div>
         </div>
