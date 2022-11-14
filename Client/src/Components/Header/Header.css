@@ -30,12 +30,18 @@
     height: 45px;
     width: 45px;
     border-radius: 100%;
+    transition: 0.5s;
+}
+
+.svg-container:hover{
+    cursor: pointer;
+    transition: 0.5s;
+    background-color: var(--brown)
 }
 
 .svg{
     fill: #fff;
     width: 1em;
-    cursor: pointer;
 }
 
 .nav{
@@ -53,6 +59,10 @@
     width: 100%;
     filter: brightness(0);
     height: auto;
+}
+
+.nav img:hover{
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;  
 }
 
 #flex-svgs{
