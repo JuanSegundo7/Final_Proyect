@@ -1,5 +1,6 @@
 #Form {
     height: 100%;
+    padding: 0 5%;
     margin: 2em 0;
     display: flex;
     flex-direction: column;
@@ -23,8 +24,13 @@
 }
 
 .product-flex-info input{
-    width: 90%;
+    width: 95%;
 }
+
+.product-flex-info select{
+    width: 100%;
+}
+
 
 #Form input, #Form select{
     box-shadow: var(--shadow);
