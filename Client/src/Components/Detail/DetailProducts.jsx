@@ -6,6 +6,8 @@ import { getOneProduct, cleanDetail } from "../../redux/Actions/Actions";
 import "./Detail.css";
 
 export default function DetailProduct() {
+  window.scrollTo(0,0)
+
   const dispatch = useDispatch();
   const product = useSelector((state) => state.Product);
   const idCoffee = useParams();
@@ -23,15 +25,14 @@ export default function DetailProduct() {
       {Object.keys(product).length ? (
         <>
             <img src={product.image && product.image.url} className="imgDetail" />
-            <p>{product.name}</p>
-            <p>
-              <span>${product.price}</span>
-            </p>
-            <p>{"Stock:" + product.stock}</p>
-            <p>{product.description}</p>
-            <p>{product.grinding_type}</p>
-            <p>{!product.brand ? "There is not name provided" : product.brand.name }</p>
-            <p>{product.category.name}</p>
+            <article id="detail_flex_info">
+              <h2>{product.name.toUpperCase()}</h2>
+              <p>Price: US${product.price}</p>
+              <p>{product.description}</p>
+              <p>Type: {product.grinding_type}</p>
+              <p>Brand: {!product.brand ? "There is not name provided" : product.brand.name.toUpperCase() }</p>
+              <p>Stock: {product.stock} units</p>
+            </article>
         </>
       ) : (
         <h1>Sorry there was an error :(</h1>
