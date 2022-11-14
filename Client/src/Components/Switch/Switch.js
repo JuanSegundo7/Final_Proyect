@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Form from "../Form/Form";
+import Form from "../ProductForm/ProductForm";
 import Home from "../Home/Home";
 import DetailProducts from "../Detail/DetailProducts";
 import ContainerInfo from "../ContainerInfo/ContainerInfo";

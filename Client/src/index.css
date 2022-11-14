@@ -10,6 +10,10 @@
   --shadow: 0 2.5px 7.5px rgb(0 0 0 / 20%);
 }
 
+select:focus {
+  outline: none
+}
+
 h1,p, h2{
   margin: 0;
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { postProduct } from '../../redux/Actions/Actions';
 import { useNavigate} from 'react-router-dom';
-import "./Form.css";
+import "./ProductForm.css";
 
 
 const Form = () => {
@@ -26,13 +26,13 @@ const Form = () => {
     //I will set some of these fields as having an error by default, since all of these fields are
     //presented as empty and THAT's an error per se.
     const [error, setError] = useState({
-        name:'You must enter a name!!',
-        description:'You must enter a description!!',
+        name:'* You must enter a name',
+        description:'* You must enter a description',
         origin:'',
-        price:'You must enter a price!!',
+        price:'* You must enter a price',
         grindingtype:'',
-        stock:'You must enter a stock!!',
-        category:'Invalid category!!',    //default value if nothing was selected
+        stock:'* You must enter a stock',
+        category:'* Invalid category',    //default value if nothing was selected
         image:'',
         brand:'',   //brand is not a required field, therefore I will no set a default value here
     });
@@ -217,36 +217,43 @@ const Form = () => {
 /**********************************************Render***********************************************/
     return (
         <form onSubmit={(e) => handleSubmit(e)} id="Form">
-            <input 
-            name="name" 
-            type="text" 
-            placeholder="Name" 
-            onChange={(e) => handleName(e)}/>
-            {error.name && <span>{error.name}</span>}
-
-            <input 
-            name="description" 
-            type="text" 
-            placeholder="Description" 
-            onChange={(e) => handleDescription(e)}/>
-            {error.description && <span>{error.description}</span>}
-
-            <input 
-            name="price" 
-            type="number"
-            min="0" 
-            placeholder="Price" 
-            onChange={(e) => handlePrice(e)}/>
-            {error.price && <span>{error.price}</span>}
-
-            <input
-            name="stock" 
-            type="number"
-            min="0" 
-            placeholder="Stock" 
-            onChange={(e) => handleStock(e)}
-            />
-            {error.stock && <span>{error.stock}</span>}
+            <fieldset id="product-form-flex">
+                <fieldset className="product-flex-info">
+                    <input 
+                    name="name" 
+                    type="text" 
+                    placeholder="Name" 
+                    onChange={(e) => handleName(e)}/>
+                    {error.name && <span>{error.name}</span>}
+                </fieldset>
+                <fieldset className="product-flex-info">
+                    <input 
+                    name="description" 
+                    type="text" 
+                    placeholder="Description" 
+                    onChange={(e) => handleDescription(e)}/>
+                    {error.description && <span>{error.description}</span>}
+                </fieldset>
+                <fieldset className="product-flex-info">
+                    <input 
+                    name="price" 
+                    type="number"
+                    min="0" 
+                    placeholder="Price" 
+                    onChange={(e) => handlePrice(e)}/>
+                    {error.price && <span>{error.price}</span>}
+                </fieldset>
+                <fieldset className="product-flex-info">
+                    <input
+                    name="stock" 
+                    type="number"
+                    min="0" 
+                    placeholder="Stock" 
+                    onChange={(e) => handleStock(e)}
+                    />
+                    {error.stock && <span>{error.stock}</span>}
+                </fieldset>
+            </fieldset>
 
             <select onChange={handleCategory} value={input.category}>                  
                 <option disabled>Category</option>
@@ -282,7 +289,7 @@ const Form = () => {
             {error.image && <span>{error.image}</span>}
 
             <br></br>
-            <button type="submit" disabled={disableSubmit}>Create Product</button>
+            <button id="product-form-button" type="submit" disabled={disableSubmit}>Create Product</button>
             
         </form>
     );
