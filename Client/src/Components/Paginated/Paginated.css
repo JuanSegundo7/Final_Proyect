@@ -3,13 +3,24 @@
   margin-bottom: 1%;
 }
 
+.containerNav{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.containerNav div{
+  margin: 0 0.5em;
+}
+
+
 #buttonPag {
-  padding: auto;
-  margin: 0.5% 1%;
   width: 50px;
   height: 30px;
   border: none;
   border-radius: 5px;
+  color: #fff;
   background-color: var(--brown);
   cursor: pointer;
 }
@@ -25,11 +36,10 @@
 }
 
 #buttonPag2 {
-  padding: auto;
-  margin: 0.5% 1%;
   width: 50px;
   height: 30px;
   border: none;
+  color: #fff;
   border-radius: 5px;
   background-color: var(--grey);
   cursor: pointer;

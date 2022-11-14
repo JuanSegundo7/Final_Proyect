@@ -71,21 +71,22 @@ export default function ContainerInfo({ info }) {
             filteredOrNot.map((cardCoffe) => {
               return (
                 <Card
-                  img={
-                    !cardCoffe.image || cardCoffe.image === null
-                      ? Error
-                      : cardCoffe.image.url
-                  }
-                  img2={cardCoffe.image && cardCoffe.image}
-                  key={cardCoffe._id}
-                  _id={cardCoffe._id}
-                  name={cardCoffe.name}
-                  origin={cardCoffe.origin}
-                  type={cardCoffe.grinding_type}
-                  price={cardCoffe.price}
+                img={
+                  !cardCoffe.image || cardCoffe.image === null
+                  ? Error
+                  : cardCoffe.image.url
+                }
+                img2={cardCoffe.image && cardCoffe.image}
+                key={cardCoffe._id}
+                _id={cardCoffe._id}
+                name={cardCoffe.name}
+                origin={cardCoffe.origin}
+                type={cardCoffe.grinding_type}
+                price={cardCoffe.price}
+                brand={info}
                 />
-              );
-            })
+                );
+              })
           ) : (
             <h1>Hola</h1>
           )}
