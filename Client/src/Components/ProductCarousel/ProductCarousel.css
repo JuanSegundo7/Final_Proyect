@@ -1,0 +1,24 @@
+#Product-carousel{
+    margin: 2em 0;
+    padding: 1em;
+}
+
+#Product-carousel #card{
+    margin: 1em;
+}
+
+#Product-carousel h1{
+    font-size: 40px;
+    font-family: 'Pacifico', cursive;
+    color: var(--brown);
+}
+
+#Product-carousel .kXteup, #Product-carousel .cVXxbE, #Product-carousel .Slxdj{
+    background-color: rgba(209, 119, 33, 0.5);
+}
+
+#Product-carousel .cVXxbE {
+    
+    box-shadow: 0 0 1px 3px rgb(209 119 33);
+
+}

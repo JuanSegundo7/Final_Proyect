@@ -4,7 +4,6 @@ import Error from "./imgs/error.webp";
 import "./Card.css";
 
 export function Card(props) {
-  console.log(props); 
   if(props.brand === "Brands"){
     return (
       <div id="card">
