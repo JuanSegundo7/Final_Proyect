@@ -11,6 +11,7 @@ export default function SearchBar() {
   const Search = (e) => {
     e.preventDefault();
     dispatch(getProductByQuery("name", "name", input));
+    e.target.reset();
   };
 
   const handle = async (e) => {

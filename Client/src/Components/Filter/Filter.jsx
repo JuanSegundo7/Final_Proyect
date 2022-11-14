@@ -3,20 +3,10 @@ import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductByQuery, filter } from "../../redux/Actions/Actions";
 import "./Filter.css";
-// import {
-//   coffeeStockAsc,
-//   coffeeStockDes,
-//   filterCoffeMax,
-//   filterCoffeMin,
-//   getCategory,
-//   getCoffees,
-// } from "../../redux/Actions/Actions";
 
 export default function ({ info }) {
   const dispatch = useDispatch();
   const location = useLocation();
-  //const allCoffees = useSelector((state) => state.allCoffees);
-  // const allCagetory = useSelector((state) => state.category);
   const Brands = useSelector((state) => state.Brands);
 
   const [price, setPrice] = useState({
@@ -284,6 +274,7 @@ export default function ({ info }) {
               max="200"
               value={price.min}
               onChange={(e) => handlePriceMin(e)}
+              id="range1"
             />
 
             <input
@@ -292,6 +283,7 @@ export default function ({ info }) {
               max="200"
               value={price.max}
               onChange={(e) => handlePriceMax(e)}
+              id="range2"
             />
             {
               <span>

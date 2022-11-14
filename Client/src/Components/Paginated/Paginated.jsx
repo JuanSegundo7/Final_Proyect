@@ -1,4 +1,7 @@
 import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { cleanFiltered } from "../../redux/Actions/Actions";
 import "./Paginated.css";
 
 export default function Paginated({
@@ -6,11 +9,19 @@ export default function Paginated({
   productPerPage,
   products,
   currentPage,
+  filteredOrNot,
 }) {
   const numberPage = [];
+  const filterState = useSelector((state) => state.Filter);
 
-  for (let i = 0; i < Math.ceil(products / productPerPage); i++) {
-    numberPage.push(i + 1);
+  if (filterState) {
+    for (let i = 0; i < Math.ceil(filteredOrNot / productPerPage); i++) {
+      numberPage.push(i + 1);
+    }
+  } else {
+    for (let i = 0; i < Math.ceil(products / productPerPage); i++) {
+      numberPage.push(i + 1);
+    }
   }
 
   const numOfPage = (number) => {
