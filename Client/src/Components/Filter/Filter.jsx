@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductByQuery, filter } from "../../redux/Actions/Actions";
+import {
+  getProductByQuery,
+  filter,
+  cleanFiltered,
+} from "../../redux/Actions/Actions";
 import "./Filter.css";
 
 export default function ({ info, order }) {
@@ -102,6 +106,7 @@ export default function ({ info, order }) {
     document.getElementById("order").selectedIndex = 0;
     document.getElementById("order2").selectedIndex = 0;
     setPrice({ min: 1, max: 200 });
+    dispatch(cleanFiltered());
   };
 
   // si primero hacemos el filtro el ordenado no funciona, creo que es porque el filtrado tiene su propio estado global,
