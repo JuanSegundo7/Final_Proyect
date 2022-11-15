@@ -13,6 +13,8 @@ export default function ({ info, order }) {
   const location = useLocation();
   const Brands = useSelector((state) => state.Brands);
   const state = useSelector((state) => state[info]);
+  const Filtered = useSelector((state) => state.Filtered);
+  const Filter = useSelector((state) => state.Filter);
 
   const [price, setPrice] = useState({
     min: 1,
