@@ -12,6 +12,7 @@ export const GET_PRODUCT_BY_QUERY = "GET_PRODUCT_BY_QUERY";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const CLEAN_FILTERED = "CLEAN_FILTERED";
 export const CLEAN_NAME = "CLEAN_NAME";
+export const CLEAN_ORDER = "CLEAN_ORDER";
 
 // FILTERS
 export const FILTER_BRAND = "FILTER_BRAND";
@@ -22,8 +23,7 @@ export const GET_BRANDS = "GET_BRANDS";
 // export const GET_BRAND_BY_QUERY = "GET_BRANDS_BY_QUERY";
 
 //ORDERS
-export const ORDER_PRODUCTS_A_Z = "ORDER_PRODUCTS_A_Z";
-export const ORDER_PRODUCTS_Z_A = "ORDER_PRODUCTS_Z_A";
+export const ORDER_FILTER = "ORDER_FILTER";
 
 // export const ORDERCOFFEES_AZ = "ORDERCOFFEES_AZ";
 // export const ORDERCOFFEES_ZA = "ORDERCOFFEES_ZA";
@@ -131,6 +131,10 @@ export function getCategories() {
     });
   };
 }
+
+export const sortFilter = (value) => (dispatch) => {
+  return dispatch({ type: ORDER_FILTER, payload: value });
+};
 
 export const cleanFiltered = () => (dispatch) => {
   return dispatch({ type: CLEAN_FILTERED });
