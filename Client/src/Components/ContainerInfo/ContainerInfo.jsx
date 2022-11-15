@@ -9,7 +9,7 @@ import { cleanFiltered, cleanByName } from "../../redux/Actions/Actions";
 import { useState } from "react";
 import Paginated from "../Paginated/Paginated";
 
-export default function ContainerInfo({ info }) {
+export default function ContainerInfo({ info, order }) {
   const location = useLocation();
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state[info]);
@@ -61,7 +61,7 @@ export default function ContainerInfo({ info }) {
         filteredOrNot={Filtered.length}
       />
       <section id="Products">
-        <Filter info={info} />
+        <Filter info={info} order={order} />
         <div className="cardHome">
           {filteredOrNot.length ? (
             filteredOrNot.map((cardCoffe) => {
@@ -84,7 +84,7 @@ export default function ContainerInfo({ info }) {
               );
             })
           ) : (
-            <h1>Hola</h1>
+            <h1>There is nothing, sorry for that :(</h1>
           )}
         </div>
       </section>
