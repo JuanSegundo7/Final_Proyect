@@ -17,13 +17,13 @@ export default function ({ info, order }) {
 
   const [price, setPrice] = useState({
     min: 1,
-    max: 200,
+    max: 500,
   });
 
   useEffect(() => {
     setPrice({
       min: 1,
-      max: 200,
+      max: 500,
     });
   }, [location.pathname]);
 
@@ -74,7 +74,7 @@ export default function ({ info, order }) {
 
   const handleReset = (e) => {
     document.getElementById("range1").value = 1;
-    document.getElementById("range2").value = 200;
+    document.getElementById("range2").value = 500;
     document.getElementById("order").selectedIndex = 0;
     document.getElementById("order2").selectedIndex = 0;
     setPrice({ min: 1, max: 200 });
@@ -110,7 +110,7 @@ export default function ({ info, order }) {
             <input
               type="range"
               min="1"
-              max="200"
+              max="500"
               value={price.min}
               onChange={(e) => handlePriceMin(e)}
               id="range1"
@@ -119,7 +119,7 @@ export default function ({ info, order }) {
             <input
               type="range"
               min="1"
-              max="200"
+              max="500"
               value={price.max}
               onChange={(e) => handlePriceMax(e)}
               id="range2"
