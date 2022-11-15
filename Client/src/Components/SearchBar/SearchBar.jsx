@@ -23,6 +23,7 @@ export default function SearchBar() {
     }
 
     dispatch(getProductByQuery("name", "name", input));
+    e.target.reset();
   };
 
   const handle = async (e) => {
