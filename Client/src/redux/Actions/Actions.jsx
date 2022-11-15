@@ -141,4 +141,17 @@ export const cleanByName = () => (dispatch) => {
   return dispatch({ type: CLEAN_NAME });
 };
 
+// IMAGES
+
+export const postImage = (payload) => {
+  return async function (dispatch) {
+    try {
+      var response = await axios.post(`${baseUrl}images`, payload);
+      return response;
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+};
+
 // //http://localhost:3001/brands?category=coffee
