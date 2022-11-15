@@ -14,21 +14,21 @@ export default function ContainerInfo({ info, order }) {
   const allProducts = useSelector((state) => state[info]); // /coffees = state.CategoriesCoffee
   const Filtered = useSelector((state) => state.Filtered);
   const FilterBoolean = useSelector((state) => state.Filter);
-  
+  const updateFilter = useSelector((state) => state.updateFilter);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [productPerPage, setProductPerPage] = useState(8);
   const indexLastProduct = productPerPage * currentPage;
   const indexFirstProduct = indexLastProduct - productPerPage;
-  
-  console.log(Filtered)
-  
+
   useEffect(() => {
     dispatch(cleanFiltered());
   }, [location.pathname]);
 
   const filteredOrNot = FilterBoolean
     ? Filtered.slice(indexFirstProduct, indexLastProduct)
-    : allProducts.length > 0 && allProducts.slice(indexFirstProduct, indexLastProduct); // products
+    : allProducts.length > 0 &&
+      allProducts.slice(indexFirstProduct, indexLastProduct); // products
 
   const paginated = (number) => {
     setCurrentPage(number);
@@ -40,9 +40,7 @@ export default function ContainerInfo({ info, order }) {
     return () => {
       dispatch(cleanByName());
     };
-
   }, [dispatch]);
-
 
   return (
     <div id="Contenido">

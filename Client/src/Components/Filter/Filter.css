@@ -59,6 +59,7 @@
   margin: 0.3em;
   border: none;
   color: #fff;
+  transition: 0.5s;
 }
 
 .buttonFilter svg {
