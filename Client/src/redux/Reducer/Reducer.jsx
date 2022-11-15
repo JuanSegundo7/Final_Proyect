@@ -8,10 +8,6 @@ import {
   GET_BRANDS,
   GET_CATEGORIES,
   FILTER,
-  FILTER_BRAND,
-  ORDER_PRODUCTS_A_Z,
-  ORDER_PRODUCTS_Z_A,
-  CLEAN_DETAIL_BY_NAME,
   CLEAN_FILTERED,
   CLEAN_NAME,
   CLEAN_ORDER,
@@ -25,13 +21,6 @@ const initialState = {
   Brands: [],
   BrandsCopy: [],
   ByName: [],
-
-  // ProductASC: [],
-  // ProductDES: [],
-  // ProductStockASC: [],
-  // ProductStockDES: [],
-  // ProductPriceASC: [],
-  // ProductPriceDES: [],
 
   CategoriesAccesories: [],
   CategoriesCoffee: [],
@@ -80,42 +69,6 @@ const rootReducer = (state = initialState, action) => {
 
     case GET_PRODUCT_BY_QUERY:
       switch (action.name) {
-        case "ProductASC": {
-          return {
-            ...state,
-            ProductASC: action.payload,
-          };
-        }
-        case "ProductDES": {
-          return {
-            ...state,
-            ProductDES: action.payload,
-          };
-        }
-        case "StockASC": {
-          return {
-            ...state,
-            ProductStockASC: action.payload,
-          };
-        }
-        case "StockDES": {
-          return {
-            ...state,
-            ProductStockDES: action.payload,
-          };
-        }
-        case "PriceASC": {
-          return {
-            ...state,
-            ProductPriceASC: action.payload,
-          };
-        }
-        case "PriceDES": {
-          return {
-            ...state,
-            ProductPriceDES: action.payload,
-          };
-        }
         case "coffee": {
           return {
             ...state,

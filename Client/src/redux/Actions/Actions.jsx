@@ -25,14 +25,6 @@ export const GET_BRANDS = "GET_BRANDS";
 //ORDERS
 export const ORDER_FILTER = "ORDER_FILTER";
 
-// export const ORDERCOFFEES_AZ = "ORDERCOFFEES_AZ";
-// export const ORDERCOFFEES_ZA = "ORDERCOFFEES_ZA";
-// export const ORDER_COFFEE_STOCK_ASC = "ORDER_COFFEE_STOCK_ASC";
-// export const ORDER_COFFEE_STOCK_DSC = "ORDER_COFFEE_STOCK_DSC";
-// export const FILTER_RANGE = "FILTER_RANGE";
-// export const FILTER_COFFE_MIN = "FILTER_COFFE_MIN";
-// export const FILTER_COFFE_MAX = "FILTER_COFFE_MAX";
-
 const baseUrl = `http://localhost:3001/`;
 
 // PRODUCTS
@@ -144,82 +136,5 @@ export const cleanByName = () => (dispatch) => {
   return dispatch({ type: CLEAN_NAME });
 };
 
-// export const getBrandByQuery = (brand) => (dispatch) => {
-//   console.log(brand, "es brand en action");
-//   return axios(`${baseUrl}products?brand=${brand}`)
-//     .then((res) => dispatch({ type: GET_BRAND_BY_QUERY, payload: res.data }))
-//     .catch((error) => console.log(error));
-// };
-
-// export const getCategory = () => (dispatch) => {
-//   return axios(`${baseUrl}categories`).then((res) =>
-//     dispatch({
-//       type: GET_CATEGORY,
-//       payload: res.data,
-//     })
-//   );
-// };
-
-// export const productNameAZ = () => (dispatch) => {
-//   return axios(`${baseUrl}products?orderedbyname=ASC`)
-//     .then((res) => dispatch({ type: ORDER_PRODUCTS_A_Z, payload: res.data }))
-//     .catch((err) => console.log(err.message));
-// };
-
-// export const productNameZA = () => (dispatch) => {
-//   return axios(`${baseUrl}products?orderedbyname=DES`)
-//     .then((res) => dispatch({ type: ORDER_PRODUCTS_A_Z, payload: res.data }))
-//     .catch((err) => console.log(err.message));
-// };
-
-// export const coffeeStockAsc = () => (dispatch) => {
-//   return axios(`http://localhost:3001/coffees?orderedbystock=asc`)
-//     .then((res) =>
-//       dispatch({
-//         type: ORDER_COFFEE_STOCK_ASC,
-//         payload: res.data,
-//       })
-//     )
-//     .catch((error) => console.log(error.message));
-// };
-
-// export const coffeeStockDes = () => (dispatch) => {
-//   return axios(`http://localhost:3001/coffees?orderedbystock=des`)
-//     .then((res) =>
-//       dispatch({
-//         type: ORDER_COFFEE_STOCK_DSC,
-//         payload: res.data,
-//       })
-//     )
-//     .catch((error) => console.log(error.message));
-// };
-
-// export const filterMin = (min) => (dispatch) => {
-//   return dispatch({ type: FILTER_RANGE, payload: { min } });
-// };
-
-// export const filterAll = () => (dispatch) => {
-//   return dispatch({ type: "FILTER_ALL" });
-// };
-
-// export const filterCoffeMin = (min, value) => {
-//   //console.log( min, value) //x ahora solo me traigo el valor del precio, tengo que ver si tambien me envio el array de cafes renderizados
-//   return function (dispatch) {
-//     return dispatch({
-//       type: FILTER_COFFE_MIN,
-//       payload: { min, value },
-//     });
-//   };
-// };
-
-// export const filterCoffeMax = (max, value) => {
-//   //x ahora solo me traigo el valor del precio, tengo que ver si tambien me envio el array de cafes renderizados
-//   return function (dispatch) {
-//     return dispatch({
-//       type: FILTER_COFFE_MAX,
-//       payload: { max, value },
-//     });
-//   };
-// };
 
 // //http://localhost:3001/brands?category=coffee
