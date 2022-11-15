@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { postProduct } from '../../redux/Actions/Actions';
+import { postProduct, postImage } from '../../redux/Actions/Actions';
 import { useNavigate} from 'react-router-dom';
 import "./ProductForm.css";
 
@@ -9,7 +9,9 @@ const Form = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const allCategories = useSelector((initialState) => initialState.Categories);  
-    const allBrands = useSelector((initialState) => initialState.Brands);  
+    const allBrands = useSelector((initialState) => initialState.Brands);
+    const [image, setImage] = useState("");
+    const [loading, setLoading] = useState("false");  
 
     const [input, setInput] = useState({
         name:'',
@@ -158,7 +160,33 @@ const Form = () => {
           setError({...error, brand:''})
     } 
 
+    const handleUploadImage = async (e) =>{
+        const files = e.target.files
+        const data = new FormData();
+        data.append("file", files[0]);
+        data.append('upload_preset','idkhqckx');//data cloudinary
+        setLoading (true)//cambiamos el estado del hook 
+        const res = await fetch(
+            "https://api.cloudinary.com/v1_1/drscelx6f/image/upload",
+            {
+                method: "POST",
+                body: data,
+            }
+        )
+        const file = await res.json();   
+        setImage(file.secure_url);//este es la url del documento
+        //console.log(file.secure_url);//aca esta la url
+        setLoading(false);
+        const imageData = await dispatch(postImage({
+            name:input.name,
+            url:file.secure_url
+        }))
+        //console.log(imageData.data._id)
+        setInput({...input, image:imageData.data._id})
+    }
+
     const handleSubmit = (e) => {
+
         if (input.brand==='Brand'){
             input.brand='';
         }
@@ -286,10 +314,11 @@ const Form = () => {
                 </fieldset>
             </fieldset>
             <input
-            disabled={true} 
             name="image" 
-            type="text" 
-            placeholder="Upload a Photo (Optional)" />
+            type="file" 
+            placeholder="Upload a Photo (Optional)" 
+            onChange={handleUploadImage}/>
+            {/* {loading ? (<h2>loading...</h2>) : (<img src={image} style = {{width:"100px"}}/>)} */}
             {error.image && <span>{error.image}</span>}
 
             <br></br>

@@ -144,6 +144,21 @@ export const cleanByName = () => (dispatch) => {
   return dispatch({ type: CLEAN_NAME });
 };
 
+
+// IMAGES
+
+export const postImage = (payload) => {
+  
+  return async function (dispatch) {
+    try {
+      var response = await axios.post(`${baseUrl}images`, payload);
+      return response;
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+};
+
 // export const getBrandByQuery = (brand) => (dispatch) => {
 //   console.log(brand, "es brand en action");
 //   return axios(`${baseUrl}products?brand=${brand}`)
