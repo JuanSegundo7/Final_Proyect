@@ -5,26 +5,30 @@ import {
   getProductByQuery,
   filter,
   cleanFiltered,
+  cleanByName,
+  cleanOrder,
 } from "../../redux/Actions/Actions";
 import "./Filter.css";
 
 export default function ({ info, order }) {
   const dispatch = useDispatch();
   const location = useLocation();
-  const Brands = useSelector((state) => state.Brands);
   const state = useSelector((state) => state[info]);
-  const Filtered = useSelector((state) => state.Filtered);
-  const Filter = useSelector((state) => state.Filter);
 
   const [price, setPrice] = useState({
     min: 1,
-    max: 200,
+    max: 500,
+  });
+
+  const [disabled, setDisabled] = useState({
+    orderName: false,
+    orderStock: false,
   });
 
   useEffect(() => {
     setPrice({
       min: 1,
-      max: 200,
+      max: 500,
     });
   }, [location.pathname]);
 
@@ -42,6 +46,7 @@ export default function ({ info, order }) {
   }
 
   const orderName = (e) => {
+    setDisabled({ ...disabled, orderName: true });
     const value = e.target.value;
     switch (state) {
       case state: {
@@ -58,6 +63,7 @@ export default function ({ info, order }) {
   };
 
   const handleOrderStock = (e) => {
+    setDisabled({ ...disabled, orderStock: true });
     const value = e.target.value;
     switch (state) {
       case state: {
@@ -75,11 +81,14 @@ export default function ({ info, order }) {
 
   const handleReset = (e) => {
     document.getElementById("range1").value = 1;
-    document.getElementById("range2").value = 200;
+    document.getElementById("range2").value = 500;
     document.getElementById("order").selectedIndex = 0;
     document.getElementById("order2").selectedIndex = 0;
-    setPrice({ min: 1, max: 200 });
+    setPrice({ min: 1, max: 500 });
     dispatch(cleanFiltered());
+    dispatch(
+      getProductByQuery("category", `${order}`, `${order}`, `orderedbyname=ASC`)
+    );
   };
 
   // si primero hacemos el filtro el ordenado no funciona, creo que es porque el filtrado tiene su propio estado global,
@@ -94,7 +103,7 @@ export default function ({ info, order }) {
           </button>
           <div>
             <select onChange={(e) => orderName(e)} id="order">
-              <option>Order by name</option>
+              <option disabled={disabled.orderName}>Order by name</option>
               <option value="ASC"> A-Z </option>
               <option value="DES">Z-A</option>
             </select>
@@ -103,7 +112,7 @@ export default function ({ info, order }) {
             <input
               type="range"
               min="1"
-              max="200"
+              max="500"
               value={price.min}
               onChange={(e) => handlePriceMin(e)}
               id="range1"
@@ -112,7 +121,7 @@ export default function ({ info, order }) {
             <input
               type="range"
               min="1"
-              max="200"
+              max="500"
               value={price.max}
               onChange={(e) => handlePriceMax(e)}
               id="range2"
@@ -126,7 +135,7 @@ export default function ({ info, order }) {
 
           <div>
             <select onChange={(e) => handleOrderStock(e)} id="order2">
-              <option>Stock</option>
+              <option disabled={disabled.orderStock}>Stock</option>
               <option value="ASC"> Menos Stock</option>
               <option value="DES"> Mas Stock</option>
             </select>

@@ -14,6 +14,7 @@ import {
   CLEAN_DETAIL_BY_NAME,
   CLEAN_FILTERED,
   CLEAN_NAME,
+  CLEAN_ORDER,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -147,7 +148,6 @@ const rootReducer = (state = initialState, action) => {
         }
 
         case "name": {
-          console.log(action.name, "hola");
           return {
             ...state,
             ByName: action.payload,
