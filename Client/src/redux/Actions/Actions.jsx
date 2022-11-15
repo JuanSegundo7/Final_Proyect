@@ -12,6 +12,7 @@ export const GET_PRODUCT_BY_QUERY = "GET_PRODUCT_BY_QUERY";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const CLEAN_FILTERED = "CLEAN_FILTERED";
 export const CLEAN_NAME = "CLEAN_NAME";
+export const CLEAN_ORDER = "CLEAN_ORDER";
 
 // FILTERS
 export const FILTER_BRAND = "FILTER_BRAND";

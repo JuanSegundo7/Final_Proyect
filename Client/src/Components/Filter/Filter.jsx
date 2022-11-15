@@ -5,16 +5,15 @@ import {
   getProductByQuery,
   filter,
   cleanFiltered,
+  cleanByName,
+  cleanOrder,
 } from "../../redux/Actions/Actions";
 import "./Filter.css";
 
 export default function ({ info, order }) {
   const dispatch = useDispatch();
   const location = useLocation();
-  const Brands = useSelector((state) => state.Brands);
   const state = useSelector((state) => state[info]);
-  const Filtered = useSelector((state) => state.Filtered);
-  const Filter = useSelector((state) => state.Filter);
 
   const [price, setPrice] = useState({
     min: 1,
@@ -80,6 +79,14 @@ export default function ({ info, order }) {
     document.getElementById("order2").selectedIndex = 0;
     setPrice({ min: 1, max: 200 });
     dispatch(cleanFiltered());
+    dispatch(
+      getProductByQuery(
+        "category",
+        `${order}`,
+        `${order}`,
+        `orderedbystock=ASC`
+      )
+    );
   };
 
   // si primero hacemos el filtro el ordenado no funciona, creo que es porque el filtrado tiene su propio estado global,
