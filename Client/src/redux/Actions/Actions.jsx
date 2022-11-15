@@ -24,6 +24,7 @@ export const GET_BRANDS = "GET_BRANDS";
 
 //ORDERS
 export const ORDER_FILTER = "ORDER_FILTER";
+export const ORDER_SEARCH = "ORDER_SEARCH";
 
 const baseUrl = `http://localhost:3001/`;
 
@@ -128,6 +129,10 @@ export const sortFilter = (value) => (dispatch) => {
   return dispatch({ type: ORDER_FILTER, payload: value });
 };
 
+export const sortSearch = (value) => (dispatch) => {
+  return dispatch({ type: ORDER_SEARCH, payload: value });
+};
+
 export const cleanFiltered = () => (dispatch) => {
   return dispatch({ type: CLEAN_FILTERED });
 };
@@ -139,7 +144,6 @@ export const cleanByName = () => (dispatch) => {
 // IMAGES
 
 export const postImage = (payload) => {
-  
   return async function (dispatch) {
     try {
       var response = await axios.post(`${baseUrl}images`, payload);

@@ -3,34 +3,40 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { cleanByName, getProductByQuery } from "../../redux/Actions/Actions";
+import {
+  cleanByName,
+  cleanFiltered,
+  getProductByQuery,
+} from "../../redux/Actions/Actions";
 import "./SearchBar.css";
 
 export default function SearchBar() {
-
-  const navigate = useNavigate()
-  const {pathname} = useLocation();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
 
   const Search = (e) => {
     e.preventDefault();
+    dispatch(cleanFiltered());
 
-    if(pathname === "/"){
-      dispatch(getProductByQuery("name", "name", input))
-      .then(() => {navigate("/search")})
+    if (pathname === "/") {
+      dispatch(getProductByQuery("name", "name", input)).then(() => {
+        navigate("/search");
+      });
     }
 
-    dispatch(getProductByQuery("name", "name", input))
-    .then(() => {navigate("/search")})
+    dispatch(getProductByQuery("name", "name", input)).then(() => {
+      navigate("/search");
+    });
     e.target.reset();
   };
 
   const handle = async (e) => {
-      const value = e.target.value;
-       setInput(value);
-  }
+    const value = e.target.value;
+    setInput(value);
+  };
   useEffect(() => {
     dispatch(cleanByName("name"));
   }, [dispatch]);
