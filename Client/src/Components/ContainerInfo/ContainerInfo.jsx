@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Filter from "../Filter/Filter";
 import { Card } from "../Card/Card";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Error from "../Card/imgs/error.webp";
 import "./ContainerInfo.css";
