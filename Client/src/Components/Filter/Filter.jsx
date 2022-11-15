@@ -95,9 +95,6 @@ export default function ({ info, order }) {
     );
   };
 
-  // si primero hacemos el filtro el ordenado no funciona, creo que es porque el filtrado tiene su propio estado global,
-  // minetras q el ordenado tiene otro estado global.
-
   return (
     <div>
       <div className="filters">
