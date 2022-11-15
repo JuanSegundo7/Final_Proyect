@@ -7,12 +7,14 @@ import {
   cleanFiltered,
   cleanByName,
   cleanOrder,
+  sortFilter,
 } from "../../redux/Actions/Actions";
 import "./Filter.css";
 
 export default function ({ info, order }) {
   const dispatch = useDispatch();
   const location = useLocation();
+  const Filter = useSelector((state) => state.Filter);
   const state = useSelector((state) => state[info]);
 
   const [price, setPrice] = useState({
@@ -48,6 +50,7 @@ export default function ({ info, order }) {
   const orderName = (e) => {
     setDisabled({ ...disabled, orderName: true });
     const value = e.target.value;
+    if (Filter) dispatch(sortFilter(value));
     switch (state) {
       case state: {
         dispatch(
@@ -65,6 +68,7 @@ export default function ({ info, order }) {
   const handleOrderStock = (e) => {
     setDisabled({ ...disabled, orderStock: true });
     const value = e.target.value;
+    if (Filter) dispatch(sortFilter(value));
     switch (state) {
       case state: {
         dispatch(
