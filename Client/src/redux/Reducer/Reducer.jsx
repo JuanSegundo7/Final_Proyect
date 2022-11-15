@@ -15,6 +15,7 @@ import {
   CLEAN_FILTERED,
   CLEAN_NAME,
   CLEAN_ORDER,
+  ORDER_FILTER,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -204,6 +205,25 @@ const rootReducer = (state = initialState, action) => {
         Filter: true,
       };
     }
+
+    case ORDER_FILTER:
+      const order = state.Filtered;
+      action.payload === "DES"
+        ? order.sort((p1, p2) => {
+            if (p1.name > p2.name) return -1;
+            if (p1.name < p2.name) return 1;
+            return 0;
+          })
+        : order.sort((p1, p2) => {
+            if (p1.name > p2.name) return 1;
+            if (p1.name < p2.name) return -1;
+            return 0;
+          });
+
+      return {
+        ...state,
+        Filtered: order,
+      };
 
     // case FILTER_BRAND:
     //   const filterBrand = state.Filters.filter((coffee) => {

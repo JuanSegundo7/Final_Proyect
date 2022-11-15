@@ -72,3 +72,10 @@
   transition: 0.5s;
   background-color: var(--brown);
 }
+
+#order,
+#order2,
+#range1,
+#range2 {
+  cursor: pointer;
+}
