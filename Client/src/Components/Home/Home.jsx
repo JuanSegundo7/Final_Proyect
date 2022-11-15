@@ -14,8 +14,6 @@ export default function Home() {
   const Accesories = useSelector((state) => state.CategoriesAccesories);
   const Others = useSelector((state) => state.CategoriesOthers);
 
-  console.log(Coffees)
-
   return (
     <section id="Home">
       <Carrousel />
@@ -23,7 +21,7 @@ export default function Home() {
       <ProductCarousel array={CoffeeMaker} title="Our Selection Of Coffee Makers"/>
       <TigerInfo />
       <ProductCarousel array={Accesories} title="Accesories"/>
-      <ProductCarousel array={Others} title="Others items"/>
+      <ProductCarousel array={Others} title="Other items"/>
     </section>
   );
 }

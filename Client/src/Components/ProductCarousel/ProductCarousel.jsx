@@ -6,12 +6,12 @@ import "./ProductCarousel.css"
 
 
 export default function ProductCarousel({array, title}) {
-    const carouselRef = useRef(null);
+    const carouselRef = useRef();
     let resetTimeout;
   return (
     <section id="Product-carousel">
     <h1>{title}</h1>
-    <Carousel itemsToShow={5} enableAutoPlay={true} autoPlaySpeed={3000} isRTL={false} onNextEnd={({ index }) => { clearTimeout(resetTimeout); resetTimeout = setTimeout(() => {carouselRef?.current?.goTo(0);}, 3000); }}  >
+    <Carousel itemsToShow={5} enableAutoPlay={true} autoPlaySpeed={2000} ref={carouselRef} onNextEnd={({ index }) => {clearTimeout(resetTimeout); resetTimeout = setTimeout(() => {if (index == carouselRef.current.props.children.length - 5) carouselRef.current.goTo(0);}, 1000)}}>
         {array.length > 0 ? array.map((product) => { 
             return <Card    
             img={
