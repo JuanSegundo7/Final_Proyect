@@ -28,37 +28,6 @@ export default function ({ info, order }) {
     });
   }, [location.pathname]);
 
-  const orderName = (e) => {
-    if (e.target.value === "DES") {
-      switch (state) {
-        case state: {
-          dispatch(
-            getProductByQuery(
-              "category",
-              `${order}`,
-              `${order}`,
-              "orderedbyname=DES",
-              ""
-            )
-          );
-        }
-      }
-    } else {
-      switch (state) {
-        case state: {
-          dispatch(
-            getProductByQuery(
-              "category",
-              `${order}`,
-              `${order}`,
-              "orderedbyname=ASC"
-            )
-          );
-        }
-      }
-    }
-  };
-
   function handlePriceMin(e) {
     e.preventDefault();
     setPrice({ ...price, min: parseInt(e.target.value) });
@@ -72,32 +41,34 @@ export default function ({ info, order }) {
     //-> ver si quiero mandar ya desde aca el array(el estado global de cafes o hacerlo desde el reducer)
   }
 
-  const handleOrderStock = (e) => {
-    if (e.target.value === "DES") {
-      switch (state) {
-        case state: {
-          dispatch(
-            getProductByQuery(
-              "category",
-              `${order}`,
-              `${order}`,
-              "orderedbystock=DES"
-            )
-          );
-        }
+  const orderName = (e) => {
+    const value = e.target.value;
+    switch (state) {
+      case state: {
+        dispatch(
+          getProductByQuery(
+            "category",
+            `${order}`,
+            `${order}`,
+            `orderedbyname=${value}`
+          )
+        );
       }
-    } else {
-      switch (state) {
-        case state: {
-          dispatch(
-            getProductByQuery(
-              "category",
-              `${order}`,
-              `${order}`,
-              "orderedbystock=ASC"
-            )
-          );
-        }
+    }
+  };
+
+  const handleOrderStock = (e) => {
+    const value = e.target.value;
+    switch (state) {
+      case state: {
+        dispatch(
+          getProductByQuery(
+            "category",
+            `${order}`,
+            `${order}`,
+            `orderedbystock=${value}`
+          )
+        );
       }
     }
   };
