@@ -20,6 +20,11 @@ export default function ({ info, order }) {
     max: 500,
   });
 
+  const [disabled, setDisabled] = useState({
+    orderName: false,
+    orderStock: false,
+  });
+
   useEffect(() => {
     setPrice({
       min: 1,
@@ -41,6 +46,7 @@ export default function ({ info, order }) {
   }
 
   const orderName = (e) => {
+    setDisabled({ ...disabled, orderName: true });
     const value = e.target.value;
     switch (state) {
       case state: {
@@ -57,6 +63,7 @@ export default function ({ info, order }) {
   };
 
   const handleOrderStock = (e) => {
+    setDisabled({ ...disabled, orderStock: true });
     const value = e.target.value;
     switch (state) {
       case state: {
@@ -80,12 +87,7 @@ export default function ({ info, order }) {
     setPrice({ min: 1, max: 500 });
     dispatch(cleanFiltered());
     dispatch(
-      getProductByQuery(
-        "category",
-        `${order}`,
-        `${order}`,
-        `orderedbystock=ASC`
-      )
+      getProductByQuery("category", `${order}`, `${order}`, `orderedbyname=ASC`)
     );
   };
 
@@ -101,7 +103,7 @@ export default function ({ info, order }) {
           </button>
           <div>
             <select onChange={(e) => orderName(e)} id="order">
-              <option>Order by name</option>
+              <option disabled={disabled.orderName}>Order by name</option>
               <option value="ASC"> A-Z </option>
               <option value="DES">Z-A</option>
             </select>
@@ -133,7 +135,7 @@ export default function ({ info, order }) {
 
           <div>
             <select onChange={(e) => handleOrderStock(e)} id="order2">
-              <option>Stock</option>
+              <option disabled={disabled.orderStock}>Stock</option>
               <option value="ASC"> Menos Stock</option>
               <option value="DES"> Mas Stock</option>
             </select>
