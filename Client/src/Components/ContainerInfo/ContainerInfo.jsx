@@ -84,7 +84,7 @@ export default function ContainerInfo({ info, order }) {
               );
             })
           ) : (
-            <h1>Hola</h1>
+            <h1>There is nothing, sorry for that :(</h1>
           )}
         </div>
       </section>
