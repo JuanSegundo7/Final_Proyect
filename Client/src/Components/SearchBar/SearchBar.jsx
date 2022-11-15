@@ -18,11 +18,12 @@ export default function SearchBar() {
     e.preventDefault();
 
     if(pathname === "/"){
-      navigate("/coffees")
-      dispatch(getProductByQuery("name", "name", input));
+      dispatch(getProductByQuery("name", "name", input))
+      .then(() => {navigate("/search")})
     }
 
-    dispatch(getProductByQuery("name", "name", input));
+    dispatch(getProductByQuery("name", "name", input))
+    .then(() => {navigate("/search")})
     e.target.reset();
   };
 
