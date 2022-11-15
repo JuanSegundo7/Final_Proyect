@@ -1,18 +1,17 @@
 import React from 'react';
-//import Container from '../Carrousel/Carrousel';
 import {Link} from "react-router-dom";
 import "./Login.css";
 import { useEffect, useState} from "react";
-//import jwt_decode from "jwt-decode";  //no se utiliza, se puede desinstalar
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from "axios";
-
+//import Container from '../Carrousel/Carrousel';
+//import jwt_decode from "jwt-decode";  //no se utiliza, se puede desinstalar
 
 
 const Login = ({close}) => { 
 
     const [myData,setMyData] = useState({});
-    const [loginOK,setLoginOK] = useState(0);
+    //const [loginOK,setLoginOK] = useState(0);
     
       const login = useGoogleLogin({
         onSuccess: async response => {
@@ -29,12 +28,12 @@ const Login = ({close}) => {
         }
       });
      
-      useEffect(()=>{
-        //console.log("datos:",myData)
+      /* useEffect(()=>{
+        console.log("datos:",myData)
         if (myData.hasOwnProperty("data")){
         setLoginOK(1);
         }
-      },[myData])
+      },[myData]) */
 
 
     return (
@@ -50,10 +49,8 @@ const Login = ({close}) => {
                         <input type="password" placeholder="Password"></input>
                         <p>Forgot password?</p>
                     </fieldset>
-                    <button id="login-btn">SIGN IN</button>
-                    <h1>hola {loginOK ? myData.data.name : "vacio"}</h1>
-                    
-                    <button type="button" onClick={login}>
+                    <button id="login-btn">SIGN IN</button>            
+                    <button id="login-btn-google" type="button" onClick={login}>
                         Sign in with Google 🚀{' '}
                     </button>
                     
