@@ -12,13 +12,13 @@ const SwitchRouter = () => {
       <Route
         exact
         path="/coffees"
-        element={<ContainerInfo info="CategoriesCoffee" order="coffee" />}
-      />
-      {/* <Route
+          element={<ContainerInfo info="CategoriesCoffee" order="coffee" />}
+        />
+      <Route
         exact
-        path="/products"
-        element={<ContainerInfo info="Products" />}
-      /> */}
+        path="/search"
+        element={<ContainerInfo info="ByName" />}
+      />
       <Route
         exact
         path="/products/coffee-maker"
