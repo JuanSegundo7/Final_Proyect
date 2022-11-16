@@ -36,11 +36,7 @@ export default function ContainerInfo({ info, order }) {
 
   useEffect(() => {
     setCurrentPage(1);
-
-    return () => {
-      dispatch(cleanByName());
-    };
-  }, [dispatch, allProducts, Filtered]);
+  }, [dispatch]);
 
   return (
     <div id="Contenido">

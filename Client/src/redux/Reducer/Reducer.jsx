@@ -14,7 +14,7 @@ import {
   ORDER_FILTER,
   ORDER_SEARCH,
   SET_FAVORITES,
-  FILL_ALL_FAVORITES
+  FILL_ALL_FAVORITES,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -36,48 +36,41 @@ const initialState = {
   Filter: false,
   updateFilter: 1,
 
-  Favorites: []
-
-  // allProducts: [],
-  // allProducts2: [],
-  // filtersProduct: [],
-  // filtersProduct2: [],
+  Favorites: [],
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-
     case FILL_ALL_FAVORITES:
-
       const myLocalStorage = localStorage.getItem("Favorites-pf");
-      if (myLocalStorage && myLocalStorage.length){
-        const newArray = myLocalStorage.split(",")
-        
-        for (let i=0; i<newArray.length; i++){
-          if (!state.Favorites.includes(newArray[i])){
-            state.Favorites.push(newArray[i])
+      if (myLocalStorage && myLocalStorage.length) {
+        const newArray = myLocalStorage.split(",");
+
+        for (let i = 0; i < newArray.length; i++) {
+          if (!state.Favorites.includes(newArray[i])) {
+            state.Favorites.push(newArray[i]);
           }
         }
       }
-      
-      return {
-        ...state
-      }
 
-
-    case SET_FAVORITES:
-
-      let totalFavorites=[...state.Favorites];
-      if (state.Favorites.includes(action.payload)){       
-        totalFavorites = totalFavorites.filter(unFavorito => unFavorito!==action.payload)
-      }else{      
-        totalFavorites.push(action.payload);
-      }
-      
       return {
         ...state,
-        Favorites: totalFavorites
+      };
+
+    case SET_FAVORITES:
+      let totalFavorites = [...state.Favorites];
+      if (state.Favorites.includes(action.payload)) {
+        totalFavorites = totalFavorites.filter(
+          (unFavorito) => unFavorito !== action.payload
+        );
+      } else {
+        totalFavorites.push(action.payload);
       }
+
+      return {
+        ...state,
+        Favorites: totalFavorites,
+      };
 
     case GET_PRODUCTS:
       return {
@@ -242,128 +235,6 @@ const rootReducer = (state = initialState, action) => {
         ByName: ordered,
         updateFilter: state.updateFilter + 1,
       };
-
-    // case FILTER_BRAND:
-    //   const filterBrand = state.Filters.filter((coffee) => {
-    //     return coffee.brand?.name === action.payload;
-    //   });
-    //   console.log(filterBrand, "filterBrand");
-    //   return {
-    //     ...state,
-    //     Brands: filterBrand,
-    //   };
-
-    // case FILTER_COFFE_MIN:
-    //   if (action.payload.value == "coffee") {
-
-    //     let aux2 = [];
-
-    //     if (!state.filters2.length) {
-
-    //       const filtrado = state.allCoffees2.filter((c) => action.payload.min <= c.price);
-    //       filtrado.map((ele) => aux2.push(ele));
-    //       return {
-    //         ...state,
-    //         filters:aux2,
-    //         allCoffees: aux2,
-    //       };
-
-    //     } else {
-
-    //       const filter2 = state.filters2.filter((c) => action.payload.min <= c.price);
-    //       filter2.map((ele) => aux2.push(ele));
-
-    //       return {
-    //         ...state,
-    //         //filters:aux2,
-    //         allCoffees: aux2,
-    //       };
-    //     }
-
-    //   } else if (action.payload.value == "products") {
-
-    //     let aux3 = [];
-
-    //     if (!state.filtersProduct2.length) {
-
-    //       const filtrado = state.allProducts2.filter((c) => action.payload.min <= c.price);
-    //       filtrado.map((ele) => aux3.push(ele));
-
-    //       return {
-    //         ...state,
-    //         filtersProduct:aux3,
-    //         allProducts: aux3,
-    //       };
-
-    //     } else {
-
-    //       const filter2 = state.filtersProduct2.filter((c) => action.payload.min <= c.price);
-    //       filter2.map((ele) => aux3.push(ele));
-
-    //       return {
-    //         ...state,
-    //         //filtersProduct:aux2,
-    //         allProducts: aux3,
-    //       };
-    //     }
-
-    //   }
-
-    // case FILTER_COFFE_MAX:
-    //   if (action.payload.value === "coffee") {
-
-    //     let aux = [];
-
-    //     if (!state.filters.length) {
-
-    //       const filtradoMax = state.allCoffees2.filter((c) => action.payload.max >= c.price);
-    //       filtradoMax.map((ele) => aux.push(ele));
-
-    //       return {
-    //         ...state,
-    //         filters2: aux,
-    //         allCoffees: aux,
-    //       };
-
-    //     } else {
-
-    //       const filter2 = state.filters.filter((c) => action.payload.max >= c.price);
-    //       filter2.map((ele) => aux.push(ele));
-
-    //       return {
-    //         ...state,
-    //         //filters2: aux,
-    //         allCoffees: aux,
-    //       };
-    //     }
-
-    //   } else if (action.payload.value == "products") {
-    //     let aux = [];
-
-    //     if (!state.filtersProduct.length) {
-
-    //       const filtrado = state.allProducts2.filter((c) => action.payload.max >= c.price);
-    //       filtrado.map((ele) => aux.push(ele));
-
-    //       return {
-    //         ...state,
-    //         filtersProduct2:aux,
-    //         allProducts: aux,
-    //       };
-
-    //     } else {
-
-    //       const filter2 = state.filtersProduct.filter((c) => action.payload.max >= c.price);
-    //       filter2.map((ele) => aux.push(ele));
-
-    //       return {
-    //         ...state,
-    //         //filtersProduct2:aux,
-    //         allProducts: aux,
-    //       };
-    //     }
-
-    //   }
 
     default:
       return {

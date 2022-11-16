@@ -161,17 +161,17 @@ export const postImage = (payload) => {
 // FAVORITES
 
 export const setFavorites = (newFavoriteId) => (dispatch) => {
-    return dispatch({
-      type: "SET_FAVORITES",
-      payload: newFavoriteId,
-    });
-}
+  return dispatch({
+    type: "SET_FAVORITES",
+    payload: newFavoriteId,
+  });
+};
 
 export const fillAllFavorites = (FavoritesArray) => (dispatch) => {
   return dispatch({
     type: "FILL_ALL_FAVORITES",
     payload: FavoritesArray,
   });
-}
+};
 
 // //http://localhost:3001/brands?category=coffee
