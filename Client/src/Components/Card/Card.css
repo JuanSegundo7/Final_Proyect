@@ -1,4 +1,5 @@
 #card {
+  position: relative;
   box-shadow: var(--shadow);
   border-radius: 15px;
   width: 200px;
