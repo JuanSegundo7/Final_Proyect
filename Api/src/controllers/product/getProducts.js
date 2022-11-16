@@ -3,7 +3,7 @@ const { Product, Category, Brand } = require("../../db.js")
 const getProducts = async function (options) {
 
 //en options tengo todo lo que me llega por req.query. Lo tengo que destructurar acá.
-const {name, category, brand, orderedbyname, orderedbystock, orderedbyprice} = options;
+const {name, category, brand, orderedbyname, orderedbystock, orderedbyprice, enabled} = options;
 const sortOptions = [];
 
 //le hago push a mi array de ordenamientos sólo si tengo algo, caso contrario queda vacío.
@@ -18,6 +18,9 @@ if (orderedbyprice && orderedbyprice.toUpperCase()==="ASC") sortOptions.push(["p
 
 //Armo el parámetro del Find
 const findOptions = {};
+if (enabled){
+  findOptions.enabled = enabled;
+}
 if (name){
   findOptions.name = new RegExp(name, 'i');
 }
