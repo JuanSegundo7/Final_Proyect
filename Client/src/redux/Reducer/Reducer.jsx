@@ -13,9 +13,8 @@ import {
   CLEAN_ORDER,
   ORDER_FILTER,
   ORDER_SEARCH,
-  FAVORITES,
-  FAVORITES_FILTER,
-  LOCALSTORAGE_IN_FAVORITES,
+  SET_FAVORITES,
+  FILL_ALL_FAVORITES,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -38,11 +37,41 @@ const initialState = {
   updateFilter: 1,
 
   Favorites: [],
-  FavoritesCopy: [],
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case FILL_ALL_FAVORITES:
+      const myLocalStorage = localStorage.getItem("Favorites-pf");
+      if (myLocalStorage && myLocalStorage.length) {
+        const newArray = myLocalStorage.split(",");
+
+        for (let i = 0; i < newArray.length; i++) {
+          if (!state.Favorites.includes(newArray[i])) {
+            state.Favorites.push(newArray[i]);
+          }
+        }
+      }
+
+      return {
+        ...state,
+      };
+
+    case SET_FAVORITES:
+      let totalFavorites = [...state.Favorites];
+      if (state.Favorites.includes(action.payload)) {
+        totalFavorites = totalFavorites.filter(
+          (unFavorito) => unFavorito !== action.payload
+        );
+      } else {
+        totalFavorites.push(action.payload);
+      }
+
+      return {
+        ...state,
+        Favorites: totalFavorites,
+      };
+
     case GET_PRODUCTS:
       return {
         ...state,
@@ -206,36 +235,6 @@ const rootReducer = (state = initialState, action) => {
         ByName: ordered,
         updateFilter: state.updateFilter + 1,
       };
-
-    case FAVORITES: {
-      const favorite = state.Favorites;
-
-      return {
-        ...state,
-        Favorites: [...favorite, action.payload],
-      };
-    }
-
-    case FAVORITES_FILTER: {
-      const favorite = state.Favorites;
-      const filter = favorite.filter((id) => action.payload !== id);
-
-      return {
-        ...state,
-        Favorites: filter,
-        // updateFilter: state.updateFilter + 1,
-      };
-    }
-
-    case LOCALSTORAGE_IN_FAVORITES: {
-      const favorite = state.Favorites;
-      console.log(action.payload, "en action");
-
-      return {
-        ...state,
-        FavoritesCopy: action.payload,
-      };
-    }
 
     default:
       return {

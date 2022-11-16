@@ -4,12 +4,15 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const createUser = async function (data) {
 
-  const { _id, name, lastname, favorites, admin, password } = data;
+  const { _id, name, lastname, favorites, /* admin, */ password } = data;
 
 
 //Data Validation
 if ((typeof(_id)!=="string") || (!_id.length)){
   throw new Error("Error: User ID cannot be empty and must be of text type.")
+} else{
+  const previusId = await User.findById(_id);
+  if(previusId)  throw new Error("Error: User ID cannot be equal to an existing one.") 
 }
 
 if ((typeof(name)!=="string") || (!name.length)){
@@ -20,9 +23,9 @@ if ((typeof(lastname)!=="string") || (!lastname.length)){
   throw new Error("Error: User Lastname cannot be empty and must be of text type.")
 }
 
-if (typeof(admin)!=="boolean"){
-  throw new Error("Error: Admin rights should be of boolean type (1 for admin, 0 for regular users).")
-}
+/* if (admin && (typeof(admin)!=="boolean")){
+  throw new Error("Error: Admin rights should be of boolean type (true for admin, false for regular users).")
+} */
 
 if ((typeof(password)!=="string") || (!password.length)){
   throw new Error("Error: User Password cannot be empty and must be of text type.")
@@ -55,7 +58,7 @@ try {
       name: name.toLowerCase(),
       lastname: lastname.toLowerCase(), 
       favorites, 
-      admin, 
+      /* admin, */ //can only be modified in the DB directly to prevent hacking attempts
       password
     });
     return newUser;

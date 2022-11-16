@@ -1,57 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  favorites,
-  favoritesFilter,
-  localStorageInFavorites,
-} from "../../redux/Actions/Actions";
+import React, { useEffect } from "react";
 import "./Favorite.css";
+import { setFavorites } from "../../redux/Actions/Actions";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Favorite({ id }) {
   const dispatch = useDispatch();
-  const [state, setState] = useState(0);
-  const Favorites = useSelector((state) => state.Favorites);
-  const FavoritesCopy = useSelector((state) => state.FavoritesCopy);
+  const allFavorites = useSelector((state) => state.Favorites);
 
-  // console.log(favoritesColor, "favoritesColor");
-  const allInFavorites = localStorage.getItem("Favorites-pf");
-  console.log(allInFavorites, "esto es allInFavorites");
-  console.log(FavoritesCopy, "Favites copyyyyyyy");
-
-  const handleFavorite = async () => {
-    var fav = await dispatch(favorites(id));
-    console.log(fav, "esto es fav");
-
-    if (Favorites.length) {
-      //delete
-      if (Favorites.includes(id)) {
-        const newValue = Favorites.filter((num) => num !== id);
-        dispatch(favoritesFilter(id));
-        localStorage.setItem("Favorites-pf", JSON.stringify(newValue));
-        return;
-      }
-      //add
-      if (Favorites.length > 0) {
-        return localStorage.setItem(
-          "Favorites-pf",
-          JSON.stringify([...Favorites, fav.payload])
-        );
-      }
-    }
-    localStorage.setItem("Favorites-pf", JSON.stringify([fav.payload]));
+  const handleFavorite = () => {
+    dispatch(setFavorites(id));
   };
 
   useEffect(() => {
-    dispatch(localStorageInFavorites(allInFavorites));
-  }, [allInFavorites]);
+    if (allFavorites.length) {
+      localStorage.setItem("Favorites-pf", allFavorites);
+    }
+  }, [allFavorites]);
 
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       onClick={handleFavorite}
       id={
-        (FavoritesCopy !== null ? FavoritesCopy.includes(id) : null) ||
-        state > 0
+        (allFavorites !== null ? allFavorites.includes(id) : null)
           ? "starClicked"
           : "dogStar"
       }

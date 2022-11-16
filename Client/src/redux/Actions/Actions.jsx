@@ -1,5 +1,9 @@
 import axios from "axios";
 
+// FAVORITES
+export const SET_FAVORITES = "SET_FAVORITES";
+export const FILL_ALL_FAVORITES = "FILL_ALL_FAVORITES";
+
 // CATEGORIES
 export const GET_CATEGORIES = "GET_CATEGORIES";
 
@@ -25,11 +29,6 @@ export const GET_BRANDS = "GET_BRANDS";
 //ORDERS
 export const ORDER_FILTER = "ORDER_FILTER";
 export const ORDER_SEARCH = "ORDER_SEARCH";
-
-//FAVORITES
-export const FAVORITES = "FAVORITES";
-export const FAVORITES_FILTER = "FAVORITES_FILTER";
-export const LOCALSTORAGE_IN_FAVORITES = "LOCALSTORAGE_IN_FAVORITES";
 
 const baseUrl = `http://localhost:3001/`;
 
@@ -146,20 +145,6 @@ export const cleanByName = () => (dispatch) => {
   return dispatch({ type: CLEAN_NAME });
 };
 
-// FAVORITES
-
-export const favorites = (id) => (dispatch) => {
-  return dispatch({ type: FAVORITES, payload: id });
-};
-
-export const favoritesFilter = (id) => (dispatch) => {
-  return dispatch({ type: FAVORITES_FILTER, payload: id });
-};
-
-export const localStorageInFavorites = (array) => (dispatch) => {
-  return dispatch({ type: LOCALSTORAGE_IN_FAVORITES, payload: array });
-};
-
 // IMAGES
 
 export const postImage = (payload) => {
@@ -171,6 +156,22 @@ export const postImage = (payload) => {
       console.log("error", error);
     }
   };
+};
+
+// FAVORITES
+
+export const setFavorites = (newFavoriteId) => (dispatch) => {
+  return dispatch({
+    type: "SET_FAVORITES",
+    payload: newFavoriteId,
+  });
+};
+
+export const fillAllFavorites = (FavoritesArray) => (dispatch) => {
+  return dispatch({
+    type: "FILL_ALL_FAVORITES",
+    payload: FavoritesArray,
+  });
 };
 
 // //http://localhost:3001/brands?category=coffee

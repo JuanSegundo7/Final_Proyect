@@ -3,7 +3,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const updateProduct = async function (_id,data) {
     
-const { description, origin, price, grinding_type, stock, category, image, brand } = data;   //esto es req.params
+const { description, origin, price, grinding_type, stock, category, image, brand, enabled } = data;   //esto es req.params
 let { name } = data;  //voy a necesitar cambiar nombre a minusculas, por eso no lo defino como constante.
 
 //Data Validation
@@ -81,6 +81,11 @@ if (brand){
   }
 }
 
+
+if (enabled && (typeof(enabled)!=="boolean")){
+  throw new Error("Error: Product enable / disable should be of boolean type.")
+}
+
 //si no encuentro error alguno, actualizo el/los dato/s.
   try{
  
@@ -94,7 +99,8 @@ if (brand){
       stock, 
       category,
       image,
-      brand
+      brand,
+      enabled
      };
 
     let resp = await Product.findOneAndUpdate(filter, update, {new: true});
