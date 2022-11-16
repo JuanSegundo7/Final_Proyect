@@ -2,10 +2,9 @@ const { Router } = require('express');
 const router = Router();
 const createUser = require("../controllers/user/createUser.js");
 const getUsers = require("../controllers/user/getUsers.js");
-//const deleteBrand = require("../controllers/brand/deleteBrand.js");
-//const getBrandById = require("../controllers/brand/getBrandById.js");
-//const updateBrand = require("../controllers/brand/updateBrand.js");
-
+const deleteUser = require("../controllers/user/deleteUser.js");
+const getUserById = require("../controllers/user/getUserById.js");
+const updateUser = require("../controllers/user/updateUser.js");
 
 router.get("/", async function (req,res){
     
@@ -19,6 +18,15 @@ router.get("/", async function (req,res){
 
 });
 
+router.get('/:_id', async (req,res) => {
+    const {_id} = req.params;
+    try {
+        const respuesta = await getUserById(_id);
+        res.send(respuesta);
+    } catch (unError) {
+        res.status(400).send(unError.message)
+    }
+})
 /* router.get("/:_idbrand", async function (req,res){
     const { _idbrand } = req.params;
     try {
@@ -29,18 +37,18 @@ router.get("/", async function (req,res){
     }
 }); */
 
-/* router.put("/:_id", async (req, res) => {
+router.put("/:_id", async (req, res) => {
     
     const { _id } = req.params;
     
     try{
-        let respuesta = await updateBrand(_id,req.body);
+        let respuesta = await updateUser(_id,req.body);
         res.send(respuesta);
     }catch(unError){
         res.status(400).send(unError.message);
     }
     
-}) */
+})
 
 router.post("/", async function (req, res){
 
@@ -52,6 +60,16 @@ router.post("/", async function (req, res){
     }
     
 });
+
+router.delete('/:_id', async (req,res) =>{
+    const {_id} = req.params;
+    try {
+        const respuesta = await deleteUser(_id);
+        res.send(respuesta);
+    } catch (unError) {
+        res.status(400).send(unError.message)
+    }
+})
 
 /* router.delete("/:_id", async (req, res) => {
 
