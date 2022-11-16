@@ -1,0 +1,17 @@
+#dogStar, #starClicked{
+    position: absolute;
+    z-index: 10;
+    width: 2em;
+    top: 0em;
+    right: 9.5em;
+    margin: 1em;
+    cursor: pointer;
+}
+
+#dogStar:hover, #starClicked:hover{
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+#starClicked{
+    fill: red;
+}
