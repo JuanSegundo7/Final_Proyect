@@ -3,7 +3,7 @@ const { User } = require('../../db.js');
 const getUserById = async function (UserId) {
   try{
     const resp = await User.findById(UserId)
-    //.populate("favorites")
+    .populate("favorites")
 
     if (!resp) throw new Error("No User matches the informed id...")
   
