@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { postProduct, postImage } from '../../redux/Actions/Actions';
 import { useNavigate} from 'react-router-dom';
 import "./ProductForm.css";
+import axios from "axios";
 
 
 const Form = () => {
@@ -11,7 +12,7 @@ const Form = () => {
     const allCategories = useSelector((initialState) => initialState.Categories);  
     const allBrands = useSelector((initialState) => initialState.Brands);
     const [image, setImage] = useState("");
-    const [loading, setLoading] = useState("false");  
+    const [loading, setLoading] = useState("false");
 
     const [input, setInput] = useState({
         name:'',
@@ -22,7 +23,7 @@ const Form = () => {
         stock:'',
         image:'',
         category:'Category',
-        brand:'Brand'
+        brand:'Brand (Optional)'
     })
 
     //I will set some of these fields as having an error by default, since all of these fields are
@@ -35,7 +36,7 @@ const Form = () => {
         grindingtype:'',
         stock:'* You must enter a stock',
         category:'* Invalid category',    //default value if nothing was selected
-        image:'',
+        image:'You must enter a Product Name First',
         brand:'',   //brand is not a required field, therefore I will no set a default value here
     });
 
@@ -44,6 +45,7 @@ const Form = () => {
     //Enable the form submit button only if there are no errors....
     const [disableSubmit, setDisableSubmit] = useState(true);
     const [disableOriginAndGrinding, setDisableOriginAndGrinding] = useState(true);
+    const [disableImageUpload, setDisableImageUpload] = useState(true);
 
 /***********************************Handlers and Errors Validation************************************/
 
@@ -51,13 +53,16 @@ const Form = () => {
 
     const handleName = (e) => {
         if(e.target.value.length === 0 || e.target.value === ''){
-            setError({...error, name:'You must enter a name!!'})
+            setError({...error, name:'You must enter a name!!', image: 'You must enter a Product Name First'})
+            setDisableImageUpload(true)
           }
           else if (e.target.value.length > 0){
             if(!regExName.test(e.target.value)){
-              setError({...error, name:'The name cannot have signs'})
+              setError({...error, name:'The name cannot have signs', image: 'You must enter a Product Name First'})
+              setDisableImageUpload(true)
             } else{
-              setError({...error, name:''})
+              setError({...error, name:'', image:''})
+              setDisableImageUpload(false)
             }
           } 
         setInput({
@@ -161,25 +166,20 @@ const Form = () => {
     } 
 
     const handleUploadImage = async (e) =>{
+        
         const files = e.target.files
         const data = new FormData();
         data.append("file", files[0]);
         data.append('upload_preset','idkhqckx');//data cloudinary
-        setLoading (true)//cambiamos el estado del hook 
-        const res = await fetch(
-            "https://api.cloudinary.com/v1_1/drscelx6f/image/upload",
-            {
-                method: "POST",
-                body: data,
-            }
-        )
-        const file = await res.json();   
-        setImage(file.secure_url);//este es la url del documento
-        //console.log(file.secure_url);//aca esta la url
+        
+        setLoading (true)
+        const response = await axios.post("https://api.cloudinary.com/v1_1/drscelx6f/image/upload", data)
+        //console.log(response.data.secure_url)
+        setImage(response.data.secure_url);//This is the image URL returned by cloudinary
         setLoading(false);
         const imageData = await dispatch(postImage({
             name:input.name,
-            url:file.secure_url
+            url:response.data.secure_url
         }))
         //console.log(imageData.data._id)
         setInput({...input, image:imageData.data._id})
@@ -187,7 +187,7 @@ const Form = () => {
 
     const handleSubmit = (e) => {
 
-        if (input.brand==='Brand'){
+        if (input.brand==='Brand (Optional)'){
             input.brand='';
         }
         e.preventDefault();
@@ -225,7 +225,7 @@ const Form = () => {
             setDisableSubmit(true);
             //console.log("there is at least 1 error",error)
         }
-       },[input])
+       },[input,error])
 
 /**********************************************Functions***********************************************/
 
@@ -281,18 +281,17 @@ const Form = () => {
                     />
                     {error.stock && <span>{error.stock}</span>}
                 </fieldset>
-                
                 <fieldset className="product-flex-info">
-                <select onChange={handleCategory} value={input.category}>                  
-                    <option disabled>Category</option>
-                    {allCategories.map(unaOpcion=><option value={unaOpcion._id} key={unaOpcion._id}>{unaOpcion.name}</option>)}
-                </select>
+                    <select onChange={handleCategory} value={input.category}>                  
+                        <option disabled>Category</option>
+                        {allCategories.map(unaOpcion=><option value={unaOpcion._id} key={unaOpcion._id}>{unaOpcion.name}</option>)}
+                    </select>
                 </fieldset>
                 <fieldset className="product-flex-info">
-                <select onChange={handleBrand} value={input.brand}>                  
-                    <option disabled>Brand</option>
-                    {allBrands.map(unaOpcion=><option value={unaOpcion._id} key={unaOpcion._id}>{unaOpcion.name}</option>)}
-                </select>
+                    <select onChange={handleBrand} value={input.brand}>                  
+                        <option>Brand (Optional)</option>
+                        {allBrands.map(unaOpcion=><option value={unaOpcion._id} key={unaOpcion._id}>{unaOpcion.name}</option>)}
+                    </select>
                 </fieldset>
                 <fieldset className="product-flex-info">
                     <input
@@ -312,15 +311,24 @@ const Form = () => {
                     onChange={(e) => handleGrindingType(e)}/>
                     {error.grindingtype && <span>{error.grindingtype}</span>}
                 </fieldset>
-            </fieldset>
-            <input
-            name="image" 
-            type="file" 
-            placeholder="Upload a Photo (Optional)" 
-            onChange={handleUploadImage}/>
-            {/* {loading ? (<h2>loading...</h2>) : (<img src={image} style = {{width:"100px"}}/>)} */}
-            {error.image && <span>{error.image}</span>}
 
+                <fieldset className="product-flex-info" disabled={disableImageUpload}>
+                    <label className="custom-file-upload">
+                        <input className="regular-file-input"
+                            name="image" 
+                            type="file" 
+                            /* placeholder="Upload a Photo (Optional)" */ 
+                            onChange={handleUploadImage}
+                        />
+                        Upload a Photo
+                    </label>
+                    {/* {loading ? (<h2>loading...</h2>) : (<img src={image} style = {{width:"100px"}}/>)} */}
+                    {loading ? (<h2></h2>) : (<img src={image} style = {{width:"100px"}}/>)}
+                    {error.image && <span>{error.image}</span>}
+                </fieldset>
+                
+            </fieldset>
+                    
             <br></br>
             <button id="product-form-button" type="submit" disabled={disableSubmit}>Create Product</button>
             
