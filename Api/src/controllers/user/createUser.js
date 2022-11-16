@@ -10,6 +10,9 @@ const createUser = async function (data) {
 //Data Validation
 if ((typeof(_id)!=="string") || (!_id.length)){
   throw new Error("Error: User ID cannot be empty and must be of text type.")
+} else{
+  const previusId = await User.findById(_id);
+  if(previusId)  throw new Error("Error: User ID cannot be equal to an existing one.") 
 }
 
 if ((typeof(name)!=="string") || (!name.length)){
