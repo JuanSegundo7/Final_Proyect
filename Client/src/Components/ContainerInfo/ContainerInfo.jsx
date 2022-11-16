@@ -40,7 +40,7 @@ export default function ContainerInfo({ info, order }) {
     return () => {
       dispatch(cleanByName());
     };
-  }, [dispatch]);
+  }, [dispatch, allProducts, Filtered]);
 
   return (
     <div id="Contenido">
@@ -50,6 +50,7 @@ export default function ContainerInfo({ info, order }) {
         className="paginated"
         currentPage={currentPage}
         filteredOrNot={Filtered.length}
+        products={allProducts.length}
       />
       <section id="Products">
         <Filter info={info} order={order} />
