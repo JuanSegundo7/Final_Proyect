@@ -26,6 +26,11 @@ export const GET_BRANDS = "GET_BRANDS";
 export const ORDER_FILTER = "ORDER_FILTER";
 export const ORDER_SEARCH = "ORDER_SEARCH";
 
+//FAVORITES
+export const FAVORITES = "FAVORITES";
+export const FAVORITES_FILTER = "FAVORITES_FILTER";
+export const LOCALSTORAGE_IN_FAVORITES = "LOCALSTORAGE_IN_FAVORITES";
+
 const baseUrl = `http://localhost:3001/`;
 
 // PRODUCTS
@@ -139,6 +144,20 @@ export const cleanFiltered = () => (dispatch) => {
 
 export const cleanByName = () => (dispatch) => {
   return dispatch({ type: CLEAN_NAME });
+};
+
+// FAVORITES
+
+export const favorites = (id) => (dispatch) => {
+  return dispatch({ type: FAVORITES, payload: id });
+};
+
+export const favoritesFilter = (id) => (dispatch) => {
+  return dispatch({ type: FAVORITES_FILTER, payload: id });
+};
+
+export const localStorageInFavorites = (array) => (dispatch) => {
+  return dispatch({ type: LOCALSTORAGE_IN_FAVORITES, payload: array });
 };
 
 // IMAGES

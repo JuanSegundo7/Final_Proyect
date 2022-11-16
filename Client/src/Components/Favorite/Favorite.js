@@ -1,43 +1,57 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  favorites,
+  favoritesFilter,
+  localStorageInFavorites,
+} from "../../redux/Actions/Actions";
 import "./Favorite.css";
 
 export default function Favorite({ id }) {
+  const dispatch = useDispatch();
   const [state, setState] = useState(0);
-  const [arrayState, setArrayState] = useState(
-    JSON.parse(localStorage.getItem("favorites-pf"))
-  );
+  const Favorites = useSelector((state) => state.Favorites);
+  const FavoritesCopy = useSelector((state) => state.FavoritesCopy);
 
-  var favorites = JSON.parse(localStorage.getItem("favorites-pf"));
-  console.log(favorites);
+  // console.log(favoritesColor, "favoritesColor");
+  const allInFavorites = localStorage.getItem("Favorites-pf");
+  console.log(allInFavorites, "esto es allInFavorites");
+  console.log(FavoritesCopy, "Favites copyyyyyyy");
 
-  const handleFavorite = () => {
-    if (favorites !== null) {
-      if (favorites.includes(id)) {
-        let newValue = favorites.filter((num) => num !== id);
-        setArrayState(newValue);
-        localStorage.setItem("favorites-pf", JSON.stringify(newValue));
-        return console.log(favorites);
+  const handleFavorite = async () => {
+    var fav = await dispatch(favorites(id));
+    console.log(fav, "esto es fav");
+
+    if (Favorites.length) {
+      //delete
+      if (Favorites.includes(id)) {
+        const newValue = Favorites.filter((num) => num !== id);
+        dispatch(favoritesFilter(id));
+        localStorage.setItem("Favorites-pf", JSON.stringify(newValue));
+        return;
       }
-      if (favorites.length > 0) {
-        let favArray = [...arrayState, id];
-        setArrayState(favArray);
-        console.log(arrayState, "favorites-pf");
-        return localStorage.setItem("favorites-pf", JSON.stringify(favArray));
+      //add
+      if (Favorites.length > 0) {
+        return localStorage.setItem(
+          "Favorites-pf",
+          JSON.stringify([...Favorites, fav.payload])
+        );
       }
     }
-
-    let array = [];
-    array.push(id);
-
-    localStorage.setItem("favorites-pf", JSON.stringify(array));
+    localStorage.setItem("Favorites-pf", JSON.stringify([fav.payload]));
   };
+
+  useEffect(() => {
+    dispatch(localStorageInFavorites(allInFavorites));
+  }, [allInFavorites]);
 
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       onClick={handleFavorite}
       id={
-        (arrayState !== null ? arrayState.includes(id) : null)
+        (FavoritesCopy !== null ? FavoritesCopy.includes(id) : null) ||
+        state > 0
           ? "starClicked"
           : "dogStar"
       }

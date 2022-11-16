@@ -5,6 +5,10 @@ import Favorite from "../Favorite/Favorite";
 import "./Card.css";
 
 export function Card(props) {
+  // const [arrayState, setArrayState] = useState(
+  //   JSON.parse(localStorage.getItem("favorites-pf"))
+  // );
+
   if (props.brand === "Brands") {
     return (
       <div id="card">
@@ -25,7 +29,11 @@ export function Card(props) {
   } else {
     return (
       <div id="card">
-        {/* <Favorite id={props._id} /> */}
+        <Favorite
+          id={props._id}
+          // setArrayState={setArrayState}
+          // arrayState={arrayState}
+        />
         <Link to={`/detail/${props._id}`} id="a_card">
           <img
             src={!props.img && props.img2 ? props.img2 : props.img}

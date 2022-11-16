@@ -13,6 +13,9 @@ import {
   CLEAN_ORDER,
   ORDER_FILTER,
   ORDER_SEARCH,
+  FAVORITES,
+  FAVORITES_FILTER,
+  LOCALSTORAGE_IN_FAVORITES,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -34,10 +37,8 @@ const initialState = {
   Filter: false,
   updateFilter: 1,
 
-  // allProducts: [],
-  // allProducts2: [],
-  // filtersProduct: [],
-  // filtersProduct2: [],
+  Favorites: [],
+  FavoritesCopy: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -206,127 +207,35 @@ const rootReducer = (state = initialState, action) => {
         updateFilter: state.updateFilter + 1,
       };
 
-    // case FILTER_BRAND:
-    //   const filterBrand = state.Filters.filter((coffee) => {
-    //     return coffee.brand?.name === action.payload;
-    //   });
-    //   console.log(filterBrand, "filterBrand");
-    //   return {
-    //     ...state,
-    //     Brands: filterBrand,
-    //   };
+    case FAVORITES: {
+      const favorite = state.Favorites;
 
-    // case FILTER_COFFE_MIN:
-    //   if (action.payload.value == "coffee") {
+      return {
+        ...state,
+        Favorites: [...favorite, action.payload],
+      };
+    }
 
-    //     let aux2 = [];
+    case FAVORITES_FILTER: {
+      const favorite = state.Favorites;
+      const filter = favorite.filter((id) => action.payload !== id);
 
-    //     if (!state.filters2.length) {
+      return {
+        ...state,
+        Favorites: filter,
+        // updateFilter: state.updateFilter + 1,
+      };
+    }
 
-    //       const filtrado = state.allCoffees2.filter((c) => action.payload.min <= c.price);
-    //       filtrado.map((ele) => aux2.push(ele));
-    //       return {
-    //         ...state,
-    //         filters:aux2,
-    //         allCoffees: aux2,
-    //       };
+    case LOCALSTORAGE_IN_FAVORITES: {
+      const favorite = state.Favorites;
+      console.log(action.payload, "en action");
 
-    //     } else {
-
-    //       const filter2 = state.filters2.filter((c) => action.payload.min <= c.price);
-    //       filter2.map((ele) => aux2.push(ele));
-
-    //       return {
-    //         ...state,
-    //         //filters:aux2,
-    //         allCoffees: aux2,
-    //       };
-    //     }
-
-    //   } else if (action.payload.value == "products") {
-
-    //     let aux3 = [];
-
-    //     if (!state.filtersProduct2.length) {
-
-    //       const filtrado = state.allProducts2.filter((c) => action.payload.min <= c.price);
-    //       filtrado.map((ele) => aux3.push(ele));
-
-    //       return {
-    //         ...state,
-    //         filtersProduct:aux3,
-    //         allProducts: aux3,
-    //       };
-
-    //     } else {
-
-    //       const filter2 = state.filtersProduct2.filter((c) => action.payload.min <= c.price);
-    //       filter2.map((ele) => aux3.push(ele));
-
-    //       return {
-    //         ...state,
-    //         //filtersProduct:aux2,
-    //         allProducts: aux3,
-    //       };
-    //     }
-
-    //   }
-
-    // case FILTER_COFFE_MAX:
-    //   if (action.payload.value === "coffee") {
-
-    //     let aux = [];
-
-    //     if (!state.filters.length) {
-
-    //       const filtradoMax = state.allCoffees2.filter((c) => action.payload.max >= c.price);
-    //       filtradoMax.map((ele) => aux.push(ele));
-
-    //       return {
-    //         ...state,
-    //         filters2: aux,
-    //         allCoffees: aux,
-    //       };
-
-    //     } else {
-
-    //       const filter2 = state.filters.filter((c) => action.payload.max >= c.price);
-    //       filter2.map((ele) => aux.push(ele));
-
-    //       return {
-    //         ...state,
-    //         //filters2: aux,
-    //         allCoffees: aux,
-    //       };
-    //     }
-
-    //   } else if (action.payload.value == "products") {
-    //     let aux = [];
-
-    //     if (!state.filtersProduct.length) {
-
-    //       const filtrado = state.allProducts2.filter((c) => action.payload.max >= c.price);
-    //       filtrado.map((ele) => aux.push(ele));
-
-    //       return {
-    //         ...state,
-    //         filtersProduct2:aux,
-    //         allProducts: aux,
-    //       };
-
-    //     } else {
-
-    //       const filter2 = state.filtersProduct.filter((c) => action.payload.max >= c.price);
-    //       filter2.map((ele) => aux.push(ele));
-
-    //       return {
-    //         ...state,
-    //         //filtersProduct2:aux,
-    //         allProducts: aux,
-    //       };
-    //     }
-
-    //   }
+      return {
+        ...state,
+        FavoritesCopy: action.payload,
+      };
+    }
 
     default:
       return {
