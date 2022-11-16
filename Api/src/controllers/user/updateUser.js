@@ -1,14 +1,19 @@
-const { User } = require('../../db');
+const { User, Product } = require('../../db');
 const ObjectId = require('mongoose').Types.ObjectId;
 
 const updateUser = async function (_id,data) {
     
-let { name , lastname , password } = data;   //esto es req.params
-
-//let{admin , favorites} = data;
+let { favorites, name , lastname , password } = data;   //esto es req.params
 
 //Data Validation
-if (!ObjectId.isValid(_id)) throw new Error ("No valid _id type provided for User!") 
+if ((typeof(_id)!=="string") || (!_id.length)){
+  throw new Error("Error: User ID cannot be empty and must be of text type.")
+} else{
+  const previusId = await User.findById(_id);
+  console.log(_id)
+  console.log(previusId)
+  if(!previusId) throw new Error("Error: User ID not found within the Database.") 
+}
 
 if (name){
   if ((typeof(name)!=="string") || (!name.length)){
@@ -26,13 +31,38 @@ if (lastname){
   }
 }
 
-//QUE HACEMOS CON EL TEMA DE CAMBIAR EL ADMIN
-
 if (password){
   if ((typeof(password)!=="string") || (!password.length)){
     throw new Error("Error: User password cannot be empty and must be of text type.")
   }
 }
+
+//Favorites validation is kinda hard but still needed.
+if (favorites){
+  console.log("soy un array por mas que este vacio")
+  if (!Array.isArray(favorites)){
+    throw new Error ("No valid data type provided for favorites. It should be an array!")
+  }
+  if (favorites.length){
+    for (let i=0; i<favorites.length; i++){
+      if ((typeof(favorites[i])!=="string") || (!ObjectId.isValid(favorites[i]))) throw new Error ("No valid _id type provided for favorites!")    
+    }
+    //assuming everything is an object, I will really search for the existing ids within my database
+    for (let i=0; i<favorites.length; i++){
+      try{
+        let resp = await Product.findById(favorites[i])
+        if (!resp) throw new Error(`Product id:${favorites[i]} not found in the Database!`)
+      }catch(unError){
+        throw new Error(unError.message)
+      }
+    }
+  }
+}
+
+
+//I'm not allowing admin rights to be changed within this route / controller as per security reasons.
+
+
 //Si no encuentro error alguno, actualizo el/los dato/s.
   try{
 
@@ -40,7 +70,8 @@ if (password){
     const update = { 
       name,
       lastname,
-      password
+      password,
+      favorites
      };
     let resp = await User.findOneAndUpdate(filter, update, {
         new: true
