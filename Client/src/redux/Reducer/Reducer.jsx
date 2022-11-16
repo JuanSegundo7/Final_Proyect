@@ -13,6 +13,8 @@ import {
   CLEAN_ORDER,
   ORDER_FILTER,
   ORDER_SEARCH,
+  SET_FAVORITES,
+  FILL_ALL_FAVORITES
 } from "../Actions/Actions";
 
 const initialState = {
@@ -34,6 +36,8 @@ const initialState = {
   Filter: false,
   updateFilter: 1,
 
+  Favorites: []
+
   // allProducts: [],
   // allProducts2: [],
   // filtersProduct: [],
@@ -42,6 +46,39 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case FILL_ALL_FAVORITES:
+
+      const myLocalStorage = localStorage.getItem("Favorites-pf");
+      if (myLocalStorage && myLocalStorage.length){
+        const newArray = myLocalStorage.split(",")
+        
+        for (let i=0; i<newArray.length; i++){
+          if (!state.Favorites.includes(newArray[i])){
+            state.Favorites.push(newArray[i])
+          }
+        }
+      }
+      
+      return {
+        ...state
+      }
+
+
+    case SET_FAVORITES:
+
+      let totalFavorites=[...state.Favorites];
+      if (state.Favorites.includes(action.payload)){       
+        totalFavorites = totalFavorites.filter(unFavorito => unFavorito!==action.payload)
+      }else{      
+        totalFavorites.push(action.payload);
+      }
+      
+      return {
+        ...state,
+        Favorites: totalFavorites
+      }
+
     case GET_PRODUCTS:
       return {
         ...state,
