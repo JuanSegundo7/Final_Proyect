@@ -25,7 +25,7 @@ export function Card(props) {
   } else {
     return (
       <div id="card">
-        {/* <Favorite id={props._id} /> */}
+        <Favorite id={props._id} />
         <Link to={`/detail/${props._id}`} id="a_card">
           <img
             src={!props.img && props.img2 ? props.img2 : props.img}
