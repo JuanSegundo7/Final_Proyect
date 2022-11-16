@@ -8,14 +8,11 @@ import {
   GET_BRANDS,
   GET_CATEGORIES,
   FILTER,
-  FILTER_BRAND,
-  ORDER_PRODUCTS_A_Z,
-  ORDER_PRODUCTS_Z_A,
-  CLEAN_DETAIL_BY_NAME,
   CLEAN_FILTERED,
   CLEAN_NAME,
   CLEAN_ORDER,
   ORDER_FILTER,
+  ORDER_SEARCH,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -24,14 +21,9 @@ const initialState = {
   Categories: [],
   Brands: [],
   BrandsCopy: [],
-  ByName: [],
 
-  // ProductASC: [],
-  // ProductDES: [],
-  // ProductStockASC: [],
-  // ProductStockDES: [],
-  // ProductPriceASC: [],
-  // ProductPriceDES: [],
+  ByName: [],
+  Search: false,
 
   CategoriesAccesories: [],
   CategoriesCoffee: [],
@@ -80,42 +72,6 @@ const rootReducer = (state = initialState, action) => {
 
     case GET_PRODUCT_BY_QUERY:
       switch (action.name) {
-        case "ProductASC": {
-          return {
-            ...state,
-            ProductASC: action.payload,
-          };
-        }
-        case "ProductDES": {
-          return {
-            ...state,
-            ProductDES: action.payload,
-          };
-        }
-        case "StockASC": {
-          return {
-            ...state,
-            ProductStockASC: action.payload,
-          };
-        }
-        case "StockDES": {
-          return {
-            ...state,
-            ProductStockDES: action.payload,
-          };
-        }
-        case "PriceASC": {
-          return {
-            ...state,
-            ProductPriceASC: action.payload,
-          };
-        }
-        case "PriceDES": {
-          return {
-            ...state,
-            ProductPriceDES: action.payload,
-          };
-        }
         case "coffee": {
           return {
             ...state,
@@ -152,6 +108,7 @@ const rootReducer = (state = initialState, action) => {
           return {
             ...state,
             ByName: action.payload,
+            Search: true,
           };
         }
 
@@ -186,6 +143,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         ByName: [],
+        Search: false,
       };
 
     // FILTER
@@ -207,22 +165,45 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case ORDER_FILTER:
-      const order = state.Filtered;
-      action.payload === "DES"
-        ? order.sort((p1, p2) => {
-            if (p1.name > p2.name) return -1;
-            if (p1.name < p2.name) return 1;
-            return 0;
-          })
-        : order.sort((p1, p2) => {
-            if (p1.name > p2.name) return 1;
-            if (p1.name < p2.name) return -1;
-            return 0;
-          });
+      const filter = state.Filtered;
+      const order =
+        action.payload === "DES"
+          ? filter.sort((p1, p2) => {
+              if (p1.name > p2.name) return -1;
+              if (p1.name < p2.name) return 1;
+              return 0;
+            })
+          : filter.sort((p1, p2) => {
+              if (p1.name > p2.name) return 1;
+              if (p1.name < p2.name) return -1;
+              return 0;
+            });
 
       return {
         ...state,
         Filtered: order,
+        updateFilter: state.updateFilter + 1,
+      };
+
+    case ORDER_SEARCH:
+      const search = state.ByName;
+      const ordered =
+        action.payload === "DES"
+          ? search.sort((p1, p2) => {
+              if (p1.name > p2.name) return -1;
+              if (p1.name < p2.name) return 1;
+              return 0;
+            })
+          : search.sort((p1, p2) => {
+              if (p1.name > p2.name) return 1;
+              if (p1.name < p2.name) return -1;
+              return 0;
+            });
+
+      return {
+        ...state,
+        ByName: ordered,
+        updateFilter: state.updateFilter + 1,
       };
 
     // case FILTER_BRAND:

@@ -38,8 +38,8 @@ export function Card(props) {
         <p id="name">
           {props.name ? props.name.toUpperCase() : "There is not name provided"}
         </p>
-        <p id="origin">{props.origin}</p>
-        <p>US$ {props.price}</p>
+        {props.origin ? <p id="origin">{props.origin}</p> : null}
+        <p id="price">US$ {props.price}</p>
         <button type="submit" className="button">
           Add to cart{" "}
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">

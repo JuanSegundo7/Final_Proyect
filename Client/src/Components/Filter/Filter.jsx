@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getProductByQuery,
   filter,
   cleanFiltered,
-  cleanByName,
-  cleanOrder,
   sortFilter,
+  sortSearch,
+  cleanByName,
 } from "../../redux/Actions/Actions";
 import "./Filter.css";
 
@@ -15,6 +15,7 @@ export default function ({ info, order }) {
   const dispatch = useDispatch();
   const location = useLocation();
   const Filter = useSelector((state) => state.Filter);
+  const Search = useSelector((state) => state.Search);
   const state = useSelector((state) => state[info]);
 
   const [price, setPrice] = useState({
@@ -32,7 +33,7 @@ export default function ({ info, order }) {
       min: 1,
       max: 500,
     });
-  }, [location.pathname]);
+  }, [location.pathname, state]);
 
   function handlePriceMin(e) {
     e.preventDefault();
@@ -50,7 +51,10 @@ export default function ({ info, order }) {
   const orderName = (e) => {
     setDisabled({ ...disabled, orderName: true });
     const value = e.target.value;
+
     if (Filter) dispatch(sortFilter(value));
+    if (Search) dispatch(sortSearch(value));
+
     switch (state) {
       case state: {
         dispatch(
@@ -68,7 +72,10 @@ export default function ({ info, order }) {
   const handleOrderStock = (e) => {
     setDisabled({ ...disabled, orderStock: true });
     const value = e.target.value;
+
     if (Filter) dispatch(sortFilter(value));
+    if (Search) dispatch(sortSearch(value));
+
     switch (state) {
       case state: {
         dispatch(
@@ -94,9 +101,6 @@ export default function ({ info, order }) {
       getProductByQuery("category", `${order}`, `${order}`, `orderedbyname=ASC`)
     );
   };
-
-  // si primero hacemos el filtro el ordenado no funciona, creo que es porque el filtrado tiene su propio estado global,
-  // minetras q el ordenado tiene otro estado global.
 
   return (
     <div>
