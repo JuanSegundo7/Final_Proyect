@@ -6,6 +6,7 @@ export const GET_ONE_USER = "GET_ONE_USER";
 // FAVORITES
 export const SET_FAVORITES = "SET_FAVORITES";
 export const FILL_ALL_FAVORITES = "FILL_ALL_FAVORITES";
+export const MATCH_FAVORITE = "MATCH_FAVORITE";
 
 // CATEGORIES
 export const GET_CATEGORIES = "GET_CATEGORIES";
@@ -177,6 +178,10 @@ export const fillAllFavorites = (FavoritesArray) => (dispatch) => {
   });
 };
 
+export const matchFavorite = () => (dispatch) => {
+  return dispatch({ type: MATCH_FAVORITE });
+};
+
 // USERS
 
 export const postUser = (payload) => {
@@ -190,15 +195,15 @@ export const postUser = (payload) => {
   };
 };
 
-export function getOneUser(id){
-  return async function(dispatch){
-      var response = await axios(`${baseUrl}users/${id}`);
-      console.log("datos:",response.data)
-      return dispatch({
-          type: GET_ONE_USER,
-          payload: response.data
-      })}
+export function getOneUser(id) {
+  return async function (dispatch) {
+    var response = await axios(`${baseUrl}users/${id}`);
+    console.log("datos:", response.data);
+    return dispatch({
+      type: GET_ONE_USER,
+      payload: response.data,
+    });
+  };
 }
-
 
 // //http://localhost:3001/brands?category=coffee
