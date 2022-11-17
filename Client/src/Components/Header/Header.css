@@ -1,80 +1,79 @@
-#ship{
-    background-color: var(--brown);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 0;
-    height: 2em;
-    padding: 0.2em 0;
+#ship {
+  background-color: var(--brown);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+  height: 2em;
+  padding: 0.2em 0;
 }
 
 #ship p {
-    color: #fff;
-    font-size: 20px;
+  color: #fff;
+  font-size: 20px;
 }
 
-#ship span{
-    font-weight: bold;
-    margin: 0 0.3em;
+#ship span {
+  font-weight: bold;
+  margin: 0 0.3em;
 }
 
-.svg-container{
-    display: flex;
-    -webkit-box-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    align-items: center;
-    position: relative;
-    background-color: var(--grey);
-    height: 45px;
-    width: 45px;
-    border-radius: 100%;
-    transition: 0.5s;
+.svg-container {
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  position: relative;
+  background-color: var(--grey);
+  height: 45px;
+  width: 45px;
+  border-radius: 100%;
+  transition: 0.5s;
 }
 
-.svg-container:hover{
-    cursor: pointer;
-    transition: 0.5s;
-    background-color: var(--brown)
+.svg-container:hover {
+  cursor: pointer;
+  transition: 0.5s;
+  background-color: var(--brown);
 }
 
-.svg{
-    fill: #fff;
-    width: 1em;
+.svg {
+  fill: #fff;
+  width: 1em;
 }
 
-.nav{
-    margin-top: 1em;
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 5em;
-    padding: 0 5%;
-    background: transparent;
+.nav {
+  margin-top: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 5em;
+  padding: 0 5%;
+  background: transparent;
 }
 
-.nav img{
-    max-width: 3.5em;
-    width: 100%;
-    filter: brightness(0);
-    height: auto;
+.nav img {
+  max-width: 3.5em;
+  width: 100%;
+  filter: brightness(0);
+  height: auto;
 }
 
-.nav img:hover{
-    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;  
+.nav img:hover {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
-#flex-svgs{
-    margin-top: 0.5em;
-    display: flex;
-    width: 6.5em;
-    align-items: center;
-    justify-content: space-between;
+#flex-svgs {
+  margin-top: 0.5em;
+  display: flex;
+  width: 6.5em;
+  align-items: center;
+  justify-content: space-between;
 }
 
-#cart{
-    fill: #fff;
-    width: 1.2em;
+#cart {
+  fill: #fff;
+  width: 1.2em;
 }
-
