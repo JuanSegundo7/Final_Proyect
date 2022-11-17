@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import "./Login.css";
-import { useEffect, useState} from "react";
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from "axios";
-//import Container from '../Carrousel/Carrousel';
-//import jwt_decode from "jwt-decode";  //no se utiliza, se puede desinstalar
+import { postUser,  getOneUser} from "../../redux/Actions/Actions";
+
 
 
 const Login = ({close}) => { 
 
+    const dispatch = useDispatch();
     const [myData,setMyData] = useState({});
-    //const [loginOK,setLoginOK] = useState(0);
+    const [loginOK,setLoginOK] = useState(0);
     
       const login = useGoogleLogin({
         onSuccess: async response => {
@@ -28,13 +29,45 @@ const Login = ({close}) => {
         }
       });
      
-      /* useEffect(()=>{
-        console.log("datos:",myData)
+      useEffect(()=>{
+        //console.log("datos:",myData.data)
         if (myData.hasOwnProperty("data")){
-        setLoginOK(1);
+            const resp = dispatch(getOneUser(myData.data.email));
+            console.log("esto:",resp)
+            setLoginOK(1);
+            console.log("estoy adentro")
+        /* const userToBeCreated={
+            _id: myData.data.email,
+            name: myData.data.given_name,
+            lastname:myData.data.family_name
         }
-      },[myData]) */
+        console.log(userToBeCreated) */
+        
+        //dispatch(postUser(userToBeCreated))
+        }
+      },[myData])
 
+      const foundUser = useSelector((state) => state.User);
+      useEffect(()=>{
+        console.log("hola")
+      },[foundUser])
+      
+      useEffect(()=>{
+        if (loginOK){
+            console.log("login exitoso")
+            console.log("user:",foundUser)
+            //si me loguee OK, cierro la ventana de login!
+            close(0);
+        }else
+            console.log("login NO exitoso",loginOK)
+      },[loginOK])
+
+      
+      /*
+      const foundUser = useSelector((state) => state.User);
+            console.log("usuario en BBDD:",foundUser)
+            //console.log("soy el cuadrado:",currentUserInDb)
+      */
 
     return (
         
