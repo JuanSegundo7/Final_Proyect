@@ -40,7 +40,7 @@ export default function ContainerInfo({ info, order }) {
     return () => {
       dispatch(cleanByName());
     };
-  }, [dispatch, allProducts, Filtered]);
+  }, [dispatch, Filtered]);
 
   return (
     <div id="Contenido">

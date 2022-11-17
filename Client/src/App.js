@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import Switch from "./Components/Switch/Switch";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
-import { BrowserRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { BrowserRouter, Routes } from "react-router-dom";
 import {
   getProductByQuery,
   getProducts,
@@ -26,13 +26,14 @@ function App() {
     dispatch(getCategories());
   }, [dispatch]);
 
+
   return (
     <BrowserRouter>
-      <Header />
-      <main>
-        <Switch />
-      </main>
-      <Footer />
+        <Header />
+        <main>
+          <Switch />
+        </main>
+        <Footer />
     </BrowserRouter>
   );
 }
