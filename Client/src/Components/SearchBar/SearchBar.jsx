@@ -37,9 +37,6 @@ export default function SearchBar() {
     const value = e.target.value;
     setInput(value);
   };
-  useEffect(() => {
-    dispatch(cleanByName("name"));
-  }, [dispatch]);
 
   return (
     <form onSubmit={(e) => Search(e)}>
