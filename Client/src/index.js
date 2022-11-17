@@ -5,17 +5,21 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux'
 import store from './redux/Store/Store.jsx';
-import { GoogleOAuthProvider } from '@react-oauth/google';
+// import { GoogleOAuthProvider } from '@react-oauth/google';
+import { Auth0Provider } from "@auth0/auth0-react";
 
 
+// AGREGAR ARCHIVO .ENV
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-    <GoogleOAuthProvider clientId="30469669249-eip3hh72bp7289tevpruvuu0i30k730l.apps.googleusercontent.com">
+    <Auth0Provider domain="dev-20y5w7kc2iwedwea.us.auth0.com" clientId="41AD6aVCeArBQ8gurncDa73s6WjLnJ9s" redirectUri={window.location.origin}>
+    {/* <GoogleOAuthProvider clientId="30469669249-eip3hh72bp7289tevpruvuu0i30k730l.apps.googleusercontent.com"> */}
         <App />
-    </GoogleOAuthProvider>
+    {/* </GoogleOAuthProvider> */}
+    </Auth0Provider>
     </Provider>
   </React.StrictMode>
 );

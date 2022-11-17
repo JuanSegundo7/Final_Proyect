@@ -2,10 +2,16 @@
     position: absolute;
     z-index: 10;
     width: 2em;
-    top: 0em;
-    right: 9.5em;
-    margin: 1em;
+    top: 1em;
+    right: 12em;
+    margin: 0;
     cursor: pointer;
+    transition: 0.5s;
+}
+
+#dogStar{
+    fill: rgb(83, 83, 83);
+    opacity: .2;
 }
 
 #dogStar:hover, #starClicked:hover{
