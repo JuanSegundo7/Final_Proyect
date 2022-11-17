@@ -3,7 +3,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const updateUser = async function (_id,data) {
     
-let { favorites, name , lastname , password } = data;   //esto es req.params
+let { name , lastname , password, favorites, picture } = data;   //esto es req.params
 
 //Data Validation
 if ((typeof(_id)!=="string") || (!_id.length)){
@@ -32,8 +32,14 @@ if (lastname){
 }
 
 if (password){
-  if ((typeof(password)!=="string") || (!password.length)){
-    throw new Error("Error: User password cannot be empty and must be of text type.")
+  if (typeof(password)!=="string") {
+    throw new Error("Error: User Password must be of text type.")
+  }
+}
+
+if (picture){
+  if (typeof(picture)!=="string") {
+    throw new Error("Error: Picture must be of text type (URL).")
   }
 }
 
@@ -71,7 +77,8 @@ if (favorites){
       name,
       lastname,
       password,
-      favorites
+      favorites,
+      picture
      };
     let resp = await User.findOneAndUpdate(filter, update, {
         new: true
