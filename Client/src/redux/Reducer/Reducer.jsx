@@ -84,11 +84,12 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case MATCH_FAVORITE: {
-      const favorites = state.Favorites.map((fav) => {
-        console.log(fav, "adentor del map");
-        return state.Products.find((p) => p._id === fav);
-      });
-      console.log("es favoritos:", favorites);
+      const allProducts = state.Products;
+      const favorites =
+        allProducts.length &&
+        state.Favorites?.map((fav) => {
+          return allProducts?.find((p) => p._id === fav);
+        });
 
       return {
         ...state,

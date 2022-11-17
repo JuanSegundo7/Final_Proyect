@@ -9,7 +9,8 @@ import {
   getProducts,
   getBrands,
   getCategories,
-  fillAllFavorites
+  fillAllFavorites,
+  matchFavorite,
 } from "./redux/Actions/Actions";
 
 import "./App.css";

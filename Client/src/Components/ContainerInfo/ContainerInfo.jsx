@@ -7,7 +7,7 @@ import Error from "../Card/imgs/error.webp";
 import "./ContainerInfo.css";
 import {
   cleanFiltered,
-  cleanByName,
+  getProducts,
   matchFavorite,
 } from "../../redux/Actions/Actions";
 import Paginated from "../Paginated/Paginated";
@@ -26,19 +26,14 @@ export default function ContainerInfo({ info, order }) {
   const indexFirstProduct = indexLastProduct - productPerPage;
 
   useEffect(() => {
-    dispatch(matchFavorite());
-  }, [localStorage, location.pathname]);
-
-  useEffect(() => {
     dispatch(cleanFiltered());
-    // dispatch(matchFavorite());
+    dispatch(matchFavorite());
   }, [location.pathname]);
 
   const filteredOrNot = FilterBoolean
     ? Filtered.slice(indexFirstProduct, indexLastProduct)
     : allProducts.length > 0 &&
       allProducts.slice(indexFirstProduct, indexLastProduct); // products
-  console.log("esto es filtered or not", filteredOrNot);
 
   const paginated = (number) => {
     setCurrentPage(number);
