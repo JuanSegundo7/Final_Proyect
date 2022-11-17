@@ -15,7 +15,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-    <Auth0Provider domain="dev-20y5w7kc2iwedwea.us.auth0.com" clientId="41AD6aVCeArBQ8gurncDa73s6WjLnJ9s" redirectUri={window.location.origin}>
+    <Auth0Provider domain="dev-uiy3ews0bp07u8ac.us.auth0.com" clientId="YmTyzeqEeDXDqXMN2FJRbDN5PR0CLgWD" redirectUri={window.location.origin}>
     {/* <GoogleOAuthProvider clientId="30469669249-eip3hh72bp7289tevpruvuu0i30k730l.apps.googleusercontent.com"> */}
         <App />
     {/* </GoogleOAuthProvider> */}

@@ -4,7 +4,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const createUser = async function (data) {
 
-  const { _id, name, lastname, favorites, /* admin, */ password } = data;
+  const { _id, name, lastname, favorites, /* admin, */ password, picture } = data;
 
 
 //Data Validation
@@ -28,11 +28,16 @@ if ((typeof(lastname)!=="string") || (!lastname.length)){
 } */
 
 if (password){
-  if ((typeof(password)!=="string") || (!password.length)){
-    throw new Error("Error: User Password cannot be empty and must be of text type.")
+  if (typeof(password)!=="string") {
+    throw new Error("Error: User Password must be of text type.")
   }
 }
 
+if (picture){
+  if (typeof(picture)!=="string") {
+    throw new Error("Error: Picture must be of text type (URL).")
+  }
+}
 
 //Favorites validation is kinda hard but still needed.
 if (favorites){
@@ -62,8 +67,9 @@ try {
       name: name.toLowerCase(),
       lastname: lastname.toLowerCase(), 
       favorites, 
+      password,
+      picture,
       /* admin, */ //can only be modified in the DB directly to prevent hacking attempts
-      password
     });
     return newUser;
 }catch (unError){
