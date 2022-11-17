@@ -5,7 +5,11 @@ import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Error from "../Card/imgs/error.webp";
 import "./ContainerInfo.css";
-import { cleanFiltered, cleanByName } from "../../redux/Actions/Actions";
+import {
+  cleanFiltered,
+  cleanByName,
+  matchFavorite,
+} from "../../redux/Actions/Actions";
 import Paginated from "../Paginated/Paginated";
 
 export default function ContainerInfo({ info, order }) {
@@ -22,13 +26,19 @@ export default function ContainerInfo({ info, order }) {
   const indexFirstProduct = indexLastProduct - productPerPage;
 
   useEffect(() => {
+    dispatch(matchFavorite());
+  }, [localStorage, location.pathname]);
+
+  useEffect(() => {
     dispatch(cleanFiltered());
+    // dispatch(matchFavorite());
   }, [location.pathname]);
 
   const filteredOrNot = FilterBoolean
     ? Filtered.slice(indexFirstProduct, indexLastProduct)
     : allProducts.length > 0 &&
       allProducts.slice(indexFirstProduct, indexLastProduct); // products
+  console.log("esto es filtered or not", filteredOrNot);
 
   const paginated = (number) => {
     setCurrentPage(number);
@@ -36,7 +46,7 @@ export default function ContainerInfo({ info, order }) {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [dispatch]);
+  }, [dispatch, updateFilter, Filtered]);
 
   return (
     <div id="Contenido">

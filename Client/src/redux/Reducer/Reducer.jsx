@@ -15,6 +15,7 @@ import {
   ORDER_SEARCH,
   SET_FAVORITES,
   FILL_ALL_FAVORITES,
+  MATCH_FAVORITE,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -37,6 +38,7 @@ const initialState = {
   updateFilter: 1,
 
   Favorites: [],
+  FavoritesCopy: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -71,6 +73,19 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         Favorites: totalFavorites,
       };
+
+    case MATCH_FAVORITE: {
+      const favorites = state.Favorites.map((fav) => {
+        console.log(fav, "adentor del map");
+        return state.Products.find((p) => p._id === fav);
+      });
+      console.log("es favoritos:", favorites);
+
+      return {
+        ...state,
+        FavoritesCopy: favorites,
+      };
+    }
 
     case GET_PRODUCTS:
       return {
@@ -139,6 +154,7 @@ const rootReducer = (state = initialState, action) => {
             ...state,
             ByName: action.payload,
             Search: true,
+            updateFilter: state.updateFilter + 1,
           };
         }
 

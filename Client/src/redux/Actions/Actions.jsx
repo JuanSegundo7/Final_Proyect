@@ -3,6 +3,7 @@ import axios from "axios";
 // FAVORITES
 export const SET_FAVORITES = "SET_FAVORITES";
 export const FILL_ALL_FAVORITES = "FILL_ALL_FAVORITES";
+export const MATCH_FAVORITE = "MATCH_FAVORITE";
 
 // CATEGORIES
 export const GET_CATEGORIES = "GET_CATEGORIES";
@@ -172,6 +173,10 @@ export const fillAllFavorites = (FavoritesArray) => (dispatch) => {
     type: "FILL_ALL_FAVORITES",
     payload: FavoritesArray,
   });
+};
+
+export const matchFavorite = () => (dispatch) => {
+  return dispatch({ type: MATCH_FAVORITE });
 };
 
 // //http://localhost:3001/brands?category=coffee
