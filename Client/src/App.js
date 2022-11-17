@@ -2,22 +2,21 @@ import React, { useEffect } from "react";
 import Switch from "./Components/Switch/Switch";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useDispatch } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import {
   getProductByQuery,
   getProducts,
   getBrands,
   getCategories,
   fillAllFavorites,
-  matchFavorite,
 } from "./redux/Actions/Actions";
 
 import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
-  const FavoritesCopy = useSelector((state) => state.FavoritesCopy);
 
   useEffect(() => {
     dispatch(getProducts());
@@ -29,6 +28,14 @@ function App() {
     dispatch(getCategories());
     dispatch(fillAllFavorites());
   }, [dispatch]);
+
+  const { user, isAuthenticated, isLoading } = useAuth0();
+
+  console.log(isAuthenticated);
+
+  if (isAuthenticated == true) {
+    sessionStorage.setItem("user", JSON.stringify(user));
+  }
 
   return (
     <BrowserRouter>
