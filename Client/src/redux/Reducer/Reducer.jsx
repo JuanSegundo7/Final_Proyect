@@ -1,4 +1,5 @@
 import {
+  GET_ONE_USER,
   GET_PRODUCTS,
   GET_ONE_PRODUCT,
   POST_PRODUCT,
@@ -36,7 +37,8 @@ const initialState = {
   Filter: false,
   updateFilter: 1,
 
-  Favorites: []
+  Favorites: [],
+  User: {},
 
   // allProducts: [],
   // allProducts2: [],
@@ -47,8 +49,13 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
 
-    case FILL_ALL_FAVORITES:
+    case GET_ONE_USER:
+      return {
+        ...state,
+        User: action.payload,
+      };
 
+    case FILL_ALL_FAVORITES:
       const myLocalStorage = localStorage.getItem("Favorites-pf");
       if (myLocalStorage && myLocalStorage.length){
         const newArray = myLocalStorage.split(",")
@@ -59,14 +66,12 @@ const rootReducer = (state = initialState, action) => {
           }
         }
       }
-      
+
       return {
         ...state
       }
 
-
     case SET_FAVORITES:
-
       let totalFavorites=[...state.Favorites];
       if (state.Favorites.includes(action.payload)){       
         totalFavorites = totalFavorites.filter(unFavorito => unFavorito!==action.payload)
@@ -84,6 +89,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         Products: action.payload,
       };
+
     case GET_ONE_PRODUCT:
       return {
         ...state,
