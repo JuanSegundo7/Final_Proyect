@@ -16,6 +16,7 @@ import {
   ORDER_SEARCH,
   SET_FAVORITES,
   FILL_ALL_FAVORITES,
+  MATCH_FAVORITE,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -38,20 +39,19 @@ const initialState = {
   updateFilter: 1,
 
   Favorites: [],
+  FavoritesCopy: [],
 
   User: {},
-
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-  
     case GET_ONE_USER:
       return {
         ...state,
         User: action.payload,
       };
-       
+
     case FILL_ALL_FAVORITES:
       const myLocalStorage = localStorage.getItem("Favorites-pf");
       if (myLocalStorage && myLocalStorage.length) {
@@ -68,7 +68,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
       };
 
-
     case SET_FAVORITES:
       let totalFavorites = [...state.Favorites];
       if (state.Favorites.includes(action.payload)) {
@@ -83,6 +82,20 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         Favorites: totalFavorites,
       };
+
+    case MATCH_FAVORITE: {
+      const allProducts = state.Products;
+      const favorites =
+        allProducts.length &&
+        state.Favorites?.map((fav) => {
+          return allProducts?.find((p) => p._id === fav);
+        });
+
+      return {
+        ...state,
+        FavoritesCopy: favorites,
+      };
+    }
 
     case GET_PRODUCTS:
       return {
@@ -152,6 +165,7 @@ const rootReducer = (state = initialState, action) => {
             ...state,
             ByName: action.payload,
             Search: true,
+            updateFilter: state.updateFilter + 1,
           };
         }
 
