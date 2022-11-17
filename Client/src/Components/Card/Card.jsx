@@ -5,6 +5,10 @@ import Favorite from "../Favorite/Favorite";
 import "./Card.css";
 
 export function Card(props) {
+  // const [arrayState, setArrayState] = useState(
+  //   JSON.parse(localStorage.getItem("favorites-pf"))
+  // );
+
   if (props.brand === "Brands") {
     return (
       <div id="card">

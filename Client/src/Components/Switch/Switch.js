@@ -45,6 +45,11 @@ const SwitchRouter = () => {
 
       <Route exact path="/create" element={<Form />} />
       <Route exact path="/detail/:id" element={<DetailProducts />} />
+      <Route
+        exact
+        path="/favorites"
+        element={<ContainerInfo info="FavoritesCopy" />}
+      />
     </Routes>
   );
 };
