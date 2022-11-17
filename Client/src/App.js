@@ -3,7 +3,7 @@ import Switch from "./Components/Switch/Switch";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import { BrowserRouter } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getProductByQuery,
   getProducts,
@@ -17,6 +17,7 @@ import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
+  const FavoritesCopy = useSelector((state) => state.FavoritesCopy);
 
   useEffect(() => {
     dispatch(getProducts());
