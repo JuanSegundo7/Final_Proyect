@@ -27,29 +27,33 @@ if ((typeof(lastname)!=="string") || (!lastname.length)){
   throw new Error("Error: Admin rights should be of boolean type (true for admin, false for regular users).")
 } */
 
-if ((typeof(password)!=="string") || (!password.length)){
-  throw new Error("Error: User Password cannot be empty and must be of text type.")
+if (password){
+  if ((typeof(password)!=="string") || (!password.length)){
+    throw new Error("Error: User Password cannot be empty and must be of text type.")
+  }
 }
 
+
 //Favorites validation is kinda hard but still needed.
-if (!Array.isArray(favorites)){
-  throw new Error ("No valid data type provided for favorites. It should be an array!")
-}
-if (favorites.length){
-  for (let i=0; i<favorites.length; i++){
-    if ((typeof(favorites[i])!=="string") || (!ObjectId.isValid(favorites[i]))) throw new Error ("No valid _id type provided for favorites!")    
+if (favorites){
+  if (!Array.isArray(favorites)){
+    throw new Error ("No valid data type provided for favorites. It should be an array!")
   }
-  //assuming everything is an object, I will really search for the existing ids within my database
-  for (let i=0; i<favorites.length; i++){
-    try{
-      let resp = await Product.findById(favorites[i])
-      if (!resp) throw new Error(`Product id:${favorites[i]} not found in the Database!`)
-    }catch(unError){
-      throw new Error(unError.message)
+  if (favorites.length){
+    for (let i=0; i<favorites.length; i++){
+      if ((typeof(favorites[i])!=="string") || (!ObjectId.isValid(favorites[i]))) throw new Error ("No valid _id type provided for favorites!")    
+    }
+    //assuming everything is an objectId, I will really search for the existing ids within my database
+    for (let i=0; i<favorites.length; i++){
+      try{
+        let resp = await Product.findById(favorites[i])
+        if (!resp) throw new Error(`Product id:${favorites[i]} not found in the Database!`)
+      }catch(unError){
+        throw new Error(unError.message)
+      }
     }
   }
 }
-
 
 //if no errors, the user is created
 try {
