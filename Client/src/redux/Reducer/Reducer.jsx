@@ -1,4 +1,5 @@
 import {
+  GET_ONE_USER,
   GET_PRODUCTS,
   GET_ONE_PRODUCT,
   POST_PRODUCT,
@@ -37,10 +38,20 @@ const initialState = {
   updateFilter: 1,
 
   Favorites: [],
+
+  User: {},
+
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+  
+    case GET_ONE_USER:
+      return {
+        ...state,
+        User: action.payload,
+      };
+       
     case FILL_ALL_FAVORITES:
       const myLocalStorage = localStorage.getItem("Favorites-pf");
       if (myLocalStorage && myLocalStorage.length) {
@@ -56,6 +67,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
       };
+
 
     case SET_FAVORITES:
       let totalFavorites = [...state.Favorites];
@@ -77,6 +89,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         Products: action.payload,
       };
+
     case GET_ONE_PRODUCT:
       return {
         ...state,
