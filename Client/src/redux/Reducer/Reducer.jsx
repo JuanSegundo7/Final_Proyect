@@ -16,6 +16,7 @@ import {
   ORDER_SEARCH,
   SET_FAVORITES,
   FILL_ALL_FAVORITES,
+  ADD_TO_CART,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -40,6 +41,8 @@ const initialState = {
   Favorites: [],
 
   User: {},
+
+  cart:[],
 
 };
 
@@ -83,6 +86,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         Favorites: totalFavorites,
       };
+    case ADD_TO_CART:
+
+      return{
+        ...state,
+        cart:[...state.cart, action.payload]
+      }
+      
 
     case GET_PRODUCTS:
       return {
