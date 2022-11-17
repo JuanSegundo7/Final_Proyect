@@ -1,43 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./Favorite.css";
+import { setFavorites } from "../../redux/Actions/Actions";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Favorite({ id }) {
-  const [state, setState] = useState(0);
-  const [arrayState, setArrayState] = useState(
-    JSON.parse(localStorage.getItem("favorites-pf"))
-  );
-
-  var favorites = JSON.parse(localStorage.getItem("favorites-pf"));
-  console.log(favorites);
+  const dispatch = useDispatch();
+  const allFavorites = useSelector((state) => state.Favorites);
 
   const handleFavorite = () => {
-    if (favorites !== null) {
-      if (favorites.includes(id)) {
-        let newValue = favorites.filter((num) => num !== id);
-        setArrayState(newValue);
-        localStorage.setItem("favorites-pf", JSON.stringify(newValue));
-        return console.log(favorites);
-      }
-      if (favorites.length > 0) {
-        let favArray = [...arrayState, id];
-        setArrayState(favArray);
-        console.log(arrayState, "favorites-pf");
-        return localStorage.setItem("favorites-pf", JSON.stringify(favArray));
-      }
-    }
-
-    let array = [];
-    array.push(id);
-
-    localStorage.setItem("favorites-pf", JSON.stringify(array));
+    dispatch(setFavorites(id));
   };
+
+  useEffect(() => {
+    if (allFavorites.length) {
+      localStorage.setItem("Favorites-pf", allFavorites);
+    }
+  }, [allFavorites]);
 
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       onClick={handleFavorite}
       id={
-        (arrayState !== null ? arrayState.includes(id) : null)
+        (allFavorites !== null ? allFavorites.includes(id) : null)
           ? "starClicked"
           : "dogStar"
       }

@@ -1,5 +1,9 @@
 import axios from "axios";
 
+// FAVORITES
+export const SET_FAVORITES = "SET_FAVORITES";
+export const FILL_ALL_FAVORITES = "FILL_ALL_FAVORITES";
+
 // CATEGORIES
 export const GET_CATEGORIES = "GET_CATEGORIES";
 
@@ -152,6 +156,22 @@ export const postImage = (payload) => {
       console.log("error", error);
     }
   };
+};
+
+// FAVORITES
+
+export const setFavorites = (newFavoriteId) => (dispatch) => {
+  return dispatch({
+    type: "SET_FAVORITES",
+    payload: newFavoriteId,
+  });
+};
+
+export const fillAllFavorites = (FavoritesArray) => (dispatch) => {
+  return dispatch({
+    type: "FILL_ALL_FAVORITES",
+    payload: FavoritesArray,
+  });
 };
 
 // //http://localhost:3001/brands?category=coffee
