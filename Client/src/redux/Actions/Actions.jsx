@@ -222,7 +222,6 @@ export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
 */
 export const addToCart = (id) => (dispatch) => {
-  //console.log('id de action',id)
   return dispatch({
     type: ADD_TO_CART,
     payload: id,
@@ -230,7 +229,6 @@ export const addToCart = (id) => (dispatch) => {
 }
 
 export const removeOneToCart = (id) => (dispatch) => {
-  //console.log(id)
   return dispatch({
     type: REMOVE_ONE_FROM_CART,
     payload: id,
@@ -259,4 +257,4 @@ export const findAllCart = (CartArray) => (dispatch) => {
 
 
 
-// //http://localhost:3001/brands?category=coffee
+

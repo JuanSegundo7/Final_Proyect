@@ -45,7 +45,6 @@ if (picture){
 
 //Favorites validation is kinda hard but still needed.
 if (favorites){
-  //console.log("soy un array por mas que este vacio")
   if (!Array.isArray(favorites)){
     throw new Error ("No valid data type provided for favorites. It should be an array!")
   }

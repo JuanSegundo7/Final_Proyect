@@ -63,7 +63,6 @@ if (image){
 }
 
 if (brand){
-  //console.log("tengo algo")
   if ((typeof(brand)!=="string") ||  (!ObjectId.isValid(brand))) throw new Error ("No valid _id type provided for brand!")
   else{
       try{
@@ -76,7 +75,6 @@ if (brand){
   }
 }else{
   brand=undefined;
-  //console.log("no tengo nada")
 }
 
 
