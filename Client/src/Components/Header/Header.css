@@ -54,13 +54,14 @@
   background: transparent;
 }
 
-.nav img, #user-img {
+.nav img,
+#user-img {
   max-width: 3.5em;
   width: 100%;
   height: auto;
 }
 
-#user-img{
+#user-img {
   max-width: 3em;
   border-radius: 50%;
 }
@@ -80,4 +81,11 @@
 #cart {
   fill: #fff;
   width: 1.2em;
+}
+
+.number {
+  margin-bottom: -35px;
+  margin-left: -12px;
+  color: var(--brown);
+  font-weight: bold;
 }
