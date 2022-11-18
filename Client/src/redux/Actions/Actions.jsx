@@ -41,6 +41,9 @@ export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
 export const FIND_ALL_CART ="FIND_ALL_CART"
 
+//MAIL
+export const SEND_EMAIL = "SEND_EMAIL";
+
 const baseUrl = `http://localhost:3001/`;
 
 /*****************************************************************************************************/
@@ -255,6 +258,12 @@ export const findAllCart = (CartArray) => (dispatch) => {
   });
 };
 
+//EMAIL
+
+export const sendEmail = (payload) => (dispatch)=>{
+  return axios.post(`${baseUrl}mail`, payload)
+      .then((data) => dispatch({ type: SEND_EMAIL, payload: data.data}));
+}
 
 
 

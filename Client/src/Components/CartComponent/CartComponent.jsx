@@ -2,7 +2,8 @@ import React, { useEffect }  from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import CardCart from './CardCart'
 import Error from '../Card/imgs/error.webp'
-import { clearCart } from '../../redux/Actions/Actions';
+import { clearCart ,sendEmail } from '../../redux/Actions/Actions';
+
 
 export default function CartComponent() {
     const allCart = useSelector(state => state.cart);
@@ -22,9 +23,13 @@ export default function CartComponent() {
         }
     }
 
+    function sendMail(){
+        dispatch(sendEmail())
+    }
+
   return (
     <div>
-        <button>Buy</button>
+        <button onClick={()=> sendMail()}>Buy</button>
         <button onClick={(e) => emptyCart(e)}>Empty Cart</button>{/* cambiar esto */}
         {
             allCart.length ?

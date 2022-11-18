@@ -22,6 +22,7 @@ import {
   REMOVE_ALL_FROM_CART,
   CLEAR_CART,
   FIND_ALL_CART,
+  SEND_EMAIL,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -48,8 +49,7 @@ const initialState = {
 
   User: {},
 
-  cart:[],
-
+  cart: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -78,6 +78,8 @@ const rootReducer = (state = initialState, action) => {
 
     case SET_FAVORITES:
       let totalFavorites = [...state.Favorites];
+      console.log(action.payload, "esto es action payload");
+      console.log(state.Favorites, "esto es state Favorites");
       if (state.Favorites.includes(action.payload)) {
         totalFavorites = totalFavorites.filter(
           (unFavorito) => unFavorito !== action.payload
@@ -85,6 +87,7 @@ const rootReducer = (state = initialState, action) => {
       } else {
         totalFavorites.push(action.payload);
       }
+      if (state.Favorites.length === 1) localStorage.removeItem("Favorites-pf");
 
       return {
         ...state,
@@ -98,78 +101,91 @@ const rootReducer = (state = initialState, action) => {
         state.Favorites?.map((fav) => {
           return allProducts?.find((p) => p._id === fav);
         });
-        
+
+      return {
+        ...state,
+        FavoritesCopy: favorites,
+      };
+    }
+
+    case ADD_TO_CART:
+      const allProducts = state.Products;
+      const allCart2 = state.cart;
+      console.log("allCart2.length", allCart2.length);
+      let newCoffe = allProducts.find(
+        (product) => product._id === action.payload
+      );
+
+      let itemInCart = state.cart.find(
+        (product) => product._id === newCoffe._id
+      );
+
+      return itemInCart
+        ? {
+            ...state,
+            cart: state.cart.map((product) =>
+              product._id === newCoffe._id
+                ? { ...product, quantity: product.quantity + 1 }
+                : product
+            ),
+          }
+        : {
+            ...state,
+            cart: [...state.cart, { ...newCoffe, quantity: 1 }],
+          };
+    case REMOVE_ONE_FROM_CART:
+      const allCart = state.cart;
+
+      let findProduct = allCart.find(
+        (product) => product._id === action.payload
+      );
+
+      if (findProduct.quantity > 1) {
+        findProduct.quantity = findProduct.quantity - 1;
         return {
           ...state,
-          FavoritesCopy: favorites,
+          cart: [...state.cart],
+        };
+      } else if (findProduct.quantity < 1) {
+        const filterCart = allCart.filter(
+          (coffe) => coffe._id !== action.payload
+        );
+        return {
+          ...state,
+          cart: filterCart,
         };
       }
+      if (allCart.length === 1) {
+        localStorage.clear("Cart-pf");
+      }
 
-      case ADD_TO_CART:
-        const allProducts = state.Products;
-        const allCart2 = state.cart;
-        console.log('allCart2.length', allCart2.length)
-        let newCoffe = allProducts.find((product) => product._id === action.payload);
+    case REMOVE_ALL_FROM_CART:
+      const cart = state.cart;
+      const filter2 = cart.filter((product) => product._id !== action.payload);
+      return {
+        ...state,
+        cart: filter2,
+      };
 
-        let itemInCart = state.cart.find((product) => product._id === newCoffe._id);
- 
-        return itemInCart ?{
+    case CLEAR_CART:
+      localStorage.clear("Cart-pf");
+      return {
+        ...state,
+        cart: [],
+      };
+    case FIND_ALL_CART:
+      const localStorageCart = JSON.parse(localStorage.getItem("Cart-pf"));
+
+      if (localStorageCart && localStorageCart.length) {
+        return {
           ...state,
-          cart: state.cart.map((product) => product._id === newCoffe._id ? 
-          {...product, quantity: product.quantity + 1} : product)
-          }:{
-          ...state,
-          cart: [...state.cart, {...newCoffe, quantity:1}]
+          cart: localStorageCart,
         };
-      case REMOVE_ONE_FROM_CART:
-        const allCart = state.cart;
-        
-        let findProduct = allCart.find((product) => product._id === action.payload);
-
-        if(findProduct.quantity > 1){
-          findProduct.quantity = findProduct.quantity - 1
-          return{
-            ...state,
-            cart: [...state.cart]
-          }
-        } else if(findProduct.quantity < 1){
-          const filterCart = allCart.filter((coffe) => coffe._id !== action.payload)
-          return{
-            ...state,
-            cart: filterCart
-          }
-        } 
-        if(allCart.length  === 1){
-          localStorage.clear('Cart-pf');
-        }
-
-      case REMOVE_ALL_FROM_CART:
-        const cart = state.cart;
-        const filter2 = cart.filter((product) => product._id !== action.payload);
-        return{
+      } else {
+        return {
           ...state,
-          cart:filter2
-        }
-
-      case CLEAR_CART:
-        localStorage.clear('Cart-pf');
-        return{
-          ...state,
-          cart:[]
-        }
-      case FIND_ALL_CART:
-        const localStorageCart = JSON.parse(localStorage.getItem("Cart-pf"));
-
-        if(localStorageCart && localStorageCart.length){
-          return{
-            ...state,
-            cart:localStorageCart
-          }
-        } else{
-          return{
-            ...state
-          }
-        }
+        };
+      }
 
     case GET_PRODUCTS:
       return {
@@ -334,6 +350,11 @@ const rootReducer = (state = initialState, action) => {
         ByName: ordered,
         updateFilter: state.updateFilter + 1,
       };
+    case SEND_EMAIL:
+      console.log("estoy en reducer");
+      return{
+        ... state
+      }
 
     default:
       return {
