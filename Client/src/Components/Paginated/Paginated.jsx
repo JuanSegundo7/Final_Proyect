@@ -35,7 +35,7 @@ export default function Paginated({
     <div className="containerPag">
       <nav className="containerNav">
         {numberPage?.map((number) => (
-          <div>
+          <div key={number.toString()}>
             {numOfPage(number) ? (
               <button id="buttonPag" onClick={() => paginated(number)}>
                 {number}

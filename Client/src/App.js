@@ -20,7 +20,7 @@ import "./App.css";
 function App() {
   const dispatch = useDispatch();
   const FavCopy = useSelector((state) => state.FavoritesCopy);
-  console.log(FavCopy, "esto es fav copu");
+
   if (FavCopy === 0) {
     dispatch(getProducts()).then((res) => dispatch(matchFavorite()));
   }

@@ -36,9 +36,9 @@ export default function Dropdown({ info, path }) {
       <div className="dropdown-content">
         <div className="dropdown-limit">
           {array.length > 0 &&
-            array.map((array) => {
+            array.map((array, index) => {
               return (
-                <Link to={`${path}?brand=${array.name}`}>
+                <Link to={`${path}?brand=${array.name}`} key={index}>
                   <a
                     key={array.id}
                     value={array.name}
