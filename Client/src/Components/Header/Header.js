@@ -51,7 +51,6 @@ const Header = () => {
           </Navigator>
           <Navigator to="cart">
             <div className="svg-container">
-              <p>{allCart.length}</p> {/* agregarle estilos */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 id="cart"
@@ -62,6 +61,9 @@ const Header = () => {
               </svg>
             </div>
           </Navigator>
+          <div className="number">
+            <picture>{allCart.length}</picture>
+          </div>
           <Navigator to="/favorites">
             <div className="svg-container">
               <svg
@@ -75,7 +77,7 @@ const Header = () => {
             </div>
           </Navigator>
           <div className="number">
-            <picture className="number">{Favorites.length}</picture>
+            <picture className="numberInSide">{Favorites.length}</picture>
           </div>
         </div>
       </nav>

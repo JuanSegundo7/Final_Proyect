@@ -85,7 +85,10 @@
 
 .number {
   margin-bottom: -35px;
-  margin-left: -12px;
+  margin-left: -19px;
+  margin-right: -10px;
   color: var(--brown);
   font-weight: bold;
+  border-radius: 100%;
+  width: 10%;
 }
