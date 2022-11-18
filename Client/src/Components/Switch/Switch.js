@@ -1,10 +1,11 @@
-import React from "react";
+import React, { Component } from "react";
 import { Route, Routes } from "react-router-dom";
 import Form from "../ProductForm/ProductForm";
 import Home from "../Home/Home";
 import Profile from "../Profile/Profile";
 import DetailProducts from "../Detail/DetailProducts";
 import ContainerInfo from "../ContainerInfo/ContainerInfo";
+import CartComponent from "../CartComponent/CartComponent";
 import Login from "../Login/Login";
 
 const SwitchRouter = () => {
@@ -56,12 +57,19 @@ const SwitchRouter = () => {
       <Route exact path="/brands" element={<ContainerInfo info="Brands" />} />
 
       <Route exact path="/create" element={<Form />} />
+
       <Route exact path="/detail/:id" element={<DetailProducts />} />
+      
       <Route
         exact
         path="/favorites"
         element={<ContainerInfo info="FavoritesCopy" />}
       />
+
+      <Route exact path="/cart"
+      element={<CartComponent />}  
+      />
+
     </Routes>
   );
 };

@@ -73,6 +73,7 @@ export default function ContainerInfo({ info, order }) {
                   type={cardCoffe.grinding_type}
                   price={cardCoffe.price}
                   brand={info}
+                  // stock={cardCoffe.stock}
                 />
               );
             })
