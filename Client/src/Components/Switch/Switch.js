@@ -6,6 +6,7 @@ import Profile from "../Profile/Profile";
 import DetailProducts from "../Detail/DetailProducts";
 import ContainerInfo from "../ContainerInfo/ContainerInfo";
 import CartComponent from "../CartComponent/CartComponent";
+import Login from "../Login/Login";
 
 const SwitchRouter = () => {
   return (

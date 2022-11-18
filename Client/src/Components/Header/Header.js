@@ -6,6 +6,7 @@ import "./Header.css";
 import Login from "../Login/Login";
 import SearchBar from "../SearchBar/SearchBar";
 import { useSelector } from "react-redux";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Header = () => {
   const [state, setState] = useState();
