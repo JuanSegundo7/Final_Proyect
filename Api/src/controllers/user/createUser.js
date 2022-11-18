@@ -5,16 +5,19 @@ const ObjectId = require('mongoose').Types.ObjectId;
 const createUser = async function (data) {
 
   const { _id, name, lastname, favorites, /* admin, */ password, picture } = data;
-
+  let userAlreadyExists = false;
 
 //Data Validation
 if ((typeof(_id)!=="string") || (!_id.length)){
   throw new Error("Error: User ID cannot be empty and must be of text type.")
 } else{
   const previusId = await User.findById(_id);
-  if(previusId)  throw new Error("Error: User ID cannot be equal to an existing one.") 
+  //if(previusId)  throw new Error("Error: User ID cannot be equal to an existing one.") 
+  if(previusId) userAlreadyExists = true;
 }
 
+if (!userAlreadyExists){
+  
 if ((typeof(name)!=="string") || (!name.length)){
   throw new Error("Error: User Name cannot be empty and must be of text type.")
 }
@@ -76,6 +79,11 @@ try {
     throw new Error(unError)
 }
   
+}
+else{
+  console.log("User already exists!!!");
+  return "User already exists!!!";
+}
 }
 
 module.exports = createUser;

@@ -6,10 +6,6 @@ import "./Card.css";
 import Cart from "../Cart/Cart";
 
 export function Card(props) {
-  // const [arrayState, setArrayState] = useState(
-  //   JSON.parse(localStorage.getItem("favorites-pf"))
-  // );
-
   if (props.brand === "Brands") {
     return (
       <div id="card">
@@ -48,7 +44,7 @@ export function Card(props) {
         {props.origin ? <p id="origin">{props.origin}</p> : null}
         <p id="price">US$ {props.price}</p>
         {/* <p>{props.stock}</p> */}
-        <Cart id={props._id}/>
+        <Cart id={props._id} />
       </div>
     );
   }

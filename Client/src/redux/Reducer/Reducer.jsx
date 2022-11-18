@@ -93,7 +93,6 @@ const rootReducer = (state = initialState, action) => {
 
     case MATCH_FAVORITE: {
       const allProducts = state.Products;
-      console.log(allProducts, "esto es all products");
       const favorites =
         allProducts.length &&
         state.Favorites?.map((fav) => {
@@ -108,7 +107,8 @@ const rootReducer = (state = initialState, action) => {
 
       case ADD_TO_CART:
         const allProducts = state.Products;
-
+        const allCart2 = state.cart;
+        console.log('allCart2.length', allCart2.length)
         let newCoffe = allProducts.find((product) => product._id === action.payload);
 
         let itemInCart = state.cart.find((product) => product._id === newCoffe._id);
@@ -123,7 +123,7 @@ const rootReducer = (state = initialState, action) => {
         };
       case REMOVE_ONE_FROM_CART:
         const allCart = state.cart;
-
+        
         let findProduct = allCart.find((product) => product._id === action.payload);
 
         if(findProduct.quantity > 1){
@@ -132,13 +132,17 @@ const rootReducer = (state = initialState, action) => {
             ...state,
             cart: [...state.cart]
           }
-        } else {
+        } else if(findProduct.quantity < 1){
           const filterCart = allCart.filter((coffe) => coffe._id !== action.payload)
           return{
             ...state,
             cart: filterCart
           }
+        } 
+        if(allCart.length  === 1){
+          localStorage.clear('Cart-pf');
         }
+
       case REMOVE_ALL_FROM_CART:
         const cart = state.cart;
         const filter2 = cart.filter((product) => product._id !== action.payload);
@@ -146,7 +150,9 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           cart:filter2
         }
+
       case CLEAR_CART:
+        localStorage.clear('Cart-pf');
         return{
           ...state,
           cart:[]
@@ -166,7 +172,6 @@ const rootReducer = (state = initialState, action) => {
         }
 
     case GET_PRODUCTS:
-      console.log("hola");
       return {
         ...state,
         Products: action.payload,
@@ -178,13 +183,11 @@ const rootReducer = (state = initialState, action) => {
         Product: action.payload,
       };
     //case POST_PRODUCT:
-    //console.log("reducer post", action.payload);
     //return {
     //...state,
     //allCoffees: [...state.allCoffees, action.payload],
     //};
     // case DELETE_PRODUCT:
-    //   console.log(action.id, "es el id");
     //   return {
     //     ...state,
     //   };

@@ -24,6 +24,7 @@ export default function CartComponent() {
 
   return (
     <div>
+        <button>Buy</button>
         <button onClick={(e) => emptyCart(e)}>Empty Cart</button>{/* cambiar esto */}
         {
             allCart.length ?
