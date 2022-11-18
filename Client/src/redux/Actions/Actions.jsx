@@ -34,12 +34,12 @@ export const GET_BRANDS = "GET_BRANDS";
 export const ORDER_FILTER = "ORDER_FILTER";
 export const ORDER_SEARCH = "ORDER_SEARCH";
 
-//CART 
+//CART
 export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_ONE_FROM_CART = "REMOVE_ONE_FROM_CART";
 export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
-export const FIND_ALL_CART ="FIND_ALL_CART"
+export const FIND_ALL_CART = "FIND_ALL_CART";
 
 //MAIL
 export const SEND_EMAIL = "SEND_EMAIL";
@@ -143,12 +143,13 @@ export function getCategories() {
   };
 }
 
-export const sortFilter = (value) => (dispatch) => {
-  return dispatch({ type: ORDER_FILTER, payload: value });
-};
-
-export const sortSearch = (value) => (dispatch) => {
-  return dispatch({ type: ORDER_SEARCH, payload: value });
+export const sortFilter = (value, info, infoOrder) => (dispatch) => {
+  return dispatch({
+    type: ORDER_FILTER,
+    payload: value,
+    info: info,
+    infoOrder: infoOrder,
+  });
 };
 
 export const cleanFiltered = () => (dispatch) => {
@@ -216,7 +217,6 @@ export function getOneUser(id) {
   };
 }
 
-
 //CART
 /*
 ADD_TO_CART = "ADD_TO_CART";
@@ -229,27 +229,27 @@ export const addToCart = (id) => (dispatch) => {
     type: ADD_TO_CART,
     payload: id,
   });
-}
+};
 
 export const removeOneToCart = (id) => (dispatch) => {
   return dispatch({
     type: REMOVE_ONE_FROM_CART,
     payload: id,
   });
-}
+};
 
 export const removeAllToCart = (id) => (dispatch) => {
   return dispatch({
     type: REMOVE_ALL_FROM_CART,
-    payload: id
+    payload: id,
   });
-}
+};
 
 export const clearCart = () => (dispatch) => {
   return dispatch({
     type: CLEAR_CART,
   });
-}
+};
 
 export const findAllCart = (CartArray) => (dispatch) => {
   return dispatch({
@@ -260,10 +260,8 @@ export const findAllCart = (CartArray) => (dispatch) => {
 
 //EMAIL
 
-export const sendEmail = (payload) => (dispatch)=>{
-  return axios.post(`${baseUrl}mail`, payload)
-      .then((data) => dispatch({ type: SEND_EMAIL, payload: data.data}));
-}
-
-
-
+export const sendEmail = (payload) => (dispatch) => {
+  return axios
+    .post(`${baseUrl}mail`, payload)
+    .then((data) => dispatch({ type: SEND_EMAIL, payload: data.data }));
+};
