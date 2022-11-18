@@ -85,6 +85,7 @@ const rootReducer = (state = initialState, action) => {
 
     case MATCH_FAVORITE: {
       const allProducts = state.Products;
+      console.log(allProducts, "esto es all products");
       const favorites =
         allProducts.length &&
         state.Favorites?.map((fav) => {
@@ -98,6 +99,7 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case GET_PRODUCTS:
+      console.log("hola");
       return {
         ...state,
         Products: action.payload,
