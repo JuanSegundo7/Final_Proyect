@@ -352,9 +352,9 @@ const rootReducer = (state = initialState, action) => {
       };
     case SEND_EMAIL:
       console.log("estoy en reducer");
-      return{
-        ... state
-      }
+      return {
+        ...state,
+      };
 
     default:
       return {
