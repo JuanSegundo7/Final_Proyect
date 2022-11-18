@@ -38,7 +38,6 @@ const Header = () => {
         picture: user.picture,
         favorites: favArray,
       };
-      //console.log(userToBeCreated);
       dispatch(postUser(userToBeCreated));
     }
   }, [user]);
