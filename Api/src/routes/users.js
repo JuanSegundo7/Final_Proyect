@@ -27,15 +27,6 @@ router.get('/:_id', async (req,res) => {
         res.status(400).send(unError.message)
     }
 })
-/* router.get("/:_idbrand", async function (req,res){
-    const { _idbrand } = req.params;
-    try {
-        const respuesta = await getBrandById(_idbrand);
-        res.send(respuesta)
-    }catch(unError){
-        res.status(400).send(unError.message)
-    }
-}); */
 
 router.put("/:_id", async (req, res) => {
     

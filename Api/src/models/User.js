@@ -6,7 +6,8 @@ const UserSchema = mongoose.Schema(
     lastname: {type: String, required: true},
     favorites: [{type : mongoose.Schema.Types.ObjectId, ref: "Product"}],
     admin: {type: Boolean, default: false},
-    password: {type: String, default: ""}
+    password: {type: String, default: ""},
+    picture: {type: String, default: ""}
   },
   {versionKey: false}
   );

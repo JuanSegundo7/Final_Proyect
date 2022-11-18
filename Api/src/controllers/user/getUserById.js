@@ -5,7 +5,8 @@ const getUserById = async function (UserId) {
     const resp = await User.findById(UserId)
     .populate("favorites")
 
-    if (!resp) throw new Error("No User matches the informed id...")
+    //if (!resp) throw new Error("No User matches the informed id...")
+    if (!resp) console.log("No User matches the informed id...")
   
     return resp;
 
