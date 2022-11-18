@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import Switch from "./Components/Switch/Switch";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
-import { BrowserRouter } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import {
   getProductByQuery,
   getProducts,
@@ -29,13 +30,21 @@ function App() {
     dispatch(fillAllFavorites());
   }, [dispatch]);
 
+  const { user, isAuthenticated, isLoading } = useAuth0();
+
+  console.log(isAuthenticated)
+
+  if(isAuthenticated == true){
+    sessionStorage.setItem("user", JSON.stringify(user))
+  }
+
   return (
     <BrowserRouter>
-      <Header />
-      <main>
-        <Switch />
-      </main>
-      <Footer />
+        <Header />
+        <main>
+          <Switch />
+        </main>
+        <Footer />
     </BrowserRouter>
   );
 }

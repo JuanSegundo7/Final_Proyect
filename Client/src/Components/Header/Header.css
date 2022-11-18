@@ -54,11 +54,15 @@
   background: transparent;
 }
 
-.nav img {
+.nav img, #user-img {
   max-width: 3.5em;
   width: 100%;
-  filter: brightness(0);
   height: auto;
+}
+
+#user-img{
+  max-width: 3em;
+  border-radius: 50%;
 }
 
 .nav img:hover {
@@ -68,7 +72,7 @@
 #flex-svgs {
   margin-top: 0.5em;
   display: flex;
-  width: 6.5em;
+  width: 11.5em;
   align-items: center;
   justify-content: space-between;
 }

@@ -2,8 +2,10 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Form from "../ProductForm/ProductForm";
 import Home from "../Home/Home";
+import Profile from "../Profile/Profile";
 import DetailProducts from "../Detail/DetailProducts";
 import ContainerInfo from "../ContainerInfo/ContainerInfo";
+import Login from "../Login/Login";
 
 const SwitchRouter = () => {
   return (
@@ -13,6 +15,16 @@ const SwitchRouter = () => {
         exact
         path="/coffees"
         element={<ContainerInfo info="CategoriesCoffee" order="coffee" />}
+      />
+      <Route
+        exact
+        path="/login"
+        element={<Login />}
+      />
+      <Route
+        exact
+        path="/profile"
+        element={<Profile />}
       />
       <Route exact path="/search" element={<ContainerInfo info="ByName" />} />
       <Route
@@ -25,6 +37,13 @@ const SwitchRouter = () => {
       <Route
         exact
         path="/products/accesories"
+        element={
+          <ContainerInfo info="CategoriesAccesories" order="accessories" />
+        }
+      />
+      <Route
+        exact
+        path="/dashboard"
         element={
           <ContainerInfo info="CategoriesAccesories" order="accessories" />
         }
