@@ -16,7 +16,7 @@ export default function CartComponent() {
 
     function emptyCart(e){
         if(allCart.length){
-            dispatch(clearCart())//cambiar esto
+            dispatch(clearCart())
         } else{
             alert('No hay nada en el carrito') //cambiar esto
         }
