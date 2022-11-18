@@ -17,16 +17,8 @@ const SwitchRouter = () => {
         path="/coffees"
         element={<ContainerInfo info="CategoriesCoffee" order="coffee" />}
       />
-      <Route
-        exact
-        path="/login"
-        element={<Login />}
-      />
-      <Route
-        exact
-        path="/profile"
-        element={<Profile />}
-      />
+      <Route exact path="/login" element={<Login />} />
+      <Route exact path="/profile" element={<Profile />} />
       <Route exact path="/search" element={<ContainerInfo info="ByName" />} />
       <Route
         exact
@@ -59,17 +51,14 @@ const SwitchRouter = () => {
       <Route exact path="/create" element={<Form />} />
 
       <Route exact path="/detail/:id" element={<DetailProducts />} />
-      
+
       <Route
         exact
         path="/favorites"
         element={<ContainerInfo info="FavoritesCopy" />}
       />
 
-      <Route exact path="/cart"
-      element={<CartComponent />}  
-      />
-
+      <Route exact path="/cart" element={<CartComponent />} />
     </Routes>
   );
 };
