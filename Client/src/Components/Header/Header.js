@@ -3,48 +3,52 @@ import logo from "./img/coffee.png";
 import Categories from "../Categories/Categories";
 import { Link as Navigator } from "react-router-dom";
 import "./Header.css";
-import Login from "../Login/Login";
 import SearchBar from "../SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-//import axios from "axios";
-import { postUser } from "../../redux/Actions/Actions";
+import { postUser, getOneUser } from "../../redux/Actions/Actions";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const [state, setState] = useState();
   const Favorites = useSelector((state) => state.Favorites);
   const allCart = useSelector((state) => state.cart);
-
   const {user, isAuthenticated, loginWithRedirect} = useAuth0()
+  const [myUserInDB,setMyUserInDB] = useState({});
 
-  //falta agregar que cuando el usuario se deslogue, se borre el local storage
-  //que cuando se loguee, se traigan los favoritos del usuario
-  //a como esta planteado hoy, hay un monton de inconsistencias....y tenemos que definir bien que hacer
+  
+//falta que cuando se loguee, se traigan los favoritos del usuario
 
-  useEffect(() => {
-    //la idea es que si NO existe, lo creo y le pongo todo cuando se loguea..incluso favoritos
-    //pero si YA existe, solo actualizo datos...incluidos favoritos
-    if (isAuthenticated) {
-      const myLocalStgFavorites = localStorage.getItem("Favorites-pf");
-      let favArray = [];
-      if (myLocalStgFavorites && myLocalStgFavorites.length) {
-        favArray = myLocalStgFavorites.split(",");
-      }
-      const userToBeCreated = {
-        _id: user.email,
-        name: user.given_name,
-        lastname: user.family_name,
-        picture: user.picture,
-        favorites: favArray,
-      };
-      dispatch(postUser(userToBeCreated));
-    }
-  }, [user]);
+//Local Storages
+const myLocalStgFavorites = localStorage.getItem("Favorites-pf");
+const myLocalStgCart = JSON.parse(localStorage.getItem("Cart-pf"));
+let favArray = [];
+if (myLocalStgFavorites && myLocalStgFavorites.length) {
+  favArray = myLocalStgFavorites.split(",");
+}
+ 
+useEffect(()=>{
+  if (isAuthenticated){
+    //console.log("ya me loguee",user)
+    dispatch(getOneUser(user.email))
+  }
+},[user])
 
-  let login;
-
-  if (state > 0) login = <Login close={setState} />;
+const datosEnMiBD = useSelector((state) => state.User);
+//console.log(datosEnMiBD);
+if (Object.keys(datosEnMiBD) && isAuthenticated){
+  const userToBeCreated = {
+    _id: user.email,
+    name: user.given_name,
+    lastname: user.family_name,
+    picture: user.picture,
+    favorites: favArray,
+    cart: myLocalStgCart && myLocalStgCart.length ? myLocalStgCart.map(unObjeto => unObjeto._id) : []
+  };
+  console.log("NO existo en la BBDD y me voy a crear:",userToBeCreated);
+  dispatch(postUser(userToBeCreated));
+}else{
+  console.log("SI existo en la BBDD y ya tengo todo en 'datosEnMiBD'")
+}
 
   return (
     <header>

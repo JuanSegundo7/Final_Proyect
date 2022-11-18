@@ -4,7 +4,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const createUser = async function (data) {
 
-  const { _id, name, lastname, favorites, /* admin, */ password, picture } = data;
+  const { _id, name, lastname, favorites, /* admin, */ password, picture, cart } = data;
   let userAlreadyExists = false;
 
 //Data Validation
@@ -63,6 +63,27 @@ if (favorites){
   }
 }
 
+//Cart validation (same as for favorites)
+if (cart){
+  if (!Array.isArray(cart)){
+    throw new Error ("No valid data type provided for cart. It should be an array!")
+  }
+  if (cart.length){
+    for (let i=0; i<cart.length; i++){
+      if ((typeof(cart[i])!=="string") || (!ObjectId.isValid(cart[i]))) throw new Error ("No valid _id type provided for cart product!")    
+    }
+    //assuming everything is an objectId, I will really search for the existing ids within my database
+    for (let i=0; i<cart.length; i++){
+      try{
+        let resp = await Product.findById(cart[i])
+        if (!resp) throw new Error(`Product id:${cart[i]} not found in the Database!`)
+      }catch(unError){
+        throw new Error(unError.message)
+      }
+    }
+  }
+}
+
 //if no errors, the user is created
 try {
     const newUser =  await User.create({
@@ -72,6 +93,7 @@ try {
       favorites, 
       password,
       picture,
+      cart
       /* admin, */ //can only be modified in the DB directly to prevent hacking attempts
     });
     return newUser;
