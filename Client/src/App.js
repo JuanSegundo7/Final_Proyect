@@ -9,7 +9,9 @@ import {
   getProducts,
   getBrands,
   getCategories,
-  fillAllFavorites
+  fillAllFavorites,
+  findAllCart,
+  matchFavorite,
 } from "./redux/Actions/Actions";
 
 import "./App.css";
@@ -26,6 +28,7 @@ function App() {
     dispatch(getBrands());
     dispatch(getCategories());
     dispatch(fillAllFavorites());
+    dispatch(findAllCart())
   }, [dispatch]);
 
   return (

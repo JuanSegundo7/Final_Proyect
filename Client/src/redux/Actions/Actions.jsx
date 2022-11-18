@@ -6,6 +6,7 @@ export const GET_ONE_USER = "GET_ONE_USER";
 // FAVORITES
 export const SET_FAVORITES = "SET_FAVORITES";
 export const FILL_ALL_FAVORITES = "FILL_ALL_FAVORITES";
+export const MATCH_FAVORITE = "MATCH_FAVORITE";
 
 // CATEGORIES
 export const GET_CATEGORIES = "GET_CATEGORIES";
@@ -38,6 +39,7 @@ export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_ONE_FROM_CART = "REMOVE_ONE_FROM_CART";
 export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
+export const FIND_ALL_CART ="FIND_ALL_CART"
 
 const baseUrl = `http://localhost:3001/`;
 
@@ -183,6 +185,10 @@ export const fillAllFavorites = (FavoritesArray) => (dispatch) => {
   });
 };
 
+export const matchFavorite = () => (dispatch) => {
+  return dispatch({ type: MATCH_FAVORITE });
+};
+
 // USERS
 
 export const postUser = (payload) => {
@@ -196,14 +202,15 @@ export const postUser = (payload) => {
   };
 };
 
-export function getOneUser(id){
-  return async function(dispatch){
-      var response = await axios(`${baseUrl}users/${id}`);
-      console.log("datos:",response.data)
-      return dispatch({
-          type: GET_ONE_USER,
-          payload: response.data
-      })}
+export function getOneUser(id) {
+  return async function (dispatch) {
+    var response = await axios(`${baseUrl}users/${id}`);
+    console.log("datos:", response.data);
+    return dispatch({
+      type: GET_ONE_USER,
+      payload: response.data,
+    });
+  };
 }
 
 
@@ -215,7 +222,7 @@ export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
 */
 export const addToCart = (id) => (dispatch) => {
-  console.log('id de action',id)
+  //console.log('id de action',id)
   return dispatch({
     type: ADD_TO_CART,
     payload: id,
@@ -223,16 +230,32 @@ export const addToCart = (id) => (dispatch) => {
 }
 
 export const removeOneToCart = (id) => (dispatch) => {
-
+  //console.log(id)
+  return dispatch({
+    type: REMOVE_ONE_FROM_CART,
+    payload: id,
+  });
 }
 
 export const removeAllToCart = (id) => (dispatch) => {
-
+  return dispatch({
+    type: REMOVE_ALL_FROM_CART,
+    payload: id
+  });
 }
 
-export const clearCart = (id) => (dispatch) => {
-
+export const clearCart = () => (dispatch) => {
+  return dispatch({
+    type: CLEAR_CART,
+  });
 }
+
+export const findAllCart = (CartArray) => (dispatch) => {
+  return dispatch({
+    type: FIND_ALL_CART,
+    payload: CartArray,
+  });
+};
 
 
 

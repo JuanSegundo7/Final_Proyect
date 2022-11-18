@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./Favorite.css";
-import { setFavorites } from "../../redux/Actions/Actions";
+import { matchFavorite, setFavorites } from "../../redux/Actions/Actions";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Favorite({ id }) {
@@ -9,8 +9,9 @@ export default function Favorite({ id }) {
 
   const handleFavorite = () => {
     dispatch(setFavorites(id));
+    dispatch(matchFavorite());
   };
-
+ 
   useEffect(() => {
     if (allFavorites.length) {
       localStorage.setItem("Favorites-pf", allFavorites);

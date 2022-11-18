@@ -17,6 +17,11 @@ import {
   SET_FAVORITES,
   FILL_ALL_FAVORITES,
   ADD_TO_CART,
+  MATCH_FAVORITE,
+  REMOVE_ONE_FROM_CART,
+  REMOVE_ALL_FROM_CART,
+  CLEAR_CART,
+  FIND_ALL_CART,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -39,6 +44,7 @@ const initialState = {
   updateFilter: 1,
 
   Favorites: [],
+  FavoritesCopy: [],
 
   User: {},
 
@@ -48,13 +54,12 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-  
     case GET_ONE_USER:
       return {
         ...state,
         User: action.payload,
       };
-       
+
     case FILL_ALL_FAVORITES:
       const myLocalStorage = localStorage.getItem("Favorites-pf");
       if (myLocalStorage && myLocalStorage.length) {
@@ -71,7 +76,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
       };
 
-
     case SET_FAVORITES:
       let totalFavorites = [...state.Favorites];
       if (state.Favorites.includes(action.payload)) {
@@ -86,13 +90,80 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         Favorites: totalFavorites,
       };
-    case ADD_TO_CART:
-
-      return{
-        ...state,
-        cart:[...state.cart, action.payload]
-      }
       
+      
+      case MATCH_FAVORITE: {
+        const allProducts = state.Products;
+        const favorites =
+        allProducts.length &&
+        state.Favorites?.map((fav) => {
+          return allProducts?.find((p) => p._id === fav);
+        });
+        
+        return {
+          ...state,
+          FavoritesCopy: favorites,
+        };
+      }
+
+      case ADD_TO_CART:
+        const allProducts = state.Products;
+
+        let newCoffe = allProducts.find((product) => product._id === action.payload);
+
+        let itemInCart = state.cart.find((product) => product._id === newCoffe._id);
+ 
+        return itemInCart ?{
+          ...state,
+          cart: state.cart.map((product) => product._id === newCoffe._id ? 
+          {...product, quantity: product.quantity + 1} : product)
+          }:{
+          ...state,
+          cart: [...state.cart, {...newCoffe, quantity:1}]
+        };
+      case REMOVE_ONE_FROM_CART:
+        const allCart = state.cart;
+
+        let findProduct = allCart.find((product) => product._id === action.payload);
+
+        if(findProduct.quantity > 1){
+          findProduct.quantity = findProduct.quantity - 1
+          return{
+            ...state,
+            cart: [...state.cart]
+          }
+        } else {
+          const filterCart = allCart.filter((coffe) => coffe._id !== action.payload)
+          return{
+            ...state,
+            cart: filterCart
+          }
+        }
+      case REMOVE_ALL_FROM_CART:
+        const cart = state.cart;
+        const filter2 = cart.filter((product) => product._id !== action.payload);
+        return{
+          ...state,
+          cart:filter2
+        }
+      case CLEAR_CART:
+        return{
+          ...state,
+          cart:[]
+        }
+      case FIND_ALL_CART:
+        const localStorageCart = JSON.parse(localStorage.getItem("Cart-pf"));
+
+        if(localStorageCart && localStorageCart.length){
+          return{
+            ...state,
+            cart:localStorageCart
+          }
+        } else{
+          return{
+            ...state
+          }
+        }
 
     case GET_PRODUCTS:
       return {
@@ -162,6 +233,7 @@ const rootReducer = (state = initialState, action) => {
             ...state,
             ByName: action.payload,
             Search: true,
+            updateFilter: state.updateFilter + 1,
           };
         }
 

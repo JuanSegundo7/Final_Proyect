@@ -5,7 +5,11 @@ import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Error from "../Card/imgs/error.webp";
 import "./ContainerInfo.css";
-import { cleanFiltered, cleanByName } from "../../redux/Actions/Actions";
+import {
+  cleanFiltered,
+  getProducts,
+  matchFavorite,
+} from "../../redux/Actions/Actions";
 import Paginated from "../Paginated/Paginated";
 
 export default function ContainerInfo({ info, order }) {
@@ -23,6 +27,7 @@ export default function ContainerInfo({ info, order }) {
 
   useEffect(() => {
     dispatch(cleanFiltered());
+    dispatch(matchFavorite());
   }, [location.pathname]);
 
   const filteredOrNot = FilterBoolean
@@ -36,7 +41,7 @@ export default function ContainerInfo({ info, order }) {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [dispatch]);
+  }, [dispatch, updateFilter, Filtered]);
 
   return (
     <div id="Contenido">
@@ -68,6 +73,7 @@ export default function ContainerInfo({ info, order }) {
                   type={cardCoffe.grinding_type}
                   price={cardCoffe.price}
                   brand={info}
+                  // stock={cardCoffe.stock}
                 />
               );
             })
