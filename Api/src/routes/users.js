@@ -65,7 +65,6 @@ router.delete('/:_id', async (req,res) =>{
 /* router.delete("/:_id", async (req, res) => {
 
     try{
-        //console.log("soy params:",req.params);
         const respuesta = await deleteBrand(req.params._id);
         res.send(respuesta);
     }catch(unError){
