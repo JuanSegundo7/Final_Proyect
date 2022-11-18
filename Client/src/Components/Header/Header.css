@@ -33,6 +33,15 @@
   transition: 0.5s;
 }
 
+#flex-svgs a{
+  text-decoration: none;
+}
+
+.svg-container p{
+  color: #fff;
+  margin: 0 0.2em;
+}
+
 .svg-container:hover {
   cursor: pointer;
   transition: 0.5s;

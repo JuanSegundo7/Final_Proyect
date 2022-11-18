@@ -41,6 +41,13 @@ function App() {
 
   if (isAuthenticated == true) {
     sessionStorage.setItem("user", JSON.stringify(user));
+    // return (
+    //   <BrowserRouter>
+    //     <main>
+    //       <h1>Hola</h1>
+    //     </main>
+    //   </BrowserRouter>
+    // );
   }
 
   return (
