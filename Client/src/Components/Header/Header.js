@@ -1,19 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "./img/coffee.png";
 import Categories from "../Categories/Categories";
 import { Link as Navigator } from "react-router-dom";
 import "./Header.css";
 import Login from "../Login/Login";
 import SearchBar from "../SearchBar/SearchBar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
+//import axios from "axios";
+import { postUser } from "../../redux/Actions/Actions";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const [state, setState] = useState();
-  const allCart = useSelector((state) => state.cart);
   const Favorites = useSelector((state) => state.Favorites);
+  const allCart = useSelector((state) => state.cart);
 
   const { user, isAuthenticated } = useAuth0();
+
+  //falta agregar que cuando el usuario se deslogue, se borre el local storage
+  //que cuando se loguee, se traigan los favoritos del usuario
+  //a como esta planteado hoy, hay un monton de inconsistencias....y tenemos que definir bien que hacer
+
+  useEffect(() => {
+    //la idea es que si NO existe, lo creo y le pongo todo cuando se loguea..incluso favoritos
+    //pero si YA existe, solo actualizo datos...incluidos favoritos
+    if (isAuthenticated) {
+      const myLocalStgFavorites = localStorage.getItem("Favorites-pf");
+      let favArray = [];
+      if (myLocalStgFavorites && myLocalStgFavorites.length) {
+        favArray = myLocalStgFavorites.split(",");
+      }
+      const userToBeCreated = {
+        _id: user.email,
+        name: user.given_name,
+        lastname: user.family_name,
+        picture: user.picture,
+        favorites: favArray,
+      };
+      //console.log(userToBeCreated);
+      dispatch(postUser(userToBeCreated));
+    }
+  }, [user]);
 
   let login;
 
