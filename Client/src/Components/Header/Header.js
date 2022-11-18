@@ -8,14 +8,14 @@ import SearchBar from "../SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 //import axios from "axios";
-import { postUser } from "../../redux/Actions/Actions";
+import { postUser, getOneUser } from "../../redux/Actions/Actions";
 
 const Header = () => {
   const dispatch = useDispatch();
   const [state, setState] = useState();
   const Favorites = useSelector((state) => state.Favorites);
   const allCart = useSelector((state) => state.cart);
-
+  const [usuarioLogueado,setUsuarioLogueado] = useState({});
   const { user, isAuthenticated } = useAuth0();
 
   //falta agregar que cuando el usuario se deslogue, se borre el local storage
@@ -27,6 +27,11 @@ const Header = () => {
     //pero si YA existe, solo actualizo datos...incluidos favoritos
     if (isAuthenticated) {
       const myLocalStgFavorites = localStorage.getItem("Favorites-pf");
+      const myLocalStgCart = JSON.parse(localStorage.getItem("Cart-pf"));
+      
+      //console.log("usuario:",user);
+      setUsuarioLogueado(user);
+
       let favArray = [];
       if (myLocalStgFavorites && myLocalStgFavorites.length) {
         favArray = myLocalStgFavorites.split(",");
@@ -37,15 +42,31 @@ const Header = () => {
         lastname: user.family_name,
         picture: user.picture,
         favorites: favArray,
+        cart: myLocalStgCart && myLocalStgCart.length ? myLocalStgCart.map(unObjeto => unObjeto._id) : []
       };
       //console.log(userToBeCreated);
-      dispatch(postUser(userToBeCreated));
+      //dispatch(postUser(userToBeCreated));
     }
   }, [user]);
 
-  let login;
 
-  if (state > 0) login = <Login close={setState} />;
+useEffect(()=>{
+  //console.log("estoy en el seguno useeffect:",unUsuario)
+  //Object.keys(object1).length
+  if (Object.keys(usuarioLogueado).length){
+    dispatch(getOneUser(usuarioLogueado.email))
+    //console.log("user back",unUsuario);
+  }
+},[usuarioLogueado])
+ 
+
+const myFullDbUser = useSelector((state) => state.User);
+if (Object.keys(myFullDbUser).length){
+  console.log("usuario de BD:",myFullDbUser)
+}else{
+  console.log("el usuario logueado no existe en la BBDD",usuarioLogueado)
+}
+
 
   return (
     <header>
@@ -110,7 +131,6 @@ const Header = () => {
         </div>
       </nav>
       <Categories />
-      {login}
     </header>
   );
 };
