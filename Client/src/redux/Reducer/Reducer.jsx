@@ -140,7 +140,8 @@ const rootReducer = (state = initialState, action) => {
           }
         } 
         if(allCart.length  === 1){
-          localStorage.clear('Cart-pf');
+          //localStorage.clear('Cart-pf');
+          localStorage.removeItem('Cart-pf');
         }
 
       case REMOVE_ALL_FROM_CART:
