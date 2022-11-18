@@ -22,6 +22,7 @@ import {
   REMOVE_ALL_FROM_CART,
   CLEAR_CART,
   FIND_ALL_CART,
+  SEND_EMAIL,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -334,6 +335,11 @@ const rootReducer = (state = initialState, action) => {
         ByName: ordered,
         updateFilter: state.updateFilter + 1,
       };
+    case SEND_EMAIL:
+      console.log("estoy en reducer");
+      return{
+        ... state
+      }
 
     default:
       return {
