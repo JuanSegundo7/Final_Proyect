@@ -11,6 +11,7 @@ import {
   getBrands,
   getCategories,
   fillAllFavorites,
+  findAllCart,
   matchFavorite,
 } from "./redux/Actions/Actions";
 
@@ -33,7 +34,7 @@ function App() {
     dispatch(getBrands());
     dispatch(getCategories());
     dispatch(fillAllFavorites());
-    dispatch(matchFavorite());
+    dispatch(findAllCart())
   }, [dispatch]);
 
   const { user, isAuthenticated, isLoading } = useAuth0();

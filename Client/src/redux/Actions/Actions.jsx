@@ -34,6 +34,13 @@ export const GET_BRANDS = "GET_BRANDS";
 export const ORDER_FILTER = "ORDER_FILTER";
 export const ORDER_SEARCH = "ORDER_SEARCH";
 
+//CART 
+export const ADD_TO_CART = "ADD_TO_CART";
+export const REMOVE_ONE_FROM_CART = "REMOVE_ONE_FROM_CART";
+export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
+export const CLEAR_CART = "CLEAR_CART";
+export const FIND_ALL_CART ="FIND_ALL_CART"
+
 const baseUrl = `http://localhost:3001/`;
 
 /*****************************************************************************************************/
@@ -205,5 +212,51 @@ export function getOneUser(id) {
     });
   };
 }
+
+
+//CART
+/*
+ADD_TO_CART = "ADD_TO_CART";
+export const REMOVE_ONE_FROM_CART = "REMOVE_ONE_FROM_CART";
+export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
+export const CLEAR_CART = "CLEAR_CART";
+*/
+export const addToCart = (id) => (dispatch) => {
+  //console.log('id de action',id)
+  return dispatch({
+    type: ADD_TO_CART,
+    payload: id,
+  });
+}
+
+export const removeOneToCart = (id) => (dispatch) => {
+  //console.log(id)
+  return dispatch({
+    type: REMOVE_ONE_FROM_CART,
+    payload: id,
+  });
+}
+
+export const removeAllToCart = (id) => (dispatch) => {
+  return dispatch({
+    type: REMOVE_ALL_FROM_CART,
+    payload: id
+  });
+}
+
+export const clearCart = () => (dispatch) => {
+  return dispatch({
+    type: CLEAR_CART,
+  });
+}
+
+export const findAllCart = (CartArray) => (dispatch) => {
+  return dispatch({
+    type: FIND_ALL_CART,
+    payload: CartArray,
+  });
+};
+
+
 
 // //http://localhost:3001/brands?category=coffee
