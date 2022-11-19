@@ -330,6 +330,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         Filtered: order,
         ByName: order,
+        FavoritesCopy: order,
         updateFilter: state.updateFilter + 1,
       };
 
