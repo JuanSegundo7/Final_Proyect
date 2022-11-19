@@ -24,7 +24,14 @@ export default function CartComponent() {
     }
 
     function sendMail(){
-        dispatch(sendEmail())
+        const data = {
+            email: "levyguidocarp@gmail.com",
+            name : "Guido",
+            image : allCart[0].image.url,
+            price : allCart[0].price ,
+            totalPrice : allCart[0].price * allCart[0].quantity,
+        }
+        dispatch(sendEmail(data))
     }
 
   return (
