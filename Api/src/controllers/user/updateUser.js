@@ -3,7 +3,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const updateUser = async function (_id,data) {
     
-let { name , lastname , password, favorites, picture, cart } = data;   //esto es req.params
+let { name , lastname , password, favorites, picture, cart, admin } = data;   //esto es req.params
 
 //Data Validation
 if ((typeof(_id)!=="string") || (!_id.length)){
@@ -97,7 +97,9 @@ if (cart){
       lastname,
       password,
       favorites,
-      picture,cart
+      picture,
+      cart,
+      admin
      };
     let resp = await User.findOneAndUpdate(filter, update, {
         new: true
