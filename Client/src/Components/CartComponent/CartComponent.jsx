@@ -23,13 +23,23 @@ export default function CartComponent() {
         }
     }
 
+    const datosEnMiBD = useSelector((state) => state.User);
+    useEffect(()=>{
+    if (datosEnMiBD.hasOwnProperty("_id")){
+        //console.log("Datos de mi BD CART:",datosEnMiBD);
+    }
+    if (datosEnMiBD.hasOwnProperty("error")){
+        //console.log("No existo y debería crearlo.CART");    
+    };
+    },[datosEnMiBD]);
+
     function sendMail(){
         const data = {
-            email: "levyguidocarp@gmail.com",
-            name : "Guido",
-            image : allCart[0].image.url,
-            price : allCart[0].price ,
-            totalPrice : allCart[0].price * allCart[0].quantity,
+            email: datosEnMiBD._id,
+            name : datosEnMiBD.name + " " + datosEnMiBD.lastname,
+            image : allCart[0].image.url,   //completar. Está todo en "datosEnMiBD"
+            price : allCart[0].price ,  //completar. Está todo en "datosEnMiBD"
+            totalPrice : allCart[0].price * allCart[0].quantity,  //completar. Está todo en "datosEnMiBD"
         }
         dispatch(sendEmail(data))
     }
