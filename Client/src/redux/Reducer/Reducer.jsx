@@ -13,7 +13,6 @@ import {
   CLEAN_NAME,
   CLEAN_ORDER,
   ORDER_FILTER,
-  ORDER_SEARCH,
   SET_FAVORITES,
   FILL_ALL_FAVORITES,
   ADD_TO_CART,
@@ -46,6 +45,10 @@ const initialState = {
 
   Favorites: [],
   FavoritesCopy: [],
+  FavoriteBoolean: true,
+
+  OrderPrice: [],
+  Price: false,
 
   User: {},
 
@@ -78,8 +81,6 @@ const rootReducer = (state = initialState, action) => {
 
     case SET_FAVORITES:
       let totalFavorites = [...state.Favorites];
-      console.log(action.payload, "esto es action payload");
-      console.log(state.Favorites, "esto es state Favorites");
       if (state.Favorites.includes(action.payload)) {
         totalFavorites = totalFavorites.filter(
           (unFavorito) => unFavorito !== action.payload
@@ -105,13 +106,13 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         FavoritesCopy: favorites,
+        FavoriteBoolean: true,
       };
     }
 
     case ADD_TO_CART:
       const allProducts = state.Products;
       const allCart2 = state.cart;
-      console.log("allCart2.length", allCart2.length);
       let newCoffe = allProducts.find(
         (product) => product._id === action.payload
       );
@@ -133,6 +134,7 @@ const rootReducer = (state = initialState, action) => {
             ...state,
             cart: [...state.cart, { ...newCoffe, quantity: 1 }],
           };
+
     case REMOVE_ONE_FROM_CART:
       const allCart = state.cart;
 
@@ -310,51 +312,33 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case ORDER_FILTER:
-      const filter = state.Filtered;
+      const filter = state[action.info];
+      const infoOrder = action.infoOrder;
       const order =
         action.payload === "DES"
           ? filter.sort((p1, p2) => {
-              if (p1.name > p2.name) return -1;
-              if (p1.name < p2.name) return 1;
+              if (p1[infoOrder] > p2[infoOrder]) return -1;
+              if (p1[infoOrder] < p2[infoOrder]) return 1;
               return 0;
             })
           : filter.sort((p1, p2) => {
-              if (p1.name > p2.name) return 1;
-              if (p1.name < p2.name) return -1;
+              if (p1[infoOrder] > p2[infoOrder]) return 1;
+              if (p1[infoOrder] < p2[infoOrder]) return -1;
               return 0;
             });
 
       return {
         ...state,
         Filtered: order,
+        ByName: order,
+        FavoritesCopy: order,
         updateFilter: state.updateFilter + 1,
       };
 
-    case ORDER_SEARCH:
-      const search = state.ByName;
-      const ordered =
-        action.payload === "DES"
-          ? search.sort((p1, p2) => {
-              if (p1.name > p2.name) return -1;
-              if (p1.name < p2.name) return 1;
-              return 0;
-            })
-          : search.sort((p1, p2) => {
-              if (p1.name > p2.name) return 1;
-              if (p1.name < p2.name) return -1;
-              return 0;
-            });
-
+    case SEND_EMAIL:
       return {
         ...state,
-        ByName: ordered,
-        updateFilter: state.updateFilter + 1,
       };
-    case SEND_EMAIL:
-      console.log("estoy en reducer");
-      return{
-        ... state
-      }
 
     default:
       return {
