@@ -45,6 +45,7 @@ const initialState = {
 
   Favorites: [],
   FavoritesCopy: [],
+  FavoriteBoolean: true,
 
   OrderPrice: [],
   Price: false,
@@ -80,8 +81,6 @@ const rootReducer = (state = initialState, action) => {
 
     case SET_FAVORITES:
       let totalFavorites = [...state.Favorites];
-      console.log(action.payload, "esto es action payload");
-      console.log(state.Favorites, "esto es state Favorites");
       if (state.Favorites.includes(action.payload)) {
         totalFavorites = totalFavorites.filter(
           (unFavorito) => unFavorito !== action.payload
@@ -107,6 +106,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         FavoritesCopy: favorites,
+        FavoriteBoolean: true,
       };
     }
 
@@ -134,6 +134,7 @@ const rootReducer = (state = initialState, action) => {
             ...state,
             cart: [...state.cart, { ...newCoffe, quantity: 1 }],
           };
+
     case REMOVE_ONE_FROM_CART:
       const allCart = state.cart;
 
@@ -335,7 +336,6 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case SEND_EMAIL:
-      console.log("estoy en reducer");
       return {
         ...state,
       };
