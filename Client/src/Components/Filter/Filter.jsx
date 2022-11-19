@@ -13,10 +13,11 @@ export default function ({ info, order }) {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
+  const state = useSelector((state) => state[info]);
   const Filter = useSelector((state) => state.Filter);
   const Search = useSelector((state) => state.Search);
-  const state = useSelector((state) => state[info]);
   const Price = useSelector((state) => state.Price);
+  const FavoritesBoolean = useSelector((state) => state.FavoriteBoolean);
 
   const [price, setPrice] = useState({
     min: 1,
@@ -56,6 +57,7 @@ export default function ({ info, order }) {
     if (Filter) dispatch(sortFilter(value, "Filtered", "name"));
     if (Search) dispatch(sortFilter(value, "ByName", "name"));
     if (Price) dispatch(sortFilter(value, "OrderPrice", "name"));
+    if (FavoritesBoolean) dispatch(sortFilter(value, "FavoritesCopy", "name"));
 
     switch (state) {
       case state: {
@@ -78,6 +80,7 @@ export default function ({ info, order }) {
     if (Filter) dispatch(sortFilter(value, "Filtered", "stock"));
     if (Search) dispatch(sortFilter(value, "ByName", "stock"));
     if (Price) dispatch(sortFilter(value, "OrderPrice", "stock"));
+    if (FavoritesBoolean) dispatch(sortFilter(value, "FavoritesCopy", "stock"));
 
     switch (state) {
       case state: {
@@ -100,6 +103,7 @@ export default function ({ info, order }) {
     if (Filter) dispatch(sortFilter(value, "Filtered", "price"));
     if (Search) dispatch(sortFilter(value, "ByName", "price"));
     if (Price) dispatch(sortFilter(value, "OrderPrice", "price"));
+    if (FavoritesBoolean) dispatch(sortFilter(value, "FavoritesCopy", "price"));
 
     switch (state) {
       case state: {
@@ -125,7 +129,6 @@ export default function ({ info, order }) {
     dispatch(
       getProductByQuery("category", `${order}`, `${order}`, `orderedbyname=ASC`)
     );
-    // if (location.pathname === "/search") navigate("/coffees");
   };
 
   return (
@@ -140,7 +143,7 @@ export default function ({ info, order }) {
             <input
               type="range"
               min="1"
-              max="500"
+              max="200"
               value={price.min}
               onChange={(e) => handlePriceMin(e)}
               id="range1"
