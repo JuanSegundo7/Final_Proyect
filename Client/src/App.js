@@ -42,7 +42,7 @@ function App() {
   const User = {admin: true}
 
 
-  if (User.admin == true) {
+  if (User.admin == false) {
     sessionStorage.setItem("user", JSON.stringify(user));
 
     return (
