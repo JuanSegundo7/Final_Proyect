@@ -14,16 +14,15 @@ import {
   findAllCart,
   matchFavorite,
 } from "./redux/Actions/Actions";
-
+import Dashboard from "./Dashboard/Dashboard"
 import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
   const FavCopy = useSelector((state) => state.FavoritesCopy);
 
-  if (FavCopy === 0) {
-    dispatch(getProducts()).then((res) => dispatch(matchFavorite()));
-  }
+  if (FavCopy === 0) dispatch(getProducts()).then(() => dispatch(matchFavorite()));
+
 
   useEffect(() => {
     dispatch(getProducts());
@@ -37,27 +36,28 @@ function App() {
     dispatch(findAllCart())
   }, [dispatch]);
 
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
 
-  if (isAuthenticated == true) {
+  
+  const User = {admin: true}
+
+
+  if (User.admin == true) {
     sessionStorage.setItem("user", JSON.stringify(user));
-    // return (
-    //   <BrowserRouter>
-    //     <main>
-    //       <h1>Hola</h1>
-    //     </main>
-    //   </BrowserRouter>
-    // );
+
+    return (
+      <Dashboard />
+    );
   }
 
   return (
     <BrowserRouter>
-      <Header />
-      <main>
-        <Switch />
-      </main>
-      <Footer />
-    </BrowserRouter>
+    <Header />
+    <main>
+      <Switch />
+    </main>
+    <Footer />
+  </BrowserRouter>
   );
 }
 
