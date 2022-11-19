@@ -13,7 +13,6 @@ import {
   CLEAN_NAME,
   CLEAN_ORDER,
   ORDER_FILTER,
-  ORDER_SEARCH,
   SET_FAVORITES,
   FILL_ALL_FAVORITES,
   ADD_TO_CART,
@@ -46,6 +45,9 @@ const initialState = {
 
   Favorites: [],
   FavoritesCopy: [],
+
+  OrderPrice: [],
+  Price: false,
 
   User: {},
 
@@ -111,7 +113,6 @@ const rootReducer = (state = initialState, action) => {
     case ADD_TO_CART:
       const allProducts = state.Products;
       const allCart2 = state.cart;
-      console.log("allCart2.length", allCart2.length);
       let newCoffe = allProducts.find(
         (product) => product._id === action.payload
       );
@@ -310,46 +311,28 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case ORDER_FILTER:
-      const filter = state.Filtered;
+      const filter = state[action.info];
+      const infoOrder = action.infoOrder;
       const order =
         action.payload === "DES"
           ? filter.sort((p1, p2) => {
-              if (p1.name > p2.name) return -1;
-              if (p1.name < p2.name) return 1;
+              if (p1[infoOrder] > p2[infoOrder]) return -1;
+              if (p1[infoOrder] < p2[infoOrder]) return 1;
               return 0;
             })
           : filter.sort((p1, p2) => {
-              if (p1.name > p2.name) return 1;
-              if (p1.name < p2.name) return -1;
+              if (p1[infoOrder] > p2[infoOrder]) return 1;
+              if (p1[infoOrder] < p2[infoOrder]) return -1;
               return 0;
             });
 
       return {
         ...state,
         Filtered: order,
+        ByName: order,
         updateFilter: state.updateFilter + 1,
       };
 
-    case ORDER_SEARCH:
-      const search = state.ByName;
-      const ordered =
-        action.payload === "DES"
-          ? search.sort((p1, p2) => {
-              if (p1.name > p2.name) return -1;
-              if (p1.name < p2.name) return 1;
-              return 0;
-            })
-          : search.sort((p1, p2) => {
-              if (p1.name > p2.name) return 1;
-              if (p1.name < p2.name) return -1;
-              return 0;
-            });
-
-      return {
-        ...state,
-        ByName: ordered,
-        updateFilter: state.updateFilter + 1,
-      };
     case SEND_EMAIL:
       console.log("estoy en reducer");
       return {

@@ -16,7 +16,7 @@ if(name){
 
   try {
     const resp = await User.find(findOptions).sort(sortOptions)
-    //.populate("favorites");
+    //.populate("favorites").populate("cart");
     return resp;
   }catch (unError){
     throw new Error(unError)

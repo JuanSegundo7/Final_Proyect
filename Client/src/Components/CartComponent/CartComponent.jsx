@@ -25,12 +25,31 @@ export default function CartComponent() {
         }
     }
 
-    function sendMail(){//ESTO NO VA A ESTAR ASI!! EL SEND EMAIL ES OTRA COSA, VAMOS A CAMBIAR EL NOMBRE DE LA FUNCION PERO VAMOS A DISPACHAR ESTO + LA PASARELA DE PAGO? O SOLO EL EMAIL
-        if(user){
-            dispatch(sendEmail())
-        } else {
-            loginWithRedirect()
+    // function sendMail(){//ESTO NO VA A ESTAR ASI!! EL SEND EMAIL ES OTRA COSA, VAMOS A CAMBIAR EL NOMBRE DE LA FUNCION PERO VAMOS A DISPACHAR ESTO + LA PASARELA DE PAGO? O SOLO EL EMAIL
+    //     if(user){
+    //         dispatch(sendEmail())
+    //     } else {
+    //         loginWithRedirect()
+    //     }
+    const datosEnMiBD = useSelector((state) => state.User);
+    useEffect(()=>{
+    if (datosEnMiBD.hasOwnProperty("_id")){
+        //console.log("Datos de mi BD CART:",datosEnMiBD);
+    }
+    if (datosEnMiBD.hasOwnProperty("error")){
+        //console.log("No existo y debería crearlo.CART");    
+    };
+    },[datosEnMiBD]);
+
+    function sendMail(){
+        const data = {
+            email: datosEnMiBD._id,
+            name : datosEnMiBD.name + " " + datosEnMiBD.lastname,
+            image : allCart[0].image.url,   //completar. Está todo en "datosEnMiBD"
+            price : allCart[0].price ,  //completar. Está todo en "datosEnMiBD"
+            totalPrice : allCart[0].price * allCart[0].quantity,  //completar. Está todo en "datosEnMiBD"
         }
+        dispatch(sendEmail(data))
     }
 
   return (

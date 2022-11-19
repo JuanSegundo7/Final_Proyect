@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getProductByQuery,
   filter,
   cleanFiltered,
   sortFilter,
-  sortSearch,
-  cleanByName,
 } from "../../redux/Actions/Actions";
 import "./Filter.css";
 
 export default function ({ info, order }) {
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
   const Filter = useSelector((state) => state.Filter);
   const Search = useSelector((state) => state.Search);
   const state = useSelector((state) => state[info]);
+  const Price = useSelector((state) => state.Price);
 
   const [price, setPrice] = useState({
     min: 1,
@@ -26,6 +26,7 @@ export default function ({ info, order }) {
   const [disabled, setDisabled] = useState({
     orderName: false,
     orderStock: false,
+    orderPrice: false,
   });
 
   useEffect(() => {
@@ -52,8 +53,9 @@ export default function ({ info, order }) {
     setDisabled({ ...disabled, orderName: true });
     const value = e.target.value;
 
-    if (Filter) dispatch(sortFilter(value));
-    if (Search) dispatch(sortSearch(value));
+    if (Filter) dispatch(sortFilter(value, "Filtered", "name"));
+    if (Search) dispatch(sortFilter(value, "ByName", "name"));
+    if (Price) dispatch(sortFilter(value, "OrderPrice", "name"));
 
     switch (state) {
       case state: {
@@ -73,8 +75,9 @@ export default function ({ info, order }) {
     setDisabled({ ...disabled, orderStock: true });
     const value = e.target.value;
 
-    if (Filter) dispatch(sortFilter(value));
-    if (Search) dispatch(sortSearch(value));
+    if (Filter) dispatch(sortFilter(value, "Filtered", "stock"));
+    if (Search) dispatch(sortFilter(value, "ByName", "stock"));
+    if (Price) dispatch(sortFilter(value, "OrderPrice", "stock"));
 
     switch (state) {
       case state: {
@@ -84,6 +87,28 @@ export default function ({ info, order }) {
             `${order}`,
             `${order}`,
             `orderedbystock=${value}`
+          )
+        );
+      }
+    }
+  };
+
+  const handleOrderPrice = (e) => {
+    setDisabled({ ...disabled, orderPrice: true });
+    const value = e.target.value;
+
+    if (Filter) dispatch(sortFilter(value, "Filtered", "price"));
+    if (Search) dispatch(sortFilter(value, "ByName", "price"));
+    if (Price) dispatch(sortFilter(value, "OrderPrice", "price"));
+
+    switch (state) {
+      case state: {
+        dispatch(
+          getProductByQuery(
+            "category",
+            `${order}`,
+            `${order}`,
+            `orderedbyprice=${value}`
           )
         );
       }
@@ -100,6 +125,7 @@ export default function ({ info, order }) {
     dispatch(
       getProductByQuery("category", `${order}`, `${order}`, `orderedbyname=ASC`)
     );
+    // if (location.pathname === "/search") navigate("/coffees");
   };
 
   return (
@@ -109,13 +135,7 @@ export default function ({ info, order }) {
           <button onClick={(e) => handleReset(e)} className="buttonFilter">
             Reset filters
           </button>
-          <div>
-            <select onChange={(e) => orderName(e)} id="order">
-              <option disabled={disabled.orderName}>Order by name</option>
-              <option value="ASC"> A-Z </option>
-              <option value="DES">Z-A</option>
-            </select>
-          </div>
+
           <div className="filterPrice">
             <input
               type="range"
@@ -142,10 +162,26 @@ export default function ({ info, order }) {
           </div>
 
           <div>
+            <select onChange={(e) => orderName(e)} id="order">
+              <option disabled={disabled.orderName}>Order by name</option>
+              <option value="ASC"> A-Z </option>
+              <option value="DES">Z-A</option>
+            </select>
+          </div>
+
+          <div>
             <select onChange={(e) => handleOrderStock(e)} id="order2">
               <option disabled={disabled.orderStock}>Stock</option>
-              <option value="ASC"> Menos Stock</option>
-              <option value="DES"> Mas Stock</option>
+              <option value="ASC"> Less Stock</option>
+              <option value="DES"> More Stock</option>
+            </select>
+          </div>
+
+          <div>
+            <select onChange={(e) => handleOrderPrice(e)} id="order3">
+              <option disabled={disabled.orderPrice}>Price</option>
+              <option value="ASC"> Less Price</option>
+              <option value="DES"> More Price</option>
             </select>
           </div>
         </div>
