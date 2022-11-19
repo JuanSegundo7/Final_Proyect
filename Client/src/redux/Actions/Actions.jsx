@@ -41,6 +41,9 @@ export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
 export const FIND_ALL_CART ="FIND_ALL_CART"
 
+//MAIL
+export const SEND_EMAIL = "SEND_EMAIL";
+
 const baseUrl = `http://localhost:3001/`;
 
 /*****************************************************************************************************/
@@ -205,7 +208,7 @@ export const postUser = (payload) => {
 export function getOneUser(id) {
   return async function (dispatch) {
     var response = await axios(`${baseUrl}users/${id}`);
-    console.log("datos:", response.data);
+    //console.log("datos:", response.data);
     return dispatch({
       type: GET_ONE_USER,
       payload: response.data,
@@ -222,7 +225,6 @@ export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
 */
 export const addToCart = (id) => (dispatch) => {
-  //console.log('id de action',id)
   return dispatch({
     type: ADD_TO_CART,
     payload: id,
@@ -230,7 +232,6 @@ export const addToCart = (id) => (dispatch) => {
 }
 
 export const removeOneToCart = (id) => (dispatch) => {
-  //console.log(id)
   return dispatch({
     type: REMOVE_ONE_FROM_CART,
     payload: id,
@@ -257,6 +258,12 @@ export const findAllCart = (CartArray) => (dispatch) => {
   });
 };
 
+//EMAIL
+
+export const sendEmail = (payload) => (dispatch)=>{
+  return axios.post(`${baseUrl}mail`, payload)
+      .then((data) => dispatch({ type: SEND_EMAIL, payload: data.data}));
+}
 
 
-// //http://localhost:3001/brands?category=coffee
+

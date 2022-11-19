@@ -4,25 +4,25 @@ import { addToCart, removeAllToCart, removeOneToCart } from '../../redux/Actions
 
 export default function CardCart(props) {
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    function addOne(e){
-        dispatch(addToCart(props._id))
-    }
+  function addOne(e) {
+    dispatch(addToCart(props._id))
+  }
 
-    function removeOne(id, all=false){
-     if(all){
-        dispatch(removeOneToCart(id)) 
-     } else {
-        dispatch(removeAllToCart(id))
-     }
+  function removeOne(id, all = false) {
+    if (all) {
+      dispatch(removeOneToCart(id))
+    } else {
+      dispatch(removeAllToCart(id))
     }
+  }
 
   return (
     <div>
       <div id="card">
-          <img
-            src={!props.img && props.img2 ? props.img2 : props.img}alt="img not found"className="imgCard"/>
+        <img
+          src={!props.img && props.img2 ? props.img2 : props.img} alt="img not found" className="imgCard" />
 
         <p id="name">
           {props.name ? props.name.toUpperCase() : "There is not name provided"}

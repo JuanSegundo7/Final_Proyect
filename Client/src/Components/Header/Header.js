@@ -3,49 +3,52 @@ import logo from "./img/coffee.png";
 import Categories from "../Categories/Categories";
 import { Link as Navigator } from "react-router-dom";
 import "./Header.css";
-import Login from "../Login/Login";
 import SearchBar from "../SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-//import axios from "axios";
-import { postUser } from "../../redux/Actions/Actions";
+import { postUser, getOneUser } from "../../redux/Actions/Actions";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const [state, setState] = useState();
   const Favorites = useSelector((state) => state.Favorites);
   const allCart = useSelector((state) => state.cart);
+  const {user, isAuthenticated, loginWithRedirect} = useAuth0()
+  const [myUserInDB,setMyUserInDB] = useState({});
 
-  const { user, isAuthenticated } = useAuth0();
+  
+//falta que cuando se loguee, se traigan los favoritos del usuario
 
-  //falta agregar que cuando el usuario se deslogue, se borre el local storage
-  //que cuando se loguee, se traigan los favoritos del usuario
-  //a como esta planteado hoy, hay un monton de inconsistencias....y tenemos que definir bien que hacer
+//Local Storages
+const myLocalStgFavorites = localStorage.getItem("Favorites-pf");
+const myLocalStgCart = JSON.parse(localStorage.getItem("Cart-pf"));
+let favArray = [];
+if (myLocalStgFavorites && myLocalStgFavorites.length) {
+  favArray = myLocalStgFavorites.split(",");
+}
+ 
+useEffect(()=>{
+  if (isAuthenticated){
+    //console.log("ya me loguee",user)
+    dispatch(getOneUser(user.email))
+  }
+},[user])
 
-  useEffect(() => {
-    //la idea es que si NO existe, lo creo y le pongo todo cuando se loguea..incluso favoritos
-    //pero si YA existe, solo actualizo datos...incluidos favoritos
-    if (isAuthenticated) {
-      const myLocalStgFavorites = localStorage.getItem("Favorites-pf");
-      let favArray = [];
-      if (myLocalStgFavorites && myLocalStgFavorites.length) {
-        favArray = myLocalStgFavorites.split(",");
-      }
-      const userToBeCreated = {
-        _id: user.email,
-        name: user.given_name,
-        lastname: user.family_name,
-        picture: user.picture,
-        favorites: favArray,
-      };
-      //console.log(userToBeCreated);
-      dispatch(postUser(userToBeCreated));
-    }
-  }, [user]);
-
-  let login;
-
-  if (state > 0) login = <Login close={setState} />;
+const datosEnMiBD = useSelector((state) => state.User);
+//console.log(datosEnMiBD);
+if (Object.keys(datosEnMiBD) && isAuthenticated){
+  const userToBeCreated = {
+    _id: user.email,
+    name: user.given_name,
+    lastname: user.family_name,
+    picture: user.picture,
+    favorites: favArray,
+    cart: myLocalStgCart && myLocalStgCart.length ? myLocalStgCart.map(unObjeto => unObjeto._id) : []
+  };
+  console.log("NO existo en la BBDD y me voy a crear:",userToBeCreated);
+  dispatch(postUser(userToBeCreated));
+}else{
+  console.log("SI existo en la BBDD y ya tengo todo en 'datosEnMiBD'")
+}
 
   return (
     <header>
@@ -62,21 +65,19 @@ const Header = () => {
         </figure>
         <SearchBar />
         <div id="flex-svgs">
-          <Navigator to={isAuthenticated ? "/profile" : "/login"}>
-            {!isAuthenticated ? (
-              <div className="svg-container">
-                <svg
+          {!isAuthenticated ? 
+              <div className="svg-container" onClick={() => loginWithRedirect()}>
+                  <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="svg"
-                  viewBox="0 0 448 512"
-                >
+                  viewBox="0 0 448 512">
                   <path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
                 </svg>
-              </div>
-            ) : (
-              <img id="user-img" src={user.picture} />
-            )}
-          </Navigator>
+              </div> :  
+              <Navigator to="/profile">
+                <img id="user-img" src={user.picture} /> 
+              </Navigator>
+          }
           <Navigator to="cart">
             <div className="svg-container">
               <svg
@@ -110,7 +111,6 @@ const Header = () => {
         </div>
       </nav>
       <Categories />
-      {login}
     </header>
   );
 };

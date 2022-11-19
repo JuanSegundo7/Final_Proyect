@@ -3,7 +3,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const updateUser = async function (_id,data) {
     
-let { name , lastname , password, favorites, picture } = data;   //esto es req.params
+let { name , lastname , password, favorites, picture, cart } = data;   //esto es req.params
 
 //Data Validation
 if ((typeof(_id)!=="string") || (!_id.length)){
@@ -45,7 +45,6 @@ if (picture){
 
 //Favorites validation is kinda hard but still needed.
 if (favorites){
-  //console.log("soy un array por mas que este vacio")
   if (!Array.isArray(favorites)){
     throw new Error ("No valid data type provided for favorites. It should be an array!")
   }
@@ -65,6 +64,26 @@ if (favorites){
   }
 }
 
+//Cart validation (same as for favorites)
+if (cart){
+  if (!Array.isArray(cart)){
+    throw new Error ("No valid data type provided for cart. It should be an array!")
+  }
+  if (cart.length){
+    for (let i=0; i<cart.length; i++){
+      if ((typeof(cart[i])!=="string") || (!ObjectId.isValid(cart[i]))) throw new Error ("No valid _id type provided for cart product!")    
+    }
+    //assuming everything is an objectId, I will really search for the existing ids within my database
+    for (let i=0; i<cart.length; i++){
+      try{
+        let resp = await Product.findById(cart[i])
+        if (!resp) throw new Error(`Product id:${cart[i]} not found in the Database!`)
+      }catch(unError){
+        throw new Error(unError.message)
+      }
+    }
+  }
+}
 
 //I'm not allowing admin rights to be changed within this route / controller as per security reasons.
 
@@ -78,7 +97,7 @@ if (favorites){
       lastname,
       password,
       favorites,
-      picture
+      picture,cart
      };
     let resp = await User.findOneAndUpdate(filter, update, {
         new: true
