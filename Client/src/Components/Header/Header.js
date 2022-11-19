@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { postUser, getOneUser } from "../../redux/Actions/Actions";
 
+//falta que cuando se loguee, se traigan los favoritos del usuario
+
 const Header = () => {
   const dispatch = useDispatch();
   const Favorites = useSelector((state) => state.Favorites);
@@ -15,8 +17,6 @@ const Header = () => {
   const {user, isAuthenticated, loginWithRedirect} = useAuth0()
   const [myUserInDB,setMyUserInDB] = useState({});
 
-  
-//falta que cuando se loguee, se traigan los favoritos del usuario
 
 //Local Storages
 const myLocalStgFavorites = localStorage.getItem("Favorites-pf");
@@ -34,21 +34,24 @@ useEffect(()=>{
 },[user])
 
 const datosEnMiBD = useSelector((state) => state.User);
-//console.log(datosEnMiBD);
-if (Object.keys(datosEnMiBD) && isAuthenticated){
-  const userToBeCreated = {
-    _id: user.email,
-    name: user.given_name,
-    lastname: user.family_name,
-    picture: user.picture,
-    favorites: favArray,
-    cart: myLocalStgCart && myLocalStgCart.length ? myLocalStgCart.map(unObjeto => unObjeto._id) : []
-  };
-  console.log("NO existo en la BBDD y me voy a crear:",userToBeCreated);
-  dispatch(postUser(userToBeCreated));
-}else{
-  console.log("SI existo en la BBDD y ya tengo todo en 'datosEnMiBD'")
-}
+useEffect(()=>{
+  if (datosEnMiBD.hasOwnProperty("_id")){
+    console.log("Datos de mi BD:",datosEnMiBD);
+  }
+  if (datosEnMiBD.hasOwnProperty("error")){
+    console.log("No existo y debería crearlo.");
+    const userToBeCreated = {
+      _id: user.email,
+      name: user.given_name,
+      lastname: user.family_name,
+      picture: user.picture,
+      favorites: favArray,
+      cart: myLocalStgCart && myLocalStgCart.length ? myLocalStgCart.map(unObjeto => unObjeto._id) : []
+    };
+    dispatch(postUser(userToBeCreated));
+  }
+},[datosEnMiBD]);
+
 
   return (
     <header>
