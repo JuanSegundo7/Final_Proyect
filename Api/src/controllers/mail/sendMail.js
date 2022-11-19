@@ -4,8 +4,6 @@ const { EMAIL_USER,  EMAIL_PASSWORD } = process.env;
 
 
 const sendEmail = async (data)=>{
-    // dos objetos que nos van a permitir el envio del correo
-    // el trasnporter y el de envio de correo
     // const reg = new RegExp(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
     // const funciona = reg.test(email);
     // if(!funciona) throw new Error("Error en la validacion del mail.")
@@ -16,7 +14,6 @@ const sendEmail = async (data)=>{
     //Despues tendremos que hacer un map
     //console.log("cart:",cart)
     
-
     const mail ={
         user: EMAIL_USER,
         pass: EMAIL_PASSWORD
@@ -35,7 +32,7 @@ const sendEmail = async (data)=>{
         subject: "Thank you for buying in Tiger Coffee Store ☕", // Subject line
         text: "Hello world?", // plain text body
         html: ` <div>
-                    <h2>${upperCaseName} We're happy to let you know that we've received your coffee order ☕ </h2>
+                    <h2>${upperCaseName} We are happy to let you know that we've received your coffee order ☕ </h2>
                     <p>Once your package ships, we will send you an email with a tracking number and link so you can see the movement of it.</p>
                     <h4>Purchase Summary:</h4>
                     <p>Product: ${cart[0].name}</p>

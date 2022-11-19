@@ -38,11 +38,9 @@ function App() {
 
   const { user, isAuthenticated } = useAuth0();
 
-  
-  const User = {admin: true}
+  const datosEnMiBD = useSelector((state) => state.User);
 
-
-  if (User.admin == false) {
+  if (datosEnMiBD.admin == true) {
     sessionStorage.setItem("user", JSON.stringify(user));
 
     return (
