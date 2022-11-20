@@ -4,7 +4,7 @@ const router = Router();
 
 router.post('/' , async function (req,res){
 
-    console.log("esto es body",req.body);
+    //console.log("esto es body",req.body);
     const { email } = req.body
     try {
         if(!email) throw new Error('No Email has been provided');

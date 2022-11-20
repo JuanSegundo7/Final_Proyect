@@ -4,7 +4,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const createUser = async function (data) {
 
-  const { _id, name, lastname, favorites, /* admin, */ password, picture, cart } = data;
+  const { _id, name, lastname, favorites, admin, password, picture, cart } = data;
   let userAlreadyExists = false;
 
 //Data Validation
@@ -26,9 +26,9 @@ if ((typeof(lastname)!=="string") || (!lastname.length)){
   throw new Error("Error: User Lastname cannot be empty and must be of text type.")
 }
 
-/* if (admin && (typeof(admin)!=="boolean")){
+if (admin && (typeof(admin)!=="boolean")){
   throw new Error("Error: Admin rights should be of boolean type (true for admin, false for regular users).")
-} */
+}
 
 if (password){
   if (typeof(password)!=="string") {
@@ -93,8 +93,8 @@ try {
       favorites, 
       password,
       picture,
-      cart
-      /* admin, */ //can only be modified in the DB directly to prevent hacking attempts
+      cart,
+      admin
     });
     return newUser;
 }catch (unError){
