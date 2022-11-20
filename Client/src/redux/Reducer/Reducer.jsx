@@ -22,6 +22,7 @@ import {
   CLEAR_CART,
   FIND_ALL_CART,
   SEND_EMAIL,
+  USERS,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -50,6 +51,7 @@ const initialState = {
   OrderPrice: [],
   Price: false,
 
+  Users: [],
   User: {},
 
   cart: [],
@@ -339,6 +341,13 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
       };
+
+    case USERS: {
+      return {
+        ...state,
+        Users: action.payload,
+      };
+    }
 
     default:
       return {
