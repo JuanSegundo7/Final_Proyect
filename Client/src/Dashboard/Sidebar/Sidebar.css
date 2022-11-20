@@ -11,6 +11,10 @@
     list-style-type: none;
 }
 
+#dashboard-sidebar a{
+    text-decoration: none;
+}
+
 #dashboard-sidebar li{
     margin: 1em 0;
     background-color: var(--light-blue);
