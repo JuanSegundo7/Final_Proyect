@@ -1,0 +1,10 @@
+#dashboard-nav{
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+#dashboard-nav img{
+    max-width: 2.5em;
+    width: 100%;
+    height: auto;
+}
