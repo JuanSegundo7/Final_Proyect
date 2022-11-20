@@ -31,6 +31,10 @@ if (lastname){
   }
 }
 
+if (admin && (typeof(admin)!=="boolean")){
+  throw new Error("Error: Admin rights should be of boolean type (true for admin, false for regular users).")
+}
+
 if (password){
   if (typeof(password)!=="string") {
     throw new Error("Error: User Password must be of text type.")
@@ -84,8 +88,6 @@ if (cart){
     }
   }
 }
-
-//I'm not allowing admin rights to be changed within this route / controller as per security reasons.
 
 
 //Si no encuentro error alguno, actualizo el/los dato/s.
