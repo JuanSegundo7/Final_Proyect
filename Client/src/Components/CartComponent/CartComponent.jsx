@@ -42,12 +42,14 @@ export default function CartComponent() {
     };
     },[datosEnMiBD]);
 
+
     function sendMail(){
         const data = {
             email: datosEnMiBD._id,
             name : datosEnMiBD.name + " " + datosEnMiBD.lastname,
-            image : allCart[0].image.url,   //completar. Está todo en "datosEnMiBD"
-            price : allCart[0].price ,  //completar. Está todo en "datosEnMiBD"
+            cart: datosEnMiBD.cart,
+            //image : allCart[0].image.url,   //completar. Está todo en "datosEnMiBD"
+            //price : allCart[0].price ,  //completar. Está todo en "datosEnMiBD"
             totalPrice : allCart[0].price * allCart[0].quantity,  //completar. Está todo en "datosEnMiBD"
         }
         dispatch(sendEmail(data))
