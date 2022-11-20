@@ -36,7 +36,7 @@ useEffect(()=>{
 const datosEnMiBD = useSelector((state) => state.User);
 useEffect(()=>{
   if (datosEnMiBD.hasOwnProperty("_id")){
-    console.log("Datos de mi BD:",datosEnMiBD);
+    //console.log("Datos de mi BD:",datosEnMiBD);
   }
   if (datosEnMiBD.hasOwnProperty("error")){
     //console.log("No existo y debería crearlo.");
