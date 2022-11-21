@@ -1,73 +1,71 @@
-import React, { useEffect }  from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import CardCart from './CardCart'
-import Error from '../Card/imgs/error.webp'
-import { clearCart, sendEmail } from '../../redux/Actions/Actions';
-
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import CardCart from "./CardCart";
+import Error from "../Card/imgs/error.webp";
+import { clearCart, sendEmail } from "../../redux/Actions/Actions";
 
 export default function CartComponent() {
-    const allCart = useSelector(state => state.cart);
-    const dispatch = useDispatch();
+  const allCart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        if (allCart.length) {
-          localStorage.setItem("Cart-pf", JSON.stringify(allCart));
-        }
-      }, [allCart]);
-
-    function emptyCart(e){
-        if(allCart.length){
-            dispatch(clearCart())
-        } else{
-            alert('No hay nada en el carrito') //cambiar esto
-        }
+  useEffect(() => {
+    if (allCart.length) {
+      localStorage.setItem("Cart-pf", JSON.stringify(allCart));
     }
+  }, [allCart]);
 
-    const datosEnMiBD = useSelector((state) => state.User);
-    //Con esto fuerzo a que se renderice nuevamente cuando efectivamente se carguen los datos de mi BD.
-    useEffect(()=>{
-    if (datosEnMiBD.hasOwnProperty("_id")){
-        console.log("Datos de mi BD CART:",datosEnMiBD);
+  function emptyCart(e) {
+    if (allCart.length) {
+      dispatch(clearCart());
+    } else {
+      alert("No hay nada en el carrito"); //cambiar esto
     }
-    },[datosEnMiBD]);
+  }
 
-    function sendMail(){
-        const data = {
-            email: datosEnMiBD._id,
-            name : datosEnMiBD.name + " " + datosEnMiBD.lastname,
-            cart:datosEnMiBD.cart,
-            //image : allCart[0].image.url,   //completar. Está todo en "datosEnMiBD"
-            price : allCart[0].price ,  //completar. Está todo en "datosEnMiBD"
-            totalPrice : allCart[0].price * allCart[0].quantity,  //completar. Está todo en "datosEnMiBD"
-        }
-        dispatch(sendEmail(data))
+  const datosEnMiBD = useSelector((state) => state.User);
+  //Con esto fuerzo a que se renderice nuevamente cuando efectivamente se carguen los datos de mi BD.
+  useEffect(() => {
+    if (datosEnMiBD.hasOwnProperty("_id")) {
+      console.log("Datos de mi BD CART:", datosEnMiBD);
     }
+  }, [datosEnMiBD]);
+
+  function sendMail() {
+    const data = {
+      email: datosEnMiBD._id,
+      name: datosEnMiBD.name + " " + datosEnMiBD.lastname,
+      cart: datosEnMiBD.cart,
+      //image : allCart[0].image.url,   //completar. Está todo en "datosEnMiBD"
+      price: allCart[0].price, //completar. Está todo en "datosEnMiBD"
+      totalPrice: allCart[0].price * allCart[0].quantity, //completar. Está todo en "datosEnMiBD"
+    };
+    dispatch(sendEmail(data));
+  }
 
   return (
     <div>
-        <button onClick={()=> sendMail()}>Buy</button>
-        <button onClick={(e) => emptyCart(e)}>Empty Cart</button>{/* cambiar esto */}
-        {
-            allCart.length ?
-            allCart.map((cardCoffe) =>
-                <CardCart
-                    img={
-                        !cardCoffe.image || cardCoffe.image === null
-                        ? Error
-                        : cardCoffe.image.url
-                    }
-                    img2={cardCoffe.image && cardCoffe.image}
-                    key={cardCoffe._id}
-                    _id={cardCoffe._id}
-                    name={cardCoffe.name}
-                    origin={cardCoffe.origin}
-                    type={cardCoffe.grinding_type}
-                    price={cardCoffe.price}
-                    quantity={cardCoffe.quantity}
-                />
-            )
-            :'There are no selected products!'
-        }
+      <button onClick={() => sendMail()}>Buy</button>
+      <button onClick={(e) => emptyCart(e)}>Empty Cart</button>
+      {/* cambiar esto */}
+      {allCart.length
+        ? allCart.map((cardCoffe) => (
+            <CardCart
+              img={
+                !cardCoffe.image || cardCoffe.image === null
+                  ? Error
+                  : cardCoffe.image.url
+              }
+              img2={cardCoffe.image && cardCoffe.image}
+              key={cardCoffe._id}
+              _id={cardCoffe._id}
+              name={cardCoffe.name}
+              origin={cardCoffe.origin}
+              type={cardCoffe.grinding_type}
+              price={cardCoffe.price}
+              quantity={cardCoffe.quantity}
+            />
+          ))
+        : "There are no selected products!"}
     </div>
-  )
+  );
 }

@@ -60,17 +60,16 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-
     case POST_USER:
       return {
         ...state,
-        User: action.payload
-      }
+        User: action.payload,
+      };
 
     case GET_ONE_USER:
       return {
         ...state,
-        User: action.payload
+        User: action.payload,
       };
 
     case FILL_ALL_FAVORITES:
