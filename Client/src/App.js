@@ -20,6 +20,7 @@ import "./App.css";
 function App() {
   const dispatch = useDispatch();
   const FavCopy = useSelector((state) => state.FavoritesCopy);
+  const allCart = useSelector(state => state.cart);
 
   if (FavCopy === 0) dispatch(getProducts()).then(() => dispatch(matchFavorite()));
 
@@ -35,6 +36,12 @@ function App() {
     dispatch(fillAllFavorites());
     dispatch(findAllCart())
   }, [dispatch]);
+
+  useEffect(() => {
+    if (allCart.length) {
+        localStorage.setItem("Cart-pf", JSON.stringify(allCart));
+    }
+}, [allCart]);
 
   const { user, isAuthenticated } = useAuth0();
 
