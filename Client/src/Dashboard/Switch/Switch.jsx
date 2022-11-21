@@ -6,8 +6,8 @@ import Form from "../../Components/ProductForm/ProductForm"
 const Switch = () => {
     return (
         <Routes>
-            <Route exact path="/users" element={<Table />} />
-            <Route exact path="/products" element={<Table />} />
+            <Route exact path="/users" element={<Table data="Products"/>} />
+            <Route exact path="/products" element={<Table data="Products" />} />
             <Route exact path="/create" element={<Form />} />
         </Routes>
     );
