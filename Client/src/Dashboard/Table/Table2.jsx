@@ -2,11 +2,13 @@ import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { useSelector } from "react-redux"
 
-export default function DataTable() {
+export default function DataTable({data}) {
 
-    const Products = useSelector((state) => state.Products)
+    const State = useSelector((state) => state[data])
 
-    const finalArray = Products.map((product) => {return ( {id: product._id, name: product.name, description: product.description, brand: product.brand.name, category: product.category.name, price: `$${product.price}`, stock: product.stock} )})
+    console.log(State)
+
+    const finalArray = State.map((product) => {return ( {id: product._id, name: product.name, description: product.description, brand: product.brand.name, category: product.category.name, price: `$${product.price}`, stock: product.stock} )})
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 220 },

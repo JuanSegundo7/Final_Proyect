@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from "./Navbar/Navbar"
 import Sidebar from "./Sidebar/Sidebar"
-import Table from "./Table/Table2";
+import Switch from "./Switch/Switch"
 import "./Dashboard.css"
 
 const Marquetes = () => {
@@ -11,7 +11,7 @@ const Marquetes = () => {
         <div id="flex-contain">
             <Sidebar />
             <div id="dashboard-contain">
-                <Table />
+                <Switch />
             </div>
         </div>
         </>
