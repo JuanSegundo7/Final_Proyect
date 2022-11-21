@@ -3,6 +3,26 @@
     border-bottom: 1px solid var(--light-gray);
 }
 
+#dashboard-nav{
+    display: flex;
+    justify-content: space-between;
+}
+
+#dashboard-nav #user-img:hover{
+    cursor: pointer
+}
+
+#dashboard-nav h1{
+    font-weight: 300;
+}
+
+#dashboard-nav span{
+    font-family: 'Pacifico', cursive;
+    color: var(--brown);
+    font-weight: 400;
+    font-size: 25px;
+}
+
 #dashboard-nav img{
     max-width: 2.5em;
     width: 100%;

@@ -278,18 +278,6 @@ const Form = () => {
                     {error.stock && <span>{error.stock}</span>}
                 </fieldset>
                 <fieldset className="product-flex-info">
-                    <select onChange={handleCategory} value={input.category}>
-                        <option disabled>Category</option>
-                        {allCategories.map(unaOpcion => <option value={unaOpcion._id} key={unaOpcion._id}>{unaOpcion.name}</option>)}
-                    </select>
-                </fieldset>
-                <fieldset className="product-flex-info">
-                    <select onChange={handleBrand} value={input.brand}>
-                        <option>Brand (Optional)</option>
-                        {allBrands.map(unaOpcion => <option value={unaOpcion._id} key={unaOpcion._id}>{unaOpcion.name}</option>)}
-                    </select>
-                </fieldset>
-                <fieldset className="product-flex-info">
                     <input
                         disabled={disableOriginAndGrinding}
                         name="origin"
@@ -307,8 +295,20 @@ const Form = () => {
                         onChange={(e) => handleGrindingType(e)} />
                     {error.grindingtype && <span>{error.grindingtype}</span>}
                 </fieldset>
-
-                <fieldset className="product-flex-info" disabled={disableImageUpload}>
+                <fieldset className="product-flex-info">
+                    <select onChange={handleCategory} value={input.category}>
+                        <option disabled>Category</option>
+                        {allCategories.map(unaOpcion => <option value={unaOpcion._id} key={unaOpcion._id}>{unaOpcion.name}</option>)}
+                    </select>
+                </fieldset>
+                <fieldset className="product-flex-info">
+                    <select onChange={handleBrand} value={input.brand}>
+                        <option>Brand (Optional)</option>
+                        {allBrands.map(unaOpcion => <option value={unaOpcion._id} key={unaOpcion._id}>{unaOpcion.name}</option>)}
+                    </select>
+                </fieldset>
+            </fieldset>
+                <fieldset className="product-flex-info" id="product-image" disabled={disableImageUpload}>
                     <label className="custom-file-upload">
                         <input className="regular-file-input"
                             name="image"
@@ -322,8 +322,6 @@ const Form = () => {
                     {loading ? (<h2></h2>) : (<img src={image} style={{ width: "100px" }} />)}
                     {error.image && <span>{error.image}</span>}
                 </fieldset>
-
-            </fieldset>
 
             <br></br>
             <button id="product-form-button" type="submit" disabled={disableSubmit}>Create Product</button>

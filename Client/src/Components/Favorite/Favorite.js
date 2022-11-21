@@ -11,7 +11,7 @@ export default function Favorite({ id }) {
     dispatch(setFavorites(id));
     dispatch(matchFavorite());
   };
- 
+
   useEffect(() => {
     if (allFavorites.length) {
       localStorage.setItem("Favorites-pf", allFavorites);

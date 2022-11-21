@@ -124,6 +124,7 @@ export default function ({ info, order }) {
     document.getElementById("range2").value = 500;
     document.getElementById("order").selectedIndex = 0;
     document.getElementById("order2").selectedIndex = 0;
+    document.getElementById("order3").selectedIndex = 0;
     setPrice({ min: 1, max: 500 });
     dispatch(cleanFiltered());
     dispatch(

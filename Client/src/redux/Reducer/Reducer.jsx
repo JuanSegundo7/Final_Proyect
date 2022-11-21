@@ -1,4 +1,5 @@
 import {
+  POST_USER,
   GET_ONE_USER,
   GET_PRODUCTS,
   GET_ONE_PRODUCT,
@@ -22,6 +23,7 @@ import {
   CLEAR_CART,
   FIND_ALL_CART,
   SEND_EMAIL,
+  USERS,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -50,6 +52,7 @@ const initialState = {
   OrderPrice: [],
   Price: false,
 
+  Users: [],
   User: {},
 
   cart: [],
@@ -57,10 +60,17 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case POST_USER:
+      return {
+        ...state,
+        User: action.payload
+      }
+
     case GET_ONE_USER:
       return {
         ...state,
-        User: action.payload,
+        User: action.payload
       };
 
     case FILL_ALL_FAVORITES:
@@ -339,6 +349,13 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
       };
+
+    case USERS: {
+      return {
+        ...state,
+        Users: action.payload,
+      };
+    }
 
     default:
       return {

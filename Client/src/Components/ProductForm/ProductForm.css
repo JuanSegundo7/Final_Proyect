@@ -4,12 +4,14 @@
     margin: 2em 0;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 #product-form-flex{
     display: flex;
     flex-wrap: wrap;
     padding: 0;
+    width: 100%;
     height: 100%;
     border: none;
     justify-content: space-between;
@@ -23,9 +25,9 @@
     border: none;
 }
 
-.product-flex-info input{
-    width: 95%;
-}
+/* .product-flex-info input{
+    width: 100%;
+} */
 
 .product-flex-info select{
     width: 100%;
@@ -34,6 +36,7 @@
 
 #Form input, #Form select{
     box-shadow: var(--shadow);
+    background-color: #fff;
     padding: 1em;
     border-radius: 12px;
     border: none;
@@ -48,12 +51,19 @@
 #product-form-button{
     padding: 0.5em;
     border: none;
+    width: 300px;
     box-shadow: var(--shadow);
     height: 50px;
     border-radius: 15px;
 }
+
 #product-form-button:hover{
     cursor: pointer;
+}
+
+#product-image{
+    width: 300px;
+    text-align: center;
 }
 
 .regular-file-input{

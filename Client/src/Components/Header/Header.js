@@ -14,17 +14,16 @@ const Header = () => {
   const dispatch = useDispatch();
   const Favorites = useSelector((state) => state.Favorites);
   const allCart = useSelector((state) => state.cart);
-  const {user, isAuthenticated, loginWithRedirect} = useAuth0()
-  const [myUserInDB,setMyUserInDB] = useState({});
+  const {user, isAuthenticated, loginWithRedirect} = useAuth0();
 
 
 //Local Storages
-/* const myLocalStgFavorites = localStorage.getItem("Favorites-pf");
+const myLocalStgFavorites = localStorage.getItem("Favorites-pf");
 const myLocalStgCart = JSON.parse(localStorage.getItem("Cart-pf"));
 let favArray = [];
 if (myLocalStgFavorites && myLocalStgFavorites.length) {
   favArray = myLocalStgFavorites.split(",");
-} */
+}
  
 useEffect(()=>{
   if (isAuthenticated){
@@ -34,24 +33,27 @@ useEffect(()=>{
 },[user])
 
 const datosEnMiBD = useSelector((state) => state.User);
+//console.log("Datos de mi BD xxx:",datosEnMiBD);
 useEffect(()=>{
   if (datosEnMiBD.hasOwnProperty("_id")){
-    console.log("Sí existo en la BD:",datosEnMiBD);
-    //deberia traerme los datos de favoritos
+    //console.log("Datos de mi BD:",datosEnMiBD);
   }
   if (datosEnMiBD.hasOwnProperty("error")){
-    console.log("No existo y debería crearlo.");
-    /* const userToBeCreated = {
+    //console.log("No existo y debería crearlo.");
+    const userToBeCreated = {
       _id: user.email,
-      name: user.given_name,
-      lastname: user.family_name,
+      name: user.given_name ? user.given_name : user.email,//for local users only
+      lastname: user.family_name ? user.family_name : user.email,//for local users only
       picture: user.picture,
-      favorites: favArray, */
-      //cart: myLocalStgCart && myLocalStgCart.length ? myLocalStgCart.map(unObjeto => unObjeto._id) : []
-    //};
-    //dispatch(postUser(userToBeCreated));
+      favorites: favArray,
+      cart: myLocalStgCart && myLocalStgCart.length ? myLocalStgCart.map(unObjeto => unObjeto._id) : []
+    };
+    dispatch(postUser(userToBeCreated));
+    //console.log("Datos de mi BD del error:",datosEnMiBD);
   }
+
 },[datosEnMiBD]);
+
 
 
   return (

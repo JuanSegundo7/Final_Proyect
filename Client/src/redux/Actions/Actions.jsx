@@ -2,6 +2,7 @@ import axios from "axios";
 
 // USERS
 export const GET_ONE_USER = "GET_ONE_USER";
+export const POST_USER = "POST_USER";
 
 // FAVORITES
 export const SET_FAVORITES = "SET_FAVORITES";
@@ -43,6 +44,10 @@ export const FIND_ALL_CART = "FIND_ALL_CART";
 
 //MAIL
 export const SEND_EMAIL = "SEND_EMAIL";
+
+//USERS
+
+export const USERS = "USERS";
 
 const baseUrl = `http://localhost:3001/`;
 
@@ -199,7 +204,10 @@ export const postUser = (payload) => {
   return async function (dispatch) {
     try {
       var response = await axios.post(`${baseUrl}users`, payload);
-      return response;
+      return dispatch ({
+        type: POST_USER,
+      payload: response.data,
+      })
     } catch (error) {
       console.log("error", error);
     }
@@ -216,6 +224,12 @@ export function getOneUser(id) {
     });
   };
 }
+
+export const Users = () => (dispatch) => {
+  return axios(`${baseUrl}users`)
+    .then((res) => dispatch({ type: USERS, payload: res.data }))
+    .catch((err) => console.log(err));
+};
 
 //CART
 /*
@@ -265,3 +279,5 @@ export const sendEmail = (payload) => (dispatch) => {
     .post(`${baseUrl}mail`, payload)
     .then((data) => dispatch({ type: SEND_EMAIL, payload: data.data }));
 };
+
+
