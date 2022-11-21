@@ -3,7 +3,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const updateUser = async function (_id,data) {
     
-let { name , lastname , password, favorites, picture, cart, admin } = data;   //esto es req.params
+let { name , lastname , favorites, picture, cart, admin } = data;   //esto es req.params
 
 //Data Validation
 if ((typeof(_id)!=="string") || (!_id.length)){
@@ -33,12 +33,6 @@ if (lastname){
 
 if (admin && (typeof(admin)!=="boolean")){
   throw new Error("Error: Admin rights should be of boolean type (true for admin, false for regular users).")
-}
-
-if (password){
-  if (typeof(password)!=="string") {
-    throw new Error("Error: User Password must be of text type.")
-  }
 }
 
 if (picture){
@@ -75,13 +69,14 @@ if (cart){
   }
   if (cart.length){
     for (let i=0; i<cart.length; i++){
-      if ((typeof(cart[i])!=="string") || (!ObjectId.isValid(cart[i]))) throw new Error ("No valid _id type provided for cart product!")    
+      if ((typeof(cart[i]._id)!=="string") || (!ObjectId.isValid(cart[i]._id))) throw new Error ("No valid _id type provided for cart product!")
+      if ((typeof(cart[i].quantity)!=="number") || (cart[i].quantity<1)) throw new Error ("No valid quantity type provided for cart product! (it should be at least 1)")
     }
     //assuming everything is an objectId, I will really search for the existing ids within my database
     for (let i=0; i<cart.length; i++){
       try{
-        let resp = await Product.findById(cart[i])
-        if (!resp) throw new Error(`Product id:${cart[i]} not found in the Database!`)
+        let resp = await Product.findById(cart[i]._id)
+        if (!resp) throw new Error(`Product id:${cart[i]._id} not found in the Database!`)
       }catch(unError){
         throw new Error(unError.message)
       }
@@ -97,7 +92,6 @@ if (cart){
     const update = { 
       name,
       lastname,
-      password,
       favorites,
       picture,
       cart,
