@@ -38,7 +38,9 @@
     justify-content: center;
     flex-direction: column;
     padding: 1em;
+    border-radius: 15px;
     height: 100vh;
+    background-color: #fff;
 }
 
 .menuFilters div{
