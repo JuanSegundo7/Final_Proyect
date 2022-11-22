@@ -6,6 +6,10 @@ import { clearCart, sendEmail } from "../../redux/Actions/Actions";
 import "./CartComponent.css";
 import { useState } from "react";
 
+  //-------------------------------------
+import { useAuth0 } from "@auth0/auth0-react";
+  //-------------------------------------
+
 export default function CartComponent() {
   const allCart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -30,13 +34,6 @@ export default function CartComponent() {
     }
   }, [allCart]);
 
-  function emptyCart(e) {
-    if (allCart.length) {
-      dispatch(clearCart());
-    } else {
-      alert("No hay nada en el carrito"); //cambiar esto
-    }
-  }
 
   const datosEnMiBD = useSelector((state) => state.User);
   //Con esto fuerzo a que se renderice nuevamente cuando efectivamente se carguen los datos de mi BD.
