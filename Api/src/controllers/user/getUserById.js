@@ -1,16 +1,37 @@
-const { User } = require('../../db.js');
+const { User, Product } = require('../../db.js');
+const getProductById = require("../../controllers/product/getProductById.js")
+
+var response = null;
+var resp = null;
 
 const getUserById = async function (UserId) {
   try{
-    const resp = await User.findById(UserId)
-    .populate("favorites")//.populate("cart");
+    
+    resp = await User.findById(UserId).lean()
+    .populate("favorites")//.populate("cart"); //this not functional populate is simulated down below.
+
+
+    if (resp && resp.cart && resp.cart.length){
+      for (let i=0; i<resp.cart.length; i++){
+        try {
+          response = await getProductById(resp.cart[i]._id);
+          resp.cart[i]["name"] = response.name;
+          resp.cart[i]["stock"] = response.stock;
+          resp.cart[i]["image"] = response.image.url;
+          resp.cart[i]["price"] = response.price;
+          if (!response) console.log(`no product found matching the provided id ${resp.cart[i]._id}`)
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    }
 
     //if (!resp) throw new Error("No User matches the informed id...")
     if (!resp) {
       console.log("No User matches the informed id...");
       return {error: "no user Id found in the DataBase."}
     }
-  
+
     return resp;
 
   }catch(unError){
