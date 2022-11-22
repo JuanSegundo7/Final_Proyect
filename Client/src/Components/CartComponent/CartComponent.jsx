@@ -59,7 +59,7 @@ export default function CartComponent() {
     dispatch(sendEmail(data));
   }
 
-  console.log(allCart);
+  // console.log("esto es estado global", allCart);
 
   return (
     <div id="Cart">
