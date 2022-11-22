@@ -1,5 +1,5 @@
-const { User, Product } = require('../../db.js');
-const getProductById = require("../../controllers/product/getProductById.js")
+const { User } = require('../../db.js');
+const getProductById = require("../../controllers/product/getProductById.js");
 
 var response = null;
 var resp = null;
@@ -12,6 +12,7 @@ const getUserById = async function (UserId) {
 
 
     if (resp && resp.cart && resp.cart.length){
+      console.log("hoolaaaa, entre bien")
       for (let i=0; i<resp.cart.length; i++){
         try {
           response = await getProductById(resp.cart[i]._id);
