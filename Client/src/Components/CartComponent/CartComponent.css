@@ -151,3 +151,15 @@
 }
 
 
+#final-button-disabled{
+    background-color: var(--grey);
+    color: #fff;
+    margin-top: 1em;
+    border: none;
+    border-radius: 8px;
+    min-width: 200px;
+    cursor: pointer;
+    padding: 13px 32px 12px;
+}
+
+

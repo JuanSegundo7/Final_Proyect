@@ -5,9 +5,13 @@ import { addToCart, removeAllToCart, removeOneToCart } from '../../redux/Actions
 export default function CardCart(props) {
 
   const dispatch = useDispatch();
+ 
+  //console.log(props.stock)
 
   function addOne(e) {
-    dispatch(addToCart(props._id))
+    if(props.stock >= 1){
+      dispatch(addToCart(props._id))
+    } 
   }
 
   function removeOne(id, all = false) {
@@ -17,6 +21,7 @@ export default function CardCart(props) {
       dispatch(removeAllToCart(id))
     }
   }
+
 
   return (
     <div>
@@ -30,7 +35,7 @@ export default function CardCart(props) {
           <div id="flex-stock-buttons">
             <div className="flex-card-info" id="cart-buttons">
               <button onClick={() => removeOne(props._id, true)}>-</button>
-              <p>{props.quantity > props.stock ? props.stock : props.quantity}</p>
+              <p>{props.quantity}</p>
               <button onClick={(e) => addOne(e)}>+</button>
             </div>
             <p id="card-stock">{props.stock} available</p>
