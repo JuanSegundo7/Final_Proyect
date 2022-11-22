@@ -14,47 +14,46 @@ const Header = () => {
   const dispatch = useDispatch();
   const Favorites = useSelector((state) => state.Favorites);
   const allCart = useSelector((state) => state.cart);
-  const {user, isAuthenticated, loginWithRedirect} = useAuth0();
+  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
 
-
-//Local Storages
-const myLocalStgFavorites = localStorage.getItem("Favorites-pf");
-const myLocalStgCart = JSON.parse(localStorage.getItem("Cart-pf"));
-let favArray = [];
-if (myLocalStgFavorites && myLocalStgFavorites.length) {
-  favArray = myLocalStgFavorites.split(",");
-}
- 
-useEffect(()=>{
-  if (isAuthenticated){
-    //console.log("ya me loguee",user)
-    dispatch(getOneUser(user.email))
-  }
-},[user])
-
-const datosEnMiBD = useSelector((state) => state.User);
-//console.log("Datos de mi BD xxx:",datosEnMiBD);
-useEffect(()=>{
-  if (datosEnMiBD.hasOwnProperty("_id")){
-    //console.log("Datos de mi BD:",datosEnMiBD);
-  }
-  if (datosEnMiBD.hasOwnProperty("error")){
-    //console.log("No existo y debería crearlo.");
-    const userToBeCreated = {
-      _id: user.email,
-      name: user.given_name ? user.given_name : user.email,//for local users only
-      lastname: user.family_name ? user.family_name : user.email,//for local users only
-      picture: user.picture,
-      favorites: favArray,
-      cart: myLocalStgCart && myLocalStgCart.length ? myLocalStgCart.map(unObjeto => unObjeto._id) : []
-    };
-    dispatch(postUser(userToBeCreated));
-    //console.log("Datos de mi BD del error:",datosEnMiBD);
+  //Local Storages
+  const myLocalStgFavorites = localStorage.getItem("Favorites-pf");
+  const myLocalStgCart = JSON.parse(localStorage.getItem("Cart-pf"));
+  let favArray = [];
+  if (myLocalStgFavorites && myLocalStgFavorites.length) {
+    favArray = myLocalStgFavorites.split(",");
   }
 
-},[datosEnMiBD]);
+  useEffect(() => {
+    if (isAuthenticated) {
+      //console.log("ya me loguee",user)
+      dispatch(getOneUser(user.email));
+    }
+  }, [user]);
 
-
+  const datosEnMiBD = useSelector((state) => state.User);
+  //console.log("Datos de mi BD xxx:",datosEnMiBD);
+  useEffect(() => {
+    if (datosEnMiBD.hasOwnProperty("_id")) {
+      //console.log("Datos de mi BD:",datosEnMiBD);
+    }
+    if (datosEnMiBD.hasOwnProperty("error")) {
+      //console.log("No existo y debería crearlo.");
+      const userToBeCreated = {
+        _id: user.email,
+        name: user.given_name ? user.given_name : user.email, //for local users only
+        lastname: user.family_name ? user.family_name : user.email, //for local users only
+        picture: user.picture,
+        favorites: favArray,
+        cart:
+          myLocalStgCart && myLocalStgCart.length
+            ? myLocalStgCart.map((unObjeto) => unObjeto._id)
+            : [],
+      };
+      dispatch(postUser(userToBeCreated));
+      //console.log("Datos de mi BD del error:",datosEnMiBD);
+    }
+  }, [datosEnMiBD]);
 
   return (
     <header>
@@ -71,19 +70,21 @@ useEffect(()=>{
         </figure>
         <SearchBar />
         <div id="flex-svgs">
-          {!isAuthenticated ? 
-              <div className="svg-container" onClick={() => loginWithRedirect()}>
-                  <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="svg"
-                  viewBox="0 0 448 512">
-                  <path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
-                </svg>
-              </div> :  
-              <Navigator to="/profile">
-                <img id="user-img" src={user.picture} /> 
-              </Navigator>
-          }
+          {!isAuthenticated ? (
+            <div className="svg-container" onClick={() => loginWithRedirect()}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="svg"
+                viewBox="0 0 448 512"
+              >
+                <path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
+              </svg>
+            </div>
+          ) : (
+            <Navigator to="/profile">
+              <img id="user-img" src={user.picture} />
+            </Navigator>
+          )}
           <Navigator to="cart">
             <div className="svg-container">
               <svg

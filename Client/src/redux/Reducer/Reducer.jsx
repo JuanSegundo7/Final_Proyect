@@ -24,6 +24,7 @@ import {
   FIND_ALL_CART,
   SEND_EMAIL,
   USERS,
+  UPDATE_USER,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -60,18 +61,6 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case POST_USER:
-      return {
-        ...state,
-        User: action.payload,
-      };
-
-    case GET_ONE_USER:
-      return {
-        ...state,
-        User: action.payload,
-      };
-
     case FILL_ALL_FAVORITES:
       const myLocalStorage = localStorage.getItem("Favorites-pf");
       if (myLocalStorage && myLocalStorage.length) {
@@ -167,7 +156,7 @@ const rootReducer = (state = initialState, action) => {
         };
       }
       if (allCart.length === 1) {
-        localStorage.clear("Cart-pf");
+        localStorage.removeItem("Cart-pf");
       }
 
     case REMOVE_ALL_FROM_CART:
@@ -353,6 +342,28 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         Users: action.payload,
+      };
+    }
+
+    case POST_USER:
+      return {
+        ...state,
+        User: action.payload,
+        updateFilter: state.updateFilter + 1,
+      };
+
+    case GET_ONE_USER:
+      return {
+        ...state,
+        User: action.payload,
+        updateFilter: state.updateFilter + 1,
+      };
+
+    case UPDATE_USER: {
+      return {
+        ...state,
+        User: action.payload,
+        updateFilter: state.updateFilter + 1,
       };
     }
 

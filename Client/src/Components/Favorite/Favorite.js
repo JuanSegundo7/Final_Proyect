@@ -1,16 +1,33 @@
 import React, { useEffect } from "react";
 import "./Favorite.css";
-import { matchFavorite, setFavorites } from "../../redux/Actions/Actions";
+import {
+  getUsers,
+  matchFavorite,
+  setFavorites,
+  updateUser,
+} from "../../redux/Actions/Actions";
 import { useDispatch, useSelector } from "react-redux";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Favorite({ id }) {
   const dispatch = useDispatch();
   const allFavorites = useSelector((state) => state.Favorites);
+  const User = useSelector((state) => state.User);
+  const { isAuthenticated } = useAuth0();
 
   const handleFavorite = () => {
     dispatch(setFavorites(id));
     dispatch(matchFavorite());
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      const UserToBeUpdate = {
+        favorites: allFavorites,
+      };
+      dispatch(updateUser(User._id, UserToBeUpdate));
+    }
+  }, [allFavorites]);
 
   useEffect(() => {
     if (allFavorites.length) {
