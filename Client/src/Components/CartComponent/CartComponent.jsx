@@ -3,12 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import CardCart from "./CardCart";
 import Error from "../Card/imgs/error.webp";
 import { clearCart, sendEmail } from "../../redux/Actions/Actions";
-import { useAuth0 } from "@auth0/auth0-react";
+import "./CartComponent.css";
 
 export default function CartComponent() {
   const allCart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  const { user, loginWithRedirect } = useAuth0();
+
+  let precioTotal = 0;
+
+  let total = 0;
+
+  for (let i = 0; i < allCart.length; i++) {
+    total = allCart[i].price * allCart[i].quantity;
+
+    if (total > 0) precioTotal = total + precioTotal;
+  }
 
   useEffect(() => {
     if (allCart.length) {
@@ -50,11 +59,13 @@ export default function CartComponent() {
     dispatch(sendEmail(data));
   }
 
+  console.log(allCart);
+
   return (
-    <div>
-      <button onClick={() => sendMail()}>Buy</button>
-      <button onClick={(e) => emptyCart(e)}>Empty Cart</button>
-      {/* cambiar esto */}
+    <div id="Cart">
+      <div id="nav-cart">
+        <h1>Cart ({allCart.length})</h1>
+      </div>
       {allCart.length
         ? allCart.map((cardCoffe) => (
             <CardCart
@@ -71,10 +82,21 @@ export default function CartComponent() {
               type={cardCoffe.grinding_type}
               price={cardCoffe.price}
               quantity={cardCoffe.quantity}
+              stock={cardCoffe.stock}
             />
           ))
         : "There are no selected products!"}
-         
+      <div id="flex-total">
+        <h1>
+          <span id="total-price">
+            {precioTotal >= 500 ? "Total with shipping" : "Total"}
+          </span>{" "}
+          ${precioTotal}
+        </h1>
+        <button id="final-button" onClick={() => sendMail()}>
+          Buy
+        </button>
+      </div>
     </div>
   );
 }

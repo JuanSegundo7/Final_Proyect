@@ -12,6 +12,14 @@
   --light-blue: #E7EBF0;
 }
 
+.mobile-visible {
+  display: inline;
+}
+
+.desktop-visible{
+  display: none;
+}
+
 select:focus {
   outline: none
 }
@@ -21,6 +29,7 @@ h1,p, h2{
 }
 
 main{
+  background-color: var(--light-blue);
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -61,3 +70,12 @@ figure {
 }
 }
 
+@media (min-width: 1000px) {
+  .mobile-visible {
+    display: none;
+  }
+  
+  .desktop-visible{
+    display: inline;
+  }
+}
