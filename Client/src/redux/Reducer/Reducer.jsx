@@ -124,7 +124,7 @@ const rootReducer = (state = initialState, action) => {
             ...state,
             cart: state.cart.map((product) =>
               product._id === newCoffe._id
-                ? { ...product, quantity: product.quantity + 1 }
+                ? { ...product, quantity: product.quantity + 1, stock: product.stock - 1 }
                 : product
             ),
           }
@@ -142,6 +142,7 @@ const rootReducer = (state = initialState, action) => {
 
       if (findProduct.quantity > 1) {
         findProduct.quantity = findProduct.quantity - 1;
+        findProduct.stock = findProduct.stock + 1;
         return {
           ...state,
           cart: [...state.cart],
