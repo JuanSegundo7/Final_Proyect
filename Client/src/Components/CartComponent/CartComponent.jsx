@@ -45,9 +45,6 @@ export default function CartComponent() {
       email: datosEnMiBD._id,
       name: datosEnMiBD.name + " " + datosEnMiBD.lastname,
       cart: datosEnMiBD.cart,
-      //image : allCart[0].image.url,   //completar. Está todo en "datosEnMiBD"
-      price: allCart[0].price, //completar. Está todo en "datosEnMiBD"
-      totalPrice: allCart[0].price * allCart[0].quantity, //completar. Está todo en "datosEnMiBD"
     };
     dispatch(sendEmail(data));
   }
@@ -74,6 +71,7 @@ export default function CartComponent() {
               price={cardCoffe.price}
               quantity={cardCoffe.quantity}
               stock={cardCoffe.stock}
+              user={datosEnMiBD}
             />
           ))
         : "There are no selected products!"}

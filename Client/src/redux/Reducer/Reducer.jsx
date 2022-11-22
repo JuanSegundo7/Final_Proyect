@@ -119,7 +119,6 @@ const rootReducer = (state = initialState, action) => {
       let itemInCart = state.cart.find(
         (product) => product._id === newCoffe._id
       );
-
       return itemInCart
         ? {
             ...state,

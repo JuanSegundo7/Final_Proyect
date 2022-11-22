@@ -13,7 +13,6 @@ export default function CardCart(props) {
   const dispatch = useDispatch();
 
   //console.log(props.stock)
-
   const user = useSelector((state) => state.User);
   const cart = useSelector((state) => state.cart);
 
@@ -22,9 +21,8 @@ export default function CardCart(props) {
       const userToBeUpdate = {
         cart: cart,
       };
+      // console.log("es user cart", user.cart);
       dispatch(updateUser(user._id, userToBeUpdate));
-    } else {
-      console.log("holaaaaaaaaaaaaaaaaaaaaaaaaaa");
     }
   }, [cart]);
 
