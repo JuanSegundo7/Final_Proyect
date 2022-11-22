@@ -4,10 +4,12 @@ import CardCart from "./CardCart";
 import Error from "../Card/imgs/error.webp";
 import { clearCart, sendEmail } from "../../redux/Actions/Actions";
 import "./CartComponent.css";
+import { useState } from "react";
 
 export default function CartComponent() {
   const allCart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const [disabled, setDisabled] = useState(false);
 
   let precioTotal = 0;
 
@@ -22,6 +24,9 @@ export default function CartComponent() {
   useEffect(() => {
     if (allCart.length) {
       localStorage.setItem("Cart-pf", JSON.stringify(allCart));
+      console.log("allcart", allCart.length);
+    } else if (!allCart.length) {
+      setDisabled(true);
     }
   }, [allCart]);
 
@@ -33,17 +38,10 @@ export default function CartComponent() {
     }
   }
 
-  // function sendMail(){//ESTO NO VA A ESTAR ASI!! EL SEND EMAIL ES OTRA COSA, VAMOS A CAMBIAR EL NOMBRE DE LA FUNCION PERO VAMOS A DISPACHAR ESTO + LA PASARELA DE PAGO? O SOLO EL EMAIL
-  //     if(user){
-  //         dispatch(sendEmail())
-  //     } else {
-  //         loginWithRedirect()
-  //     }
   const datosEnMiBD = useSelector((state) => state.User);
   //Con esto fuerzo a que se renderice nuevamente cuando efectivamente se carguen los datos de mi BD.
   useEffect(() => {
     if (datosEnMiBD.hasOwnProperty("_id")) {
-      //console.log("Datos de mi BD CART:", datosEnMiBD);
     }
   }, [datosEnMiBD]);
 
@@ -58,8 +56,6 @@ export default function CartComponent() {
     };
     dispatch(sendEmail(data));
   }
-
-  // console.log("esto es estado global", allCart);
 
   return (
     <div id="Cart">
@@ -93,7 +89,11 @@ export default function CartComponent() {
           </span>{" "}
           ${precioTotal}
         </h1>
-        <button id="final-button" onClick={() => sendMail()}>
+        <button
+          id={disabled ? "final-button-disabled" : "final-button"}
+          disabled={disabled}
+          onClick={() => sendMail()}
+        >
           Buy
         </button>
       </div>
