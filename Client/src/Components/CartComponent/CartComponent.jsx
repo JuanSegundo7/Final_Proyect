@@ -9,7 +9,7 @@ import { useState } from "react";
 export default function CartComponent() {
   const allCart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  const [disabled, setDisabled] = useState(false)
+  const [disabled, setDisabled] = useState(false);
 
   let precioTotal = 0;
 
@@ -24,9 +24,9 @@ export default function CartComponent() {
   useEffect(() => {
     if (allCart.length) {
       localStorage.setItem("Cart-pf", JSON.stringify(allCart));
-      console.log('allcart', allCart.length)
-    } else if(!allCart.length){
-      setDisabled(true)
+      console.log("allcart", allCart.length);
+    } else if (!allCart.length) {
+      setDisabled(true);
     }
   }, [allCart]);
 
@@ -37,7 +37,6 @@ export default function CartComponent() {
       alert("No hay nada en el carrito"); //cambiar esto
     }
   }
-
 
   const datosEnMiBD = useSelector((state) => state.User);
   //Con esto fuerzo a que se renderice nuevamente cuando efectivamente se carguen los datos de mi BD.
@@ -57,8 +56,6 @@ export default function CartComponent() {
     };
     dispatch(sendEmail(data));
   }
-
-  //console.log(allCart);
 
   return (
     <div id="Cart">
@@ -92,7 +89,11 @@ export default function CartComponent() {
           </span>{" "}
           ${precioTotal}
         </h1>
-        <button id={disabled?'final-button-disabled':'final-button'} disabled= {disabled} onClick={() => sendMail()}>
+        <button
+          id={disabled ? "final-button-disabled" : "final-button"}
+          disabled={disabled}
+          onClick={() => sendMail()}
+        >
           Buy
         </button>
       </div>

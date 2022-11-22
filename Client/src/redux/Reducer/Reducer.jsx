@@ -57,6 +57,7 @@ const initialState = {
   User: {},
 
   cart: [],
+  update: 1,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -364,6 +365,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         User: action.payload,
+        update: state.update + 1,
       };
     }
 
