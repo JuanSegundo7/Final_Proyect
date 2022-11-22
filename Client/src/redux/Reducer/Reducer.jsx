@@ -125,7 +125,11 @@ const rootReducer = (state = initialState, action) => {
             ...state,
             cart: state.cart.map((product) =>
               product._id === newCoffe._id
-                ? { ...product, quantity: product.quantity + 1, stock: product.stock - 1 }
+                ? {
+                    ...product,
+                    quantity: product.quantity + 1,
+                    stock: product.stock - 1,
+                  }
                 : product
             ),
           }
@@ -164,6 +168,8 @@ const rootReducer = (state = initialState, action) => {
     case REMOVE_ALL_FROM_CART:
       const cart = state.cart;
       const filter2 = cart.filter((product) => product._id !== action.payload);
+      if (state.cart.length === 1) localStorage.removeItem("Cart-pf");
+
       return {
         ...state,
         cart: filter2,

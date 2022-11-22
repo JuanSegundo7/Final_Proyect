@@ -6,9 +6,9 @@ import { clearCart, sendEmail } from "../../redux/Actions/Actions";
 import "./CartComponent.css";
 import { useState } from "react";
 
-  //-------------------------------------
+//-------------------------------------
 import { useAuth0 } from "@auth0/auth0-react";
-  //-------------------------------------
+//-------------------------------------
 
 export default function CartComponent() {
   const allCart = useSelector((state) => state.cart);
@@ -28,12 +28,10 @@ export default function CartComponent() {
   useEffect(() => {
     if (allCart.length) {
       localStorage.setItem("Cart-pf", JSON.stringify(allCart));
-      console.log("allcart", allCart.length);
     } else if (!allCart.length) {
       setDisabled(true);
     }
   }, [allCart]);
-
 
   const datosEnMiBD = useSelector((state) => state.User);
   //Con esto fuerzo a que se renderice nuevamente cuando efectivamente se carguen los datos de mi BD.

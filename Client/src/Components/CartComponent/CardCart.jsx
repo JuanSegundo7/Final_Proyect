@@ -23,6 +23,8 @@ export default function CardCart(props) {
         cart: cart,
       };
       dispatch(updateUser(user._id, userToBeUpdate));
+    } else {
+      console.log("holaaaaaaaaaaaaaaaaaaaaaaaaaa");
     }
   }, [cart]);
 
