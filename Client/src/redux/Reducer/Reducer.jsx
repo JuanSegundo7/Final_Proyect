@@ -363,7 +363,6 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         User: action.payload,
-        updateFilter: state.updateFilter + 1,
       };
     }
 
