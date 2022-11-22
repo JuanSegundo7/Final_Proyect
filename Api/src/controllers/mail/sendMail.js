@@ -7,9 +7,12 @@ const sendEmail = async (data)=>{
     
     const { email, name , cart} = data
     const upperCaseName = name.toUpperCase();
-    const products = cart.map(unProducto => `<p>Product: ${unProducto.name} - Unit Price: ${unProducto.price}</p>`);
+    const products = cart.map(unProducto => `<p>Product: ${unProducto.name} - Unit Price: ${unProducto.price}</p><img src="${unProducto.image}" alt=${unProducto.name} width="200px" height="200px"/>`);
     const productsWithoutCommas = products.join('');
     
+    //console.log("soy data:",data)
+    //console.log(productsWithoutCommas)
+
     let total = 0;
     if (cart && cart.length)
         for (let i=0; i<cart.length; i++)
