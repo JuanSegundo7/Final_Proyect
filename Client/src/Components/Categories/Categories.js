@@ -37,7 +37,7 @@ const Categories = () => {
   };
 
   return (
-    <nav id="Categorys">
+    <nav id="Categorys" className="desktop-visible">
       <ul id="Categorys">
         <li>
           <Link to="/coffees">

@@ -31,6 +31,7 @@
 #containerDetail img{
     width: 40vw;
     margin: 2em;
+    border-radius: 30px;
 }
 
 #button-cart{

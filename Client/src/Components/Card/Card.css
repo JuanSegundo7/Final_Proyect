@@ -1,6 +1,7 @@
 #card {
   position: relative;
   box-shadow: var(--shadow);
+  background-color: #fff;
   border-radius: 15px;
   width: 200px;
   height: 410px;
@@ -43,7 +44,7 @@
   font-size: 20px;
 }
 #name{
-  font-weight: bold;
+  font-weight: 500;
   font-size: 24px;
   margin: 0;
   height: 100px;
