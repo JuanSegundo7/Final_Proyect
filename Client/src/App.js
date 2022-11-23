@@ -14,16 +14,16 @@ import {
   findAllCart,
   matchFavorite,
 } from "./redux/Actions/Actions";
-import Dashboard from "./Dashboard/Dashboard"
+import Dashboard from "./Dashboard/Dashboard";
 import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
   const FavCopy = useSelector((state) => state.FavoritesCopy);
-  const allCart = useSelector(state => state.cart);
+  const allCart = useSelector((state) => state.cart);
 
-  if (FavCopy === 0) dispatch(getProducts()).then(() => dispatch(matchFavorite()));
-
+  if (FavCopy === 0)
+    dispatch(getProducts()).then(() => dispatch(matchFavorite()));
 
   useEffect(() => {
     dispatch(getProducts());
@@ -34,14 +34,14 @@ function App() {
     dispatch(getBrands());
     dispatch(getCategories());
     dispatch(fillAllFavorites());
-    dispatch(findAllCart())
+    dispatch(findAllCart());
   }, [dispatch]);
 
   useEffect(() => {
     if (allCart.length) {
-        localStorage.setItem("Cart-pf", JSON.stringify(allCart));
+      localStorage.setItem("Cart-pf", JSON.stringify(allCart));
     }
-}, [allCart]);
+  }, [allCart]);
 
   const { user, isAuthenticated } = useAuth0();
 
@@ -59,12 +59,12 @@ function App() {
 
   return (
     <BrowserRouter>
-    <Header />
-    <main>
-      <Switch />
-    </main>
-    <Footer />
-  </BrowserRouter>
+      <Header />
+      <main>
+        <Switch />
+      </main>
+      <Footer />
+    </BrowserRouter>
   );
 }
 

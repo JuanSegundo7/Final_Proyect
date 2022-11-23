@@ -2,26 +2,36 @@ import { useAuth0 } from "@auth0/auth0-react";
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, updateUser } from "../../redux/Actions/Actions";
+import {
+  addToCart,
+  clearCart,
+  getOneUser,
+  updateUser,
+} from "../../redux/Actions/Actions";
 
 export default function Cart({ id }) {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.User);
-  const cart = useSelector((state) => state.cart);
-  const { isAuthenticated } = useAuth0();
+  // const User = useSelector((state) => state.User);
+  // const cart = useSelector((state) => state.cart);
+
+  //BUTTON ADD TO CART
 
   function handleToCart(e) {
     dispatch(addToCart(id));
   }
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      const userToBeUpdate = {
-        cart: cart,
-      };
-      dispatch(updateUser(user._id, userToBeUpdate));
-    }
-  }, [cart]);
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     if (User.cart.length > 0) {
+  //     }
+  //     dispatch(updateUser(User._id, { cart: cart }));
+  //   }
+
+  //   if (!user) {
+  //     dispatch(clearCart());
+  //     localStorage.removeItem("Cart-pf");
+  //   }
+  // }, [cart]);
 
   return (
     <div className="Cart-container">

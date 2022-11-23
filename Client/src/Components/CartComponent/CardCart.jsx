@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
+  getOneUser,
   removeAllToCart,
   removeOneToCart,
   updateUser,
@@ -16,15 +17,24 @@ export default function CardCart(props) {
   const user = useSelector((state) => state.User);
   const cart = useSelector((state) => state.cart);
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      const userToBeUpdate = {
-        cart: cart,
-      };
-      // console.log("es user cart", user.cart);
-      dispatch(updateUser(user._id, userToBeUpdate));
-    }
-  }, [cart]);
+  // if (user._id) {
+  //   dispatch(getOneUser(user._id)).then((res) => {
+  //     const userCart = res.payload.cart;
+  //     dispatch(updateUser(user._id, { ...userCart, cart })).catch((err) =>
+  //       console.error(err)
+  //     );
+  //   });
+  // }
+
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     const userToBeUpdate = {
+  //       cart: cart,
+  //     };
+  //     // console.log("es user cart", user.cart);
+  //     dispatch(updateUser(user._id, userToBeUpdate));
+  //   }
+  // }, [cart]);
 
   function addOne(e) {
     if (props.stock >= 1) {

@@ -111,30 +111,36 @@ const rootReducer = (state = initialState, action) => {
 
     case ADD_TO_CART:
       const allProducts = state.Products;
-      const allCart2 = state.cart;
+
       let newCoffe = allProducts.find(
         (product) => product._id === action.payload
       );
 
-      let itemInCart = state.cart.find(
-        (product) => product._id === newCoffe._id
-      );
+      let itemInCart = state.cart.find((product) => {
+        return product._id === newCoffe._id;
+      });
+
       return itemInCart
         ? {
             ...state,
-            cart: state.cart.map((product) =>
-              product._id === newCoffe._id
-                ? {
-                    ...product,
-                    quantity: product.quantity + 1,
-                    stock: product.stock - 1,
-                  }
-                : product
-            ),
+            cart: [
+              ...state.cart,
+              state.cart.map((product) =>
+                product._id === newCoffe._id
+                  ? {
+                      ...product,
+                      quantity: product.quantity + 1,
+                      stock: product.stock - 1,
+                    }
+                  : product
+              ),
+            ],
+            update: state.update + 1,
           }
         : {
             ...state,
             cart: [...state.cart, { ...newCoffe, quantity: 1 }],
+            update: state.update + 1,
           };
 
     case REMOVE_ONE_FROM_CART:
@@ -175,7 +181,7 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case CLEAR_CART:
-      localStorage.clear("Cart-pf");
+      localStorage.removeItem("Cart-pf");
       return {
         ...state,
         cart: [],
@@ -367,10 +373,13 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case UPDATE_USER: {
+      const add = state.User.cart;
+      const payload = action.payload;
+
       return {
         ...state,
-        User: action.payload,
-        update: state.update + 1,
+        User: payload,
+        // update: state.update + 1,
       };
     }
 

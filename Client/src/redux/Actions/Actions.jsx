@@ -217,8 +217,7 @@ export const postUser = (payload) => {
 
 export function getOneUser(id) {
   return async function (dispatch) {
-    var response = await axios(`${baseUrl}users/${id}`);
-    //console.log("datos:", response.data);
+    const response = await axios(`${baseUrl}users/${id}`);
     return dispatch({
       type: GET_ONE_USER,
       payload: response.data,
