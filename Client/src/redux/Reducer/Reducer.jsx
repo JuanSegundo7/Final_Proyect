@@ -1,10 +1,12 @@
 import {
   POST_USER,
+  USERS,
+  UPDATE_USER,
   GET_ONE_USER,
   GET_PRODUCTS,
   GET_ONE_PRODUCT,
-  POST_PRODUCT,
-  DELETE_PRODUCT,
+  //POST_PRODUCT,
+  //DELETE_PRODUCT,
   GET_PRODUCT_BY_QUERY,
   CLEAN_DETAIL,
   GET_BRANDS,
@@ -12,19 +14,18 @@ import {
   FILTER,
   CLEAN_FILTERED,
   CLEAN_NAME,
-  CLEAN_ORDER,
+  //CLEAN_ORDER,
   ORDER_FILTER,
-  SET_FAVORITES,
+  SET_ALL_FAVORITES,
+  ADD_ONE_FAVORITE,
   FILL_ALL_FAVORITES,
-  ADD_TO_CART,
   MATCH_FAVORITE,
-  REMOVE_ONE_FROM_CART,
+  /* ADD_TO_CART, */
+  /* REMOVE_ONE_FROM_CART,
   REMOVE_ALL_FROM_CART,
   CLEAR_CART,
-  FIND_ALL_CART,
+  FIND_ALL_CART, */
   SEND_EMAIL,
-  USERS,
-  UPDATE_USER,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -56,8 +57,8 @@ const initialState = {
   Users: [],
   User: {},
 
-  cart: [],
-  update: 1,
+  /* cart: [],
+  update: 1, */
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -78,7 +79,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
       };
 
-    case SET_FAVORITES:
+    case SET_ALL_FAVORITES:
+      return {
+        ...state,
+        Favorites: action.payload,
+      };
+
+    case ADD_ONE_FAVORITE:
       let totalFavorites = [...state.Favorites];
       if (state.Favorites.includes(action.payload)) {
         totalFavorites = totalFavorites.filter(
@@ -109,7 +116,7 @@ const rootReducer = (state = initialState, action) => {
       };
     }
 
-    case ADD_TO_CART:
+    /* case ADD_TO_CART:
       const allProducts = state.Products;
 
       let newCoffe = allProducts.find(
@@ -140,10 +147,9 @@ const rootReducer = (state = initialState, action) => {
         : {
             ...state,
             cart: [...state.cart, { ...newCoffe, quantity: 1 }],
-            update: state.update + 1,
-          };
+          }; */
 
-    case REMOVE_ONE_FROM_CART:
+    /* case REMOVE_ONE_FROM_CART:
       const allCart = state.cart;
 
       let findProduct = allCart.find(
@@ -168,9 +174,9 @@ const rootReducer = (state = initialState, action) => {
       }
       if (allCart.length === 1) {
         localStorage.removeItem("Cart-pf");
-      }
+      } */
 
-    case REMOVE_ALL_FROM_CART:
+    /* case REMOVE_ALL_FROM_CART:
       const cart = state.cart;
       const filter2 = cart.filter((product) => product._id !== action.payload);
       if (state.cart.length === 1) localStorage.removeItem("Cart-pf");
@@ -198,7 +204,7 @@ const rootReducer = (state = initialState, action) => {
         return {
           ...state,
         };
-      }
+      } */
 
     case GET_PRODUCTS:
       return {

@@ -36,8 +36,8 @@ export default function CartComponent() {
   const datosEnMiBD = useSelector((state) => state.User);
   //Con esto fuerzo a que se renderice nuevamente cuando efectivamente se carguen los datos de mi BD.
   useEffect(() => {
-    if (datosEnMiBD.hasOwnProperty("_id")) {
-    }
+    /* if (datosEnMiBD.hasOwnProperty("_id")) {
+    } */
   }, [datosEnMiBD]);
 
   function sendMail() {
@@ -46,6 +46,7 @@ export default function CartComponent() {
       name: datosEnMiBD.name + " " + datosEnMiBD.lastname,
       cart: datosEnMiBD.cart,
     };
+    console.log("soy cart en el front:", datosEnMiBD.cart);
     dispatch(sendEmail(data));
   }
 
