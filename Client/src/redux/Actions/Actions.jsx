@@ -6,7 +6,8 @@ export const POST_USER = "POST_USER";
 export const UPDATE_USER = "UPDATE_USER";
 
 // FAVORITES
-export const SET_FAVORITES = "SET_FAVORITES";
+export const SET_ALL_FAVORITES = "SET_ALL_FAVORITES";
+export const ADD_ONE_FAVORITE = "ADD_ONE_FAVORITE";
 export const FILL_ALL_FAVORITES = "FILL_ALL_FAVORITES";
 export const MATCH_FAVORITE = "MATCH_FAVORITE";
 
@@ -37,11 +38,11 @@ export const ORDER_FILTER = "ORDER_FILTER";
 export const ORDER_SEARCH = "ORDER_SEARCH";
 
 //CART
-export const ADD_TO_CART = "ADD_TO_CART";
+/* export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_ONE_FROM_CART = "REMOVE_ONE_FROM_CART";
 export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
-export const FIND_ALL_CART = "FIND_ALL_CART";
+export const FIND_ALL_CART = "FIND_ALL_CART"; */
 
 //MAIL
 export const SEND_EMAIL = "SEND_EMAIL";
@@ -97,8 +98,6 @@ export const getProductByQuery = (info, name, value, order) => {
     console.log(error.message, "Error en action");
   }
 };
-
-// dispatch(getOneProduct(id)) - Detail
 
 export const getOneProduct = (id) => async (dispatch) => {
   try {
@@ -181,16 +180,23 @@ export const postImage = (payload) => {
 
 // FAVORITES
 
-export const setFavorites = (newFavoriteId) => (dispatch) => {
+export const setAllFavorites = (totalFavorites) => (dispatch) => {
   return dispatch({
-    type: "SET_FAVORITES",
+    type: SET_ALL_FAVORITES,
+    payload: totalFavorites,
+  });
+};
+
+export const addOneFavorite = (newFavoriteId) => (dispatch) => {
+  return dispatch({
+    type: ADD_ONE_FAVORITE,
     payload: newFavoriteId,
   });
 };
 
 export const fillAllFavorites = (FavoritesArray) => (dispatch) => {
   return dispatch({
-    type: "FILL_ALL_FAVORITES",
+    type: FILL_ALL_FAVORITES,
     payload: FavoritesArray,
   });
 };
@@ -200,6 +206,20 @@ export const matchFavorite = () => (dispatch) => {
 };
 
 // USERS
+
+export const updateUser = (_id, body) => {
+  return async function (dispatch) {
+    try {
+      var response = await axios.put(`${baseUrl}users/${_id}`, body);
+      return dispatch({
+        type: UPDATE_USER,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+}
 
 export const postUser = (payload) => {
   return async function (dispatch) {
@@ -218,7 +238,7 @@ export const postUser = (payload) => {
 export function getOneUser(id) {
   return async function (dispatch) {
     var response = await axios(`${baseUrl}users/${id}`);
-    //console.log("datos:", response.data);
+    //console.log("datos locos:", response.data);
     return dispatch({
       type: GET_ONE_USER,
       payload: response.data,
@@ -232,12 +252,7 @@ export const getUsers = () => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
-export const updateUser = (id, body) => (dispatch) => {
-  return axios
-    .put(`${baseUrl}users/${id}`, body)
-    .then((res) => dispatch({ type: UPDATE_USER, payload: res.data }))
-    .catch((err) => console.log(err));
-};
+
 //CART
 /*
 ADD_TO_CART = "ADD_TO_CART";
@@ -245,39 +260,39 @@ export const REMOVE_ONE_FROM_CART = "REMOVE_ONE_FROM_CART";
 export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
 */
-export const addToCart = (id) => (dispatch) => {
+/* export const addToCart = (id) => (dispatch) => {
   return dispatch({
     type: ADD_TO_CART,
     payload: id,
   });
-};
+}; */
 
-export const removeOneToCart = (id) => (dispatch) => {
+/* export const removeOneToCart = (id) => (dispatch) => {
   return dispatch({
     type: REMOVE_ONE_FROM_CART,
     payload: id,
   });
-};
+}; */
 
-export const removeAllToCart = (id) => (dispatch) => {
+/* export const removeAllToCart = (id) => (dispatch) => {
   return dispatch({
     type: REMOVE_ALL_FROM_CART,
     payload: id,
   });
-};
+}; */
 
-export const clearCart = () => (dispatch) => {
+/* export const clearCart = () => (dispatch) => {
   return dispatch({
     type: CLEAR_CART,
   });
-};
+}; */
 
-export const findAllCart = (CartArray) => (dispatch) => {
+/* export const findAllCart = (CartArray) => (dispatch) => {
   return dispatch({
     type: FIND_ALL_CART,
     payload: CartArray,
   });
-};
+}; */
 
 //EMAIL
 

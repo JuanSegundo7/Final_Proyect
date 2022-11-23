@@ -1,11 +1,6 @@
 import React, { useEffect } from "react";
 import "./Favorite.css";
-import {
-  getUsers,
-  matchFavorite,
-  setFavorites,
-  updateUser,
-} from "../../redux/Actions/Actions";
+import { matchFavorite,addOneFavorite,updateUser} from "../../redux/Actions/Actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -16,21 +11,22 @@ export default function Favorite({ id }) {
   const { isAuthenticated } = useAuth0();
 
   const handleFavorite = () => {
-    dispatch(setFavorites(id));
+    dispatch(addOneFavorite(id));
     dispatch(matchFavorite());
+    //console.log("estoy favoritenado")
+    //tal vez aca deberia escribir ademas en la bbdd solo si estoy logueado y cada vez que hago click
   };
 
+  //Update my database everytime I click on a new item
   useEffect(() => {
     if (isAuthenticated) {
-      const UserToBeUpdate = {
-        favorites: allFavorites,
-      };
-      dispatch(updateUser(User._id, UserToBeUpdate));
+      dispatch(updateUser(User._id, {favorites: allFavorites}));
     }
   }, [allFavorites]);
 
   useEffect(() => {
-    if (allFavorites.length) {
+    if (allFavorites.length /* && !isAuthenticated */) {
+      console.log("allFavorites:",allFavorites)
       localStorage.setItem("Favorites-pf", allFavorites);
     }
   }, [allFavorites]);
