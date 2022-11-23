@@ -26,7 +26,7 @@ export default function Favorite({ id }) {
 
   useEffect(() => {
     if (allFavorites.length /* && !isAuthenticated */) {
-      console.log("allFavorites:",allFavorites)
+      //console.log("allFavorites:",allFavorites)
       localStorage.setItem("Favorites-pf", allFavorites);
     }
   }, [allFavorites]);
