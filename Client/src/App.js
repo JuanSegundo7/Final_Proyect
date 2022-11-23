@@ -13,6 +13,7 @@ import {
   fillAllFavorites,
   findAllCart,
   matchFavorite,
+  getUsers
 } from "./redux/Actions/Actions";
 import Dashboard from "./Dashboard/Dashboard"
 import "./App.css";
@@ -21,6 +22,9 @@ function App() {
   const dispatch = useDispatch();
   const FavCopy = useSelector((state) => state.FavoritesCopy);
   const allCart = useSelector(state => state.cart);
+  const Users = useSelector(state => state.Users);
+
+  console.log(Users)
 
   if (FavCopy === 0) dispatch(getProducts()).then(() => dispatch(matchFavorite()));
 
@@ -35,6 +39,7 @@ function App() {
     dispatch(getCategories());
     dispatch(fillAllFavorites());
     dispatch(findAllCart())
+    dispatch(getUsers())
   }, [dispatch]);
 
   useEffect(() => {

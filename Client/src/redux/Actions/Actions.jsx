@@ -229,6 +229,7 @@ export function getOneUser(id) {
 export const getUsers = () => (dispatch) => {
   return axios(`${baseUrl}users`)
     .then((res) => dispatch({ type: USERS, payload: res.data }))
+    .then(data => console.log(data, "users"))
     .catch((err) => console.log(err));
 };
 

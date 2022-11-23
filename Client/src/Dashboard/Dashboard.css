@@ -16,3 +16,7 @@
     border: none;
 }
 
+#table .css-1e2bxag-MuiDataGrid-root, #table .MuiDataGrid-columnHeader:focus, #table .css-1e2bxag-MuiDataGrid-root, #table .MuiDataGrid-cell:focus, #table .MuiDataGrid-cell:focus-within{
+    outline: none
+}
+
