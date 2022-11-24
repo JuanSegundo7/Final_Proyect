@@ -4,7 +4,8 @@ const categoryRouter = require("../routes/categories.js");
 const imageRouter = require("../routes/images.js");
 const brandRouter = require("../routes/brands.js");
 const userRouter = require("../routes/users");
-const mailRouter = require('../routes/mail.js')
+const mailRouter = require('../routes/mail.js');
+const commentRouter = require('../routes/comments.js');
 
 const router = Router();
 
@@ -14,7 +15,8 @@ router.use('/categories', categoryRouter);
 router.use('/images', imageRouter);
 router.use('/brands', brandRouter);
 router.use('/users', userRouter);
-router.use('/mail', mailRouter)
+router.use('/mail', mailRouter);
+router.use('/comments' , commentRouter);
 
 
 module.exports = router;
