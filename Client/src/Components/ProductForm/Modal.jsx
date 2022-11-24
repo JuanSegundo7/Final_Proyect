@@ -1,9 +1,9 @@
 import React from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import {useDispatch} from "react-redux";
+import {updateProduct} from "../../redux/Actions/Actions"
 
 const ModalComponent = ({openModal, closeModal, info, close}) => {
+  const dispatch = useDispatch();
 
   console.log(info)
 
@@ -18,27 +18,61 @@ const ModalComponent = ({openModal, closeModal, info, close}) => {
   }
 
   const [selectedProduct, setSelectedProduct] = React.useState({
-    id: "",
-    brand: "",
-    description: "",
-    name: "",
-    price: "",
-    stock: ""
+    name: info.name,
+    brand: info.brand,
+    category: info.category,
+    description: info.description,
+    price: info.price,
+    stock: info.stock
   })
+
+  const handleSubmit = (e) => {
+    let data = {
+      name: selectedProduct.name,
+      brand: selectedProduct.brand,
+      category: selectedProduct.category,
+      description: selectedProduct.description,
+      price: parseInt(selectedProduct.price.replace('$', '')),
+      stock: parseInt(info.stock)
+    }
+
+    console.log(data)
+
+
+    e.preventDefault();
+  }
 
 
   return (
     <article id="wrapper">
     <article id="wrapper-container">
         <article id="wrapper-x" onClick={() => close(false)}>
-            X
+          la concha tuya marqutos        
         </article>
         <form>
-          <input  label="name" name="name" onChange={e => handleChange(e)} value={info&&info.name}></input>
-          <input  label="category" name="category" onChange={e => handleChange(e)} value={info&&info.category}></input>
-          <input  label="brand" name="brand" onChange={e => handleChange(e)} value={info&&info.brand}></input>
-          <input  label="price" name="price" onChange={e => handleChange(e)} value={info&&info.price}></input>
-          <input  label="stock" name="stock" onChange={e => handleChange(e)} value={info&&info.stock}></input>
+          <fieldset>
+            <label>Name</label>
+            <input  name="name" onChange={e => handleChange(e)} value={selectedProduct.name}></input>
+          </fieldset>
+          <fieldset>
+            <label>Category</label>
+            <input label="category" name="category" onChange={e => handleChange(e)} value={selectedProduct.category}></input>
+          </fieldset>
+          <fieldset>
+            <label>Brand</label>
+            <input label="brand" name="brand" onChange={e => handleChange(e)} value={selectedProduct.brand}></input>
+          </fieldset>
+          <fieldset>
+            <label>Price</label>
+            <input label="price" name="price" onChange={e => handleChange(e)} value={selectedProduct.price}></input>
+          </fieldset>
+          <fieldset>
+            <label>Stock</label>
+            <input label="stock" name="stock" onChange={e => handleChange(e)} value={selectedProduct.stock}></input>
+          </fieldset>
+          <textarea name="description" onChange={e => handleChange(e)} value={selectedProduct.description}></textarea>
+          <button onClick={handleSubmit}>Edit</button>
+          <button onClick={() => close(false)}>Cancel</button>
         </form>
     </article>
     </article>

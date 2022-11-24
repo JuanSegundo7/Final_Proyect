@@ -29,7 +29,7 @@ export default function DataTable() {
     }
 
 
-    const toggleAdmin = () => {
+    const toggleEnable = () => {
         
     }
 

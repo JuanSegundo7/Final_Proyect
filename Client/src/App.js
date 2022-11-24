@@ -54,6 +54,8 @@ function App() {
     );
   }
 
+  console.log(window.location.pathname)
+
   return (
     <BrowserRouter>
     <Header />
