@@ -11,5 +11,6 @@ module.exports = {
   Category: require("./models/Category.js"),
   Image: require("./models/Image.js"),
   Brand: require("./models/Brand.js"),
-  User: require("./models/User.js")
+  User: require("./models/User.js"),
+  Comment: require('./models/Comment.js')
 };
