@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { /* addToCart, */ updateUser } from "../../redux/Actions/Actions";
+import AddProductAlert from "../Alert/AddProduct";
 
 export default function Cart({ id }) {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ export default function Cart({ id }) {
   const { isAuthenticated } = useAuth0();
 
   function handleToCart(e) {
+    AddProductAlert()
     /* dispatch(addToCart(id)); */
   }
 
