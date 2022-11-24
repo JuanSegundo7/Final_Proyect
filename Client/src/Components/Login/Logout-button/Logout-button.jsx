@@ -4,8 +4,15 @@ import { useAuth0 } from "@auth0/auth0-react";
 const LogoutButton = () => {
   const { logout } = useAuth0();
 
+const logoutChangeHandler = (event) => {
+  //console.log("me desloguee")
+  localStorage.removeItem("Favorites-pf");
+  //localStorage.clear();
+  logout({ returnTo: window.location.origin })
+}
+
   return (
-    <button onClick={() => logout({ returnTo: window.location.origin })}>
+    <button onClick={logoutChangeHandler}>
       Log Out
     </button>
   );

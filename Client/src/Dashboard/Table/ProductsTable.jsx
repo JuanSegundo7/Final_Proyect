@@ -1,38 +1,39 @@
-import * as React from 'react';
+import React,{useState} from 'react';
 import { DataGrid, GridActionsCellItem} from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Clear from '@mui/icons-material/Clear';
 import Tooltip from "@mui/material/Tooltip";
 import { useSelector } from "react-redux"
-// import EditForm from "../../Components/ProductForm/EditForm"
 import Delete from "../../Components/Alert/Delete"
+import Modal from "../../Components/ProductForm/Modal"
 import "../Dashboard.css"
 
-import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 
 export default function DataTable() {
-
     const State = useSelector((state) => state.Products)        
     const finalArray = State.map((product) => {return ( {id: product._id, name: product.name, description: product.description, brand: product.brand.name, category: product.category.name, price: `$${product.price}`, stock: product.stock} )})
-        
+    const [open, setOpen] = useState(false)
+    const [info, setInfo] = useState({})
+    let modal
+
     const deleteProduct = (e) => {
         Delete()
         e.stopPropagation();
     }
 
-
-    const editProduct = (e) => {
-        console.log("llegue")
+    const editProduct = (e, params) => {
+        setInfo(params.row)
+        setOpen(true)
         e.stopPropagation();
     }
+
 
     const toggleAdmin = () => {
         
     }
 
+    if(open == true) modal = <Modal close={setOpen} info={info}/>
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 220 },
@@ -57,7 +58,7 @@ export default function DataTable() {
                     <GridActionsCellItem
                     icon={<EditIcon />}
                     label="Edit"
-                    onClick={(e) => editProduct(e)}
+                    onClick={(e) => editProduct(e, params)}
                     />
                 </Tooltip>,
                 <Tooltip title="Make disabled">
@@ -72,20 +73,22 @@ export default function DataTable() {
     ];
         // Products.length > 0 && Products.map((product) => {return(product._id)})
         
-        
-        return (
-            <div id="table" style={{ height: 525, width: '98%', backgroundColor: '#fff', borderRadius: "20px"}}>
-        {finalArray.length > 0 ?
-        
-        <DataGrid
-
-        rows={finalArray}
-        columns={columns}
-        pageSize={8}
-        rowsPerPageOptions={[7]}
-    
-        /> : <h1>Cargando..</h1>
-        }   
+    return (
+        <>
+        <div id="table" style={{ height: 525, width: '98%', backgroundColor: '#fff', borderRadius: "20px"}}>
+            {finalArray.length > 0 ?
+            
+            <DataGrid
+            
+            rows={finalArray}
+            columns={columns}
+            pageSize={8}
+            rowsPerPageOptions={[7]}
+            
+            /> : <h1>Cargando..</h1>
+            }   
         </div>
+        {modal}
+        </>
     )
 }

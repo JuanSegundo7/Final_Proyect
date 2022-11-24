@@ -20,3 +20,16 @@
     outline: none
 }
 
+#editForm{
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#flex-buttons-editForm{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
