@@ -21,6 +21,7 @@ export const POST_PRODUCT = "POST_PRODUCT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const GET_PRODUCT_BY_QUERY = "GET_PRODUCT_BY_QUERY";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
+export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const CLEAN_FILTERED = "CLEAN_FILTERED";
 export const CLEAN_NAME = "CLEAN_NAME";
 export const CLEAN_ORDER = "CLEAN_ORDER";
@@ -77,9 +78,18 @@ export const postProduct = (payload) => {
   };
 };
 
-// dispatch(getProductsByQuery("name, orderbyName, category", "ASC"))
-
-// `${baseUrl}products?orderedbyname=ASC`
+export const updateProduct = (_id, body) => {
+  return async function (dispatch) {
+    try {
+      await axios.put(`${baseUrl}products/${_id}`, body);
+      return dispatch({
+        type: UPDATE_PRODUCT,
+      });
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+}
 
 export const getProductByQuery = (info, name, value, order) => {
   try {
@@ -250,6 +260,7 @@ export function getOneUser(id) {
 export const getUsers = () => (dispatch) => {
   return axios(`${baseUrl}users`)
     .then((res) => dispatch({ type: USERS, payload: res.data }))
+    .then(data => console.log(data, "users"))
     .catch((err) => console.log(err));
 };
 
