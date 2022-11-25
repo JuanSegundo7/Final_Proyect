@@ -12,6 +12,7 @@ import {
   fillAllFavorites,
   //findAllCart,
   matchFavorite,
+  getUsers
 } from "./redux/Actions/Actions";
 import Dashboard from "./Dashboard/Dashboard"
 import "./App.css";
@@ -19,7 +20,8 @@ import "./App.css";
 function App() {
   const dispatch = useDispatch();
   const FavCopy = useSelector((state) => state.FavoritesCopy);
-  //const allCart = useSelector(state => state.cart);
+  const allCart = useSelector(state => state.cart);
+
 
   if (FavCopy === 0) dispatch(getProducts()).then(() => dispatch(matchFavorite()));
 
@@ -33,7 +35,8 @@ function App() {
     dispatch(getBrands());
     dispatch(getCategories());
     dispatch(fillAllFavorites());
-    /* dispatch(findAllCart()) */
+    // dispatch(findAllCart())
+    dispatch(getUsers())
   }, [dispatch]);
 
  /*  useEffect(() => {
@@ -50,6 +53,8 @@ function App() {
       </BrowserRouter>
     );
   }
+
+  console.log(window.location.pathname)
 
   return (
     <BrowserRouter>
