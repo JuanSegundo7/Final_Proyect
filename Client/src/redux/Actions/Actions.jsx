@@ -39,11 +39,11 @@ export const ORDER_FILTER = "ORDER_FILTER";
 export const ORDER_SEARCH = "ORDER_SEARCH";
 
 //CART
-/* export const ADD_TO_CART = "ADD_TO_CART";
+ export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_ONE_FROM_CART = "REMOVE_ONE_FROM_CART";
 export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
-export const FIND_ALL_CART = "FIND_ALL_CART"; */
+export const FIND_ALL_CART = "FIND_ALL_CART"; 
 
 //MAIL
 export const SEND_EMAIL = "SEND_EMAIL";
@@ -259,51 +259,47 @@ export function getOneUser(id) {
 export const getUsers = () => (dispatch) => {
   return axios(`${baseUrl}users`)
     .then((res) => dispatch({ type: USERS, payload: res.data }))
-    .then(data => console.log(data, "users"))
+    //.then(data => console.log(data, "users"))
     .catch((err) => console.log(err));
 };
 
 
 //CART
-/*
-ADD_TO_CART = "ADD_TO_CART";
-export const REMOVE_ONE_FROM_CART = "REMOVE_ONE_FROM_CART";
-export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
-export const CLEAR_CART = "CLEAR_CART";
-*/
-/* export const addToCart = (id) => (dispatch) => {
+
+
+ export const addToCart = (id) => (dispatch) => {
   return dispatch({
     type: ADD_TO_CART,
     payload: id,
   });
-}; */
+}; 
 
-/* export const removeOneToCart = (id) => (dispatch) => {
+ export const removeOneToCart = (id) => (dispatch) => {
   return dispatch({
     type: REMOVE_ONE_FROM_CART,
     payload: id,
   });
-}; */
+}; 
 
-/* export const removeAllToCart = (id) => (dispatch) => {
+ export const removeAllToCart = (id) => (dispatch) => {
   return dispatch({
     type: REMOVE_ALL_FROM_CART,
     payload: id,
   });
-}; */
+}; 
 
-/* export const clearCart = () => (dispatch) => {
+ export const clearCart = () => (dispatch) => {
   return dispatch({
     type: CLEAR_CART,
   });
-}; */
+}; 
 
-/* export const findAllCart = (CartArray) => (dispatch) => {
+ export const findAllCart = (CartArray) => (dispatch) => {
   return dispatch({
     type: FIND_ALL_CART,
     payload: CartArray,
   });
-}; */
+}; 
 
 //EMAIL
 

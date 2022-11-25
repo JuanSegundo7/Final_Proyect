@@ -10,7 +10,7 @@ import {
   getBrands,
   getCategories,
   fillAllFavorites,
-  //findAllCart,
+  findAllCart,
   matchFavorite,
   getUsers
 } from "./redux/Actions/Actions";
@@ -20,7 +20,7 @@ import "./App.css";
 function App() {
   const dispatch = useDispatch();
   const FavCopy = useSelector((state) => state.FavoritesCopy);
-  const allCart = useSelector(state => state.cart);
+  //const allCart = useSelector(state => state.cart);
 
 
   if (FavCopy === 0) dispatch(getProducts()).then(() => dispatch(matchFavorite()));
@@ -35,18 +35,14 @@ function App() {
     dispatch(getBrands());
     dispatch(getCategories());
     dispatch(fillAllFavorites());
-    // dispatch(findAllCart())
+    dispatch(findAllCart())
     dispatch(getUsers())
   }, [dispatch]);
 
- /*  useEffect(() => {
-    if (allCart.length) {
-        localStorage.setItem("Cart-pf", JSON.stringify(allCart));
-    }
-}, [allCart]); */
+
 
   const datosEnMiBD = useSelector((state) => state.User);
-  if (datosEnMiBD.admin == true) {
+  if (datosEnMiBD.admin === true) {
     return (
       <BrowserRouter>
         <Dashboard />
@@ -54,7 +50,7 @@ function App() {
     );
   }
 
-  console.log(window.location.pathname)
+  //console.log(window.location.pathname)
 
   return (
     <BrowserRouter>
