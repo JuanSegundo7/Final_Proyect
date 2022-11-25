@@ -25,8 +25,8 @@
 #wrapper-container{
     justify-content: center;
     align-items: center;  
-    max-width: 22em;
-    max-height: 31em;
+    max-width: 35em;
+    max-height: 33em;
     margin: 1em;
 }
 
@@ -43,6 +43,7 @@
 #wrapper-x svg{
     font-size: 25px;
     margin: 1em;
+    fill: #000;
 }
 
 #wrapper-container form{
@@ -50,15 +51,14 @@
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
+    flex-wrap: wrap;
 }
 
 #wrapper-container form fieldset{
     margin: 0;
-    width: 100%;
-    height: 20%;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -66,13 +66,22 @@
     justify-content: space-around;
 }
 
-#wrapper-container form input{
+#wrapper-container label{
+    margin: 0.5em 0;
+}
+
+#wrapper-container form input, #wrapper-container form textarea{
     padding: 1em;
-    margin-top: 3em;
-    width: 85%;
+    width: 100%;
     border-radius: 12px;
     border: none;
     box-shadow: var(--shadow);
+}
+
+#wrapper-container form textarea{
+    height: 142px;
+    width: 559px;
+    font-size: 15px;
 }
 
 #wrapper-container form fieldset p{
@@ -100,7 +109,7 @@
     cursor: pointer;
 }
 
-input:focus{
+input:focus, textarea:focus{
     outline: none;
 }
 

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import Switch from "./Components/Switch/Switch";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
-import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import {
@@ -11,8 +10,9 @@ import {
   getBrands,
   getCategories,
   fillAllFavorites,
-  findAllCart,
+  //findAllCart,
   matchFavorite,
+  getUsers
 } from "./redux/Actions/Actions";
 import Dashboard from "./Dashboard/Dashboard"
 import "./App.css";
@@ -21,6 +21,7 @@ function App() {
   const dispatch = useDispatch();
   const FavCopy = useSelector((state) => state.FavoritesCopy);
   const allCart = useSelector(state => state.cart);
+
 
   if (FavCopy === 0) dispatch(getProducts()).then(() => dispatch(matchFavorite()));
 
@@ -34,28 +35,26 @@ function App() {
     dispatch(getBrands());
     dispatch(getCategories());
     dispatch(fillAllFavorites());
-    dispatch(findAllCart())
+    // dispatch(findAllCart())
+    dispatch(getUsers())
   }, [dispatch]);
 
-  useEffect(() => {
+ /*  useEffect(() => {
     if (allCart.length) {
         localStorage.setItem("Cart-pf", JSON.stringify(allCart));
     }
-}, [allCart]);
-
-  const { user, isAuthenticated } = useAuth0();
+}, [allCart]); */
 
   const datosEnMiBD = useSelector((state) => state.User);
-  //datosEnMiBD.admin == true
   if (datosEnMiBD.admin == true) {
-    sessionStorage.setItem("user", JSON.stringify(user));
-
     return (
       <BrowserRouter>
         <Dashboard />
       </BrowserRouter>
     );
   }
+
+  console.log(window.location.pathname)
 
   return (
     <BrowserRouter>

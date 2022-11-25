@@ -6,6 +6,7 @@ const { EMAIL_USER,  EMAIL_PASSWORD } = process.env;
 const sendEmail = async (data)=>{
     
     const { email, name , cart} = data
+    console.log("soy cart:",cart)
     const upperCaseName = name.toUpperCase();
     const products = cart.map(unProducto => `<p>Product: ${unProducto.name} - Units: ${unProducto.quantity}
      - Unit Price: ${unProducto.price} - Subtotal: ${unProducto.price*unProducto.quantity}

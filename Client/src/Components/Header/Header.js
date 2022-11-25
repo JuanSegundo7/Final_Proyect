@@ -6,15 +6,14 @@ import "./Header.css";
 import SearchBar from "../SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-import { postUser, getOneUser } from "../../redux/Actions/Actions";
+import { postUser, getOneUser, updateUser, setAllFavorites } from "../../redux/Actions/Actions";
 
-//falta que cuando se loguee, se traigan los favoritos del usuario
 
 const Header = () => {
   const dispatch = useDispatch();
   const Favorites = useSelector((state) => state.Favorites);
-  const allCart = useSelector((state) => state.cart);
-  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
+  //const allCart = useSelector((state) => state.cart);
+  const { user, isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
 
   //Local Storages
   const myLocalStgFavorites = localStorage.getItem("Favorites-pf");
@@ -25,20 +24,41 @@ const Header = () => {
   }
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && !isLoading) {
       //console.log("ya me loguee",user)
       dispatch(getOneUser(user.email));
     }
-  }, [user]);
+  },[user]);
+
 
   const datosEnMiBD = useSelector((state) => state.User);
-  //console.log("Datos de mi BD xxx:",datosEnMiBD);
   useEffect(() => {
     if (datosEnMiBD.hasOwnProperty("_id")) {
       //console.log("Datos de mi BD:",datosEnMiBD);
+
+      const onlyIdsArray = [];
+      if (datosEnMiBD.favorites.length){
+        for (let i=0;i<datosEnMiBD.favorites.length;i++){
+          onlyIdsArray.push(datosEnMiBD.favorites[i]._id)
+        }
+        //ademas, deberia meter lo de la bbdd en mi localStg
+        //console.log("estoy por aca, no se:",onlyIdsArray)
+      }
+      
+      let total = onlyIdsArray.concat(favArray);
+      total = total.filter(element => (element !== undefined && element !==null));
+      total = [...new Set([...onlyIdsArray,...favArray])];
+      //console.log("total:",total)
+      
+      if (!total.includes(undefined) && !total.includes(null)){
+        dispatch(updateUser(datosEnMiBD._id,{favorites:total}));
+        localStorage.setItem("Favorites-pf",total);
+        dispatch(setAllFavorites(total));
+      }  
     }
+
     if (datosEnMiBD.hasOwnProperty("error")) {
-      //console.log("No existo y debería crearlo.");
+      //console.log("No existo y deberia crearlo.");
       const userToBeCreated = {
         _id: user.email,
         name: user.given_name ? user.given_name : user.email, //for local users only
@@ -124,7 +144,7 @@ const Header = () => {
               </div>
             </Navigator>
           <div className="number">
-            <picture>{allCart.length}</picture>
+            {/* <picture>{allCart.length}</picture> */}
           </div>
           <Navigator to="/favorites">
             <div className="svg-container">
