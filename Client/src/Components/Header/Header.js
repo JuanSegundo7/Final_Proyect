@@ -16,12 +16,12 @@ import {
 const Header = () => {
   const dispatch = useDispatch();
   const Favorites = useSelector((state) => state.Favorites);
-  //const allCart = useSelector((state) => state.cart);
+  const allCart = useSelector((state) => state.cart);
   const { user, isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
 
   //Local Storages
   const myLocalStgFavorites = localStorage.getItem("Favorites-pf");
-  const myLocalStgCart = JSON.parse(localStorage.getItem("Cart-pf"));
+  const myLocalStgCart = localStorage.getItem("Cart-pf");
   let favArray = [];
   if (myLocalStgFavorites && myLocalStgFavorites.length) {
     favArray = myLocalStgFavorites.split(",");

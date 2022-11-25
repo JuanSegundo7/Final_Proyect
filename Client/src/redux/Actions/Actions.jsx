@@ -69,7 +69,7 @@ export const getProducts = () => async (dispatch) => {
 export const postProduct = (payload) => {
   return async function (dispatch) {
     try {
-      var response = await axios.post(`${baseUrl}products`, payload);
+      const response = await axios.post(`${baseUrl}products`, payload);
       return response;
     } catch (error) {
       console.log("error", error);
@@ -140,7 +140,7 @@ export const filter = (value, info) => (dispatch) => {
 
 export function getCategories() {
   return async function (dispatch) {
-    var response = await axios.get(`${baseUrl}categories`);
+    const response = await axios.get(`${baseUrl}categories`);
     return dispatch({
       type: "GET_CATEGORIES",
       payload: response.data,
@@ -170,7 +170,7 @@ export const cleanByName = () => (dispatch) => {
 export const postImage = (payload) => {
   return async function (dispatch) {
     try {
-      var response = await axios.post(`${baseUrl}images`, payload);
+      const response = await axios.post(`${baseUrl}images`, payload);
       return response;
     } catch (error) {
       console.log("error", error);
@@ -207,16 +207,18 @@ export const matchFavorite = () => (dispatch) => {
 
 // USERS
 
-export const updateUser = (_id, body) => {
+export const updateUser = (id, body) => {
   return async function (dispatch) {
-    try {
-      var response = await axios.put(`${baseUrl}users/${_id}`, body);
-      return dispatch({
-        type: UPDATE_USER,
-        payload: response.data,
-      });
-    } catch (error) {
-      console.log("error", error);
+    if (id) {
+      try {
+        const response = await axios.put(`${baseUrl}users/${id}`, body);
+        return dispatch({
+          type: UPDATE_USER,
+          payload: response.data,
+        });
+      } catch (error) {
+        console.log("error", error);
+      }
     }
   };
 };
@@ -224,7 +226,7 @@ export const updateUser = (_id, body) => {
 export const postUser = (payload) => {
   return async function (dispatch) {
     try {
-      var response = await axios.post(`${baseUrl}users`, payload);
+      const response = await axios.post(`${baseUrl}users`, payload);
       return dispatch({
         type: POST_USER,
         payload: response.data,
