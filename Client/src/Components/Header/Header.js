@@ -60,6 +60,25 @@ const Header = () => {
         localStorage.setItem("Favorites-pf", total);
         dispatch(setAllFavorites(total));
       }
+      /****************************** CART****************************/
+      /* const onlyIdsArrayCart = [];
+      if (datosEnMiBD.favorites.length) {
+        for (let i = 0; i < datosEnMiBD.favorites.length; i++) {
+          onlyIdsArray.push(datosEnMiBD.favorites[i]._id);
+        }
+      }
+
+      let totalCart = onlyIdsArray.concat(favArray);
+      totalCart = totalCart.filter(
+        (element) => element !== undefined && element !== null
+      );
+      totalCart = [...new Set([...onlyIdsArray, ...favArray])];
+
+      if (!totalCart.includes(undefined) && !totalCart.includes(null)) {
+        dispatch(updateUser(datosEnMiBD._id, { favorites: totalCart }));
+        localStorage.setItem("Favorites-pf", totalCart);
+        dispatch(setAllFavorites(totalCart));
+      } */
     }
 
     if (datosEnMiBD.hasOwnProperty("error")) {
