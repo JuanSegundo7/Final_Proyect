@@ -7,7 +7,7 @@ const LogoutButton = () => {
 const logoutChangeHandler = (event) => {
   //console.log("me desloguee")
   localStorage.removeItem("Favorites-pf");
-  //localStorage.clear();
+  localStorage.removeItem("Cart-pf");
   logout({ returnTo: window.location.origin })
 }
 
