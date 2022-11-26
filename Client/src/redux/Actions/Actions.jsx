@@ -21,6 +21,7 @@ export const POST_PRODUCT = "POST_PRODUCT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const GET_PRODUCT_BY_QUERY = "GET_PRODUCT_BY_QUERY";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
+export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const CLEAN_FILTERED = "CLEAN_FILTERED";
 export const CLEAN_NAME = "CLEAN_NAME";
 export const CLEAN_ORDER = "CLEAN_ORDER";
@@ -38,11 +39,11 @@ export const ORDER_FILTER = "ORDER_FILTER";
 export const ORDER_SEARCH = "ORDER_SEARCH";
 
 //CART
-/* export const ADD_TO_CART = "ADD_TO_CART";
+export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_ONE_FROM_CART = "REMOVE_ONE_FROM_CART";
 export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
-export const FIND_ALL_CART = "FIND_ALL_CART"; */
+export const FIND_ALL_CART = "FIND_ALL_CART";
 
 //MAIL
 export const SEND_EMAIL = "SEND_EMAIL";
@@ -50,6 +51,9 @@ export const SEND_EMAIL = "SEND_EMAIL";
 //USERS
 
 export const USERS = "USERS";
+
+//MERCADOPAGO
+export const MERCADOPAGO = "MERCADOPAGO";
 
 const baseUrl = `http://localhost:3001/`;
 
@@ -69,7 +73,7 @@ export const getProducts = () => async (dispatch) => {
 export const postProduct = (payload) => {
   return async function (dispatch) {
     try {
-      var response = await axios.post(`${baseUrl}products`, payload);
+      const response = await axios.post(`${baseUrl}products`, payload);
       return response;
     } catch (error) {
       console.log("error", error);
@@ -77,9 +81,18 @@ export const postProduct = (payload) => {
   };
 };
 
-// dispatch(getProductsByQuery("name, orderbyName, category", "ASC"))
-
-// `${baseUrl}products?orderedbyname=ASC`
+export const updateProduct = (_id, body) => {
+  return async function (dispatch) {
+    try {
+      await axios.put(`${baseUrl}products/${_id}`, body);
+      return dispatch({
+        type: UPDATE_PRODUCT,
+      });
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+}
 
 export const getProductByQuery = (info, name, value, order) => {
   try {
@@ -140,7 +153,7 @@ export const filter = (value, info) => (dispatch) => {
 
 export function getCategories() {
   return async function (dispatch) {
-    var response = await axios.get(`${baseUrl}categories`);
+    const response = await axios.get(`${baseUrl}categories`);
     return dispatch({
       type: "GET_CATEGORIES",
       payload: response.data,
@@ -170,7 +183,7 @@ export const cleanByName = () => (dispatch) => {
 export const postImage = (payload) => {
   return async function (dispatch) {
     try {
-      var response = await axios.post(`${baseUrl}images`, payload);
+      const response = await axios.post(`${baseUrl}images`, payload);
       return response;
     } catch (error) {
       console.log("error", error);
@@ -207,16 +220,19 @@ export const matchFavorite = () => (dispatch) => {
 
 // USERS
 
-export const updateUser = (_id, body) => {
+export const updateUser = (id, body) => {
   return async function (dispatch) {
-    try {
-      var response = await axios.put(`${baseUrl}users/${_id}`, body);
-      return dispatch({
-        type: UPDATE_USER,
-        payload: response.data,
-      });
-    } catch (error) {
-      console.log("error", error);
+    if (id){
+      try {
+        let resp = await axios.put(`${baseUrl}users/${id}`, body);
+        //console.log("soy resp.data en el action:",resp.data)
+        return dispatch({
+          type: UPDATE_USER,
+          payload: resp.data
+        });
+      } catch (error) {
+        console.log("error", error);
+      }
     }
   };
 }
@@ -224,7 +240,7 @@ export const updateUser = (_id, body) => {
 export const postUser = (payload) => {
   return async function (dispatch) {
     try {
-      var response = await axios.post(`${baseUrl}users`, payload);
+      const response = await axios.post(`${baseUrl}users`, payload);
       return dispatch({
         type: POST_USER,
         payload: response.data,
@@ -237,7 +253,7 @@ export const postUser = (payload) => {
 
 export function getOneUser(id) {
   return async function (dispatch) {
-    var response = await axios(`${baseUrl}users/${id}`);
+    const response = await axios(`${baseUrl}users/${id}`);
     //console.log("datos locos:", response.data);
     return dispatch({
       type: GET_ONE_USER,
@@ -249,50 +265,46 @@ export function getOneUser(id) {
 export const getUsers = () => (dispatch) => {
   return axios(`${baseUrl}users`)
     .then((res) => dispatch({ type: USERS, payload: res.data }))
+    //.then(data => console.log(data, "users"))
     .catch((err) => console.log(err));
 };
 
 
 //CART
-/*
-ADD_TO_CART = "ADD_TO_CART";
-export const REMOVE_ONE_FROM_CART = "REMOVE_ONE_FROM_CART";
-export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
-export const CLEAR_CART = "CLEAR_CART";
-*/
-/* export const addToCart = (id) => (dispatch) => {
+
+export const addToCart = (id) => (dispatch) => {
   return dispatch({
     type: ADD_TO_CART,
     payload: id,
   });
-}; */
+};
 
-/* export const removeOneToCart = (id) => (dispatch) => {
+export const removeOneToCart = (id) => (dispatch) => {
   return dispatch({
     type: REMOVE_ONE_FROM_CART,
     payload: id,
   });
-}; */
+};
 
-/* export const removeAllToCart = (id) => (dispatch) => {
+export const removeAllToCart = (id) => (dispatch) => {
   return dispatch({
     type: REMOVE_ALL_FROM_CART,
     payload: id,
   });
-}; */
+};
 
-/* export const clearCart = () => (dispatch) => {
+export const clearCart = () => (dispatch) => {
   return dispatch({
     type: CLEAR_CART,
   });
-}; */
+};
 
-/* export const findAllCart = (CartArray) => (dispatch) => {
+export const findAllCart = (CartArray) => (dispatch) => {
   return dispatch({
     type: FIND_ALL_CART,
     payload: CartArray,
   });
-}; */
+};
 
 //EMAIL
 
@@ -300,4 +312,11 @@ export const sendEmail = (payload) => (dispatch) => {
   return axios
     .post(`${baseUrl}mail`, payload)
     .then((data) => dispatch({ type: SEND_EMAIL, payload: data.data }));
+};
+
+//MERCADOPAGO
+
+export const linkMp = (payload) => (dispatch) => {
+  return axios.post(`${baseUrl}mercadopago`, payload)
+    .then((data) => dispatch({ type: MERCADOPAGO, payload: data.data }));
 };

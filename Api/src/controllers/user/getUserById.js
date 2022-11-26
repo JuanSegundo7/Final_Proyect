@@ -12,14 +12,19 @@ const getUserById = async function (UserId) {
 
 
     if (resp && resp.cart && resp.cart.length){
-      console.log("hoolaaaa, entre bien")
       for (let i=0; i<resp.cart.length; i++){
         try {
           response = await getProductById(resp.cart[i]._id);
           resp.cart[i]["name"] = response.name;
-          resp.cart[i]["stock"] = response.stock;
-          resp.cart[i]["image"] = response.image.url;
+          resp.cart[i]["description"] = response.description;
+          resp.cart[i]["origin"] = response.origin;
           resp.cart[i]["price"] = response.price;
+          resp.cart[i]["grinding_type"] = response.grinding_type;
+          resp.cart[i]["stock"] = response.stock;
+          resp.cart[i]["enabled"] = response.enabled;
+          resp.cart[i]["category"] = response.category;
+          resp.cart[i]["image"] = response.image;
+          resp.cart[i]["brand"] = response.brand; 
           if (!response) console.log(`no product found matching the provided id ${resp.cart[i]._id}`)
         } catch (error) {
           console.log(error)

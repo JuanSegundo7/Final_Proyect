@@ -2,21 +2,21 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardCart from "./CardCart";
 import Error from "../Card/imgs/error.webp";
-import { clearCart, sendEmail } from "../../redux/Actions/Actions";
+import { /* clearCart, */ updateUser } from "../../redux/Actions/Actions";
 import "./CartComponent.css";
 import { useState } from "react";
-
-//-------------------------------------
 import { useAuth0 } from "@auth0/auth0-react";
-//-------------------------------------
+import { linkMp } from "../../redux/Actions/Actions";
+
 
 export default function CartComponent() {
   const allCart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const [disabled, setDisabled] = useState(false);
+  const { isAuthenticated } = useAuth0();
+  const datosEnMiBD = useSelector((state) => state.User);
 
   let precioTotal = 0;
-
   let total = 0;
 
   for (let i = 0; i < allCart.length; i++) {
@@ -28,27 +28,28 @@ export default function CartComponent() {
   useEffect(() => {
     if (allCart.length) {
       localStorage.setItem("Cart-pf", JSON.stringify(allCart));
+      if (isAuthenticated){
+        //console.log("estoy casi casi:",allCart)
+        dispatch(updateUser(datosEnMiBD._id,{cart:allCart}));
+        //console.log("esto es justo despues olcaar:",allCart)
+      }
     } else if (!allCart.length) {
       setDisabled(true);
     }
   }, [allCart]);
 
-  const datosEnMiBD = useSelector((state) => state.User);
-  //Con esto fuerzo a que se renderice nuevamente cuando efectivamente se carguen los datos de mi BD.
-  useEffect(() => {
-    /* if (datosEnMiBD.hasOwnProperty("_id")) {
-    } */
-  }, [datosEnMiBD]);
-
-  function sendMail() {
-    const data = {
-      email: datosEnMiBD._id,
+  
+  async function mercadopago(){
+    //if (theLink) window.location.href = theLink;
+    const data={
       name: datosEnMiBD.name + " " + datosEnMiBD.lastname,
-      cart: datosEnMiBD.cart
-    };
-    console.log("soy cart en el front:",datosEnMiBD.cart)
-    dispatch(sendEmail(data));
+      email: datosEnMiBD._id,
+      cart : datosEnMiBD.cart
+    }
+    //console.log("hice click en el boton de comprar - data:",data)
+    dispatch(linkMp(data))
   }
+
 
   return (
     <div id="Cart">
@@ -85,7 +86,7 @@ export default function CartComponent() {
         <button
           id={disabled ? "final-button-disabled" : "final-button"}
           disabled={disabled}
-          onClick={() => sendMail()}
+          onClick={() => mercadopago()}
         >
           Buy
         </button>

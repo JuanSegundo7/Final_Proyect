@@ -20,11 +20,12 @@ import {
   ADD_ONE_FAVORITE,
   FILL_ALL_FAVORITES,
   MATCH_FAVORITE,
-  /* ADD_TO_CART, */
-  /* REMOVE_ONE_FROM_CART,
+  ADD_TO_CART,
+  MERCADOPAGO,
+  REMOVE_ONE_FROM_CART,
   REMOVE_ALL_FROM_CART,
   CLEAR_CART,
-  FIND_ALL_CART, */
+  FIND_ALL_CART,
   SEND_EMAIL
 } from "../Actions/Actions";
 
@@ -32,7 +33,9 @@ const initialState = {
   Products: [],
   Product: {},
   Categories: [],
+  
   Brands: [],
+  ProductsBrand: [],
   BrandsCopy: [],
 
   ByName: [],
@@ -57,8 +60,9 @@ const initialState = {
   Users: [],
   User: {},
 
-  /* cart: [],
-  update: 1, */
+  cart: [],
+  update: 1,
+
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -116,7 +120,7 @@ const rootReducer = (state = initialState, action) => {
       };
     }
 
-    /* case ADD_TO_CART:
+    case ADD_TO_CART:
       const allProducts = state.Products;
       const allCart2 = state.cart;
       let newCoffe = allProducts.find(
@@ -143,9 +147,9 @@ const rootReducer = (state = initialState, action) => {
         : {
             ...state,
             cart: [...state.cart, { ...newCoffe, quantity: 1 }],
-          }; */
+          };
 
-    /* case REMOVE_ONE_FROM_CART:
+    case REMOVE_ONE_FROM_CART:
       const allCart = state.cart;
 
       let findProduct = allCart.find(
@@ -170,9 +174,9 @@ const rootReducer = (state = initialState, action) => {
       }
       if (allCart.length === 1) {
         localStorage.removeItem("Cart-pf");
-      } */
+      }
 
-    /* case REMOVE_ALL_FROM_CART:
+    case REMOVE_ALL_FROM_CART:
       const cart = state.cart;
       const filter2 = cart.filter((product) => product._id !== action.payload);
       if (state.cart.length === 1) localStorage.removeItem("Cart-pf");
@@ -200,7 +204,7 @@ const rootReducer = (state = initialState, action) => {
         return {
           ...state,
         };
-      } */
+      }
 
     case GET_PRODUCTS:
       return {
@@ -259,7 +263,7 @@ const rootReducer = (state = initialState, action) => {
         case "brand": {
           return {
             ...state,
-            Brands: action.payload,
+            ProductsBrand: action.payload,
           };
         }
 
@@ -377,10 +381,15 @@ const rootReducer = (state = initialState, action) => {
     case UPDATE_USER: {
       return {
         ...state,
-        User: action.payload,
-        update: state.update + 1,
+        /* User: action.payload,
+        update: state.update + 1, */
       };
     }
+
+    case MERCADOPAGO:
+      return{
+        ...state
+      }
 
     default:
       return {

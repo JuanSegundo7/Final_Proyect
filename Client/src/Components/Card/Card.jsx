@@ -2,29 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Error from "./imgs/error.webp";
 import Favorite from "../Favorite/Favorite";
+// import { useDispatch } from "react-redux";
 import "./Card.css";
 import CartButton from "../Cart/CartButton";
+// import { getProductByQuery } from "../../redux/Actions/Actions";
 
 export function Card(props) {
-  if (props.brand === "Brands") {
-    return (
-      <div id="card">
-        <img
-          src={!props.img && props.img2 ? props.img2 : props.img}
-          alt="img not found"
-          className="imgCard_brand"
-          onError={({ currentTarget }) => {
-            currentTarget.onerror = null;
-            currentTarget.src = Error;
-          }}
-        />
-        <p className="brand_name">
-          {props.name ? props.name.toUpperCase() : "There is not name provided"}
-        </p>
-      </div>
-    );
-  } else {
-    return (
+  return (
       <div id="card">
         <Favorite id={props._id} />
         <Link to={`/detail/${props._id}`} id="a_card">
@@ -47,5 +31,4 @@ export function Card(props) {
         <CartButton id={props._id} />
       </div>
     );
-  }
 }

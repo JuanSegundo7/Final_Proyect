@@ -5,6 +5,8 @@ import Home from "../Home/Home";
 import Profile from "../Profile/Profile";
 import DetailProducts from "../Detail/DetailProducts";
 import ContainerInfo from "../ContainerInfo/ContainerInfo";
+import ContainerBrands from "../ContainerInfo/ContainerBrands";
+import BrandSearched from "../ContainerInfo/BrandSearched";
 import CartComponent from "../CartComponent/CartComponent";
 import Login from "../Login/Login";
 import About from "../About/About";
@@ -36,20 +38,20 @@ const SwitchRouter = () => {
           <ContainerInfo info="CategoriesAccesories" order="accessories" />
         }
       />
-      <Route
+      {/* <Route
         exact
         path="/dashboard"
         element={
           <ContainerInfo info="CategoriesAccesories" order="accessories" />
         }
-      />
+      /> */}
       <Route
         exact
         path="/products/others"
         element={<ContainerInfo info="CategoriesOthers" order="others" />}
       />
-      <Route exact path="/brands" element={<ContainerInfo info="Brands" />} />
-
+      <Route exact path="/brands" element={<ContainerBrands />} />
+      <Route exact path="/brands/:params" element={<BrandSearched />} />
       <Route exact path="/create" element={<Form />} />
 
       <Route exact path="/detail/:id" element={<DetailProducts />} />
