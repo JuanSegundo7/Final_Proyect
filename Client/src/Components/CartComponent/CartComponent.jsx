@@ -9,6 +9,7 @@ import {
 import "./CartComponent.css";
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { linkMp } from "../../redux/Actions/Actions";
 
 export default function CartComponent() {
   const allCart = useSelector((state) => state.cart);
@@ -16,10 +17,9 @@ export default function CartComponent() {
   const [disabled, setDisabled] = useState(false);
   const { isAuthenticated } = useAuth0();
   const datosEnMiBD = useSelector((state) => state.User);
-  console.log("es allCart:", allCart);
+  // console.log("es allCart:", allCart);
 
   let precioTotal = 0;
-
   let total = 0;
 
   for (let i = 0; i < allCart.length; i++) {
@@ -31,33 +31,30 @@ export default function CartComponent() {
   useEffect(() => {
     if (allCart.length) {
       localStorage.setItem("Cart-pf", JSON.stringify(allCart));
-      console.log("antes del if:", allCart);
 
       if (isAuthenticated) {
-        console.log("estoy casi casi:", allCart);
         dispatch(updateUser(datosEnMiBD._id, { cart: allCart }));
-
-        // console.log("esto es justo despues olcaar:",allCart)
       }
-    } else if (!allCart.length) {
+    }
+    console.log("SOY CART:", allCart);
+    if (isAuthenticated) {
+      if (!allCart.length) {
+        setDisabled(true);
+      }
+    } else if (allCart.length) {
       setDisabled(true);
     }
   }, [allCart]);
 
-  //Con esto fuerzo a que se renderice nuevamente cuando efectivamente se carguen los datos de mi BD.
-  //useEffect(() => {
-  /* if (datosEnMiBD.hasOwnProperty("_id")) {
-    } */
-  //}, [datosEnMiBD]);
-
-  function sendMail() {
+  async function mercadopago() {
+    //if (theLink) window.location.href = theLink;
     const data = {
-      email: datosEnMiBD._id,
       name: datosEnMiBD.name + " " + datosEnMiBD.lastname,
+      email: datosEnMiBD._id,
       cart: datosEnMiBD.cart,
     };
-    console.log("soy cart en el front:", datosEnMiBD.cart);
-    dispatch(sendEmail(data));
+    //console.log("hice click en el boton de comprar - data:",data)
+    dispatch(linkMp(data));
   }
 
   return (
@@ -96,7 +93,7 @@ export default function CartComponent() {
         <button
           id={disabled ? "final-button-disabled" : "final-button"}
           disabled={disabled}
-          onClick={() => sendMail()}
+          onClick={() => mercadopago()}
         >
           Buy
         </button>

@@ -6,7 +6,7 @@ import { getOneProduct, cleanDetail } from "../../redux/Actions/Actions";
 import "./Detail.css";
 
 export default function DetailProduct() {
-  window.scrollTo(0, 0);
+  window.scrollTo(0,250);
 
   const dispatch = useDispatch();
   const product = useSelector((state) => state.Product);

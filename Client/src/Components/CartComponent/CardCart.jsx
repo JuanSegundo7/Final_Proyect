@@ -6,11 +6,10 @@ import {
   clearCart,
   removeAllToCart,
   removeOneToCart,
-  //updateUser
+  updateUser,
 } from "../../redux/Actions/Actions";
 
 export default function CardCart(props) {
-  const { isAuthenticated } = useAuth0();
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.User);
@@ -25,9 +24,15 @@ export default function CardCart(props) {
   function removeOne(id, all = false) {
     if (all) {
       dispatch(removeOneToCart(id));
-      if (cart && cart.length === 1) dispatch(clearCart());
+
+      if (cart && cart.length === 1) {
+        dispatch(clearCart());
+        dispatch(updateUser(user._id, { cart: [] }));
+      }
     } else {
       dispatch(removeAllToCart(id));
+      if (cart && cart.length === 1)
+        dispatch(updateUser(user._id, { cart: [] }));
     }
   }
 

@@ -21,6 +21,7 @@ import {
   FILL_ALL_FAVORITES,
   MATCH_FAVORITE,
   ADD_TO_CART,
+  MERCADOPAGO,
   REMOVE_ONE_FROM_CART,
   REMOVE_ALL_FROM_CART,
   CLEAR_CART,
@@ -32,7 +33,9 @@ const initialState = {
   Products: [],
   Product: {},
   Categories: [],
+
   Brands: [],
+  ProductsBrand: [],
   BrandsCopy: [],
 
   ByName: [],
@@ -129,18 +132,19 @@ const rootReducer = (state = initialState, action) => {
       return itemInCart
         ? {
             ...state,
-            cart: [
-              ...state.cart,
-              state.cart.map((product) =>
-                product._id === newCoffe._id
+            cart:
+              // [
+              // ...state.cart, //ACA SACO LA COPIA Y EL ARRAY PORQUE SINO SE GUARADABA COMO UN ARRAY NUEVO ([..[]])
+              state.cart.map((product) => {
+                return product._id === newCoffe._id
                   ? {
                       ...product,
                       quantity: product.quantity + 1,
                       stock: product.stock - 1,
                     }
-                  : product
-              ),
-            ],
+                  : product;
+              }),
+            // ],
             update: state.update + 1,
           }
         : {
@@ -148,7 +152,7 @@ const rootReducer = (state = initialState, action) => {
             cart: [...state.cart, { ...newCoffe, quantity: 1 }],
           };
 
-    case REMOVE_ONE_FROM_CART:
+    case REMOVE_ONE_FROM_CART: {
       const allCart = state.cart;
 
       let findProduct = allCart.find(
@@ -174,6 +178,7 @@ const rootReducer = (state = initialState, action) => {
       if (allCart.length === 1) {
         localStorage.removeItem("Cart-pf");
       }
+    }
 
     case REMOVE_ALL_FROM_CART:
       const cart = state.cart;
@@ -263,7 +268,7 @@ const rootReducer = (state = initialState, action) => {
         case "brand": {
           return {
             ...state,
-            Brands: action.payload,
+            ProductsBrand: action.payload,
           };
         }
 
@@ -386,6 +391,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
       };
     }
+
+    case MERCADOPAGO:
+      return {
+        ...state,
+      };
 
     default:
       return {
