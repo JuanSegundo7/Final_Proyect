@@ -21,6 +21,7 @@ import {
   FILL_ALL_FAVORITES,
   MATCH_FAVORITE,
   ADD_TO_CART,
+  MERCADOPAGO,
   REMOVE_ONE_FROM_CART,
   REMOVE_ALL_FROM_CART,
   CLEAR_CART,
@@ -58,7 +59,9 @@ const initialState = {
   User: {},
 
   cart: [],
-  update: 1
+  update: 1,
+
+  linkMp:null
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -381,6 +384,12 @@ const rootReducer = (state = initialState, action) => {
         update: state.update + 1, */
       };
     }
+
+    case MERCADOPAGO:
+      return{
+        ...state,
+        linkMp: action.payload
+      }
 
     default:
       return {
