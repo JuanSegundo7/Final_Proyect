@@ -33,7 +33,9 @@ const initialState = {
   Products: [],
   Product: {},
   Categories: [],
+  
   Brands: [],
+  ProductsBrand: [],
   BrandsCopy: [],
 
   ByName: [],
@@ -262,7 +264,7 @@ const rootReducer = (state = initialState, action) => {
         case "brand": {
           return {
             ...state,
-            Brands: action.payload,
+            ProductsBrand: action.payload,
           };
         }
 
