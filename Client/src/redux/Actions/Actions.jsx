@@ -52,6 +52,9 @@ export const SEND_EMAIL = "SEND_EMAIL";
 
 export const USERS = "USERS";
 
+//MERCADOPAGO
+export const MERCADOPAGO = "MERCADOPAGO";
+
 const baseUrl = `http://localhost:3001/`;
 
 /*****************************************************************************************************/
@@ -309,4 +312,11 @@ export const sendEmail = (payload) => (dispatch) => {
   return axios
     .post(`${baseUrl}mail`, payload)
     .then((data) => dispatch({ type: SEND_EMAIL, payload: data.data }));
+};
+
+//MERCADOPAGO
+
+export const linkMp = (payload) => (dispatch) => {
+  return axios.post(`${baseUrl}mercadopago`, payload)
+    .then((data) => dispatch({ type: MERCADOPAGO, payload: data.data }));
 };

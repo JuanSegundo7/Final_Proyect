@@ -6,6 +6,7 @@ import { /* clearCart, */ sendEmail, updateUser } from "../../redux/Actions/Acti
 import "./CartComponent.css";
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { linkMp } from "../../redux/Actions/Actions";
 
 
 export default function CartComponent() {
@@ -14,6 +15,7 @@ export default function CartComponent() {
   const [disabled, setDisabled] = useState(false);
   const { isAuthenticated } = useAuth0();
   const datosEnMiBD = useSelector((state) => state.User);
+  const theLink = useSelector((state) => state.linkMp)
 
   let precioTotal = 0;
 
@@ -45,15 +47,38 @@ export default function CartComponent() {
     } */
   //}, [datosEnMiBD]);
 
-  function sendMail() {
-    const data = {
-      email: datosEnMiBD._id,
-      name: datosEnMiBD.name + " " + datosEnMiBD.lastname,
-      cart: datosEnMiBD.cart
-    };
-    console.log("soy cart en el front:",datosEnMiBD.cart)
-    dispatch(sendEmail(data));
+  // function sendMail() {
+  //   const data = {
+  //     email: datosEnMiBD._id,
+  //     name: datosEnMiBD.name + " " + datosEnMiBD.lastname,
+  //     cart: datosEnMiBD.cart
+  //   };
+  //   console.log("soy cart en el front:",datosEnMiBD.cart)
+  //   dispatch(sendEmail(data));
+  // }
+
+  useEffect(()=>{
+    // // const data={
+    // //  name: datosEnMiBD.name,
+    //   email: datosEnMiBD.email,
+    //   cart : datosEnMiBD.cart
+    // // }
+    console.log("entre a generar el link");
+    // dispatch(linkMp(data))
+  },[theLink])
+
+  
+  async function mercadopago(){
+    if (theLink) window.location.href = theLink;
+    const data={
+      name: datosEnMiBD.name,
+      email: datosEnMiBD.email,
+      cart : datosEnMiBD.cart
+    }
+    // console.log(data);
+    dispatch(linkMp(data))
   }
+
 
   return (
     <div id="Cart">
@@ -90,7 +115,9 @@ export default function CartComponent() {
         <button
           id={disabled ? "final-button-disabled" : "final-button"}
           disabled={disabled}
-          onClick={() => sendMail()}
+          // onClick={() => sendMail()}
+          onClick={() => mercadopago()}
+          // onMouseOver={()=>linkmercado()}
         >
           Buy
         </button>
