@@ -38,11 +38,11 @@ function App() {
     dispatch(getUsers());
   }, [dispatch]);
 
-  /*  useEffect(() => {
+  useEffect(() => {
     if (allCart.length) {
-        localStorage.setItem("Cart-pf", JSON.stringify(allCart));
+      localStorage.setItem("Cart-pf", JSON.stringify(allCart));
     }
-}, [allCart]); */
+  }, [allCart]);
 
   const datosEnMiBD = useSelector((state) => state.User);
   if (datosEnMiBD.admin == true) {
@@ -53,7 +53,7 @@ function App() {
     );
   }
 
-  console.log(window.location.pathname);
+  // console.log(window.location.pathname);
 
   return (
     <BrowserRouter>

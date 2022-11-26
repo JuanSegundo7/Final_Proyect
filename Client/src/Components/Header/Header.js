@@ -168,7 +168,7 @@ const Header = () => {
             </div>
           </Navigator>
           <div className="number">
-            {/* <picture>{allCart.length}</picture> */}
+            {<picture>{allCart && allCart.length}</picture>}
           </div>
           <Navigator to="/favorites">
             <div className="svg-container">

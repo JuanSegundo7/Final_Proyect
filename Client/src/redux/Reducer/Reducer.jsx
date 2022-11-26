@@ -57,8 +57,8 @@ const initialState = {
   Users: [],
   User: {},
 
-  /* cart: [],
-  update: 1, */
+  cart: [],
+  update: 1,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -192,6 +192,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         cart: [],
       };
+
     case FIND_ALL_CART:
       const localStorageCart = JSON.parse(localStorage.getItem("Cart-pf"));
 
