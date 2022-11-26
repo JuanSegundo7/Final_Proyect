@@ -31,12 +31,10 @@ export default function CartComponent() {
   useEffect(() => {
     if (allCart.length) {
       localStorage.setItem("Cart-pf", JSON.stringify(allCart));
-
       if (isAuthenticated) {
         dispatch(updateUser(datosEnMiBD._id, { cart: allCart }));
       }
     }
-    console.log("SOY CART:", allCart);
     if (isAuthenticated) {
       if (!allCart.length) {
         setDisabled(true);
