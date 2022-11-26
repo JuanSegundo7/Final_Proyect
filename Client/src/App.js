@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
+import About from "./Components/About/About";
 import Switch from "./Components/Switch/Switch";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter} from "react-router-dom";
 import {
   getProductByQuery,
   getProducts,
@@ -51,9 +52,16 @@ function App() {
     );
   }
 
+  // if (window.location.pathname === "/about"){
+  //   return (
+  //     <BrowserRouter>
+  //       <About />
+  //     </BrowserRouter>
+  //   );
+  // }
   return (
     <BrowserRouter>
-    <Header />
+    <Header />   
     <main>
       <Switch />
     </main>
