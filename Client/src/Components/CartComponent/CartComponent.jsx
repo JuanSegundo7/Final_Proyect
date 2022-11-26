@@ -2,18 +2,21 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardCart from "./CardCart";
 import Error from "../Card/imgs/error.webp";
-import { clearCart, sendEmail } from "../../redux/Actions/Actions";
+import {
+  /* clearCart, */ sendEmail,
+  updateUser,
+} from "../../redux/Actions/Actions";
 import "./CartComponent.css";
 import { useState } from "react";
-
-//-------------------------------------
 import { useAuth0 } from "@auth0/auth0-react";
-//-------------------------------------
 
 export default function CartComponent() {
   const allCart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const [disabled, setDisabled] = useState(false);
+  const { isAuthenticated } = useAuth0();
+  const datosEnMiBD = useSelector((state) => state.User);
+  console.log("es allCart:", allCart);
 
   let precioTotal = 0;
 
@@ -28,17 +31,24 @@ export default function CartComponent() {
   useEffect(() => {
     if (allCart.length) {
       localStorage.setItem("Cart-pf", JSON.stringify(allCart));
+      console.log("antes del if:", allCart);
+
+      if (isAuthenticated) {
+        console.log("estoy casi casi:", allCart);
+        dispatch(updateUser(datosEnMiBD._id, { cart: allCart }));
+
+        // console.log("esto es justo despues olcaar:",allCart)
+      }
     } else if (!allCart.length) {
       setDisabled(true);
     }
   }, [allCart]);
 
-  const datosEnMiBD = useSelector((state) => state.User);
   //Con esto fuerzo a que se renderice nuevamente cuando efectivamente se carguen los datos de mi BD.
-  useEffect(() => {
-    /* if (datosEnMiBD.hasOwnProperty("_id")) {
+  //useEffect(() => {
+  /* if (datosEnMiBD.hasOwnProperty("_id")) {
     } */
-  }, [datosEnMiBD]);
+  //}, [datosEnMiBD]);
 
   function sendMail() {
     const data = {

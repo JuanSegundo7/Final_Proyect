@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Switch from "./Components/Switch/Switch";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
+import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import {
@@ -13,6 +14,7 @@ import {
   findAllCart,
   matchFavorite,
   getUsers,
+  getOneUser,
 } from "./redux/Actions/Actions";
 import Dashboard from "./Dashboard/Dashboard";
 import "./App.css";
@@ -21,6 +23,10 @@ function App() {
   const dispatch = useDispatch();
   const FavCopy = useSelector((state) => state.FavoritesCopy);
   const allCart = useSelector((state) => state.cart);
+  const { user } = useAuth0();
+
+  if (FavCopy === 0)
+    dispatch(getProducts()).then(() => dispatch(matchFavorite()));
 
   if (FavCopy === 0)
     dispatch(getProducts()).then(() => dispatch(matchFavorite()));
@@ -36,6 +42,7 @@ function App() {
     dispatch(fillAllFavorites());
     dispatch(findAllCart());
     dispatch(getUsers());
+    if (user) dispatch(getOneUser(user.email));
   }, [dispatch]);
 
   useEffect(() => {
@@ -52,8 +59,6 @@ function App() {
       </BrowserRouter>
     );
   }
-
-  // console.log(window.location.pathname);
 
   return (
     <BrowserRouter>

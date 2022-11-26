@@ -11,6 +11,7 @@ import {
   getOneUser,
   updateUser,
   setAllFavorites,
+  findAllCart,
 } from "../../redux/Actions/Actions";
 
 const Header = () => {
@@ -39,6 +40,8 @@ const Header = () => {
     if (datosEnMiBD.hasOwnProperty("_id")) {
       //console.log("Datos de mi BD:",datosEnMiBD);
 
+      /*********************Merging Favorites from my DB and LocalStorage******************/
+
       const onlyIdsArray = [];
       if (datosEnMiBD.favorites.length) {
         for (let i = 0; i < datosEnMiBD.favorites.length; i++) {
@@ -60,25 +63,38 @@ const Header = () => {
         localStorage.setItem("Favorites-pf", total);
         dispatch(setAllFavorites(total));
       }
-      /****************************** CART****************************/
-      /* const onlyIdsArrayCart = [];
-      if (datosEnMiBD.favorites.length) {
-        for (let i = 0; i < datosEnMiBD.favorites.length; i++) {
-          onlyIdsArray.push(datosEnMiBD.favorites[i]._id);
+
+      /*********************************************************************************/
+
+      /*********************Merging Cart from my DB and LocalStorage********************/
+
+      console.log("en header, carrito de mi BD:", datosEnMiBD.cart);
+      console.log("y en cart global???:", allCart);
+      const myTotalArray = [...datosEnMiBD.cart];
+      for (let i = 0; i < allCart.length; i++) {
+        //console.log("caritooo",allCart[i])
+        let duplicated = false;
+        for (let j = 0; j < datosEnMiBD.cart.length; j++) {
+          if (allCart[i]._id === datosEnMiBD.cart[j]._id) {
+            //console.log("encontre un duplicado y es:",allCart[i].name)
+            duplicated = true;
+          }
+        }
+        if (!duplicated) {
+          myTotalArray.push(allCart[i]);
         }
       }
 
-      let totalCart = onlyIdsArray.concat(favArray);
-      totalCart = totalCart.filter(
-        (element) => element !== undefined && element !== null
-      );
-      totalCart = [...new Set([...onlyIdsArray, ...favArray])];
+      console.log("mytotalarray:", myTotalArray);
 
-      if (!totalCart.includes(undefined) && !totalCart.includes(null)) {
-        dispatch(updateUser(datosEnMiBD._id, { favorites: totalCart }));
-        localStorage.setItem("Favorites-pf", totalCart);
-        dispatch(setAllFavorites(totalCart));
-      } */
+      //if (!myTotalArray.includes(undefined) && !myTotalArray.includes(null)){
+      localStorage.setItem("Cart-pf", JSON.stringify(myTotalArray));
+      //dispatch(setAllFavorites(myTotalArray));
+      dispatch(findAllCart());
+      dispatch(updateUser(datosEnMiBD._id, { cart: myTotalArray }));
+      //}
+
+      /*********************************************************************************/
     }
 
     if (datosEnMiBD.hasOwnProperty("error")) {
@@ -168,7 +184,11 @@ const Header = () => {
             </div>
           </Navigator>
           <div className="number">
-            {<picture>{allCart && allCart.length}</picture>}
+            {
+              <picture>
+                {allCart && allCart.length ? allCart.length : 0}
+              </picture>
+            }
           </div>
           <Navigator to="/favorites">
             <div className="svg-container">
