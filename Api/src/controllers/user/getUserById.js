@@ -12,7 +12,6 @@ const getUserById = async function (UserId) {
 
 
     if (resp && resp.cart && resp.cart.length){
-      console.log("hoolaaaa, entre bien")
       for (let i=0; i<resp.cart.length; i++){
         try {
           response = await getProductById(resp.cart[i]._id);
