@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState} from "react";
 import logo from "./img/coffee.png";
 import Categories from "../Categories/Categories";
 import { Link as Navigator } from "react-router-dom";
@@ -6,19 +6,16 @@ import "./Header.css";
 import SearchBar from "../SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-import {
-  postUser,
-  getOneUser,
-  updateUser,
-  setAllFavorites,
-  findAllCart,
-} from "../../redux/Actions/Actions";
+import { postUser, getOneUser, updateUser, setAllFavorites, findAllCart } from "../../redux/Actions/Actions";
+import Error from "./img/user_not_found_white.png";
+
 
 const Header = () => {
   const dispatch = useDispatch();
   const Favorites = useSelector((state) => state.Favorites);
   const allCart = useSelector((state) => state.cart);
   const { user, isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
+  const [error, setError] = useState(false)
 
   //Local Storages
   const myLocalStgFavorites = localStorage.getItem("Favorites-pf");
@@ -100,9 +97,13 @@ const Header = () => {
       //console.log("Datos de mi BD del error:",datosEnMiBD);
     }
   }, [datosEnMiBD]);
+  
+const about = window.location.pathname === "/about";
+// `${about?"display:none" : "display:block"}`
+// console.log(about);
 
   return (
-    <header>
+    <header className="display:none">
       <div id="ship">
         <p>
           <span>Free shipping</span>to all the country from 500 USD
@@ -128,7 +129,9 @@ const Header = () => {
             </div>
           ) : (
             <Navigator to="/profile">
-              <img id="user-img" src={user.picture} />
+              <div className="svg-container">
+                <img id={!error ? "user-img" : "error-img"} src={user.picture} onError={({ currentTarget }) => {currentTarget.onerror = null; currentTarget.src = Error; setError(true)}} />
+              </div>
             </Navigator>
           )}
 
@@ -195,7 +198,9 @@ const Header = () => {
       </nav>
       <Categories />
     </header>
+    
   );
+
 };
 
 export default Header;

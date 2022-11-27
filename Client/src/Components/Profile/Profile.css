@@ -1,0 +1,19 @@
+#Profile{
+    width: 90vw;
+    background-color: #fff;
+    border-radius: 20px;
+    height: 100%;
+    padding: 1em;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#Profile-rigth{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#Profile-rigth h2, #Profile-rigth p{
+    margin: 0.5em 0;
+}
