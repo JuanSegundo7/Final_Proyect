@@ -45,15 +45,15 @@ router.post("/", async (req, res) => {
         },
     };
 
-    await mercadopago.preferences.create(preference)
-        .then(function (response) {
-            //console.log("soy response:",response)
-            onSuccessHandler(response.body.init_point);
-            res.send(response.body.init_point);
-        })
-        .catch(function (error) {
-            console.log(error);
-        }); 
+    mercadopago.preferences.create(preference)
+    .then(function (response) {
+        //console.log("soy response:",response)
+        onSuccessHandler(response.body.init_point);
+        res.send(response.body.init_point);
+    })
+    .catch(function (error) {
+        console.log(error);
+    }); 
 
 })
 

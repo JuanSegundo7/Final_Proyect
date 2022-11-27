@@ -13,11 +13,13 @@ import { linkMp } from "../../redux/Actions/Actions";
 
 export default function CartComponent() {
   const allCart = useSelector((state) => state.cart);
+  const MercadoPagoUrl = useSelector((state) => state.MercadoPagoUrl);
   const dispatch = useDispatch();
   const [disabled, setDisabled] = useState(false);
   const { isAuthenticated } = useAuth0();
   const datosEnMiBD = useSelector((state) => state.User);
-  // console.log("es allCart:", allCart);
+   
+  console.log("es mp:", MercadoPagoUrl);
 
   let precioTotal = 0;
   let total = 0;
@@ -53,6 +55,10 @@ export default function CartComponent() {
     };
     //console.log("hice click en el boton de comprar - data:",data)
     dispatch(linkMp(data));
+
+    if(MercadoPagoUrl.length){
+      return window.location.href = MercadoPagoUrl
+    }
   }
 
   return (
