@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import logo from "./img/coffee.png";
 import Categories from "../Categories/Categories";
 import { Link as Navigator } from "react-router-dom";
@@ -114,9 +114,13 @@ const Header = () => {
       //console.log("Datos de mi BD del error:",datosEnMiBD);
     }
   }, [datosEnMiBD]);
+  
+const about = window.location.pathname === "/about";
+// `${about?"display:none" : "display:block"}`
+// console.log(about);
 
   return (
-    <header>
+    <header className="display:none">
       <div id="ship">
         <p>
           <span>Free shipping</span>to all the country from 500 USD
@@ -127,6 +131,7 @@ const Header = () => {
           <Navigator to="/">
             <img src={logo} alt="logo" />
           </Navigator>
+          <Navigator to = "/about">About Us</Navigator>
         </figure>
         <SearchBar />
         <div id="flex-svgs" className="desktop-visible">
@@ -209,7 +214,9 @@ const Header = () => {
       </nav>
       <Categories />
     </header>
+    
   );
+
 };
 
 export default Header;
