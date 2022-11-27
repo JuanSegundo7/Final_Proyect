@@ -20,7 +20,6 @@ export default function ({ info, order }) {
   const FavoritesBoolean = useSelector((state) => state.FavoriteBoolean);
 
   const ProductsBrand = useSelector((state) => state.ProductsBrand);
-  // console.log("ESTOY EN FILTER ProductsBrand:", ProductsBrand);
 
   const [price, setPrice] = useState({
     min: 1,
@@ -54,6 +53,7 @@ export default function ({ info, order }) {
     e.preventDefault();
     setPrice({ ...price, max: parseInt(e.target.value) });
     dispatch(filter(price, info));
+    // el comentario de abajo ya lo resolvieron??? si es asi borrenlooo
     //-> ver si quiero mandar ya desde aca el array(el estado global de cafes o hacerlo desde el reducer)
   }
 
@@ -133,8 +133,6 @@ export default function ({ info, order }) {
   };
 
   const handleReset = (e) => {
-    document.getElementById("range1").value = 1;
-    document.getElementById("range2").value = 500;
     document.getElementById("order").selectedIndex = 0;
     document.getElementById("order2").selectedIndex = 0;
     document.getElementById("order3").selectedIndex = 0;
