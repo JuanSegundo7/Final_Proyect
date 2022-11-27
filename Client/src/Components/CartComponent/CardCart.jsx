@@ -1,27 +1,11 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
   clearCart,
   removeAllToCart,
   removeOneToCart,
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-} from "../../redux/Actions/Actions";
-
-export default function CardCart(props) {
-
-  const dispatch = useDispatch();
-
-  function addOne(e) {
-    if (props.stock >= 1) {
-       dispatch(addToCart(props._id)); 
-=======
-  //updateUser
-=======
   updateUser,
->>>>>>> fc738d202c76089a35ff4606d3aa63779ed44e01
 } from "../../redux/Actions/Actions";
 
 export default function CardCart(props) {
@@ -33,17 +17,11 @@ export default function CardCart(props) {
   function addOne(e) {
     if (props.stock >= 1) {
       dispatch(addToCart(props._id));
->>>>>>> 0d90800a5cad77c7eb27bf16f9c4eda881befadb
     }
   }
 
   function removeOne(id, all = false) {
     if (all) {
-<<<<<<< HEAD
-       dispatch(removeOneToCart(id)); 
-    } else {
-       dispatch(removeAllToCart(id)); 
-=======
       dispatch(removeOneToCart(id));
 
       if (cart && cart.length === 1) {
@@ -52,12 +30,8 @@ export default function CardCart(props) {
       }
     } else {
       dispatch(removeAllToCart(id));
-<<<<<<< HEAD
->>>>>>> 0d90800a5cad77c7eb27bf16f9c4eda881befadb
-=======
       if (cart && cart.length === 1)
         dispatch(updateUser(user._id, { cart: [] }));
->>>>>>> fc738d202c76089a35ff4606d3aa63779ed44e01
     }
   }
 
