@@ -4,11 +4,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Clear from '@mui/icons-material/Clear';
 import Tooltip from "@mui/material/Tooltip";
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import Delete from "../../Components/Alert/Delete"
 import Modal from "../../Components/ProductForm/Modal"
 import "../Dashboard.css"
-import { updateProduct } from '../../redux/Actions/Actions';
 
 
 export default function DataTable() {
@@ -17,8 +16,6 @@ export default function DataTable() {
     const [open, setOpen] = useState(false)
     const [info, setInfo] = useState({})
     let modal
-
-    const dispatch = useDispatch();
 
     const deleteProduct = (e) => {
         Delete()
@@ -31,19 +28,9 @@ export default function DataTable() {
         e.stopPropagation();
     }
 
-    const toggleEnable = (e, id) => {
-        e.stopPropagation();
-        const findProduct = State?.find((product) => product._id === id);
+
+    const toggleEnable = () => {
         
-        if(findProduct){
-            if(findProduct.enabled){ //=== true
-                findProduct.enabled = false;
-                dispatch(updateProduct(id, {enabled:findProduct.enabled}));
-            } else{
-                findProduct.enabled = true
-                dispatch(updateProduct(id, {enabled:findProduct.enabled}));
-            }
-        }
     }
 
     if(open == true) modal = <Modal close={setOpen} info={info}/>
@@ -78,7 +65,7 @@ export default function DataTable() {
                     <GridActionsCellItem
                     icon={<Clear />}
                     label="Toggle Admin"
-                    onClick={(e) => toggleEnable(e ,params.id)}
+                    // onClick={toggleAdmin(params.id)}
                     />
                 </Tooltip>,
             ]}

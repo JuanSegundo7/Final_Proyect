@@ -4,36 +4,15 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import SecurityIcon from '@mui/icons-material/Security';
 import Tooltip from "@mui/material/Tooltip";
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import "../Dashboard.css"
-import { updateUser } from '../../redux/Actions/Actions';
-import { useNavigate } from "react-router-dom";
 
 export default function DataTable() {
 
     const State = useSelector((state) => state.Users)        
     const finalArray = State.map((user) => {return ( {id: user._id, name: user.name, lastname: user.lastname, admin: user.admin} )})
         
-    //console.log(State)
-
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-
-    const toggleAdmin = (e, id) =>{
-        e.stopPropagation();
-
-        const findProduct = State?.find((user) => user._id === id);
-
-        if(findProduct){
-            if(findProduct.admin){
-                findProduct.admin = false;
-                dispatch(updateUser(id, {admin:findProduct.admin}))
-            } else{
-                findProduct.admin = true;
-                dispatch(updateUser(id, {admin:findProduct.admin}))
-            }
-        }
-    }
+    console.log(State)
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 250 },
@@ -62,7 +41,7 @@ export default function DataTable() {
                     <GridActionsCellItem
                     icon={<SecurityIcon />}
                     label="Toggle Admin"
-                    onClick={(e) => toggleAdmin(e ,params.id)}
+                    // onClick={toggleAdmin(params.id)}
                     />
                 </Tooltip>,
 

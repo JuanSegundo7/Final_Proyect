@@ -2,11 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-<<<<<<< HEAD
-import {  addToCart,  updateUser } from "../../redux/Actions/Actions";
-=======
 import { addToCart, updateUser } from "../../redux/Actions/Actions";
->>>>>>> 0d90800a5cad77c7eb27bf16f9c4eda881befadb
 import AddProductAlert from "../Alert/AddProduct";
 
 export default function Cart({ id }) {
@@ -17,11 +13,7 @@ export default function Cart({ id }) {
 
   function handleToCart(e) {
     AddProductAlert()
-<<<<<<< HEAD
-     dispatch(addToCart(id)); 
-=======
     dispatch(addToCart(id));
->>>>>>> 0d90800a5cad77c7eb27bf16f9c4eda881befadb
   }
 
   useEffect(() => {

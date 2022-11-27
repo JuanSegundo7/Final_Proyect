@@ -31,8 +31,8 @@ router.get("/:_idproduct", async function (req,res){
 router.put("/:_id", async (req, res) => {
     
     const { _id } = req.params;
-    console.log('req.body', req.body);
     //const { name, description, origin, type, stock, category} = req.body;
+    
     try{
         let respuesta = await updateProduct(_id,req.body);
         res.send(respuesta);
