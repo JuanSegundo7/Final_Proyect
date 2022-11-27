@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState} from "react";
 import logo from "./img/coffee.png";
 import Categories from "../Categories/Categories";
 import { Link as Navigator } from "react-router-dom";
@@ -7,6 +7,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { postUser, getOneUser, updateUser, setAllFavorites, findAllCart } from "../../redux/Actions/Actions";
+import Error from "./img/user_not_found_white.png";
 
 
 const Header = () => {
@@ -14,11 +15,11 @@ const Header = () => {
   const Favorites = useSelector((state) => state.Favorites);
   const allCart = useSelector((state) => state.cart);
   const { user, isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
+  const [error, setError] = useState(false)
 
   //Local Storages
   const myLocalStgFavorites = localStorage.getItem("Favorites-pf");
-  const myLocalStgCart = JSON.parse(localStorage.getItem("Cart-pf"));
-
+  const myLocalStgCart = localStorage.getItem("Cart-pf");
   let favArray = [];
   if (myLocalStgFavorites && myLocalStgFavorites.length) {
     favArray = myLocalStgFavorites.split(",");
@@ -29,20 +30,7 @@ const Header = () => {
       //console.log("ya me loguee",user)
       dispatch(getOneUser(user.email));
     }
-  },[user]);
-  
-  const datosEnMiBD = useSelector((state) => state.User);
-  
-  useEffect(() => {
-    if (allCart.length) {
-      localStorage.setItem("Cart-pf", JSON.stringify(allCart));
-    } 
-    if(isAuthenticated){
-      dispatch(updateUser(User._id, {cart: allCart}))
-    }
-  },[allCart]);
-
-
+  }, [user]);
 
   useEffect(() => {
     if (datosEnMiBD.hasOwnProperty("_id")) {
@@ -51,54 +39,56 @@ const Header = () => {
       /*********************Merging Favorites from my DB and LocalStorage******************/
 
       const onlyIdsArray = [];
-      if (datosEnMiBD.favorites.length){
-        for (let i=0;i<datosEnMiBD.favorites.length;i++){
-          onlyIdsArray.push(datosEnMiBD.favorites[i]._id)
+      if (datosEnMiBD.favorites.length) {
+        for (let i = 0; i < datosEnMiBD.favorites.length; i++) {
+          onlyIdsArray.push(datosEnMiBD.favorites[i]._id);
         }
         //ademas, deberia meter lo de la bbdd en mi localStg
         //console.log("estoy por aca, no se:",onlyIdsArray)
       }
-      
+
       let total = onlyIdsArray.concat(favArray);
-      total = total.filter(element => (element !== undefined && element !==null));
-      total = [...new Set([...onlyIdsArray,...favArray])];
+      total = total.filter(
+        (element) => element !== undefined && element !== null
+      );
+      total = [...new Set([...onlyIdsArray, ...favArray])];
       //console.log("total:",total)
-      
-      if (!total.includes(undefined) && !total.includes(null)){
-        dispatch(updateUser(datosEnMiBD._id,{favorites:total}));
-        localStorage.setItem("Favorites-pf",total);
+
+      if (!total.includes(undefined) && !total.includes(null)) {
+        dispatch(updateUser(datosEnMiBD._id, { favorites: total }));
+        localStorage.setItem("Favorites-pf", total);
         dispatch(setAllFavorites(total));
-      }  
+      }
 
       /*********************************************************************************/
 
       /*********************Merging Cart from my DB and LocalStorage********************/
 
-      console.log("en header, carrito de mi BD:",datosEnMiBD.cart)
-      console.log("y en cart global???:",allCart)
-      const myTotalArray = [...datosEnMiBD.cart]
-      for (let i=0;i<allCart.length;i++){
+      //console.log("en header, carrito de mi BD:",datosEnMiBD.cart)
+      //console.log("y en cart global???:",allCart)
+      const myTotalArray = [...datosEnMiBD.cart];
+      for (let i = 0; i < allCart.length; i++) {
         //console.log("caritooo",allCart[i])
         let duplicated = false;
-        for (let j=0;j<datosEnMiBD.cart.length;j++){
-          if (allCart[i]._id===datosEnMiBD.cart[j]._id){
+        for (let j = 0; j < datosEnMiBD.cart.length; j++) {
+          if (allCart[i]._id === datosEnMiBD.cart[j]._id) {
             //console.log("encontre un duplicado y es:",allCart[i].name)
             duplicated = true;
           }
         }
-        if (!duplicated){
+        if (!duplicated) {
           myTotalArray.push(allCart[i]);
         }
       }
-      
-      console.log("mytotalarray:",myTotalArray)
+
+      //console.log("mytotalarray:", myTotalArray);
 
       //if (!myTotalArray.includes(undefined) && !myTotalArray.includes(null)){
-        localStorage.setItem("Cart-pf", JSON.stringify(myTotalArray));
-        //dispatch(setAllFavorites(myTotalArray));
-        dispatch(findAllCart())
-        dispatch(updateUser(datosEnMiBD._id,{cart:myTotalArray}));
-      //}  
+      localStorage.setItem("Cart-pf", JSON.stringify(myTotalArray));
+      //dispatch(setAllFavorites(myTotalArray));
+      dispatch(findAllCart());
+      dispatch(updateUser(datosEnMiBD._id, { cart: myTotalArray }));
+      //}
 
       /*********************************************************************************/
     }
@@ -117,9 +107,13 @@ const Header = () => {
       //console.log("Datos de mi BD del error:",datosEnMiBD);
     }
   }, [datosEnMiBD]);
+  
+const about = window.location.pathname === "/about";
+// `${about?"display:none" : "display:block"}`
+// console.log(about);
 
   return (
-    <header>
+    <header className="display:none">
       <div id="ship">
         <p>
           <span>Free shipping</span>to all the country from 500 USD
@@ -145,10 +139,25 @@ const Header = () => {
             </div>
           ) : (
             <Navigator to="/profile">
-              <img id="user-img" src={user.picture} />
+              <div className="svg-container">
+                <img id={!error ? "user-img" : "error-img"} src={user.picture} onError={({ currentTarget }) => {currentTarget.onerror = null; currentTarget.src = Error; setError(true)}} />
+              </div>
             </Navigator>
           )}
-           <Navigator to="cart">
+
+          {/* {!isAuthenticated ? (
+            <div className="svg-container" onClick={() => loginWithRedirect()}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                id="cart"
+                className="svg"
+                viewBox="0 0 576 512"
+              >
+                <path d="M24 0C10.7 0 0 10.7 0 24S10.7 48 24 48H76.1l60.3 316.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24-10.7 24-24s-10.7-24-24-24H179.9l-9.1-48h317c14.3 0 26.9-9.5 30.8-23.3l54-192C578.3 52.3 563 32 541.8 32H122l-2.4-12.5C117.4 8.2 107.5 0 96 0H24zM176 512c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm336-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48z" />
+              </svg>
+            </div>
+          ) : (
+            <Navigator to="cart">
               <div className="svg-container">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -160,8 +169,25 @@ const Header = () => {
                 </svg>
               </div>
             </Navigator>
+          )} */}
+          <Navigator to="cart">
+            <div className="svg-container">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                id="cart"
+                className="svg"
+                viewBox="0 0 576 512"
+              >
+                <path d="M24 0C10.7 0 0 10.7 0 24S10.7 48 24 48H76.1l60.3 316.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24-10.7 24-24s-10.7-24-24-24H179.9l-9.1-48h317c14.3 0 26.9-9.5 30.8-23.3l54-192C578.3 52.3 563 32 541.8 32H122l-2.4-12.5C117.4 8.2 107.5 0 96 0H24zM176 512c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm336-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48z" />
+              </svg>
+            </div>
+          </Navigator>
           <div className="number">
-            {<picture>{allCart && allCart.length? allCart.length : 0}</picture>}
+            {
+              <picture>
+                {allCart && allCart.length ? allCart.length : 0}
+              </picture>
+            }
           </div>
           <Navigator to="/favorites">
             <div className="svg-container">
@@ -182,7 +208,9 @@ const Header = () => {
       </nav>
       <Categories />
     </header>
+    
   );
+
 };
 
 export default Header;

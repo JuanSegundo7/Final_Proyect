@@ -2,8 +2,10 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import {
   addToCart,
+  clearCart,
   removeAllToCart,
   removeOneToCart,
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 } from "../../redux/Actions/Actions";
@@ -17,15 +19,16 @@ export default function CardCart(props) {
        dispatch(addToCart(props._id)); 
 =======
   //updateUser
+=======
+  updateUser,
+>>>>>>> fc738d202c76089a35ff4606d3aa63779ed44e01
 } from "../../redux/Actions/Actions";
 
 export default function CardCart(props) {
-  const { isAuthenticated } = useAuth0();
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.User);
   const cart = useSelector((state) => state.cart);
-
 
   function addOne(e) {
     if (props.stock >= 1) {
@@ -42,9 +45,19 @@ export default function CardCart(props) {
        dispatch(removeAllToCart(id)); 
 =======
       dispatch(removeOneToCart(id));
+
+      if (cart && cart.length === 1) {
+        dispatch(clearCart());
+        dispatch(updateUser(user._id, { cart: [] }));
+      }
     } else {
       dispatch(removeAllToCart(id));
+<<<<<<< HEAD
 >>>>>>> 0d90800a5cad77c7eb27bf16f9c4eda881befadb
+=======
+      if (cart && cart.length === 1)
+        dispatch(updateUser(user._id, { cart: [] }));
+>>>>>>> fc738d202c76089a35ff4606d3aa63779ed44e01
     }
   }
 

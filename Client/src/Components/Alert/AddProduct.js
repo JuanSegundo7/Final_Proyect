@@ -6,7 +6,7 @@ export default function AddProductAlert() {
         title:"Excelent!",
         text:'The product has been added to the cart',
         icon:'success',
-        timer: 1750
+        timer: 2000
     })
   )
 }

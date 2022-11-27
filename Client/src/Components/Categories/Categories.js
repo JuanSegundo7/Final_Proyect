@@ -41,17 +41,23 @@ const Categories = () => {
       <ul id="Categorys">
         <li>
           <Link to="/coffees">
-            <Dropdown info={Coffees} path="/coffees" />
+            <div className="div-button-categories">Coffees</div>
           </Link>
         </li>
         <li>
-          <Dropdown info={CoffeeMaker} path="/products/coffee-maker" />
+        <Link to="/products/coffee-maker">
+          <div className="div-button-categories">Coffee-Maker</div>
+        </Link>
         </li>
         <li>
-          <Dropdown info={Accesories} path="/products/accesories" />
+        <Link to="/products/accesories">
+          <div className="div-button-categories">Accesories</div>
+        </Link>
         </li>
         <li>
-          <Dropdown info={Others} path="/products/others" />
+        <Link to="/products/others">
+          <div className="div-button-categories">Others</div>
+        </Link>
         </li>
         <li>
           <Dropdown info={Brands} path="/brands" />

@@ -6,6 +6,7 @@
     align-items: center;
     justify-content: space-evenly;
     margin: 2em 0;
+    background-color: #fff;
 }
 
 #detail_flex_info{

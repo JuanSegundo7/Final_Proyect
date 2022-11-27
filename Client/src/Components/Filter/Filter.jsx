@@ -19,6 +19,9 @@ export default function ({ info, order }) {
   const Price = useSelector((state) => state.Price);
   const FavoritesBoolean = useSelector((state) => state.FavoriteBoolean);
 
+  const ProductsBrand = useSelector((state) => state.ProductsBrand);
+  // console.log("ESTOY EN FILTER ProductsBrand:", ProductsBrand);
+
   const [price, setPrice] = useState({
     min: 1,
     max: 500,
@@ -36,6 +39,10 @@ export default function ({ info, order }) {
       max: 500,
     });
   }, [location.pathname, state]);
+
+  useEffect(() => {
+    dispatch(cleanFiltered());
+  }, [location.pathname]);
 
   function handlePriceMin(e) {
     e.preventDefault();
@@ -58,6 +65,8 @@ export default function ({ info, order }) {
     if (Search) dispatch(sortFilter(value, "ByName", "name"));
     if (Price) dispatch(sortFilter(value, "OrderPrice", "name"));
     if (FavoritesBoolean) dispatch(sortFilter(value, "FavoritesCopy", "name"));
+    if (ProductsBrand.length)
+      dispatch(sortFilter(value, "ProductsBrand", "name"));
 
     switch (state) {
       case state: {
@@ -81,6 +90,8 @@ export default function ({ info, order }) {
     if (Search) dispatch(sortFilter(value, "ByName", "stock"));
     if (Price) dispatch(sortFilter(value, "OrderPrice", "stock"));
     if (FavoritesBoolean) dispatch(sortFilter(value, "FavoritesCopy", "stock"));
+    if (ProductsBrand.length)
+      dispatch(sortFilter(value, "ProductsBrand", "stock"));
 
     switch (state) {
       case state: {
@@ -104,6 +115,8 @@ export default function ({ info, order }) {
     if (Search) dispatch(sortFilter(value, "ByName", "price"));
     if (Price) dispatch(sortFilter(value, "OrderPrice", "price"));
     if (FavoritesBoolean) dispatch(sortFilter(value, "FavoritesCopy", "price"));
+    if (ProductsBrand.length)
+      dispatch(sortFilter(value, "ProductsBrand", "price"));
 
     switch (state) {
       case state: {
@@ -127,9 +140,7 @@ export default function ({ info, order }) {
     document.getElementById("order3").selectedIndex = 0;
     setPrice({ min: 1, max: 500 });
     dispatch(cleanFiltered());
-    dispatch(
-      getProductByQuery("category", `${order}`, `${order}`, `orderedbyname=ASC`)
-    );
+    dispatch(getProductByQuery("category", `${order}`, `${order}`));
   };
 
   return (

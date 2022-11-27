@@ -4,10 +4,9 @@ import Carrousel from "../Carrousel/Carrousel";
 import TigerInfo from "../TigerInfo/TigerInfo";
 import ProductCarousel from "../ProductCarousel/ProductCarousel";
 import {useSelector} from "react-redux"
+import Help from "../Help/Help"
 
 export default function Home() {
-
-  // hola
 
   const Coffees = useSelector((state) => state.CategoriesCoffee);
   const CoffeeMaker = useSelector((state) => state.CategoriesCoffeeMaker);
@@ -22,6 +21,7 @@ export default function Home() {
       <TigerInfo />
       <ProductCarousel array={Accesories} title="Accesories"/>
       <ProductCarousel array={Others} title="Other items"/>
+      <Help />
     </section>
   );
 }

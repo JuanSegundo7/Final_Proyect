@@ -6,6 +6,7 @@ const brandRouter = require("../routes/brands.js");
 const userRouter = require("../routes/users");
 const mailRouter = require('../routes/mail.js');
 const commentRouter = require('../routes/comments.js');
+const mercadoRouter = require('../routes/mercadopago.js');
 
 const router = Router();
 
@@ -17,6 +18,7 @@ router.use('/brands', brandRouter);
 router.use('/users', userRouter);
 router.use('/mail', mailRouter);
 router.use('/comments' , commentRouter);
+router.use('/mercadopago', mercadoRouter);
 
 
 module.exports = router;
