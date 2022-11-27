@@ -5,7 +5,7 @@ import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter} from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import {
   getProductByQuery,
   getProducts,
@@ -28,9 +28,6 @@ function App() {
 
   if (FavCopy === 0)
     dispatch(getProducts()).then(() => dispatch(matchFavorite()));
-
-  // if (FavCopy === 0)
-  //   dispatch(getProducts()).then(() => dispatch(matchFavorite()));
 
   useEffect(() => {
     dispatch(getProducts());
@@ -61,12 +58,12 @@ function App() {
     );
   }
 
-  if(window.location.pathname == "/about"){
+  if (window.location.pathname == "/about") {
     return (
       <main>
         <About />
       </main>
-    )
+    );
   }
 
   return (

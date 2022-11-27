@@ -6,6 +6,7 @@ const getProducts = async function (options) {
     name,
     category,
     brand,
+    enabled,
     orderedbyname,
     orderedbystock,
     orderedbyprice,
@@ -48,6 +49,9 @@ const getProducts = async function (options) {
       throw new Error(unError);
     }
     if (brandComplete) findOptions.brand = brandComplete._id;
+  }
+  if (enabled) {
+    findOptions.enabled = true;
   }
 
   //Ahora sí, realizo la búsqueda...

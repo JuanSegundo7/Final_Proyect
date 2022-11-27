@@ -14,7 +14,6 @@ import {
   FILTER,
   CLEAN_FILTERED,
   CLEAN_NAME,
-  //CLEAN_ORDER,
   ORDER_FILTER,
   SET_ALL_FAVORITES,
   ADD_ONE_FAVORITE,
@@ -27,7 +26,6 @@ import {
   CLEAR_CART,
   FIND_ALL_CART,
   SEND_EMAIL,
-  CLEAN_BRANDS,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -225,6 +223,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         Product: action.payload,
       };
+
     //case POST_PRODUCT:
     //return {
     //...state,

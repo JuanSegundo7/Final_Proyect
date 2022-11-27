@@ -25,6 +25,9 @@ export default function ContainerInfo({ info, order }) {
   const User = useSelector((state) => state.User);
   const { isAuthenticated } = useAuth0();
 
+  const ProductsEnabled = useSelector((state) => state.ProductsEnabled);
+  console.log("SOY PRODUCT ENABLED:", ProductsEnabled);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [productPerPage, setProductPerPage] = useState(8);
   const indexLastProduct = productPerPage * currentPage;
