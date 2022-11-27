@@ -29,8 +29,8 @@ function App() {
   if (FavCopy === 0)
     dispatch(getProducts()).then(() => dispatch(matchFavorite()));
 
-  if (FavCopy === 0)
-    dispatch(getProducts()).then(() => dispatch(matchFavorite()));
+  // if (FavCopy === 0)
+  //   dispatch(getProducts()).then(() => dispatch(matchFavorite()));
 
   useEffect(() => {
     dispatch(getProducts());
@@ -59,6 +59,14 @@ function App() {
         <Dashboard />
       </BrowserRouter>
     );
+  }
+
+  if(window.location.pathname == "/about"){
+    return (
+      <main>
+        <About />
+      </main>
+    )
   }
 
   return (
