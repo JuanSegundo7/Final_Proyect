@@ -6,14 +6,13 @@ import "./Header.css";
 import SearchBar from "../SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-import { postUser, getOneUser, updateUser, setAllFavorites } from "../../redux/Actions/Actions";
+import { postUser, getOneUser, updateUser, setAllFavorites, findAllCart } from "../../redux/Actions/Actions";
 
 
 const Header = () => {
   const dispatch = useDispatch();
   const Favorites = useSelector((state) => state.Favorites);
   const allCart = useSelector((state) => state.cart);
-  const User = useSelector((state) => state.User);
   const { user, isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
 
   //Local Storages
@@ -48,6 +47,9 @@ const Header = () => {
   useEffect(() => {
     if (datosEnMiBD.hasOwnProperty("_id")) {
       //console.log("Datos de mi BD:",datosEnMiBD);
+
+      /*********************Merging Favorites from my DB and LocalStorage******************/
+
       const onlyIdsArray = [];
       if (datosEnMiBD.favorites.length){
         for (let i=0;i<datosEnMiBD.favorites.length;i++){
@@ -66,16 +68,39 @@ const Header = () => {
         dispatch(updateUser(datosEnMiBD._id,{favorites:total}));
         localStorage.setItem("Favorites-pf",total);
         dispatch(setAllFavorites(total));
-      } 
+      }  
 
-      if(datosEnMiBD.cart.length){
-        //console.log('estoy aca adentro', datosEnMiBD.cart);
-        const cartUser = datosEnMiBD.cart;
-        console.log('cartUser', cartUser)
-        // let localStg = myLocalStgCart.filter((product) => product !== undefined && product !==null);
-        //console.log('local storage filter', localStg);
+      /*********************************************************************************/
+
+      /*********************Merging Cart from my DB and LocalStorage********************/
+
+      console.log("en header, carrito de mi BD:",datosEnMiBD.cart)
+      console.log("y en cart global???:",allCart)
+      const myTotalArray = [...datosEnMiBD.cart]
+      for (let i=0;i<allCart.length;i++){
+        //console.log("caritooo",allCart[i])
+        let duplicated = false;
+        for (let j=0;j<datosEnMiBD.cart.length;j++){
+          if (allCart[i]._id===datosEnMiBD.cart[j]._id){
+            //console.log("encontre un duplicado y es:",allCart[i].name)
+            duplicated = true;
+          }
+        }
+        if (!duplicated){
+          myTotalArray.push(allCart[i]);
+        }
       }
-    
+      
+      console.log("mytotalarray:",myTotalArray)
+
+      //if (!myTotalArray.includes(undefined) && !myTotalArray.includes(null)){
+        localStorage.setItem("Cart-pf", JSON.stringify(myTotalArray));
+        //dispatch(setAllFavorites(myTotalArray));
+        dispatch(findAllCart())
+        dispatch(updateUser(datosEnMiBD._id,{cart:myTotalArray}));
+      //}  
+
+      /*********************************************************************************/
     }
 
     if (datosEnMiBD.hasOwnProperty("error")) {
@@ -136,7 +161,7 @@ const Header = () => {
               </div>
             </Navigator>
           <div className="number">
-             <picture>{allCart.length}</picture> 
+            {<picture>{allCart && allCart.length? allCart.length : 0}</picture>}
           </div>
           <Navigator to="/favorites">
             <div className="svg-container">

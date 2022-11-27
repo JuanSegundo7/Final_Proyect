@@ -4,6 +4,7 @@ import {
   addToCart,
   removeAllToCart,
   removeOneToCart,
+<<<<<<< HEAD
 
 } from "../../redux/Actions/Actions";
 
@@ -14,14 +15,36 @@ export default function CardCart(props) {
   function addOne(e) {
     if (props.stock >= 1) {
        dispatch(addToCart(props._id)); 
+=======
+  //updateUser
+} from "../../redux/Actions/Actions";
+
+export default function CardCart(props) {
+  const { isAuthenticated } = useAuth0();
+  const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.User);
+  const cart = useSelector((state) => state.cart);
+
+
+  function addOne(e) {
+    if (props.stock >= 1) {
+      dispatch(addToCart(props._id));
+>>>>>>> 0d90800a5cad77c7eb27bf16f9c4eda881befadb
     }
   }
 
   function removeOne(id, all = false) {
     if (all) {
+<<<<<<< HEAD
        dispatch(removeOneToCart(id)); 
     } else {
        dispatch(removeAllToCart(id)); 
+=======
+      dispatch(removeOneToCart(id));
+    } else {
+      dispatch(removeAllToCart(id));
+>>>>>>> 0d90800a5cad77c7eb27bf16f9c4eda881befadb
     }
   }
 

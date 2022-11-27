@@ -39,11 +39,11 @@ export const ORDER_FILTER = "ORDER_FILTER";
 export const ORDER_SEARCH = "ORDER_SEARCH";
 
 //CART
- export const ADD_TO_CART = "ADD_TO_CART";
+export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_ONE_FROM_CART = "REMOVE_ONE_FROM_CART";
 export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
-export const FIND_ALL_CART = "FIND_ALL_CART"; 
+export const FIND_ALL_CART = "FIND_ALL_CART";
 
 //MAIL
 export const SEND_EMAIL = "SEND_EMAIL";
@@ -70,7 +70,7 @@ export const getProducts = () => async (dispatch) => {
 export const postProduct = (payload) => {
   return async function (dispatch) {
     try {
-      var response = await axios.post(`${baseUrl}products`, payload);
+      const response = await axios.post(`${baseUrl}products`, payload);
       return response;
     } catch (error) {
       console.log("error", error);
@@ -150,7 +150,7 @@ export const filter = (value, info) => (dispatch) => {
 
 export function getCategories() {
   return async function (dispatch) {
-    var response = await axios.get(`${baseUrl}categories`);
+    const response = await axios.get(`${baseUrl}categories`);
     return dispatch({
       type: "GET_CATEGORIES",
       payload: response.data,
@@ -180,7 +180,7 @@ export const cleanByName = () => (dispatch) => {
 export const postImage = (payload) => {
   return async function (dispatch) {
     try {
-      var response = await axios.post(`${baseUrl}images`, payload);
+      const response = await axios.post(`${baseUrl}images`, payload);
       return response;
     } catch (error) {
       console.log("error", error);
@@ -217,16 +217,19 @@ export const matchFavorite = () => (dispatch) => {
 
 // USERS
 
-export const updateUser = (_id, body) => {
+export const updateUser = (id, body) => {
   return async function (dispatch) {
-    try {
-      var response = await axios.put(`${baseUrl}users/${_id}`, body);
-      return dispatch({
-        type: UPDATE_USER,
-        payload: response.data,
-      });
-    } catch (error) {
-      console.log("error", error);
+    if (id){
+      try {
+        let resp = await axios.put(`${baseUrl}users/${id}`, body);
+        //console.log("soy resp.data en el action:",resp.data)
+        return dispatch({
+          type: UPDATE_USER,
+          payload: resp.data
+        });
+      } catch (error) {
+        console.log("error", error);
+      }
     }
   };
 }
@@ -234,7 +237,7 @@ export const updateUser = (_id, body) => {
 export const postUser = (payload) => {
   return async function (dispatch) {
     try {
-      var response = await axios.post(`${baseUrl}users`, payload);
+      const response = await axios.post(`${baseUrl}users`, payload);
       return dispatch({
         type: POST_USER,
         payload: response.data,
@@ -247,7 +250,7 @@ export const postUser = (payload) => {
 
 export function getOneUser(id) {
   return async function (dispatch) {
-    var response = await axios(`${baseUrl}users/${id}`);
+    const response = await axios(`${baseUrl}users/${id}`);
     //console.log("datos locos:", response.data);
     return dispatch({
       type: GET_ONE_USER,
@@ -266,40 +269,39 @@ export const getUsers = () => (dispatch) => {
 
 //CART
 
-
- export const addToCart = (id) => (dispatch) => {
+export const addToCart = (id) => (dispatch) => {
   return dispatch({
     type: ADD_TO_CART,
     payload: id,
   });
-}; 
+};
 
- export const removeOneToCart = (id) => (dispatch) => {
+export const removeOneToCart = (id) => (dispatch) => {
   return dispatch({
     type: REMOVE_ONE_FROM_CART,
     payload: id,
   });
-}; 
+};
 
- export const removeAllToCart = (id) => (dispatch) => {
+export const removeAllToCart = (id) => (dispatch) => {
   return dispatch({
     type: REMOVE_ALL_FROM_CART,
     payload: id,
   });
-}; 
+};
 
- export const clearCart = () => (dispatch) => {
+export const clearCart = () => (dispatch) => {
   return dispatch({
     type: CLEAR_CART,
   });
-}; 
+};
 
- export const findAllCart = (CartArray) => (dispatch) => {
+export const findAllCart = (CartArray) => (dispatch) => {
   return dispatch({
     type: FIND_ALL_CART,
     payload: CartArray,
   });
-}; 
+};
 
 //EMAIL
 

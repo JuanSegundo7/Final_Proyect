@@ -2,29 +2,39 @@ import { useAuth0 } from "@auth0/auth0-react";
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+<<<<<<< HEAD
 import {  addToCart,  updateUser } from "../../redux/Actions/Actions";
+=======
+import { addToCart, updateUser } from "../../redux/Actions/Actions";
+>>>>>>> 0d90800a5cad77c7eb27bf16f9c4eda881befadb
 import AddProductAlert from "../Alert/AddProduct";
 
 export default function Cart({ id }) {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.User);
-  //const cart = useSelector((state) => state.cart);
+  const datosEnMiBD = useSelector((state) => state.User);
+  const allCart = useSelector((state) => state.cart);
   const { isAuthenticated } = useAuth0();
 
   function handleToCart(e) {
     AddProductAlert()
+<<<<<<< HEAD
      dispatch(addToCart(id)); 
+=======
+    dispatch(addToCart(id));
+>>>>>>> 0d90800a5cad77c7eb27bf16f9c4eda881befadb
   }
 
-  /* useEffect(() => {
-    if (isAuthenticated) {
-      const userToBeUpdate = {
-        cart: cart,
-      };
-      dispatch(updateUser(user._id, userToBeUpdate));
-    }
-  }, [cart]); */
+  useEffect(() => {
+    if (allCart.length) {
+      localStorage.setItem("Cart-pf", JSON.stringify(allCart));
+      
+      if (isAuthenticated){
+        dispatch(updateUser(datosEnMiBD._id,{cart:allCart}));
+      }
+    } 
+  }, [allCart]);
 
+  
   return (
     <div className="Cart-container">
       <button className="button" onClick={(e) => handleToCart(e)}>
