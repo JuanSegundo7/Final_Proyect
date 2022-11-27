@@ -9,8 +9,10 @@ import {
   cleanFiltered,
   getProducts,
   matchFavorite,
+  updateUser,
 } from "../../redux/Actions/Actions";
 import Paginated from "../Paginated/Paginated";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function ContainerInfo({ info, order }) {
   const location = useLocation();
@@ -19,6 +21,9 @@ export default function ContainerInfo({ info, order }) {
   const Filtered = useSelector((state) => state.Filtered);
   const FilterBoolean = useSelector((state) => state.Filter);
   const updateFilter = useSelector((state) => state.updateFilter);
+  const UpdateFavorite = useSelector((state) => state.UpdateFavorite);
+  const User = useSelector((state) => state.User);
+  const { isAuthenticated } = useAuth0();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [productPerPage, setProductPerPage] = useState(8);
@@ -29,6 +34,12 @@ export default function ContainerInfo({ info, order }) {
     dispatch(cleanFiltered());
     dispatch(matchFavorite());
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(updateUser(User._id, { favorites: [] }));
+    }
+  }, [UpdateFavorite]);
 
   const filteredOrNot = FilterBoolean
     ? Filtered.slice(indexFirstProduct, indexLastProduct)

@@ -54,6 +54,7 @@ const initialState = {
   Favorites: [],
   FavoritesCopy: [],
   FavoriteBoolean: false,
+  UpdateFavorite: 1,
 
   OrderPrice: [],
   Price: false,
@@ -102,6 +103,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         Favorites: totalFavorites,
+        UpdateFavorite: state.UpdateFavorite + 1,
       };
 
     case MATCH_FAVORITE: {
