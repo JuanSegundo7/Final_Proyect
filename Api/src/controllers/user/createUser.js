@@ -4,7 +4,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const createUser = async function (data) {
 
-  const { _id, name, lastname, favorites, admin, picture, cart } = data;
+  const { _id, name, lastname, favorites, picture, cart, admin, enabled } = data;
   let userAlreadyExists = false;
 
 //Data Validation
@@ -28,6 +28,10 @@ if ((typeof(lastname)!=="string") || (!lastname.length)){
 
 if (admin && (typeof(admin)!=="boolean")){
   throw new Error("Error: Admin rights should be of boolean type (true for admin, false for regular users).")
+}
+
+if (enabled && (typeof(enabled)!=="boolean")){
+  throw new Error("Error: User disablement should be of boolean type (true for enabled, false for disabled).")
 }
 
 if (picture){
@@ -88,7 +92,8 @@ try {
       favorites, 
       picture,
       cart,
-      admin
+      admin,
+      enabled
     });
     return newUser;
 }catch (unError){

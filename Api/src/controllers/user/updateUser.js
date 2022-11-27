@@ -3,7 +3,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const updateUser = async function (_id,data) {
     
-let { name , lastname , favorites, picture, cart, admin } = data;   //esto es req.params
+let { name , lastname , favorites, picture, cart, admin, enabled } = data;   //esto es req.params
 
 //Data Validation
 if ((typeof(_id)!=="string") || (!_id.length)){
@@ -33,6 +33,10 @@ if (lastname){
 
 if (admin && (typeof(admin)!=="boolean")){
   throw new Error("Error: Admin rights should be of boolean type (true for admin, false for regular users).")
+}
+
+if (enabled && (typeof(enabled)!=="boolean")){
+  throw new Error("Error: User disablement should be of boolean type (true for enabled, false for disabled).")
 }
 
 if (picture){
@@ -95,7 +99,8 @@ if (cart){
       favorites,
       picture,
       cart,
-      admin
+      admin,
+      enabled
      };
     let resp = await User.findOneAndUpdate(filter, update, {
         new: true
