@@ -5,6 +5,7 @@ const UserSchema = mongoose.Schema(
     name: {type: String, required: true},
     lastname: {type: String, required: true},
     favorites: [{type : mongoose.Schema.Types.ObjectId, ref: "Product"}],
+    enabled: {type: Boolean, default: true},
     cart: [{
       _id: {type : mongoose.Schema.Types.ObjectId, /* ref: "Product" */},
       quantity: Number

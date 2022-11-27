@@ -4,7 +4,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const createProduct = async function (data) {
 
-  let { name, description, origin, price, grinding_type, stock, category, image, brand } = data;
+  let { name, description, origin, price, grinding_type, stock, category, image, brand, total_accumulated, total_purchases } = data;
 
 //Data Validation
 if ((typeof(name)!=="string") || (!name.length)){
@@ -23,6 +23,14 @@ if (origin){
 
 if ((typeof(price)!=="number") || (!(price>0))){
   throw new Error("Error: Price must be a number and higher than 0.")
+}
+
+if (total_accumulated && ((typeof(total_accumulated)!=="number") || ((total_accumulated<0)))){
+  throw new Error("Error: total_accumulated must be a non negative number.")
+}
+
+if (total_purchases && ((typeof(total_purchases)!=="number") || ((total_purchases<0)))){
+  throw new Error("Error: total_purchases must be a non negative number.")
 }
   
 if (grinding_type){
@@ -91,7 +99,9 @@ if (brand){
       stock,
       category,
       image,
-      brand
+      brand,
+      total_accumulated, 
+      total_purchases
     });
     return newProduct;
 

@@ -34,17 +34,13 @@ const Header = () => {
 
   useEffect(() => {
     if (datosEnMiBD.hasOwnProperty("_id")) {
-      //console.log("Datos de mi BD:",datosEnMiBD);
-
       /*********************Merging Favorites from my DB and LocalStorage******************/
-
       const onlyIdsArray = [];
       if (datosEnMiBD.favorites.length) {
         for (let i = 0; i < datosEnMiBD.favorites.length; i++) {
           onlyIdsArray.push(datosEnMiBD.favorites[i]._id);
         }
         //ademas, deberia meter lo de la bbdd en mi localStg
-        //console.log("estoy por aca, no se:",onlyIdsArray)
       }
 
       let total = onlyIdsArray.concat(favArray);
@@ -52,7 +48,6 @@ const Header = () => {
         (element) => element !== undefined && element !== null
       );
       total = [...new Set([...onlyIdsArray, ...favArray])];
-      //console.log("total:",total)
 
       if (!total.includes(undefined) && !total.includes(null)) {
         dispatch(updateUser(datosEnMiBD._id, { favorites: total }));
@@ -61,18 +56,13 @@ const Header = () => {
       }
 
       /*********************************************************************************/
-
       /*********************Merging Cart from my DB and LocalStorage********************/
 
-      //console.log("en header, carrito de mi BD:",datosEnMiBD.cart)
-      //console.log("y en cart global???:",allCart)
       const myTotalArray = [...datosEnMiBD.cart];
       for (let i = 0; i < allCart.length; i++) {
-        //console.log("caritooo",allCart[i])
         let duplicated = false;
         for (let j = 0; j < datosEnMiBD.cart.length; j++) {
           if (allCart[i]._id === datosEnMiBD.cart[j]._id) {
-            //console.log("encontre un duplicado y es:",allCart[i].name)
             duplicated = true;
           }
         }
@@ -81,15 +71,9 @@ const Header = () => {
         }
       }
 
-      //console.log("mytotalarray:", myTotalArray);
-
-      //if (!myTotalArray.includes(undefined) && !myTotalArray.includes(null)){
       localStorage.setItem("Cart-pf", JSON.stringify(myTotalArray));
-      //dispatch(setAllFavorites(myTotalArray));
       dispatch(findAllCart());
       dispatch(updateUser(datosEnMiBD._id, { cart: myTotalArray }));
-      //}
-
       /*********************************************************************************/
     }
 
@@ -101,7 +85,12 @@ const Header = () => {
         lastname: user.family_name ? user.family_name : user.email, //for local users only
         picture: user.picture,
         favorites: favArray,
-        cart: myLocalStgCart && myLocalStgCart.length? myLocalStgCart: [],
+        // ABAJO
+        cart:
+          myLocalStgCart && myLocalStgCart.length
+            ? myLocalStgCart.map((unObjeto) => unObjeto._id)
+            : [],
+        // ^^ ME PARECE QUE HAY QUE CORREGIR ESTO ^^
       };
       dispatch(postUser(userToBeCreated));
       //console.log("Datos de mi BD del error:",datosEnMiBD);

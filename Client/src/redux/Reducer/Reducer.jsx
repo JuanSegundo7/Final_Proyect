@@ -14,7 +14,6 @@ import {
   FILTER,
   CLEAN_FILTERED,
   CLEAN_NAME,
-  //CLEAN_ORDER,
   ORDER_FILTER,
   SET_ALL_FAVORITES,
   ADD_ONE_FAVORITE,
@@ -27,7 +26,6 @@ import {
   CLEAR_CART,
   FIND_ALL_CART,
   SEND_EMAIL,
-  CLEAN_BRANDS,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -54,6 +52,7 @@ const initialState = {
   Favorites: [],
   FavoritesCopy: [],
   FavoriteBoolean: false,
+  UpdateFavorite: 1,
 
   OrderPrice: [],
   Price: false,
@@ -102,6 +101,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         Favorites: totalFavorites,
+        UpdateFavorite: state.UpdateFavorite + 1,
       };
 
     case MATCH_FAVORITE: {
@@ -223,6 +223,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         Product: action.payload,
       };
+
     //case POST_PRODUCT:
     //return {
     //...state,
