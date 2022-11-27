@@ -55,6 +55,10 @@ export const USERS = "USERS";
 //MERCADOPAGO
 export const MERCADOPAGO = "MERCADOPAGO";
 
+//COMMENTS
+export const GET_COMMENTS = "GET_COMMENTS"
+export const POST_COMMENT ="POST_COMMENT"
+
 const baseUrl = `http://localhost:3001/`;
 
 /*****************************************************************************************************/
@@ -320,3 +324,15 @@ export const linkMp = (payload) => (dispatch) => {
   return axios.post(`${baseUrl}mercadopago`, payload)
     .then((data) => dispatch({ type: MERCADOPAGO, payload: data.data }));
 };
+
+// COMMENTS 
+
+export const getComments = () => (dispatch) =>{
+  return axios.get(`${baseUrl}comments`)
+    .then((data) => dispatch({type: GET_COMMENTS , payload:data.data}))
+}
+
+export const postComment = (payload) => (dispatch) => {
+  return axios.post(`${baseUrl}comments`, payload)
+    .then((data) => dispatch({type: POST_COMMENT , payload:data.data}))
+}

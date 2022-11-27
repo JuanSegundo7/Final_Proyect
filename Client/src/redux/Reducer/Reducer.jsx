@@ -26,7 +26,9 @@ import {
   REMOVE_ALL_FROM_CART,
   CLEAR_CART,
   FIND_ALL_CART,
-  SEND_EMAIL
+  SEND_EMAIL,
+  GET_COMMENTS,
+  POST_COMMENT
 } from "../Actions/Actions";
 
 const initialState = {
@@ -62,6 +64,8 @@ const initialState = {
 
   cart: [],
   update: 1,
+
+  comments:[],
 
 };
 
@@ -389,6 +393,16 @@ const rootReducer = (state = initialState, action) => {
     case MERCADOPAGO:
       return{
         ...state
+      }
+
+    case GET_COMMENTS:
+      return{
+        ...state,
+        comments:action.payload
+      }
+    case POST_COMMENT:
+      return{
+        ...state,
       }
 
     default:

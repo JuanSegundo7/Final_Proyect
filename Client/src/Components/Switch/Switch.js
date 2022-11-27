@@ -9,6 +9,7 @@ import ContainerBrands from "../ContainerInfo/ContainerBrands";
 import BrandSearched from "../ContainerInfo/BrandSearched";
 import CartComponent from "../CartComponent/CartComponent";
 import Login from "../Login/Login";
+import CreateComments from "../Comments/CreateComments";
 
 const SwitchRouter = () => {
   return (
@@ -61,6 +62,7 @@ const SwitchRouter = () => {
       />
 
       <Route exact path="/cart" element={<CartComponent />} />
+      <Route exact path="/comment" element={<CreateComments/>}/>
     </Routes>
   );
 };
