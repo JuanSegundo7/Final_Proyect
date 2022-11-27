@@ -16,6 +16,7 @@ export const GET_CATEGORIES = "GET_CATEGORIES";
 
 // PRODUCTS
 export const GET_PRODUCTS = "GET_PRODUCTS";
+export const GET_PRODUCTS_ENABLED = "GET_PRODUCTS_ENABLED";
 export const GET_ONE_PRODUCT = "GET_ONE_PRODUCT";
 export const POST_PRODUCT = "POST_PRODUCT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
@@ -99,7 +100,7 @@ export const getProductByQuery = (info, name, value, order) => {
   try {
     return async function (dispatch) {
       let json = await axios.get(
-        `${baseUrl}products?${info}=${value}&${order}`
+        `${baseUrl}products?${info}=${value}&${order}&enabled=true`
       ); // category=coffee
       return dispatch({
         type: GET_PRODUCT_BY_QUERY,
