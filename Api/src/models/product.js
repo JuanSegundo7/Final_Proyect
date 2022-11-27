@@ -8,6 +8,8 @@ const ProductSchema = mongoose.Schema(
     grinding_type: String,
     stock: {type: Number, required: true},
     enabled: {type: Boolean, default: true},
+    total_accumulated: Number,
+    total_purchases: Number,
     category: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
