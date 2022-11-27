@@ -1,14 +1,15 @@
 import React from 'react';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {updateProduct} from "../../redux/Actions/Actions"
 
 const ModalComponent = ({openModal, closeModal, info, close}) => {
   const dispatch = useDispatch();
-
-  console.log(info)
+  const category = useSelector((state) => state.Categories);
+  console.log('category', category);
+  //console.log(info)
 
   const handleChange=(e)=>{
-    console.log(e, "E")
+    //console.log(e, "E")
     const {name, value}=e.target;
 
     setSelectedProduct(prevState=>({
@@ -20,25 +21,28 @@ const ModalComponent = ({openModal, closeModal, info, close}) => {
   const [selectedProduct, setSelectedProduct] = React.useState({
     name: info.name,
     brand: info.brand,
-    category: info.category,
+    category: '',
     description: info.description,
     price: info.price,
     stock: info.stock
   })
 
+  const handleCategory = (e, ) => {
+    setSelectedProduct({...selectedProduct, category: e.target.value})
+  }
+  //console.log('category', info.category)
+
   const handleSubmit = (e) => {
     let data = {
       name: selectedProduct.name,
-      brand: selectedProduct.brand,
+      //brand: selectedProduct.brand,
       category: selectedProduct.category,
       description: selectedProduct.description,
       price: parseInt(selectedProduct.price.replace('$', '')),
       stock: parseInt(info.stock)
     }
-
-    console.log(data)
-
-
+    //console.log('data',data)
+    dispatch(updateProduct(info.id, data))
     e.preventDefault();
   }
 
@@ -52,11 +56,16 @@ const ModalComponent = ({openModal, closeModal, info, close}) => {
         <form>
           <fieldset>
             <label>Name</label>
-            <input  name="name" onChange={e => handleChange(e)} value={selectedProduct.name}></input>
+            <input  name="name" onClick={e => handleChange(e)} value={selectedProduct.name}></input>
           </fieldset>
           <fieldset>
-            <label>Category</label>
-            <input label="category" name="category" onChange={e => handleChange(e)} value={selectedProduct.category}></input>
+            {/* <label>Category</label>
+            <input label="category" name="category" onChange={e => handleChange(e)} value={selectedProduct.category}></input> */}
+            <select onChange={(e) => handleCategory(e)}>
+              {
+                category?.map((c) => <option key={c.name} value={c._id}>{c.name}</option>)
+              }
+            </select>
           </fieldset>
           <fieldset>
             <label>Brand</label>
