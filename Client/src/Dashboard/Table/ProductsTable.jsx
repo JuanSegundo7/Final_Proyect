@@ -12,7 +12,7 @@ import "../Dashboard.css"
 
 export default function DataTable() {
     const State = useSelector((state) => state.Products)        
-    const finalArray = State.map((product) => {return ( {id: product._id, name: product.name, description: product.description, brand: product.brand.name, category: product.category.name, price: `$${product.price}`, stock: product.stock} )})
+    const finalArray = State.map((product) => {return ( {id: product._id, name: product.name, description: product.description, brand: product.brand.name, category: product.category.name, price: `$${product.price}`, stock: product.stock, enabled: product.enabled} )})
     const [open, setOpen] = useState(false)
     const [info, setInfo] = useState({})
     let modal
@@ -42,10 +42,11 @@ export default function DataTable() {
         { field: 'brand', headerName: 'Brand', width: 120 },
         { field: 'stock', headerName: 'Stock', type: 'number', width: 90},
         { field: 'price', headerName: 'Price', type: 'number', width: 90},
+        { field: 'enabled', headerName: 'Enabled', width: 70},
         {
             field: 'actions',
             type: 'actions',
-            width: 200,
+            width: 150,
             getActions: (params) => [
                 <Tooltip title="Delete">
                     <GridActionsCellItem
