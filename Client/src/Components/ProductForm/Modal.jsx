@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {updateProduct} from "../../redux/Actions/Actions"
 
 const ModalComponent = ({openModal, closeModal, info, close}) => {
   const dispatch = useDispatch();
   const category = useSelector((state) => state.Categories);
-  console.log('category', category);
-  //console.log(info)
+  const brand = useSelector((state) => state.Brands)
+  const [categoryId, setCategoryId] = useState(info.category2);
+  const [brandId, setBrandId] = useState(info.brand2)
+  //console.log('category', category);
+  console.log('info', info)
+  console.log('info.category', info.category)
+  console.log('info.category2', info.category2)
+  //console.log('info.category._id', info.category._id)
+
+
 
   const handleChange=(e)=>{
     //console.log(e, "E")
@@ -20,28 +28,35 @@ const ModalComponent = ({openModal, closeModal, info, close}) => {
 
   const [selectedProduct, setSelectedProduct] = React.useState({
     name: info.name,
-    brand: info.brand,
-    category: '',
+    brand: categoryId.brand,
+    category: categoryId.category,
     description: info.description,
     price: info.price,
     stock: info.stock
   })
 
-  const handleCategory = (e, ) => {
-    setSelectedProduct({...selectedProduct, category: e.target.value})
+  //console.log('selectedProduct', selectedProduct.category.name)
+
+  const handleCategory = (e ) => {
+    //console.log('e', e.target.value)
+    setCategoryId(e.target.value);
   }
-  //console.log('category', info.category)
+
+  const handleBrand = (e ) => {
+    //console.log('e', e.target.value)
+    setBrandId(e.target.value);
+  }
 
   const handleSubmit = (e) => {
     let data = {
       name: selectedProduct.name,
-      //brand: selectedProduct.brand,
-      category: selectedProduct.category,
+      brand: brandId,
+      category: categoryId,
       description: selectedProduct.description,
-      price: parseInt(selectedProduct.price.replace('$', '')),
+      price: parseInt(selectedProduct.price),
       stock: parseInt(info.stock)
     }
-    //console.log('data',data)
+    console.log('data',data)
     dispatch(updateProduct(info.id, data))
     e.preventDefault();
   }
@@ -63,14 +78,19 @@ const ModalComponent = ({openModal, closeModal, info, close}) => {
             <input label="category" name="category" onChange={e => handleChange(e)} value={selectedProduct.category}></input> */}
             <select onChange={(e) => handleCategory(e)}>
               {
-                category?.map((c) => <option key={c.name} value={c._id}>{c.name}</option>)
+                category?.map((c) => <option key={c._id} value={c._id}>{c.name}</option>)
               }
             </select>
           </fieldset>
-          <fieldset>
+          {/* <fieldset>
             <label>Brand</label>
             <input label="brand" name="brand" onChange={e => handleChange(e)} value={selectedProduct.brand}></input>
-          </fieldset>
+          </fieldset> */}
+          <select onChange={(e) => handleBrand(e)}>
+            {
+              brand?.map((b) => <option key={b._id} value={b._id}>{b.name}</option>)
+            }
+          </select>
           <fieldset>
             <label>Price</label>
             <input label="price" name="price" onChange={e => handleChange(e)} value={selectedProduct.price}></input>

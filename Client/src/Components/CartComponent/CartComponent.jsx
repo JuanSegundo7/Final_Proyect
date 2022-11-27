@@ -1,36 +1,32 @@
-
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardCart from "./CardCart";
 import Error from "../Card/imgs/error.webp";
-
-
-
-
-import "./CartComponent.css";
-
-import { useAuth0 } from "@auth0/auth0-react";
-
-
+import {
+  /* clearCart, */ sendEmail,
+  updateUser,
+} from "../../redux/Actions/Actions";
 import "./CartComponent.css";
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { linkMp } from "../../redux/Actions/Actions";
 
-
 export default function CartComponent() {
   const allCart = useSelector((state) => state.cart);
+  const MercadoPagoUrl = useSelector((state) => state.MercadoPagoUrl);
   const dispatch = useDispatch();
   const [disabled, setDisabled] = useState(false);
   const { isAuthenticated } = useAuth0();
-  //const datosEnMiBD = useSelector((state) => state.User);
-
-
-  // console.log("es allCart:", allCart);
+  const datosEnMiBD = useSelector((state) => state.User);
+   
+  console.log("es mp:", MercadoPagoUrl);
 
   let precioTotal = 0;
   let total = 0;
+
   for (let i = 0; i < allCart.length; i++) {
     total = allCart[i].price * allCart[i].quantity;
+
     if (total > 0) precioTotal = total + precioTotal;
   }
 
@@ -48,28 +44,10 @@ export default function CartComponent() {
     } else if (allCart.length) {
       setDisabled(true);
     }
-    // if(isAuthenticated){
-    //   dispatch(updateUser(User._id, {cart: allCart}))
-    // }
   }, [allCart]);
-
-
-  const datosEnMiBD = useSelector((state) => state.User);
- 
-
-  
-  //Con esto fuerzo a que se renderice nuevamente cuando efectivamente se carguen los datos de mi BD.
-  //useEffect(() => {
-    /* if (datosEnMiBD.hasOwnProperty("_id")) {
-    } */
-  //}, [datosEnMiBD]);
-
-
-  function sendMail() {
 
   async function mercadopago() {
     //if (theLink) window.location.href = theLink;
-
     const data = {
       name: datosEnMiBD.name + " " + datosEnMiBD.lastname,
       email: datosEnMiBD._id,
@@ -77,6 +55,10 @@ export default function CartComponent() {
     };
     //console.log("hice click en el boton de comprar - data:",data)
     dispatch(linkMp(data));
+
+    if(MercadoPagoUrl.length){
+      return window.location.href = MercadoPagoUrl
+    }
   }
 
   return (
@@ -122,6 +104,4 @@ export default function CartComponent() {
       </div>
     </div>
   );
-            }
-          }
-        
+}

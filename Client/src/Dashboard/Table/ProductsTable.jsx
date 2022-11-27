@@ -13,15 +13,15 @@ import { updateProduct } from '../../redux/Actions/Actions';
 
 export default function DataTable() {
     const State = useSelector((state) => state.Products)        
-    const finalArray = State.map((product) => {return ( {id: product._id, name: product.name, description: product.description, brand: product.brand.name, category: product.category.name, price: `$${product.price}`, stock: product.stock} )})
+    const finalArray = State.map((product) => {return ( {id: product._id, name: product.name, description: product.description, brand: product.brand.name, brand2: product.brand._id ,category: product.category.name, category2: product.category._id , price: product.price, stock: product.stock} )})
     const [open, setOpen] = useState(false)
     const [info, setInfo] = useState({})
     let modal
 
     const dispatch = useDispatch();
 
-    const deleteProduct = (e) => {
-        Delete()
+    const deleteProduct = (e, params) => {
+        Delete(params.row.id)
         e.stopPropagation();
     }
 
@@ -64,7 +64,7 @@ export default function DataTable() {
                     <GridActionsCellItem
                     icon={<DeleteIcon />}
                     label="Delete"
-                    onClick={(e) => deleteProduct(e)}
+                    onClick={(e) => deleteProduct(e,params)}
                     />
                 </Tooltip>,
                 <Tooltip title="Edit">
