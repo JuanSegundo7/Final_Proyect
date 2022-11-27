@@ -57,6 +57,8 @@ const initialState = {
   OrderPrice: [],
   Price: false,
 
+  MercadoPagoUrl: "",
+
   Users: [],
   User: {},
 
@@ -400,6 +402,7 @@ const rootReducer = (state = initialState, action) => {
     case MERCADOPAGO:
       return {
         ...state,
+        MercadoPagoUrl: action.payload
       };
 
     default:

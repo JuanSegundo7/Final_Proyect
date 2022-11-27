@@ -32,6 +32,7 @@ const Header = () => {
     }
   }, [user]);
 
+  const datosEnMiBD = useSelector((state) => state.User);
   useEffect(() => {
     if (datosEnMiBD.hasOwnProperty("_id")) {
       /*********************Merging Favorites from my DB and LocalStorage******************/

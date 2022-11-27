@@ -50,7 +50,7 @@ function App() {
   }, [allCart]);
 
   const datosEnMiBD = useSelector((state) => state.User);
-  if (datosEnMiBD.admin === true) {
+  if (datosEnMiBD.admin == true) {
     return (
       <BrowserRouter>
         <Dashboard />
