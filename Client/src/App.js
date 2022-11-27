@@ -43,14 +43,18 @@ function App() {
     if (user) dispatch(getOneUser(user.email));
   }, [dispatch]);
 
+<<<<<<< HEAD
+
+=======
   useEffect(() => {
     if (allCart.length) {
       localStorage.setItem("Cart-pf", JSON.stringify(allCart));
     }
   }, [allCart]);
+>>>>>>> fc738d202c76089a35ff4606d3aa63779ed44e01
 
   const datosEnMiBD = useSelector((state) => state.User);
-  if (datosEnMiBD.admin == true) {
+  if (datosEnMiBD.admin === true) {
     return (
       <BrowserRouter>
         <Dashboard />
