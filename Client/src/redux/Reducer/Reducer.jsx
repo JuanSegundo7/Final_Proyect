@@ -63,7 +63,6 @@ const initialState = {
   cart: [],
   update: 1,
 
-  linkMp:null
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -389,8 +388,7 @@ const rootReducer = (state = initialState, action) => {
 
     case MERCADOPAGO:
       return{
-        ...state,
-        linkMp: action.payload
+        ...state
       }
 
     default:

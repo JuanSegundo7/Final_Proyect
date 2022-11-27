@@ -64,8 +64,8 @@ const Header = () => {
 
       /*********************Merging Cart from my DB and LocalStorage********************/
 
-      console.log("en header, carrito de mi BD:",datosEnMiBD.cart)
-      console.log("y en cart global???:",allCart)
+      //console.log("en header, carrito de mi BD:",datosEnMiBD.cart)
+      //console.log("y en cart global???:",allCart)
       const myTotalArray = [...datosEnMiBD.cart]
       for (let i=0;i<allCart.length;i++){
         //console.log("caritooo",allCart[i])
@@ -81,7 +81,7 @@ const Header = () => {
         }
       }
       
-      console.log("mytotalarray:",myTotalArray)
+      //console.log("mytotalarray:",myTotalArray)
 
       //if (!myTotalArray.includes(undefined) && !myTotalArray.includes(null)){
         localStorage.setItem("Cart-pf", JSON.stringify(myTotalArray));
