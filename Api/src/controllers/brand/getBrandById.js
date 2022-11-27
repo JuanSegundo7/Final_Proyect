@@ -4,7 +4,6 @@ const getBrandById = async function (brandId) {
   try{
     const resp = await Brand.findById(brandId)
     .populate("image");
-    //.populate("activities",["name","season"]);
 
     if (!resp) throw new Error("No brand matches the informed id...")
   

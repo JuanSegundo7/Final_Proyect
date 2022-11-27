@@ -14,14 +14,14 @@ router.get('/', async (req,res)=>{
 })
 
 router.post('/' , async (req,res) =>{
-    const {content} = req.body;
-    if(!content) throw new Error('Error: Comments cannot be empty.');
+    
     try {
-        const response = await createComment(content);
+        const response = await createComment(req.body);
         res.send(response);
     } catch (error) {
         res.status(400).send(error.message);
     }
+    
 })
 
 router.delete('/:_id', async (req,res) => {
