@@ -19,7 +19,7 @@ export default function Home() {
       <ProductCarousel array={Coffees} title="Our Selection Of Coffees"/>
       <ProductCarousel array={CoffeeMaker} title="Our Selection Of Coffee Makers"/>
       <TigerInfo />
-      <ProductCarousel array={Accesories} title="Accesories"/>
+      <ProductCarousel array={Accesories} title="Accessories"/>
       <ProductCarousel array={Others} title="Other items"/>
       <Help />
     </section>

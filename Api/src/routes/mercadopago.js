@@ -1,10 +1,11 @@
+require('dotenv').config();
+const { TEST_ACCESS_TOKEN } = process.env;
 const { Router } = require('express');
 const router = Router();
 const mercadopago = require("mercadopago");
 const sendMail = require("../controllers/mail/sendMail.js");
 
 
-const TEST_ACCESS_TOKEN ="APP_USR-7942690128692880-112022-61f6e6c8b9a4c804c20385dda87fa84f-1243916405"
 mercadopago.configure({
     access_token: TEST_ACCESS_TOKEN
 });
