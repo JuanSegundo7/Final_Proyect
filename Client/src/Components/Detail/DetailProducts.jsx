@@ -51,6 +51,12 @@ export default function DetailProduct() {
                 ? "There is not name provided"
                 : product.brand.name.toUpperCase()}
             </p>
+            <p>
+              Average Rating:{" "}
+              {(!product.total_accumulated || !product.total_purchases || !product.total_purchases>0)
+                ? "This product has not been rated yet"
+                : product.total_accumulated / product.total_purchases}
+            </p>
             <p>Stock: {product.stock} units</p>
             <button
               type="submit"

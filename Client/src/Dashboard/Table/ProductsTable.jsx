@@ -18,7 +18,7 @@ export default function DataTable() {
     const [info, setInfo] = useState({})
     let modal
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
 
     const deleteProduct = (e, params) => {
         Delete(params.row.id)
@@ -30,6 +30,7 @@ export default function DataTable() {
         setOpen(true)
         e.stopPropagation();
     }
+
 
     const toggleEnable = (e, id) => {
         e.stopPropagation();
@@ -53,12 +54,13 @@ export default function DataTable() {
         { field: 'name', headerName: 'Name', width: 250 },
         { field: 'category', headerName: 'Category', width: 130 },
         { field: 'brand', headerName: 'Brand', width: 120 },
-        { field: 'stock', headerName: 'Stock', type: 'number', width: 90},
+        { field: 'stock', headerName: 'Stock', type: 'number', width: 70},
         { field: 'price', headerName: 'Price', type: 'number', width: 90},
+        { field: 'enabled', headerName: 'Enabled', width: 110},
         {
             field: 'actions',
             type: 'actions',
-            width: 200,
+            width: 150,
             getActions: (params) => [
                 <Tooltip title="Delete">
                     <GridActionsCellItem
@@ -78,7 +80,7 @@ export default function DataTable() {
                     <GridActionsCellItem
                     icon={<Clear />}
                     label="Toggle Admin"
-                    onClick={(e) => toggleEnable(e ,params.id)}
+                    onClick={(e) => toggleEnable(e, params.id)}
                     />
                 </Tooltip>,
             ]}

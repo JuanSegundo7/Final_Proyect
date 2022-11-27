@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from 'react-router-dom';
 import "./Home.css";
 import Carrousel from "../Carrousel/Carrousel";
 import TigerInfo from "../TigerInfo/TigerInfo";
@@ -12,6 +13,8 @@ export default function Home() {
   const CoffeeMaker = useSelector((state) => state.CategoriesCoffeeMaker);
   const Accesories = useSelector((state) => state.CategoriesAccesories);
   const Others = useSelector((state) => state.CategoriesOthers);
+  let {search} = useLocation();
+  //console.log("link que devuelve mercadopago...tiene status=???:",search)
 
   return (
     <section id="Home">
@@ -19,7 +22,7 @@ export default function Home() {
       <ProductCarousel array={Coffees} title="Our Selection Of Coffees"/>
       <ProductCarousel array={CoffeeMaker} title="Our Selection Of Coffee Makers"/>
       <TigerInfo />
-      <ProductCarousel array={Accesories} title="Accesories"/>
+      <ProductCarousel array={Accesories} title="Accessories"/>
       <ProductCarousel array={Others} title="Other items"/>
       <Help />
     </section>

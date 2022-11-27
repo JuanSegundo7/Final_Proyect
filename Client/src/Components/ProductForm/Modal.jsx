@@ -17,7 +17,7 @@ const ModalComponent = ({openModal, closeModal, info, close}) => {
 
 
   const handleChange=(e)=>{
-    //console.log(e, "E")
+    console.log(e, "E")
     const {name, value}=e.target;
 
     setSelectedProduct(prevState=>({
@@ -71,7 +71,7 @@ const ModalComponent = ({openModal, closeModal, info, close}) => {
         <form>
           <fieldset>
             <label>Name</label>
-            <input  name="name" onClick={e => handleChange(e)} value={selectedProduct.name}></input>
+            <input  name="name" onChange={e => handleChange(e)} value={selectedProduct.name}></input>
           </fieldset>
           <fieldset>
             {/* <label>Category</label>

@@ -7,17 +7,13 @@ import Tooltip from "@mui/material/Tooltip";
 import { useDispatch, useSelector } from "react-redux"
 import "../Dashboard.css"
 import { updateUser } from '../../redux/Actions/Actions';
-import { useNavigate } from "react-router-dom";
 
 export default function DataTable() {
 
     const State = useSelector((state) => state.Users)        
     const finalArray = State.map((user) => {return ( {id: user._id, name: user.name, lastname: user.lastname, admin: user.admin} )})
         
-    //console.log(State)
-
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const dispatch = useDispatch()
 
     const toggleAdmin = (e, id) =>{
         e.stopPropagation();
@@ -34,7 +30,6 @@ export default function DataTable() {
             }
         }
     }
-
     const columns = [
         { field: 'id', headerName: 'ID', width: 250 },
         { field: 'name', headerName: 'Name', width: 250 },
