@@ -27,6 +27,7 @@ import {
   CLEAR_CART,
   FIND_ALL_CART,
   SEND_EMAIL,
+  CLEAN_BRANDS,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -52,7 +53,7 @@ const initialState = {
 
   Favorites: [],
   FavoritesCopy: [],
-  FavoriteBoolean: true,
+  FavoriteBoolean: false,
 
   OrderPrice: [],
   Price: false,
@@ -351,9 +352,12 @@ const rootReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        Filtered: order,
-        ByName: order,
-        FavoritesCopy: order,
+        Filtered: action.info === "Filtered" ? order : [...state.Filtered],
+        ByName: action.info === "ByName" ? order : [...state.ByName],
+        FavoritesCopy:
+          action.info === "FavoritesCopy" ? order : [...state.FavoritesCopy],
+        ProductsBrand:
+          action.info === "ProductsBrand" ? order : [...state.ProductsBrand],
         updateFilter: state.updateFilter + 1,
       };
 

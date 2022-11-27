@@ -49,7 +49,11 @@ const SwitchRouter = () => {
         element={<ContainerInfo info="CategoriesOthers" order="others" />}
       />
       <Route exact path="/brands" element={<ContainerBrands />} />
-      <Route exact path="/brands/:params" element={<BrandSearched />} />
+      <Route
+        exact
+        path="/brands/:params"
+        element={<BrandSearched info={"ProductsBrand"} />}
+      />
       <Route exact path="/create" element={<Form />} />
 
       <Route exact path="/detail/:id" element={<DetailProducts />} />

@@ -32,6 +32,7 @@ export const FILTER = "FILTER";
 
 // BRANDS
 export const GET_BRANDS = "GET_BRANDS";
+export const CLEAN_BRANDS = "CLEAN_BRANDS";
 // export const GET_BRAND_BY_QUERY = "GET_BRANDS_BY_QUERY";
 
 //ORDERS
@@ -313,6 +314,7 @@ export const sendEmail = (payload) => (dispatch) => {
 //MERCADOPAGO
 
 export const linkMp = (payload) => (dispatch) => {
-  return axios.post(`${baseUrl}mercadopago`, payload)
+  return axios
+    .post(`${baseUrl}mercadopago`, payload)
     .then((data) => dispatch({ type: MERCADOPAGO, payload: data.data }));
 };

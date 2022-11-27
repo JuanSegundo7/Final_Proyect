@@ -85,7 +85,7 @@ const Header = () => {
         }
       }
 
-      console.log("mytotalarray:", myTotalArray);
+      //console.log("mytotalarray:", myTotalArray);
 
       //if (!myTotalArray.includes(undefined) && !myTotalArray.includes(null)){
       localStorage.setItem("Cart-pf", JSON.stringify(myTotalArray));
