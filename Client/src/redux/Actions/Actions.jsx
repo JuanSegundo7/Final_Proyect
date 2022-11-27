@@ -32,6 +32,7 @@ export const FILTER = "FILTER";
 
 // BRANDS
 export const GET_BRANDS = "GET_BRANDS";
+export const CLEAN_BRANDS = "CLEAN_BRANDS";
 // export const GET_BRAND_BY_QUERY = "GET_BRANDS_BY_QUERY";
 
 //ORDERS
@@ -92,7 +93,7 @@ export const updateProduct = (_id, body) => {
       console.log("error", error);
     }
   };
-}
+};
 
 export const getProductByQuery = (info, name, value, order) => {
   try {
@@ -222,20 +223,20 @@ export const matchFavorite = () => (dispatch) => {
 
 export const updateUser = (id, body) => {
   return async function (dispatch) {
-    if (id){
+    if (id) {
       try {
         let resp = await axios.put(`${baseUrl}users/${id}`, body);
         //console.log("soy resp.data en el action:",resp.data)
         return dispatch({
           type: UPDATE_USER,
-          payload: resp.data
+          payload: resp.data,
         });
       } catch (error) {
         console.log("error", error);
       }
     }
   };
-}
+};
 
 export const postUser = (payload) => {
   return async function (dispatch) {
@@ -254,7 +255,6 @@ export const postUser = (payload) => {
 export function getOneUser(id) {
   return async function (dispatch) {
     const response = await axios(`${baseUrl}users/${id}`);
-    //console.log("datos locos:", response.data);
     return dispatch({
       type: GET_ONE_USER,
       payload: response.data,
@@ -265,13 +265,10 @@ export function getOneUser(id) {
 export const getUsers = () => (dispatch) => {
   return axios(`${baseUrl}users`)
     .then((res) => dispatch({ type: USERS, payload: res.data }))
-    //.then(data => console.log(data, "users"))
     .catch((err) => console.log(err));
 };
 
-
 //CART
-
 export const addToCart = (id) => (dispatch) => {
   return dispatch({
     type: ADD_TO_CART,
@@ -317,6 +314,7 @@ export const sendEmail = (payload) => (dispatch) => {
 //MERCADOPAGO
 
 export const linkMp = (payload) => (dispatch) => {
-  return axios.post(`${baseUrl}mercadopago`, payload)
+  return axios
+    .post(`${baseUrl}mercadopago`, payload)
     .then((data) => dispatch({ type: MERCADOPAGO, payload: data.data }));
 };

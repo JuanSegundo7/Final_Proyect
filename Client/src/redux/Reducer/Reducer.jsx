@@ -26,14 +26,15 @@ import {
   REMOVE_ALL_FROM_CART,
   CLEAR_CART,
   FIND_ALL_CART,
-  SEND_EMAIL
+  SEND_EMAIL,
+  CLEAN_BRANDS,
 } from "../Actions/Actions";
 
 const initialState = {
   Products: [],
   Product: {},
   Categories: [],
-  
+
   Brands: [],
   ProductsBrand: [],
   BrandsCopy: [],
@@ -52,7 +53,7 @@ const initialState = {
 
   Favorites: [],
   FavoritesCopy: [],
-  FavoriteBoolean: true,
+  FavoriteBoolean: false,
 
   OrderPrice: [],
   Price: false,
@@ -61,8 +62,6 @@ const initialState = {
   User: {},
 
   cart: [],
-  update: 1,
-
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -122,34 +121,39 @@ const rootReducer = (state = initialState, action) => {
 
     case ADD_TO_CART:
       const allProducts = state.Products;
-      const allCart2 = state.cart;
+
       let newCoffe = allProducts.find(
         (product) => product._id === action.payload
       );
 
-      let itemInCart = state.cart.find(
-        (product) => product._id === newCoffe._id
-      );
+      let itemInCart = state.cart.find((product) => {
+        return product._id === newCoffe._id;
+      });
 
       return itemInCart
         ? {
             ...state,
-            cart: state.cart.map((product) =>
-              product._id === newCoffe._id
-                ? {
-                    ...product,
-                    quantity: product.quantity + 1,
-                    stock: product.stock - 1,
-                  }
-                : product
-            ),
+            cart:
+              // [
+              // ...state.cart, //ACA SACO LA COPIA Y EL ARRAY PORQUE SINO SE GUARADABA COMO UN ARRAY NUEVO ([..[]])
+              state.cart.map((product) => {
+                return product._id === newCoffe._id
+                  ? {
+                      ...product,
+                      quantity: product.quantity + 1,
+                      stock: product.stock - 1,
+                    }
+                  : product;
+              }),
+            // ],
+            update: state.update + 1,
           }
         : {
             ...state,
             cart: [...state.cart, { ...newCoffe, quantity: 1 }],
           };
 
-    case REMOVE_ONE_FROM_CART:
+    case REMOVE_ONE_FROM_CART: {
       const allCart = state.cart;
 
       let findProduct = allCart.find(
@@ -175,6 +179,7 @@ const rootReducer = (state = initialState, action) => {
       if (allCart.length === 1) {
         localStorage.removeItem("Cart-pf");
       }
+    }
 
     case REMOVE_ALL_FROM_CART:
       const cart = state.cart;
@@ -187,11 +192,12 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case CLEAR_CART:
-      localStorage.clear("Cart-pf");
+      localStorage.removeItem("Cart-pf");
       return {
         ...state,
         cart: [],
       };
+
     case FIND_ALL_CART:
       const localStorageCart = JSON.parse(localStorage.getItem("Cart-pf"));
 
@@ -346,9 +352,12 @@ const rootReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        Filtered: order,
-        ByName: order,
-        FavoritesCopy: order,
+        Filtered: action.info === "Filtered" ? order : [...state.Filtered],
+        ByName: action.info === "ByName" ? order : [...state.ByName],
+        FavoritesCopy:
+          action.info === "FavoritesCopy" ? order : [...state.FavoritesCopy],
+        ProductsBrand:
+          action.info === "ProductsBrand" ? order : [...state.ProductsBrand],
         updateFilter: state.updateFilter + 1,
       };
 
@@ -379,17 +388,18 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case UPDATE_USER: {
+      /*  const add = state.User.cart;
+      const payload = action.payload;
+ */
       return {
         ...state,
-        /* User: action.payload,
-        update: state.update + 1, */
       };
     }
 
     case MERCADOPAGO:
-      return{
-        ...state
-      }
+      return {
+        ...state,
+      };
 
     default:
       return {
