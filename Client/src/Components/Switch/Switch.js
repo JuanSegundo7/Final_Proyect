@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Form from "../ProductForm/ProductForm";
 import Home from "../Home/Home";
@@ -10,10 +10,12 @@ import BrandSearched from "../ContainerInfo/BrandSearched";
 import CartComponent from "../CartComponent/CartComponent";
 import Login from "../Login/Login";
 import CreateComments from "../Comments/CreateComments";
+import About from "../About/About";
 
 const SwitchRouter = () => {
   return (
     <Routes>
+      <Route exact path="/about" element={<About />} />
       <Route exact path="/" element={<Home />} />
       <Route
         exact
@@ -50,7 +52,11 @@ const SwitchRouter = () => {
         element={<ContainerInfo info="CategoriesOthers" order="others" />}
       />
       <Route exact path="/brands" element={<ContainerBrands />} />
-      <Route exact path="/brands/:params" element={<BrandSearched />} />
+      <Route
+        exact
+        path="/brands/:params"
+        element={<BrandSearched info={"ProductsBrand"} />}
+      />
       <Route exact path="/create" element={<Form />} />
 
       <Route exact path="/detail/:id" element={<DetailProducts />} />

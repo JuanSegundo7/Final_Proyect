@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import BrandCard  from "../Card/BrandCard";
+import BrandCard from "../Card/BrandCard";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Error from "../Card/imgs/error.webp";
@@ -8,16 +8,16 @@ import {
   cleanFiltered,
   getProducts,
   matchFavorite,
-  cleanByName
+  cleanByName,
 } from "../../redux/Actions/Actions";
 import Paginated from "../Paginated/Paginated";
 
-export default function ContainerBrands({info}) {
+export default function ContainerBrands({ info }) {
   const location = useLocation();
   const dispatch = useDispatch();
-  const allProducts = useSelector((state) => state.Brands); // /coffees = state.CategoriesCoffee
+  const allProducts = useSelector((state) => state.Brands);
 
-  console.log(allProducts)
+  // console.log("SOY TODAS LAS MARCAS:", allProducts);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [productPerPage, setProductPerPage] = useState(8);
@@ -27,7 +27,7 @@ export default function ContainerBrands({info}) {
   useEffect(() => {
     dispatch(matchFavorite());
   }, [location.pathname]);
- 
+
   let finalArray = allProducts.slice(indexFirstProduct, indexLastProduct); // products
 
   const paginated = (number) => {

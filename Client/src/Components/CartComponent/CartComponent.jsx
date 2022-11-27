@@ -2,12 +2,14 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardCart from "./CardCart";
 import Error from "../Card/imgs/error.webp";
-import { /* clearCart, */ updateUser } from "../../redux/Actions/Actions";
+import {
+  /* clearCart, */ sendEmail,
+  updateUser,
+} from "../../redux/Actions/Actions";
 import "./CartComponent.css";
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { linkMp } from "../../redux/Actions/Actions";
-
 
 export default function CartComponent() {
   const allCart = useSelector((state) => state.cart);
@@ -15,6 +17,7 @@ export default function CartComponent() {
   const [disabled, setDisabled] = useState(false);
   const { isAuthenticated } = useAuth0();
   const datosEnMiBD = useSelector((state) => state.User);
+  // console.log("es allCart:", allCart);
 
   let precioTotal = 0;
   let total = 0;
@@ -28,28 +31,29 @@ export default function CartComponent() {
   useEffect(() => {
     if (allCart.length) {
       localStorage.setItem("Cart-pf", JSON.stringify(allCart));
-      if (isAuthenticated){
-        //console.log("estoy casi casi:",allCart)
-        dispatch(updateUser(datosEnMiBD._id,{cart:allCart}));
-        //console.log("esto es justo despues olcaar:",allCart)
+      if (isAuthenticated) {
+        dispatch(updateUser(datosEnMiBD._id, { cart: allCart }));
       }
-    } else if (!allCart.length) {
+    }
+    if (isAuthenticated) {
+      if (!allCart.length) {
+        setDisabled(true);
+      }
+    } else if (allCart.length) {
       setDisabled(true);
     }
   }, [allCart]);
 
-  
-  async function mercadopago(){
+  async function mercadopago() {
     //if (theLink) window.location.href = theLink;
-    const data={
+    const data = {
       name: datosEnMiBD.name + " " + datosEnMiBD.lastname,
       email: datosEnMiBD._id,
-      cart : datosEnMiBD.cart
-    }
+      cart: datosEnMiBD.cart,
+    };
     //console.log("hice click en el boton de comprar - data:",data)
-    dispatch(linkMp(data))
+    dispatch(linkMp(data));
   }
-
 
   return (
     <div id="Cart">
@@ -73,6 +77,7 @@ export default function CartComponent() {
               price={cardCoffe.price}
               quantity={cardCoffe.quantity}
               stock={cardCoffe.stock}
+              user={datosEnMiBD}
             />
           ))
         : "There are no selected products!"}
