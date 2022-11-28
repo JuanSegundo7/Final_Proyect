@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardCart from "./CardCart";
 import Error from "../Card/imgs/error.webp";
-import { updateUser } from "../../redux/Actions/Actions";
+import { getOneUser, updateUser } from "../../redux/Actions/Actions";
 import "./CartComponent.css";
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -15,8 +15,6 @@ export default function CartComponent() {
   const [disabled, setDisabled] = useState(false);
   const { isAuthenticated } = useAuth0();
   const datosEnMiBD = useSelector((state) => state.User);
-
-  // console.log("es mp:", MercadoPagoUrl);
 
   let precioTotal = 0;
   let total = 0;
@@ -43,12 +41,13 @@ export default function CartComponent() {
     }
   }, [allCart]);
 
-  async function mercadopago() {
+  function mercadopago() {
     //if (theLink) window.location.href = theLink;
+    console.log("CLICK MP");
     const data = {
       name: datosEnMiBD.name + " " + datosEnMiBD.lastname,
       email: datosEnMiBD._id,
-      cart: datosEnMiBD.cart,
+      cart: /* datosEnMiBD.cart */ allCart,
     };
     //console.log("hice click en el boton de comprar - data:",data)
     dispatch(linkMp(data));
@@ -57,14 +56,12 @@ export default function CartComponent() {
     } */
   }
 
-  useEffect(()=>{
-    if (MercadoPagoUrl.length){
+  useEffect(() => {
+    if (MercadoPagoUrl.length) {
       //console.log("ahora si tengo URL, y soy:",MercadoPagoUrl)
-      window.location.href = MercadoPagoUrl
+      window.location.href = MercadoPagoUrl;
     }
-    
-  },[MercadoPagoUrl])
-
+  }, [MercadoPagoUrl]);
 
   return (
     <div id="Cart">

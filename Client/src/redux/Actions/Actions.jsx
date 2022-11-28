@@ -86,15 +86,17 @@ export const postProduct = (payload) => {
   };
 };
 
-export const updateProduct = (_id, body) => {
+export const updateProduct = (id, body) => {
   return async function (dispatch) {
-    try {
-      await axios.put(`${baseUrl}products/${_id}`, body);
-      return dispatch({
-        type: UPDATE_PRODUCT,
-      });
-    } catch (error) {
-      console.log("error", error);
+    if (id) {
+      try {
+        await axios.put(`${baseUrl}products/${id}`, body);
+        return dispatch({
+          type: UPDATE_PRODUCT,
+        });
+      } catch (error) {
+        console.log("error", error);
+      }
     }
   };
 };
@@ -330,10 +332,12 @@ export const linkMp = (payload) => (dispatch) => {
 //COMMENTS
 
 export const getComments = () => (dispatch) => {
-  return axios
-    .get(`${baseUrl}comments`)
-    // .then(info => console.log(info))
-    .then((data) => dispatch({ type: GET_COMMENTS, payload: data.data }));
+  return (
+    axios
+      .get(`${baseUrl}comments`)
+      // .then(info => console.log(info))
+      .then((data) => dispatch({ type: GET_COMMENTS, payload: data.data }))
+  );
 };
 
 export const postComment = (payload) => (dispatch) => {

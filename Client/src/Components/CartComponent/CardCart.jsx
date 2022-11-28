@@ -23,14 +23,7 @@ export default function CardCart(props) {
   function removeOne(id, all = false) {
     if (all) {
       dispatch(removeOneToCart(id));
-      //if (UserDb && cart.length === 1) {
-        //const helper = cart.find((productInCart) => productInCart.quantity);
-        //if (helper.quantity === 0){
-          //console.log('helper.quantity', helper.quantity)
-          //dispatch(clearCart());
-          dispatch(updateUser(UserDb._id, { cart: [] }));
-        //}
-      //}
+      dispatch(updateUser(UserDb._id, { cart: [] }));
     } else {
       dispatch(removeAllToCart(id));
       if (cart && cart.length === 1) console.log("a ver gaston, en el all");

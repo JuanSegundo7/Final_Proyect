@@ -6,7 +6,13 @@ import Carousel from "../Carrousel/Carrousel";
 import TigerInfo from "../TigerInfo/TigerInfo";
 import ProductCarousel from "../ProductCarousel/ProductCarousel";
 import Help from "../Help/Help";
-import { clearCart, updateUser, sendEmail } from "../../redux/Actions/Actions";
+import {
+  clearCart,
+  updateUser,
+  sendEmail,
+  updateProduct,
+  getProducts,
+} from "../../redux/Actions/Actions";
 import CommentsCarousel from "../Comments/Comments";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
@@ -22,17 +28,28 @@ export default function Home() {
   const updateFilter = useSelector((state) => state.updateFilter);
   const Comments = useSelector((state) => state.Comments);
   const User = useSelector((state) => state.User);
+  const Products = useSelector((state) => state.Products);
   const { user } = useAuth0();
-
-  /* 
-  cada vez que aumento la cantidad en el carrito tengo que bajar la cantidad de stock
-  en el producto, pero... una vez que se complete la compra. Es decir que cuando la 
-  compra salio bien deberia hacer la cuenta para restar el stock que tiene products con lo que 
-  habia en el carrito 
-  */
 
   useEffect(() => {
     if (user && search.includes("approved") && User) {
+      dispatch(getProducts());
+      const array = [];
+
+      Products.forEach((product) => {
+        User.cart.find((productInCart) => {
+          if (product._id === productInCart._id) {
+            const allData = {};
+            allData.stock = product.stock - productInCart.quantity;
+            allData._id = product._id;
+            array.push(allData);
+          }
+        });
+      });
+      array.forEach((element) =>
+        dispatch(updateProduct(element._id, { stock: element.stock }))
+      );
+
       localStorage.removeItem("Cart-pf");
       dispatch(clearCart());
       dispatch(updateUser(User._id, { cart: [] }));
