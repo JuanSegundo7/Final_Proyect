@@ -26,6 +26,7 @@ import {
   CLEAR_CART,
   FIND_ALL_CART,
   SEND_EMAIL,
+  UPDATE_PRODUCT,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -226,6 +227,14 @@ const rootReducer = (state = initialState, action) => {
         Product: action.payload,
       };
 
+    case UPDATE_PRODUCT: {
+      // cambio el stock y lo guardo en mi estado global
+      return {
+        ...state,
+        Products: action.payload,
+      };
+    }
+
     //case POST_PRODUCT:
     //return {
     //...state,
@@ -391,9 +400,6 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case UPDATE_USER: {
-      /*  const add = state.User.cart;
-      const payload = action.payload;
- */
       return {
         ...state,
       };
@@ -402,7 +408,7 @@ const rootReducer = (state = initialState, action) => {
     case MERCADOPAGO:
       return {
         ...state,
-        MercadoPagoUrl: action.payload
+        MercadoPagoUrl: action.payload,
       };
 
     default:
