@@ -12,7 +12,7 @@ export default function CartComponent() {
   const allCart = useSelector((state) => state.cart);
   const MercadoPagoUrl = useSelector((state) => state.MercadoPagoUrl);
   const dispatch = useDispatch();
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState(true);
   const { isAuthenticated } = useAuth0();
   const datosEnMiBD = useSelector((state) => state.User);
 
@@ -33,11 +33,9 @@ export default function CartComponent() {
       }
     }
     if (isAuthenticated) {
-      if (!allCart.length) {
-        setDisabled(true);
+      if (allCart.length) {
+        setDisabled(false);
       }
-    } else if (allCart.length) {
-      setDisabled(true);
     }
   }, [allCart]);
 
