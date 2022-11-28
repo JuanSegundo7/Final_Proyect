@@ -42,18 +42,12 @@ export default function CartComponent() {
   }, [allCart]);
 
   function mercadopago() {
-    //if (theLink) window.location.href = theLink;
-    console.log("CLICK MP");
     const data = {
       name: datosEnMiBD.name + " " + datosEnMiBD.lastname,
       email: datosEnMiBD._id,
       cart: /* datosEnMiBD.cart */ allCart,
     };
-    //console.log("hice click en el boton de comprar - data:",data)
     dispatch(linkMp(data));
-    /* if (MercadoPagoUrl.length) {
-      return (window.location.href = MercadoPagoUrl);
-    } */
   }
 
   useEffect(() => {
