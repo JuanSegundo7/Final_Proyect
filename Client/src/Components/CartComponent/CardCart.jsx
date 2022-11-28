@@ -1,5 +1,4 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
@@ -14,9 +13,6 @@ export default function CardCart(props) {
 
   const UserDb = useSelector((state) => state.User);
   const cart = useSelector((state) => state.cart);
-  const { user } = useAuth0();
-
-  console.log("SOY CART:", cart);
 
   function addOne(e) {
     if (props.stock >= 1) {
@@ -27,11 +23,12 @@ export default function CardCart(props) {
   function removeOne(id, all = false) {
     if (all) {
       dispatch(removeOneToCart(id));
-      console.log("hola antes del cart === 1");
-      if (UserDb && cart && cart.quantity === 1) {
-        console.log("en el cart === 1");
-        dispatch(clearCart());
-        dispatch(updateUser(UserDb._id, { cart: [] }));
+      if (UserDb && cart.length === 1) {
+        const helper = cart.find((productInCart) => productInCart.quantity);
+        if (helper.quantity === 1) {
+          dispatch(clearCart());
+          dispatch(updateUser(UserDb._id, { cart: [] }));
+        }
       }
     } else {
       dispatch(removeAllToCart(id));
