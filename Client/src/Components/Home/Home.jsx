@@ -9,6 +9,7 @@ import Help from "../Help/Help";
 import { clearCart, updateUser, sendEmail } from "../../redux/Actions/Actions";
 import CommentsCarousel from "../Comments/Comments";
 import { useAuth0 } from "@auth0/auth0-react";
+import Swal from "sweetalert2";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -35,6 +36,12 @@ export default function Home() {
       localStorage.removeItem("Cart-pf");
       dispatch(clearCart());
       dispatch(updateUser(User._id, { cart: [] }));
+      Swal.fire({
+        title:"Purchase Success!",
+        text:'Please check you email for further details!',
+        icon:'success',
+        timer: 2000
+      });
       const email_data = {
         email: User._id,
         name: User.name + " " + User.lastname,
@@ -43,6 +50,22 @@ export default function Home() {
       dispatch(sendEmail(email_data));
       navigate("/");
     }
+
+    if (user && search.includes("rejected") && User) {
+      Swal.fire({
+        title:"Purchase Error!",
+        text:'There was an error with your purchase',
+        icon:'error',
+        timer: 2000
+      });
+      const email_data = {
+        email: User._id,
+        name: User.name + " " + User.lastname,
+        error:"error with the purchase"
+      };
+      dispatch(sendEmail(email_data));
+    }
+    
   }, [updateFilter]);
 
   return (
