@@ -336,8 +336,9 @@ export const getComments = () => (dispatch) => {
     .then((data) => dispatch({ type: GET_COMMENTS, payload: data.data }));
 };
 
-export const postComment = () => (dispatch) => {
+export const postComment = (payload) => (dispatch) => {
+  console.log(payload,"soy payload en actions");
   return axios
-    .post(`${baseUrl}comments`)
+    .post(`${baseUrl}comments`,payload)
     .then((data) => dispatch({ type: POST_COMMENT, payload: data.data }));
 };

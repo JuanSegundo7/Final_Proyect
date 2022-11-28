@@ -432,9 +432,10 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case POST_COMMENT:
-    return {
-      ...state,
-    };
+      console.log("estoy en el reducer");
+      return {
+        ...state,
+      };
 
     default:
       return {

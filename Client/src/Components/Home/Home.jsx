@@ -41,7 +41,7 @@ export default function Home() {
         cart: User.cart,
       };
       dispatch(sendEmail(email_data));
-      navigate("/");
+      navigate("/comments");
     }
   }, [updateFilter]);
 
