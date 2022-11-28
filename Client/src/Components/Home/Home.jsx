@@ -36,7 +36,7 @@ export default function Home() {
       dispatch(updateUser(User._id, { cart: [] }));
       navigate("/");
     }
-  }, [search, updateFilter]);
+  }, [updateFilter]);
 
   return (
     <section id="Home">

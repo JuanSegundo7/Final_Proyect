@@ -27,6 +27,7 @@ import {
   FIND_ALL_CART,
   SEND_EMAIL,
   UPDATE_PRODUCT,
+  CLEAN_BRANDS,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -303,6 +304,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         Brands: action.payload,
         BrandsCopy: action.payload,
+      };
+    }
+
+    case CLEAN_BRANDS: {
+      return {
+        ...state,
+        ProductsBrand: [],
       };
     }
 
