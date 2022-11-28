@@ -2,10 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardCart from "./CardCart";
 import Error from "../Card/imgs/error.webp";
-import {
-  /* clearCart, */ sendEmail,
-  updateUser,
-} from "../../redux/Actions/Actions";
+import { updateUser } from "../../redux/Actions/Actions";
 import "./CartComponent.css";
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
