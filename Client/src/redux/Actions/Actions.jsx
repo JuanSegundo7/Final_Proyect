@@ -337,7 +337,7 @@ export const getComments = () => (dispatch) => {
 };
 
 export const postComment = (payload) => (dispatch) => {
-  console.log(payload,"soy payload en actions");
+  // console.log(payload,"soy payload en actions");
   return axios
     .post(`${baseUrl}comments`,payload)
     .then((data) => dispatch({ type: POST_COMMENT, payload: data.data }));
