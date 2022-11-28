@@ -2,13 +2,11 @@ import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import {
-  getOneProduct,
-  cleanDetail,
-  addToCart,
-} from "../../redux/Actions/Actions";
+import { getOneProduct, cleanDetail, addToCart } from "../../redux/Actions/Actions";
 import AddCart from "../Alert/AddProduct"
+import Stars from "../Detail/Stars"
 import "./Detail.css";
+
 
 export default function DetailProduct() {
   window.scrollTo(0, 250);
@@ -26,7 +24,7 @@ export default function DetailProduct() {
     dispatch(getOneProduct(idCoffee.id));
 
     return () => {
-      dispatch(cleanDetail()); // para que se limpie el estado de detalle cuando lo saco y caundo aprete otro se ponga el nuevo y no qeude ese dilay del anterior
+      dispatch(cleanDetail()); // para que se limpie el estado de detalle cuando lo saco y cuando apriete otro se ponga el nuevo y no quede ese delay del anterior
     };
   }, [dispatch]);
 
@@ -56,9 +54,12 @@ export default function DetailProduct() {
             <p>
               Average Rating:{" "}
               {(!product.total_accumulated || !product.total_purchases || !product.total_purchases>0)
-                ? "This product has not been rated yet"
-                : product.total_accumulated / product.total_purchases}
+                ? "This product has not been rated yet "
+                : <Stars average={product.total_accumulated / product.total_purchases}/>                
+              }
+                
             </p>
+
             <p>Stock: {product.stock} units</p>
             <button
               type="submit"
