@@ -1,11 +1,6 @@
 import React, { useEffect } from "react";
 import "./Favorite.css";
-import {
-  matchFavorite,
-  addOneFavorite,
-  updateUser,
-  getOneUser,
-} from "../../redux/Actions/Actions";
+import { matchFavorite, addOneFavorite, updateUser } from "../../redux/Actions/Actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 

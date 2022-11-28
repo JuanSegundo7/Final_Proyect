@@ -6,14 +6,14 @@ import "../ProductCarousel/ProductCarousel.css"
 
 export default function Comments({array, title}) {
 
-    console.log(array)
+    //console.log(array)
     const commentsRef = useRef();
     let resetTimeout;
 
     return (
     <section id="Product-carousel-comments">
     <h1>{title}</h1>
-    <Carousel itemsToShow={1} enableAutoPlay={true} autoPlaySpeed={3000} showArrows={false} ref={commentsRef} onNextEnd={({ index }) => {clearTimeout(resetTimeout); resetTimeout = setTimeout(() => {if (index == commentsRef.current.props.children.length - 1) commentsRef.current.goTo(0);}, 1000)}}>
+    <Carousel itemsToShow={1} enableAutoPlay={true} autoPlaySpeed={5000} showArrows={false} ref={commentsRef} onNextEnd={({ index }) => {clearTimeout(resetTimeout); resetTimeout = setTimeout(() => {if (index == commentsRef.current.props.children.length - 1) commentsRef.current.goTo(0);}, 1000)}}>
         {array.length > 0 ? array.map((product) => { 
             return <Card    
             key={product._id}
