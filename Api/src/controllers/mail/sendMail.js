@@ -5,7 +5,7 @@ const { EMAIL_USER,  EMAIL_PASSWORD } = process.env;
 
 const sendEmail = async (data)=>{
     
-    const { email, name, cart, respuestaURL} = data
+    const { email, name, cart } = data
     //console.log("soy data en sendmail:",data)
     //console.log("soy cart:",cart)
     const upperCaseName = name.toUpperCase();
@@ -39,7 +39,6 @@ const sendEmail = async (data)=>{
         text: "Hello world?", // plain text body not used in this case (using html instead)
         html: ` <div>
                     <h2>${upperCaseName}, we are happy to let you know that we've received your coffee order ☕ </h2>
-                    <p>Payment Link:${respuestaURL}</p>
                     <p>Once your package ships, we will send you an email with a tracking number and link so you can see the movement of it.</p>
                     <h4>Purchase Summary:</h4>
                     ${productsWithoutCommas}

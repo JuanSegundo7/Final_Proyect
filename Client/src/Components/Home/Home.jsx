@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./Home.css";
 import Carousel from "../Carrousel/Carrousel";
 import TigerInfo from "../TigerInfo/TigerInfo";
 import ProductCarousel from "../ProductCarousel/ProductCarousel";
-import { useDispatch, useSelector } from "react-redux";
 import Help from "../Help/Help";
-import { clearCart, getOneUser, updateUser } from "../../redux/Actions/Actions";
+import { clearCart, updateUser, sendEmail } from "../../redux/Actions/Actions";
+// getOneUser
 import CommentsCarousel from "../Comments/Comments"
 import { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -25,11 +26,21 @@ export default function Home() {
   const { user } = useAuth0();
   //console.log("link que devuelve mercadopago...tiene status=???:",search)
 
+  /* if (User){
+    console.log(User)
+  } */
+
   useEffect(() => {
-    if (user && search.includes("approved")) {
+    if (user && search.includes("approved") && User) {
       localStorage.removeItem("Cart-pf");
       dispatch(clearCart());
       dispatch(updateUser(User._id, { cart: [] }));
+      const email_data = {
+        email:User._id, 
+        name:User.name + " " + User.lastname,
+        cart:User.cart
+      };
+      dispatch(sendEmail(email_data));
       navigate("/");
     }
   }, [search, updateFilter]);
