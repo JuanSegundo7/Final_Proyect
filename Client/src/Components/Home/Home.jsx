@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./Home.css";
-import Carrousel from "../Carrousel/Carrousel";
+import Carousel from "../Carrousel/Carrousel";
 import TigerInfo from "../TigerInfo/TigerInfo";
 import ProductCarousel from "../ProductCarousel/ProductCarousel";
 import Help from "../Help/Help";
 import { clearCart, updateUser, sendEmail } from "../../redux/Actions/Actions";
+import CommentsCarousel from "../Comments/Comments";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
   const Accesories = useSelector((state) => state.CategoriesAccesories);
   const Others = useSelector((state) => state.CategoriesOthers);
   const updateFilter = useSelector((state) => state.updateFilter);
+  const Comments = useSelector((state) => state.Comments);
   const User = useSelector((state) => state.User);
   const { user } = useAuth0();
 
@@ -45,7 +47,7 @@ export default function Home() {
 
   return (
     <section id="Home">
-      <Carrousel />
+      <Carousel />
       <ProductCarousel array={Coffees} title="Our Selection Of Coffees" />
       <ProductCarousel
         array={CoffeeMaker}
@@ -53,6 +55,7 @@ export default function Home() {
       />
       <TigerInfo />
       <ProductCarousel array={Accesories} title="Accessories" />
+      <CommentsCarousel array={Comments} title="Comments" />
       <ProductCarousel array={Others} title="Other items" />
       <Help />
     </section>

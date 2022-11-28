@@ -2,10 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Error from "./imgs/error.webp";
 import Favorite from "../Favorite/Favorite";
-// import { useDispatch } from "react-redux";
 import "./Card.css";
 import CartButton from "../Cart/CartButton";
-// import { getProductByQuery } from "../../redux/Actions/Actions";
 
 export function Card(props) {
   return (

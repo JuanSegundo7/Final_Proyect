@@ -15,6 +15,7 @@ import {
   findAllCart,
   matchFavorite,
   getUsers,
+  getComments,
   getOneUser,
 } from "./redux/Actions/Actions";
 import Dashboard from "./Dashboard/Dashboard";
@@ -37,6 +38,7 @@ function App() {
     dispatch(getProductByQuery("category", "others", "others"));
     dispatch(getBrands());
     dispatch(getCategories());
+    dispatch(getComments());
     dispatch(fillAllFavorites());
     dispatch(findAllCart());
     dispatch(getUsers());

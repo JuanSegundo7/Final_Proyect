@@ -28,6 +28,7 @@ import {
   SEND_EMAIL,
   UPDATE_PRODUCT,
   CLEAN_BRANDS,
+  GET_COMMENTS,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -65,6 +66,8 @@ const initialState = {
   User: {},
 
   cart: [],
+
+  Comments: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -417,6 +420,13 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         MercadoPagoUrl: action.payload,
+      };
+
+    case GET_COMMENTS:
+      console.log("llegue reducer");
+      return {
+        ...state,
+        Comments: action.payload,
       };
 
     default:
