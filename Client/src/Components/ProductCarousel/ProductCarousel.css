@@ -3,24 +3,44 @@
     padding: 1em;
 }
 
-#Product-carousel #card{
+#Product-carousel-comments{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 2em 0;
+    padding: 0;
+    background-color: var(--background-color-top);
+    height: 700px;
+}
+
+#Product-carousel #card, #Product-carousel-comments #card{
     margin: 1em;
 }
 
-#Product-carousel h1{
+#Product-carousel h1, #Product-carousel-comments h1{
     font-size: 40px;
     font-family: 'Pacifico', cursive;
     color: var(--brown);
 }
 
-#Product-carousel .kXteup, #Product-carousel .cVXxbE, #Product-carousel .Slxdj{
+#Product-carousel-comments h1{
+    margin: 0.3em 0;
+    font-size: 50px;
+}
+
+#Product-carousel .kXteup, #Product-carousel .cVXxbE, #Product-carousel .Slxdj, #Product-carousel-comments .kXteup, #Product-carousel-comments .cVXxbE, #Product-carousel-comments .Slxdj {
     background-color: rgba(209, 119, 33, 0.5);
 }
 
-#Product-carousel .cVXxbE {
+#Product-carousel .cVXxbE, #Product-carousel-comments .cVXxbE {
     box-shadow: 0 0 1px 3px rgb(209 119 33);
 }
 
-#Product-carousel .jtKTCe{
+#Product-carousel .jtKTCe, #Product-carousel-comments .jtKTCe{
     display: none;
+}
+
+
+#Product-carousel-comments{
+    background-color: var(--background-color-top)
 }

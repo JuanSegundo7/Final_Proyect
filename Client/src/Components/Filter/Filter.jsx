@@ -19,6 +19,8 @@ export default function ({ info, order }) {
   const Price = useSelector((state) => state.Price);
   const FavoritesBoolean = useSelector((state) => state.FavoriteBoolean);
 
+  const ProductsBrand = useSelector((state) => state.ProductsBrand);
+
   const [price, setPrice] = useState({
     min: 1,
     max: 500,
@@ -35,7 +37,14 @@ export default function ({ info, order }) {
       min: 1,
       max: 500,
     });
-  }, [location.pathname, state]);
+    document.getElementById("order").selectedIndex = 0;
+    document.getElementById("order2").selectedIndex = 0;
+    document.getElementById("order3").selectedIndex = 0;
+  }, [location.pathname]);
+
+  useEffect(() => {
+    dispatch(cleanFiltered());
+  }, [location.pathname]);
 
   function handlePriceMin(e) {
     e.preventDefault();
@@ -47,6 +56,7 @@ export default function ({ info, order }) {
     e.preventDefault();
     setPrice({ ...price, max: parseInt(e.target.value) });
     dispatch(filter(price, info));
+    // el comentario de abajo ya lo resolvieron??? si es asi borrenlooo
     //-> ver si quiero mandar ya desde aca el array(el estado global de cafes o hacerlo desde el reducer)
   }
 
@@ -58,6 +68,8 @@ export default function ({ info, order }) {
     if (Search) dispatch(sortFilter(value, "ByName", "name"));
     if (Price) dispatch(sortFilter(value, "OrderPrice", "name"));
     if (FavoritesBoolean) dispatch(sortFilter(value, "FavoritesCopy", "name"));
+    if (ProductsBrand.length)
+      dispatch(sortFilter(value, "ProductsBrand", "name"));
 
     switch (state) {
       case state: {
@@ -81,6 +93,8 @@ export default function ({ info, order }) {
     if (Search) dispatch(sortFilter(value, "ByName", "stock"));
     if (Price) dispatch(sortFilter(value, "OrderPrice", "stock"));
     if (FavoritesBoolean) dispatch(sortFilter(value, "FavoritesCopy", "stock"));
+    if (ProductsBrand.length)
+      dispatch(sortFilter(value, "ProductsBrand", "stock"));
 
     switch (state) {
       case state: {
@@ -104,6 +118,8 @@ export default function ({ info, order }) {
     if (Search) dispatch(sortFilter(value, "ByName", "price"));
     if (Price) dispatch(sortFilter(value, "OrderPrice", "price"));
     if (FavoritesBoolean) dispatch(sortFilter(value, "FavoritesCopy", "price"));
+    if (ProductsBrand.length)
+      dispatch(sortFilter(value, "ProductsBrand", "price"));
 
     switch (state) {
       case state: {
@@ -120,16 +136,12 @@ export default function ({ info, order }) {
   };
 
   const handleReset = (e) => {
-    document.getElementById("range1").value = 1;
-    document.getElementById("range2").value = 500;
     document.getElementById("order").selectedIndex = 0;
     document.getElementById("order2").selectedIndex = 0;
     document.getElementById("order3").selectedIndex = 0;
     setPrice({ min: 1, max: 500 });
     dispatch(cleanFiltered());
-    dispatch(
-      getProductByQuery("category", `${order}`, `${order}`, `orderedbyname=ASC`)
-    );
+    dispatch(getProductByQuery("category", `${order}`, `${order}`));
   };
 
   return (

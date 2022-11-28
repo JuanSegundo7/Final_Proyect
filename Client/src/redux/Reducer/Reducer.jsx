@@ -14,7 +14,6 @@ import {
   FILTER,
   CLEAN_FILTERED,
   CLEAN_NAME,
-  //CLEAN_ORDER,
   ORDER_FILTER,
   SET_ALL_FAVORITES,
   ADD_ONE_FAVORITE,
@@ -27,15 +26,16 @@ import {
   CLEAR_CART,
   FIND_ALL_CART,
   SEND_EMAIL,
+  UPDATE_PRODUCT,
+  CLEAN_BRANDS,
   GET_COMMENTS,
-  POST_COMMENT
 } from "../Actions/Actions";
 
 const initialState = {
   Products: [],
   Product: {},
   Categories: [],
-  
+
   Brands: [],
   ProductsBrand: [],
   BrandsCopy: [],
@@ -54,19 +54,20 @@ const initialState = {
 
   Favorites: [],
   FavoritesCopy: [],
-  FavoriteBoolean: true,
+  FavoriteBoolean: false,
+  UpdateFavorite: 1,
 
   OrderPrice: [],
   Price: false,
+
+  MercadoPagoUrl: "",
 
   Users: [],
   User: {},
 
   cart: [],
-  update: 1,
 
-  comments:[],
-
+  Comments: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -107,6 +108,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         Favorites: totalFavorites,
+        UpdateFavorite: state.UpdateFavorite + 1,
       };
 
     case MATCH_FAVORITE: {
@@ -126,34 +128,39 @@ const rootReducer = (state = initialState, action) => {
 
     case ADD_TO_CART:
       const allProducts = state.Products;
-      const allCart2 = state.cart;
+
       let newCoffe = allProducts.find(
         (product) => product._id === action.payload
       );
 
-      let itemInCart = state.cart.find(
-        (product) => product._id === newCoffe._id
-      );
+      let itemInCart = state.cart.find((product) => {
+        return product._id === newCoffe._id;
+      });
 
       return itemInCart
         ? {
             ...state,
-            cart: state.cart.map((product) =>
-              product._id === newCoffe._id
-                ? {
-                    ...product,
-                    quantity: product.quantity + 1,
-                    stock: product.stock - 1,
-                  }
-                : product
-            ),
+            cart:
+              // [
+              // ...state.cart, //ACA SACO LA COPIA Y EL ARRAY PORQUE SINO SE GUARADABA COMO UN ARRAY NUEVO ([..[]])
+              state.cart.map((product) => {
+                return product._id === newCoffe._id
+                  ? {
+                      ...product,
+                      quantity: product.quantity + 1,
+                      stock: product.stock - 1,
+                    }
+                  : product;
+              }),
+            // ],
+            update: state.update + 1,
           }
         : {
             ...state,
             cart: [...state.cart, { ...newCoffe, quantity: 1 }],
           };
 
-    case REMOVE_ONE_FROM_CART:
+    case REMOVE_ONE_FROM_CART: {
       const allCart = state.cart;
 
       let findProduct = allCart.find(
@@ -179,6 +186,7 @@ const rootReducer = (state = initialState, action) => {
       if (allCart.length === 1) {
         localStorage.removeItem("Cart-pf");
       }
+    }
 
     case REMOVE_ALL_FROM_CART:
       const cart = state.cart;
@@ -191,11 +199,12 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case CLEAR_CART:
-      localStorage.clear("Cart-pf");
+      localStorage.removeItem("Cart-pf");
       return {
         ...state,
         cart: [],
       };
+
     case FIND_ALL_CART:
       const localStorageCart = JSON.parse(localStorage.getItem("Cart-pf"));
 
@@ -221,6 +230,15 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         Product: action.payload,
       };
+
+    case UPDATE_PRODUCT: {
+      // cambio el stock y lo guardo en mi estado global
+      return {
+        ...state,
+        Products: action.payload,
+      };
+    }
+
     //case POST_PRODUCT:
     //return {
     //...state,
@@ -292,6 +310,13 @@ const rootReducer = (state = initialState, action) => {
       };
     }
 
+    case CLEAN_BRANDS: {
+      return {
+        ...state,
+        ProductsBrand: [],
+      };
+    }
+
     case GET_CATEGORIES: {
       return {
         ...state,
@@ -350,9 +375,12 @@ const rootReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        Filtered: order,
-        ByName: order,
-        FavoritesCopy: order,
+        Filtered: action.info === "Filtered" ? order : [...state.Filtered],
+        ByName: action.info === "ByName" ? order : [...state.ByName],
+        FavoritesCopy:
+          action.info === "FavoritesCopy" ? order : [...state.FavoritesCopy],
+        ProductsBrand:
+          action.info === "ProductsBrand" ? order : [...state.ProductsBrand],
         updateFilter: state.updateFilter + 1,
       };
 
@@ -385,25 +413,21 @@ const rootReducer = (state = initialState, action) => {
     case UPDATE_USER: {
       return {
         ...state,
-        /* User: action.payload,
-        update: state.update + 1, */
       };
     }
 
     case MERCADOPAGO:
-      return{
-        ...state
-      }
+      return {
+        ...state,
+        MercadoPagoUrl: action.payload,
+      };
 
     case GET_COMMENTS:
-      return{
+      console.log("llegue reducer");
+      return {
         ...state,
-        comments:action.payload
-      }
-    case POST_COMMENT:
-      return{
-        ...state,
-      }
+        Comments: action.payload,
+      };
 
     default:
       return {
