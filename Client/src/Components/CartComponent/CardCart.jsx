@@ -13,9 +13,12 @@ export default function CardCart(props) {
 
   const UserDb = useSelector((state) => state.User);
   const cart = useSelector((state) => state.cart);
+  const products = useSelector((state) => state.Products);
+  // const stock = 0
+  const findProduct = products.find((product) => product._id === props._id);
 
   function addOne(e) {
-    if (props.stock >= 1) {
+    if (findProduct.stock !== props.quantity && props.stock > 1) {
       dispatch(addToCart(props._id));
     }
   }
@@ -26,8 +29,8 @@ export default function CardCart(props) {
       dispatch(updateUser(UserDb._id, { cart: [] }));
     } else {
       dispatch(removeAllToCart(id));
-      if (cart && cart.length === 1) console.log("a ver gaston, en el all");
-      dispatch(updateUser(UserDb._id, { cart: [] }));
+      if (cart && cart.length === 1)
+        dispatch(updateUser(UserDb._id, { cart: [] }));
     }
   }
 

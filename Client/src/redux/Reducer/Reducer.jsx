@@ -141,19 +141,15 @@ const rootReducer = (state = initialState, action) => {
       return itemInCart
         ? {
             ...state,
-            cart:
-              // [
-              // ...state.cart, //ACA SACO LA COPIA Y EL ARRAY PORQUE SINO SE GUARADABA COMO UN ARRAY NUEVO ([..[]])
-              state.cart.map((product) => {
-                return product._id === newCoffe._id
-                  ? {
-                      ...product,
-                      quantity: product.quantity + 1,
-                      stock: product.stock - 1,
-                    }
-                  : product;
-              }),
-            // ],
+            cart: state.cart.map((product) => {
+              return product._id === newCoffe._id
+                ? {
+                    ...product,
+                    quantity: product.quantity + 1,
+                    // stock: product.stock - 1,
+                  }
+                : product;
+            }),
             update: state.update + 1,
           }
         : {
@@ -170,7 +166,7 @@ const rootReducer = (state = initialState, action) => {
 
       if (findProduct.quantity > 1) {
         findProduct.quantity = findProduct.quantity - 1;
-        findProduct.stock = findProduct.stock + 1;
+        // findProduct.stock = findProduct.stock + 1;
         return {
           ...state,
           cart: [...state.cart],
@@ -430,7 +426,6 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case POST_COMMENT:
-      console.log("estoy en el reducer");
       return {
         ...state,
       };
