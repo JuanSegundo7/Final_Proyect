@@ -37,7 +37,7 @@ export default function ({ info, order }) {
       min: 1,
       max: 500,
     });
-  }, [location.pathname, state]);
+  }, [location.pathname]);
 
   useEffect(() => {
     dispatch(cleanFiltered());
