@@ -55,11 +55,19 @@ export default function CartComponent() {
     };
     //console.log("hice click en el boton de comprar - data:",data)
     dispatch(linkMp(data));
-
-    if (MercadoPagoUrl.length) {
+    /* if (MercadoPagoUrl.length) {
       return (window.location.href = MercadoPagoUrl);
-    }
+    } */
   }
+
+  useEffect(()=>{
+    if (MercadoPagoUrl.length){
+      //console.log("ahora si tengo URL, y soy:",MercadoPagoUrl)
+      window.location.href = MercadoPagoUrl
+    }
+    
+  },[MercadoPagoUrl])
+
 
   return (
     <div id="Cart">
