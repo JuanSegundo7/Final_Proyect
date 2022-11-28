@@ -23,13 +23,14 @@ export default function CardCart(props) {
   function removeOne(id, all = false) {
     if (all) {
       dispatch(removeOneToCart(id));
-      if (UserDb && cart.length === 1) {
-        const helper = cart.find((productInCart) => productInCart.quantity);
-        if (helper.quantity === 1) {
-          dispatch(clearCart());
+      //if (UserDb && cart.length === 1) {
+        //const helper = cart.find((productInCart) => productInCart.quantity);
+        //if (helper.quantity === 0){
+          //console.log('helper.quantity', helper.quantity)
+          //dispatch(clearCart());
           dispatch(updateUser(UserDb._id, { cart: [] }));
-        }
-      }
+        //}
+      //}
     } else {
       dispatch(removeAllToCart(id));
       if (cart && cart.length === 1) console.log("a ver gaston, en el all");
@@ -62,7 +63,7 @@ export default function CardCart(props) {
               <p>{props.quantity}</p>
               <button onClick={(e) => addOne(e)}>+</button>
             </div>
-            <p id="card-stock">{props.stock} available</p>
+            <p id="card-stock">{props.stock - 1} available</p>
           </div>
           <p id="cart-card-price">${props.price * props.quantity}</p>
         </div>

@@ -175,7 +175,8 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           cart: [...state.cart],
         };
-      } else if (findProduct.quantity < 1) {
+       } 
+      else if (findProduct.quantity === 0) {
         const filterCart = allCart.filter(
           (coffe) => coffe._id !== action.payload
         );
@@ -424,7 +425,7 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case GET_COMMENTS:
-      console.log("llegue reducer");
+      //console.log("llegue reducer");
       return {
         ...state,
         Comments: action.payload,
