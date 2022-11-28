@@ -29,6 +29,7 @@ import {
   UPDATE_PRODUCT,
   CLEAN_BRANDS,
   GET_COMMENTS,
+  POST_COMMENT,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -428,6 +429,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         Comments: action.payload,
+      };
+
+    case POST_COMMENT:
+      console.log("estoy en el reducer");
+      return {
+        ...state,
       };
 
     default:

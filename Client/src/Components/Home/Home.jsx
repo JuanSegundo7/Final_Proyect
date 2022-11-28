@@ -48,7 +48,7 @@ export default function Home() {
         cart: User.cart,
       };
       dispatch(sendEmail(email_data));
-      navigate("/");
+      navigate("/comments");
     }
 
     if (user && search.includes("rejected") && User) {
