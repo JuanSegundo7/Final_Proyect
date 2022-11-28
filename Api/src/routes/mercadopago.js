@@ -22,10 +22,10 @@ router.post("/", async (req, res) => {
   }
   //console.log("totalPurchase:",totalPurchase)
 
-  function onSuccessHandler(respuestaURL) {
+  //function onSuccessHandler() {
     //OJO, QUE ESTE ONSUCCESS NO ES POR EL PAGO, SINO UN SUCCESS DE "GENERE EL LINK DE PAGO". NADA MAS.
-    sendMail({ email, name, cart, respuestaURL });
-  }
+    //sendMail({ email, name, cart });
+  //}
 
   let preference = {
     payer: {
@@ -44,7 +44,7 @@ router.post("/", async (req, res) => {
     .create(preference)
     .then(function (response) {
       //console.log("soy response:",response)
-      onSuccessHandler(response.body.init_point);
+      //onSuccessHandler(response.body.init_point);
       res.send(response.body.init_point);
     })
     .catch(function (error) {
