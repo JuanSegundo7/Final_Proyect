@@ -13,7 +13,7 @@ import { updateProduct } from '../../redux/Actions/Actions';
 
 export default function DataTable() {
     const State = useSelector((state) => state.Products)        
-    const finalArray = State.map((product) => {return ( {id: product._id, name: product.name, description: product.description, brand: product.brand.name, brand2: product.brand._id ,category: product.category.name, category2: product.category._id , price: product.price, stock: product.stock} )})
+    const finalArray = State.map((product) => {return ( {id: product._id, name: product.name, description: product.description, brand: product.brand.name, brand2: product.brand._id ,category: product.category.name, category2: product.category._id , price: product.price, stock: product.stock, enabled: product.enabled} )})
     const [open, setOpen] = useState(false)
     const [info, setInfo] = useState({})
     let modal
