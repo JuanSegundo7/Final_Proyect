@@ -15,6 +15,7 @@ export default function CartComponent() {
   const [disabled, setDisabled] = useState(true);
   const { isAuthenticated } = useAuth0();
   const datosEnMiBD = useSelector((state) => state.User);
+  console.log("SPY CART:", allCart);
 
   let precioTotal = 0;
   let total = 0;
@@ -32,12 +33,15 @@ export default function CartComponent() {
         dispatch(updateUser(datosEnMiBD._id, { cart: allCart }));
       }
     }
+  }, [allCart]);
+
+  useEffect(() => {
     if (isAuthenticated) {
       if (allCart.length) {
         setDisabled(false);
-      }
+      } else if (!allCart.length) setDisabled(true);
     }
-  }, [allCart]);
+  }, [allCart.length]);
 
   function mercadopago() {
     const data = {
