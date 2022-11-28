@@ -5,10 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Error from "../Card/imgs/error.webp";
 import "./ContainerInfo.css";
 import {
-  cleanFiltered,
-  getProducts,
   matchFavorite,
-  cleanByName,
+  cleanProductsBrands,
 } from "../../redux/Actions/Actions";
 import Paginated from "../Paginated/Paginated";
 
@@ -26,6 +24,10 @@ export default function ContainerBrands({ info }) {
 
   useEffect(() => {
     dispatch(matchFavorite());
+
+    return () => {
+      dispatch(cleanProductsBrands());
+    };
   }, [location.pathname]);
 
   let finalArray = allProducts.slice(indexFirstProduct, indexLastProduct); // products

@@ -7,14 +7,12 @@ import TigerInfo from "../TigerInfo/TigerInfo";
 import ProductCarousel from "../ProductCarousel/ProductCarousel";
 import Help from "../Help/Help";
 import { clearCart, updateUser, sendEmail } from "../../redux/Actions/Actions";
-// getOneUser
-import CommentsCarousel from "../Comments/Comments"
-import { useEffect } from "react";
+import CommentsCarousel from "../Comments/Comments";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Home() {
   const dispatch = useDispatch();
-  const { search, state, pathname } = useLocation();
+  const { search } = useLocation();
   const navigate = useNavigate();
   const Coffees = useSelector((state) => state.CategoriesCoffee);
   const CoffeeMaker = useSelector((state) => state.CategoriesCoffeeMaker);
@@ -24,11 +22,13 @@ export default function Home() {
   const Comments = useSelector((state) => state.Comments);
   const User = useSelector((state) => state.User);
   const { user } = useAuth0();
-  //console.log("link que devuelve mercadopago...tiene status=???:",search)
 
-  /* if (User){
-    console.log(User)
-  } */
+  /* 
+  cada vez que aumento la cantidad en el carrito tengo que bajar la cantidad de stock
+  en el producto, pero... una vez que se complete la compra. Es decir que cuando la 
+  compra salio bien deberia hacer la cuenta para restar el stock que tiene products con lo que 
+  habia en el carrito 
+  */
 
   useEffect(() => {
     if (user && search.includes("approved") && User) {
@@ -36,14 +36,14 @@ export default function Home() {
       dispatch(clearCart());
       dispatch(updateUser(User._id, { cart: [] }));
       const email_data = {
-        email:User._id, 
-        name:User.name + " " + User.lastname,
-        cart:User.cart
+        email: User._id,
+        name: User.name + " " + User.lastname,
+        cart: User.cart,
       };
       dispatch(sendEmail(email_data));
       navigate("/");
     }
-  }, [search, updateFilter]);
+  }, [updateFilter]);
 
   return (
     <section id="Home">

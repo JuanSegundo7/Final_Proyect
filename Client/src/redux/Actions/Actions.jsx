@@ -16,7 +16,6 @@ export const GET_CATEGORIES = "GET_CATEGORIES";
 
 // PRODUCTS
 export const GET_PRODUCTS = "GET_PRODUCTS";
-export const GET_PRODUCTS_ENABLED = "GET_PRODUCTS_ENABLED";
 export const GET_ONE_PRODUCT = "GET_ONE_PRODUCT";
 export const POST_PRODUCT = "POST_PRODUCT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
@@ -34,7 +33,6 @@ export const FILTER = "FILTER";
 // BRANDS
 export const GET_BRANDS = "GET_BRANDS";
 export const CLEAN_BRANDS = "CLEAN_BRANDS";
-// export const GET_BRAND_BY_QUERY = "GET_BRANDS_BY_QUERY";
 
 //ORDERS
 export const ORDER_FILTER = "ORDER_FILTER";
@@ -51,7 +49,6 @@ export const FIND_ALL_CART = "FIND_ALL_CART";
 export const SEND_EMAIL = "SEND_EMAIL";
 
 //USERS
-
 export const USERS = "USERS";
 
 //MERCADOPAGO
@@ -153,6 +150,10 @@ export const filterBrands = (value) => (dispatch) => {
 
 export const filter = (value, info) => (dispatch) => {
   return dispatch({ type: FILTER, info: info, value: value });
+};
+
+export const cleanProductsBrands = () => (dispatch) => {
+  return dispatch({ type: CLEAN_BRANDS });
 };
 
 // CATEGORIES

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
@@ -11,7 +11,7 @@ import {
 export default function CardCart(props) {
   const dispatch = useDispatch();
 
-  const user = useSelector((state) => state.User);
+  const UserDb = useSelector((state) => state.User);
   const cart = useSelector((state) => state.cart);
 
   function addOne(e) {
@@ -23,15 +23,17 @@ export default function CardCart(props) {
   function removeOne(id, all = false) {
     if (all) {
       dispatch(removeOneToCart(id));
-
-      if (cart && cart.length === 1) {
-        dispatch(clearCart());
-        dispatch(updateUser(user._id, { cart: [] }));
+      if (UserDb && cart.length === 1) {
+        const helper = cart.find((productInCart) => productInCart.quantity);
+        if (helper.quantity === 1) {
+          dispatch(clearCart());
+          dispatch(updateUser(UserDb._id, { cart: [] }));
+        }
       }
     } else {
       dispatch(removeAllToCart(id));
-      if (cart && cart.length === 1)
-        dispatch(updateUser(user._id, { cart: [] }));
+      if (cart && cart.length === 1) console.log("a ver gaston, en el all");
+      dispatch(updateUser(UserDb._id, { cart: [] }));
     }
   }
 

@@ -26,7 +26,9 @@ import {
   CLEAR_CART,
   FIND_ALL_CART,
   SEND_EMAIL,
-  GET_COMMENTS
+  UPDATE_PRODUCT,
+  CLEAN_BRANDS,
+  GET_COMMENTS,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -65,7 +67,7 @@ const initialState = {
 
   cart: [],
 
-  Comments: []
+  Comments: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -229,6 +231,14 @@ const rootReducer = (state = initialState, action) => {
         Product: action.payload,
       };
 
+    case UPDATE_PRODUCT: {
+      // cambio el stock y lo guardo en mi estado global
+      return {
+        ...state,
+        Products: action.payload,
+      };
+    }
+
     //case POST_PRODUCT:
     //return {
     //...state,
@@ -297,6 +307,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         Brands: action.payload,
         BrandsCopy: action.payload,
+      };
+    }
+
+    case CLEAN_BRANDS: {
+      return {
+        ...state,
+        ProductsBrand: [],
       };
     }
 
@@ -394,9 +411,6 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case UPDATE_USER: {
-      /*  const add = state.User.cart;
-      const payload = action.payload;
- */
       return {
         ...state,
       };
@@ -405,15 +419,15 @@ const rootReducer = (state = initialState, action) => {
     case MERCADOPAGO:
       return {
         ...state,
-        MercadoPagoUrl: action.payload
+        MercadoPagoUrl: action.payload,
       };
 
     case GET_COMMENTS:
-      console.log("llegue reducer")
-    return {
-      ...state,
-      Comments: action.payload
-    };
+      console.log("llegue reducer");
+      return {
+        ...state,
+        Comments: action.payload,
+      };
 
     default:
       return {
