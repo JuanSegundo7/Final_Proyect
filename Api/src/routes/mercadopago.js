@@ -22,11 +22,6 @@ router.post("/", async (req, res) => {
   }
   //console.log("totalPurchase:",totalPurchase)
 
-  //function onSuccessHandler() {
-    //OJO, QUE ESTE ONSUCCESS NO ES POR EL PAGO, SINO UN SUCCESS DE "GENERE EL LINK DE PAGO". NADA MAS.
-    //sendMail({ email, name, cart });
-  //}
-
   let preference = {
     payer: {
       name,
@@ -34,8 +29,8 @@ router.post("/", async (req, res) => {
     },
     items: totalPurchase, // por cada producto un item
     back_urls: {
-      success: "http://localhost:3000",
-      //"failure": console.log("falle"),
+      "success": "http://localhost:3000",
+      "failure": "http://localhost:3000",
       //"pending": console.log("pending")
     },
   };
@@ -43,7 +38,6 @@ router.post("/", async (req, res) => {
   mercadopago.preferences
     .create(preference)
     .then(function (response) {
-      //console.log("soy response:",response)
       //onSuccessHandler(response.body.init_point);
       res.send(response.body.init_point);
     })
