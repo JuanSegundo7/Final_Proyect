@@ -23,7 +23,6 @@ export default function CardCart(props) {
   function removeOne(id, all = false) {
     if (all) {
       dispatch(removeOneToCart(id));
-
       dispatch(updateUser(UserDb._id, { cart: [] }));
     } else {
       dispatch(removeAllToCart(id));

@@ -114,6 +114,7 @@ const rootReducer = (state = initialState, action) => {
     case MATCH_FAVORITE: {
       const allProducts = state.Products;
       const favorites =
+        allProducts &&
         allProducts.length &&
         state.Favorites?.map((fav) => {
           return allProducts?.find((p) => p._id === fav);
@@ -136,7 +137,6 @@ const rootReducer = (state = initialState, action) => {
       let itemInCart = state.cart.find((product) => {
         return product._id === newCoffe._id;
       });
-
       return itemInCart
         ? {
             ...state,
@@ -174,8 +174,7 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           cart: [...state.cart],
         };
-       } 
-      else if (findProduct.quantity === 0) {
+      } else if (findProduct.quantity === 0) {
         const filterCart = allCart.filter(
           (coffe) => coffe._id !== action.payload
         );
@@ -424,7 +423,6 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case GET_COMMENTS:
-      //console.log("llegue reducer");
       return {
         ...state,
         Comments: action.payload,
