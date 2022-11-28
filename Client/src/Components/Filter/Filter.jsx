@@ -37,6 +37,9 @@ export default function ({ info, order }) {
       min: 1,
       max: 500,
     });
+    document.getElementById("order").selectedIndex = 0;
+    document.getElementById("order2").selectedIndex = 0;
+    document.getElementById("order3").selectedIndex = 0;
   }, [location.pathname]);
 
   useEffect(() => {
