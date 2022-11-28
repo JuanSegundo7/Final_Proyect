@@ -7,6 +7,7 @@ import {
   cleanDetail,
   addToCart,
 } from "../../redux/Actions/Actions";
+import AddCart from "../Alert/AddProduct"
 import "./Detail.css";
 
 export default function DetailProduct() {
@@ -17,6 +18,7 @@ export default function DetailProduct() {
   const idCoffee = useParams();
 
   const handleAddToCart = (e) => {
+    AddCart()
     dispatch(addToCart(idCoffee.id));
   };
 
