@@ -1,6 +1,7 @@
 import Swal from "sweetalert2"
 
-export default function Alert() {
+export default function Alert(id) {
+  console.log('id', id)
   const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
       confirmButton: 'btn btn-success',

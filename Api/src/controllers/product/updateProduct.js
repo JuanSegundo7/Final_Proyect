@@ -8,6 +8,7 @@ let { name } = data;  //voy a necesitar cambiar nombre a minusculas, por eso no 
 
 //Data Validation
 
+
 //consulto si es válido el tipo de dato provisto como ID.
 if (!ObjectId.isValid(_id)) throw new Error ("No valid _id type provided for product!") 
 
