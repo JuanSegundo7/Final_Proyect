@@ -5,7 +5,9 @@ import "./Locked.css"
 const Locked = () => {
     return (
         <div>
-            <img className='userLocked' src={Image1} />
+            <div id="Locked">
+                <button id="button-contact">Contact support</button>
+            </div>
         </div>
     );
 }

@@ -123,7 +123,7 @@ const Header = () => {
         </p>
       </div>
       <nav className={navbar ? "nav active" : "nav"}>
-        <figure>
+        <figure id="logo">
           <Navigator to="/">
             <img src={logo} alt="logo" />
           </Navigator>
