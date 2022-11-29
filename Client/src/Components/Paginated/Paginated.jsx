@@ -13,7 +13,7 @@ export default function Paginated({
 }) {
   const numberPage = [];
   const filterState = useSelector((state) => state.Filter);
-  window.scrollTo(0, 0);
+  window.scrollTo(0, 150);
 
   if (filterState) {
     for (let i = 0; i < Math.ceil(filteredOrNot / productPerPage); i++) {
