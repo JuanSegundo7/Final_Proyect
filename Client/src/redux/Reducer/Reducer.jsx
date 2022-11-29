@@ -427,6 +427,7 @@ const rootReducer = (state = initialState, action) => {
     case POST_COMMENT:
       return {
         ...state,
+        updateFilter: state.updateFilter + 1,
       };
 
     default:
