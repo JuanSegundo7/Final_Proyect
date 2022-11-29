@@ -30,6 +30,8 @@ export default function ContainerInfo({ info, order }) {
   const indexLastProduct = productPerPage * currentPage;
   const indexFirstProduct = indexLastProduct - productPerPage;
 
+  window.scrollTo(0,40)
+
   useEffect(() => {
     dispatch(cleanFiltered());
     dispatch(matchFavorite());

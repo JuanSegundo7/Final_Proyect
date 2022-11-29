@@ -4,7 +4,7 @@ import Dropdown from "../Dropdown/Dropdown";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
-const Categories = () => {
+const Categories = ({navbar}) => {
   const brands = useSelector((state) => state.BrandsCopy);
 
   const Brands = {
@@ -13,7 +13,7 @@ const Categories = () => {
   };
 
   return (
-    <nav id="Categorys" className="desktop-visible">
+    <nav id="Categorys" className={navbar ? "navbar active desktop-visible" : "desktop-visible"}>
       <ul id="Categorys">
         <li>
           <Link to="/coffees">

@@ -52,6 +52,7 @@ const ModalComponent = ({openModal, closeModal, info, close}) => {
     }
     console.log('data',data)
     dispatch(updateProduct(info.id, data))
+    close(false)
     e.preventDefault();
   }
 
@@ -59,8 +60,8 @@ const ModalComponent = ({openModal, closeModal, info, close}) => {
   return (
     <article id="wrapper">
     <article id="wrapper-container">
-        <article id="wrapper-x" onClick={() => close(false)}>
-          la concha tuya marqutos        
+        <article id="wrapper-x" onClick={() => close(false)}> 
+          X
         </article>
         <form>
           <fieldset>
