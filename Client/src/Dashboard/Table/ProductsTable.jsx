@@ -9,6 +9,7 @@ import Delete from "../../Components/Alert/Delete"
 import Modal from "../../Components/ProductForm/ModalProducts"
 import "../Dashboard.css"
 import { updateProduct } from "../../redux/Actions/Actions"
+import ModalDelete from './ModalDelete';
 
 
 export default function DataTable() {
@@ -23,11 +24,19 @@ export default function DataTable() {
     
     let modal
 
-
+    const [open2, setOpen2] = useState(false)
+    const [info2, setInfo2] = useState({})
+    
+    let modal2
+    
+    
     const deleteProduct = (e, params) => {
-        Delete(params.row.id)
+        setInfo2(params.id)
+        setOpen2(true)
         e.stopPropagation();
     }
+
+    if(open2 == true) modal = <ModalDelete close={setOpen2} info={info2}/>
 
     const editProduct = (e, params) => {
         setInfo(params.row)
@@ -52,7 +61,7 @@ export default function DataTable() {
     }
 
     if(open == true) modal = <Modal close={setOpen} info={info}/>
-
+    
     const columns = [
         { field: 'id', headerName: 'ID', width: 220 },
         { field: 'name', headerName: 'Name', width: 250 },
@@ -107,6 +116,7 @@ export default function DataTable() {
             }   
         </div>
         {modal}
+        {modal2}
         </>
     )
 }
