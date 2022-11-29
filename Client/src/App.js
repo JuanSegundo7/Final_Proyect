@@ -19,6 +19,7 @@ import {
   getOneUser,
 } from "./redux/Actions/Actions";
 import Dashboard from "./Dashboard/Dashboard";
+import Locked from "./Locked/Locked";
 import "./App.css";
 
 function App() {
@@ -56,6 +57,13 @@ function App() {
     return (
       <BrowserRouter>
         <Dashboard />
+      </BrowserRouter>
+    );
+  }
+  if (datosEnMiBD.enabled == false) {
+    return (
+      <BrowserRouter>
+        <Locked />
       </BrowserRouter>
     );
   }
