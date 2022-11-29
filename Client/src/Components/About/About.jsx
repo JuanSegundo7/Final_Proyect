@@ -20,53 +20,53 @@ export default function About() {
                     <h2>Marcos Pla Señorans</h2>
                     <h3>Web Developer</h3>
                     <p></p>
-                    <ul>
-                        <li><a href="https://www.linkedin.com/in/marcos-pla"><LinkedInIcon /></a></li>
-                        <li><a href="https://github.com/marcospla02"><GitHubIcon /></a></li>
-                    </ul>
+                    <div className='logos'>
+                        <a href="https://www.linkedin.com/in/marcos-pla"><LinkedInIcon /></a>
+                        <a href="https://github.com/marcospla02"><GitHubIcon /></a>
+                    </div>
                 </div>
                 <div className='containerInfo'>
                 <img src="https://res.cloudinary.com/drscelx6f/image/upload/v1669587490/wmi9mnljgccauhy5aejc.jpg" alt="photo" />
                     <h2>Guido Levy</h2>
                     <h3>Web Developer</h3>
-                    <ul>
-                        <li><a href="https://www.linkedin.com/in/guido-levy-147640246"><LinkedInIcon /></a></li>
-                        <li><a href="https://github.com/Guidolevy23"><GitHubIcon /></a></li>
-                    </ul>
+                    <div className='logos'>
+                        <a href="https://www.linkedin.com/in/guido-levy-147640246"><LinkedInIcon /></a>
+                        <a href="https://github.com/Guidolevy23"><GitHubIcon /></a>
+                    </div>
                 </div>
                 <div className='containerInfo'>
                     <img src="https://res.cloudinary.com/drscelx6f/image/upload/v1669301390/tibxu0mox4vrlnefs1sy.jpg" alt="photo" />
                     <h2>Francisco Javier Caballe</h2>
                     <h3>Web Developer</h3>
-                    <ul>
-                        <li><a href="https://www.linkedin.com/in/francisco-caballe/"><LinkedInIcon /></a></li>
-                        <li><a href="https://github.com/francaballe"><GitHubIcon /></a></li>
-                    </ul>
+                    <div className='logos'>
+                        <a href="https://www.linkedin.com/in/francisco-caballe/"><LinkedInIcon /></a>
+                        <a href="https://github.com/francaballe"><GitHubIcon /></a>
+                    </div>
                 </div>
                 <div className='containerInfo'>
                     <h2>Juan Segundo Martinez</h2>
                     <h3>Web Developer</h3>
-                    <ul>
-                        <li><a href="https://www.linkedin.com/in/francisco-caballe"><LinkedInIcon /></a></li>
-                        <li><a href="https://github.com/EmanuelCorreaAR"><GitHubIcon /></a></li>
-                    </ul>
+                    <div className='logos'>
+                        <a href="https://www.linkedin.com/in/francisco-caballe"><LinkedInIcon /></a>
+                        <a href="https://github.com/EmanuelCorreaAR"><GitHubIcon /></a>
+                    </div>
                 </div>
                 <div className='containerInfo'>
                     <h2>Francisco Porta</h2>
                     <h3>Web Developer</h3>
-                    <ul>
-                        <li><a href="https://www.linkedin.com/in/francisco-caballe"><LinkedInIcon /></a></li>
-                        <li><a href="https://github.com/EmanuelCorreaAR"><GitHubIcon /></a></li>
-                    </ul>
+                    <div className='logos'>
+                        <a href="https://www.linkedin.com/in/francisco-caballe"><LinkedInIcon /></a>
+                        <a href="https://github.com/EmanuelCorreaAR"><GitHubIcon /></a>
+                    </div>
                 </div>
                 <div className='containerInfo'>
                     <img src="https://res.cloudinary.com/drscelx6f/image/upload/v1669318784/1566314615583_suzaep.jpg" alt="photo" />
                     <h2>Emanuel Correa</h2>
                     <h3>Web Developer</h3>
-                    <ul>
-                        <li><a href="https://www.linkedin.com/in/emanuel-s-correa-5b4b40139"><LinkedInIcon /></a></li>
-                        <li><a href="https://github.com/EmanuelCorreaAR"><GitHubIcon /></a></li>
-                    </ul>
+                    <div className='logos'>
+                        <a href="https://www.linkedin.com/in/emanuel-s-correa-5b4b40139"><LinkedInIcon /></a>
+                        <a href="https://github.com/EmanuelCorreaAR"><GitHubIcon /></a>
+                    </div>
                 </div>
             </section>
         </div>

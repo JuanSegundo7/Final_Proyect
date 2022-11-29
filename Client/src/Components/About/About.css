@@ -80,14 +80,18 @@
   height: 50%;
 }
 
-.containerInfo > ul li {
+.logos{
+  display: flex;
+  justify-content: space-around;
   list-style: none;
-  display: inline-block;
-  margin-right: 40px;
+  height: 15%;
 }
 
-.containerInfo > ul li a {
-    cursor: pointer;
+
+
+
+.containerInfo  .logos  a {
+  cursor: pointer;
   text-decoration: none;
   color: black;
 }
