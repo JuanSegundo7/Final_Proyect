@@ -20,8 +20,6 @@ export default function Cart({ id }) {
     dispatch(addToCart(id));
   }
 
-  // findProduct.stock === 0 && setDisabled(true);
-
   useEffect(() => {
     if (allCart.length) {
       localStorage.setItem("Cart-pf", JSON.stringify(allCart));
@@ -30,7 +28,9 @@ export default function Cart({ id }) {
         dispatch(updateUser(datosEnMiBD._id, { cart: allCart }));
       }
     }
-    findProduct.stock === 0 ? setDisabled(true) : setDisabled(false);
+    findProduct && findProduct.stock === 0
+      ? setDisabled(true)
+      : setDisabled(false);
   }, [allCart]);
 
   return (
