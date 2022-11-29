@@ -129,8 +129,16 @@ export const getOneProduct = (id) => async (dispatch) => {
   }
 };
 
-export const deleteProduct = (id) => {
-  return { type: DELETE_PRODUCT, id };
+export const deleteProducts = (id) => {
+  //console.log('actions id', id);
+  return async function (dispatch) {
+    try {
+      await axios.delete(`${baseUrl}products/${id}`);
+      return dispatch(getProducts());
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
 };
 
 export const cleanDetail = () => {
@@ -252,6 +260,18 @@ export const postUser = (payload) => {
         type: POST_USER,
         payload: response.data,
       });
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+};
+
+export const deleteUser = (id) => {
+  //console.log('actions id', id);
+  return async function (dispatch) {
+    try {
+      await axios.delete(`${baseUrl}users/${id}`);
+      return dispatch(getUsers());
     } catch (error) {
       console.log("error", error);
     }

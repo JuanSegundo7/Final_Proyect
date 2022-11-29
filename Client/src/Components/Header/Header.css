@@ -1,4 +1,3 @@
-
 #ship {
   background-color: var(--brown);
   text-align: center;
@@ -9,7 +8,6 @@
   height: 2em;
   padding: 0.2em 0;
 }
-
 
 #ship p {
   color: #fff;
@@ -35,11 +33,11 @@
   transition: 0.5s;
 }
 
-#flex-svgs a{
+#flex-svgs a {
   text-decoration: none;
 }
 
-.svg-container p{
+.svg-container p {
   color: #fff;
   margin: 0 0.2em;
 }
@@ -54,7 +52,6 @@
   fill: #fff;
   width: 1em;
 }
-
 
 .nav {
   transition: 0.3s;
@@ -110,8 +107,8 @@
   width: 10%;
 }
 
-.nav.active{
-  position: fixed; 
+.nav.active {
+  position: fixed;
   width: -webkit-fill-available;
   transition: all 0.7s;
   top: 0;
@@ -124,9 +121,9 @@
 .nav.active #logo img{
   -webkit-filter: invert(100%); /* Safari/Chrome */
   filter: invert(100%);
-}
+} */
 
-.nav.active .number{
+.nav.active .number {
   color: #fff;
 }
 
@@ -135,13 +132,11 @@
   background-color: #fff;
 }
 
-.nav.active .svg-container:hover svg{
+.nav.active .svg-container:hover svg {
   transition: 0.5s;
   fill: var(--brown);
 }
 
-
-
-#none{
+#none {
   display: none !important;
 }
