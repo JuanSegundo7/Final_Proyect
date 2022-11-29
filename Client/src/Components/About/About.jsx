@@ -44,7 +44,7 @@ export default function About() {
                     </ul>
                 </div>
                 <div className='containerInfo'>
-                    <h2>Emanuel Correa</h2>
+                    <h2>Juan Segundo Martinez</h2>
                     <h3>Web Developer</h3>
                     <ul>
                         <li><a href="https://www.linkedin.com/in/francisco-caballe"><LinkedInIcon /></a></li>
@@ -52,7 +52,7 @@ export default function About() {
                     </ul>
                 </div>
                 <div className='containerInfo'>
-                    <h2>Emanuel Correa</h2>
+                    <h2>Francisco Porta</h2>
                     <h3>Web Developer</h3>
                     <ul>
                         <li><a href="https://www.linkedin.com/in/francisco-caballe"><LinkedInIcon /></a></li>
