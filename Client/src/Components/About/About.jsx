@@ -16,9 +16,9 @@ export default function About() {
             </div>
             <section className='cards'>
                 <div className='containerInfo'>
-                <img src="https://res.cloudinary.com/drscelx6f/image/upload/v1669379307/foto_para_cv_-_Marcos_Pla_xfesvw.jpg" alt="photo" />
+                <img src="https://res.cloudinary.com/drscelx6f/image/upload/v1669379307/foto_para_cv_-_Marcos_Pla_xfesvw.jpg" alt="profile" />
                     <h2>Marcos Pla Señorans</h2>
-                    <h3>Web Developer</h3>
+                    <h3>Full Stack Developer</h3>
                     <p></p>
                     <div className='logos'>
                         <a href="https://www.linkedin.com/in/marcos-pla"><LinkedInIcon /></a>
@@ -26,43 +26,45 @@ export default function About() {
                     </div>
                 </div>
                 <div className='containerInfo'>
-                <img src="https://res.cloudinary.com/drscelx6f/image/upload/v1669587490/wmi9mnljgccauhy5aejc.jpg" alt="photo" />
+                <img src="https://res.cloudinary.com/drscelx6f/image/upload/v1669587490/wmi9mnljgccauhy5aejc.jpg" alt="profile" />
                     <h2>Guido Levy</h2>
-                    <h3>Web Developer</h3>
+                    <h3>Full Stack Developer</h3>
                     <div className='logos'>
                         <a href="https://www.linkedin.com/in/guido-levy-147640246"><LinkedInIcon /></a>
                         <a href="https://github.com/Guidolevy23"><GitHubIcon /></a>
                     </div>
                 </div>
                 <div className='containerInfo'>
-                    <img src="https://res.cloudinary.com/drscelx6f/image/upload/v1669301390/tibxu0mox4vrlnefs1sy.jpg" alt="photo" />
+                    <img src="https://res.cloudinary.com/drscelx6f/image/upload/v1669301390/tibxu0mox4vrlnefs1sy.jpg" alt="profile" />
                     <h2>Francisco Javier Caballe</h2>
-                    <h3>Web Developer</h3>
+                    <h3>Full Stack Developer</h3>
                     <div className='logos'>
                         <a href="https://www.linkedin.com/in/francisco-caballe/"><LinkedInIcon /></a>
                         <a href="https://github.com/francaballe"><GitHubIcon /></a>
                     </div>
                 </div>
                 <div className='containerInfo'>
+                <img src="https://res.cloudinary.com/drscelx6f/image/upload/v1669735611/Juanse_-_Juan_Segundo_Mart%C3%ADnez._vawx3f.jpg" alt="profile" />
                     <h2>Juan Segundo Martinez</h2>
-                    <h3>Web Developer</h3>
+                    <h3>Full Stack Developer</h3>
                     <div className='logos'>
-                        <a href="https://www.linkedin.com/in/francisco-caballe"><LinkedInIcon /></a>
-                        <a href="https://github.com/EmanuelCorreaAR"><GitHubIcon /></a>
+                        <a href="https://www.linkedin.com/in/juansegundomartinez/"><LinkedInIcon /></a>
+                        <a href="https://github.com/JuanSegundo7"><GitHubIcon /></a>
                     </div>
                 </div>
                 <div className='containerInfo'>
+                    <img src="https://res.cloudinary.com/drscelx6f/image/upload/v1669735244/perfil_-_Francisco_Porta_z2049j.jpg" alt="profile" />
                     <h2>Francisco Porta</h2>
-                    <h3>Web Developer</h3>
+                    <h3>Full Stack Developer</h3>
                     <div className='logos'>
-                        <a href="https://www.linkedin.com/in/francisco-caballe"><LinkedInIcon /></a>
-                        <a href="https://github.com/EmanuelCorreaAR"><GitHubIcon /></a>
+                        <a href="https://www.linkedin.com/in/franciscoporta/"><LinkedInIcon /></a>
+                        <a href="https://github.com/franciscoporta"><GitHubIcon /></a>
                     </div>
                 </div>
                 <div className='containerInfo'>
-                    <img src="https://res.cloudinary.com/drscelx6f/image/upload/v1669318784/1566314615583_suzaep.jpg" alt="photo" />
+                    <img src="https://res.cloudinary.com/drscelx6f/image/upload/v1669318784/1566314615583_suzaep.jpg" alt="profile" />
                     <h2>Emanuel Correa</h2>
-                    <h3>Web Developer</h3>
+                    <h3>Full Stack Developer</h3>
                     <div className='logos'>
                         <a href="https://www.linkedin.com/in/emanuel-s-correa-5b4b40139"><LinkedInIcon /></a>
                         <a href="https://github.com/EmanuelCorreaAR"><GitHubIcon /></a>
