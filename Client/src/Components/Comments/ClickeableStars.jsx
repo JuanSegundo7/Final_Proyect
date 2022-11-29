@@ -3,7 +3,7 @@ import { BsStarFill, BsStar, BsStarHalf } from "react-icons/bs";
 import { useState } from "react";
 
 
-export default function ClickeableStars ({_id}) {
+export default function ClickeableStars (props) {
 
 const [rating, setRating] = useState([0,0,0,0,0]);
 
@@ -49,31 +49,23 @@ function onClickHandler (star) {
   useEffect(()=>{
     let totalRating = 0;
     for (let i=0; i<5; i++){
-      totalRating = totalRating + rating[i]
+      totalRating = totalRating + rating[i]  
     }
-  
-  /* const unArray = []
-  let currentSessionStg = sessionStorage.getItem("Rating-pf");
-  
-  if (currentSessionStg && currentSessionStg.length){
-    for (let i=0;i<currentSessionStg.length;i++){
-      unArray.push(currentSessionStg[i])
-    }
-    console.log(currentSessionStg)
-  }
-  unArray.push({totalRating, _id})
-  if (unArray.length)
-    sessionStorage.setItem("Rating-pf", JSON.stringify(unArray)); */
+    
+    props.setRatingFunction({
+      _id: props._id,
+      totalRating: totalRating
+    })
 
   },[rating])
 
   return (
             <div>  
-              {rating[0]===1 ? <BsStarFill color="red" onClick={()=> onClickHandler(1)}/> : <BsStar color="red" onClick={()=> onClickHandler(1)}/>}
-              {rating[1]===1 ? <BsStarFill color="red" onClick={()=> onClickHandler(2)}/> : <BsStar color="red" onClick={()=> onClickHandler(2)}/>}
-              {rating[2]===1 ? <BsStarFill color="red" onClick={()=> onClickHandler(3)}/> : <BsStar color="red" onClick={()=> onClickHandler(3)}/>}
-              {rating[3]===1 ? <BsStarFill color="red" onClick={()=> onClickHandler(4)}/> : <BsStar color="red" onClick={()=> onClickHandler(4)}/>}
-              {rating[4]===1 ? <BsStarFill color="red" onClick={()=> onClickHandler(5)}/> : <BsStar color="red" onClick={()=> onClickHandler(5)}/>}
+              {rating[0]===1 ? <BsStarFill color="red" cursor="pointer" onClick={()=> onClickHandler(1)}/> : <BsStar color="red" cursor="pointer" onClick={()=> onClickHandler(1)}/>}
+              {rating[1]===1 ? <BsStarFill color="red" cursor="pointer" onClick={()=> onClickHandler(2)}/> : <BsStar color="red" cursor="pointer" onClick={()=> onClickHandler(2)}/>}
+              {rating[2]===1 ? <BsStarFill color="red" cursor="pointer" onClick={()=> onClickHandler(3)}/> : <BsStar color="red" cursor="pointer" onClick={()=> onClickHandler(3)}/>}
+              {rating[3]===1 ? <BsStarFill color="red" cursor="pointer" onClick={()=> onClickHandler(4)}/> : <BsStar color="red" cursor="pointer" onClick={()=> onClickHandler(4)}/>}
+              {rating[4]===1 ? <BsStarFill color="red" cursor="pointer" onClick={()=> onClickHandler(5)}/> : <BsStar color="red" cursor="pointer" onClick={()=> onClickHandler(5)}/>}
             </div>            
   );
 }
