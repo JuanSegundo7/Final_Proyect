@@ -8,7 +8,7 @@ export function Card({comment,user }) {
         <div id="cardcomponent-top">
           <div id="cardcomponent-top-container">  
           <img
-            src={!user.picture  ? null : user.picture}
+            src={user.picture ? user.picture : Error}
             alt="img not found"
             className="imgCard"
             onError={({ currentTarget }) => {
