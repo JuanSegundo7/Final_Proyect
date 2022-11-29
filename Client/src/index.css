@@ -12,14 +12,26 @@
   --light-blue: #e7ebf0;
 }
 
-.button-dashboard {
+.button-dashboard,
+.button-dashboard-cancel {
   padding: 1em 2em;
   width: 200px;
   border-radius: 15px;
   cursor: pointer;
   color: #fff;
   border: none;
+  background-color: var(--grey);
+  transition: 0.7s;
+}
+
+.button-dashboard:hover {
   background-color: var(--brown);
+  transition: 0.7s;
+}
+
+.button-dashboard-cancel:hover {
+  background-color: red;
+  transition: 0.7s;
 }
 
 body::-webkit-scrollbar {
