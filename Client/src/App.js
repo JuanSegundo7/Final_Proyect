@@ -53,13 +53,7 @@ function App() {
   }, [allCart]);
 
   const datosEnMiBD = useSelector((state) => state.User);
-  if (datosEnMiBD.admin == true) {
-    return (
-      <BrowserRouter>
-        <Dashboard />
-      </BrowserRouter>
-    );
-  }
+  
   if (datosEnMiBD.enabled == false) {
     return (
       <BrowserRouter>
@@ -67,6 +61,15 @@ function App() {
       </BrowserRouter>
     );
   }
+  
+  if (datosEnMiBD.admin == true) {
+    return (
+      <BrowserRouter>
+        <Dashboard />
+      </BrowserRouter>
+    );
+  }
+
 
   if (window.location.pathname == "/about") {
     return (

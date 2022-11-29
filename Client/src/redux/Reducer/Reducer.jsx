@@ -232,7 +232,6 @@ const rootReducer = (state = initialState, action) => {
       // cambio el stock y lo guardo en mi estado global
       return {
         ...state,
-        Products: action.payload,
       };
     }
 
