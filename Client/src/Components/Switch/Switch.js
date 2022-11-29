@@ -10,7 +10,9 @@ import BrandSearched from "../ContainerInfo/BrandSearched";
 import CartComponent from "../CartComponent/CartComponent";
 import Login from "../Login/Login";
 import About from "../About/About";
+import Page404 from "../Page404/Page404";
 import CreateComments from "../Comments/CreateComment";
+
 
 const SwitchRouter = () => {
   return (
@@ -68,8 +70,9 @@ const SwitchRouter = () => {
       />
 
       <Route exact path="/cart" element={<CartComponent />} />
-
+      <Route exact path="*" element={<Page404 />} />
       <Route exact path="/comments" element={<CreateComments/>} />
+
     </Routes>
   );
 };
