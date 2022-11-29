@@ -93,16 +93,6 @@ export default function ContainerInfo({ info, order }) {
           )}
         </div>
       </section>
-      <div id="paginated-down">
-        <Paginated
-          paginated={paginated}
-          productPerPage={productPerPage}
-          className="paginated"
-          currentPage={currentPage}
-          filteredOrNot={Filtered.length}
-          products={allProducts.length}
-        />
-      </div>
     </div>
   );
 }
