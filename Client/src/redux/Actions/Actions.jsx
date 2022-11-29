@@ -87,6 +87,8 @@ export const postProduct = (payload) => {
 };
 
 export const updateProduct = (id, body) => {
+  console.log("id:",id)
+  console.log("body:",body)
   return async function (dispatch) {
     if (id) {
       try {
