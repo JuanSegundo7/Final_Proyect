@@ -21,16 +21,18 @@ export default function SearchBar() {
     e.preventDefault();
     dispatch(cleanFiltered());
 
-    if (pathname === "/") {
+    if (input !== "") {
+      if (pathname === "/") {
+        dispatch(getProductByQuery("name", "name", input)).then(() => {
+          navigate("/search");
+        });
+      }
+
       dispatch(getProductByQuery("name", "name", input)).then(() => {
         navigate("/search");
       });
+      e.target.reset();
     }
-
-    dispatch(getProductByQuery("name", "name", input)).then(() => {
-      navigate("/search");
-    });
-    e.target.reset();
   };
 
   const handle = async (e) => {

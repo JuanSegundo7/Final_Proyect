@@ -1,71 +1,71 @@
 .cardHome {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    gap: 15px;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 15px;
+  justify-content: center;
 }
 
-.filterPrice{
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    padding-left: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+.filterPrice {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-#Products{
-    display: flex;
-    align-items: flex-start;
+#Products {
+  display: flex;
+  align-items: flex-start;
 }
 
-#Contenido{
-    width: 100%;
-    height: 100%;
-    margin: 2.5em 0;
+#Contenido {
+  width: 100%;
+  height: 100%;
+  margin: 2.5em 0;
 }
 
-.filters{
-    width: 260px;
-    box-shadow: 0 2.5px 7.5px rgb(0 0 0 / 20%);
-    border-radius: 15px;
-    margin: 0 1em;
+.filters {
+  width: 260px;
+  box-shadow: 0 2.5px 7.5px rgb(0 0 0 / 20%);
+  border-radius: 15px;
+  margin: 0 1em;
 }
 
-.menuFilters{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding: 1em;
-    border-radius: 15px;
-    height: 100vh;
-    background-color: #fff;
+.menuFilters {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1em;
+  border-radius: 15px;
+  height: 100vh;
+  background-color: #fff;
 }
 
-.menuFilters div{
-    margin: 0.5em 0;
+.menuFilters div {
+  margin: 0.5em 0;
 }
 
-.button{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 30px;
-    background-color: black;
-    margin: 0.3em;
-    border: none;
-    color: #fff;
+.button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 30px;
+  background-color: black;
+  margin: 0.3em;
+  border: none;
+  color: #fff;
 }
 
-.button svg{
-    margin: 0 0.3em;
-    width: 1.5em;
-    fill: #fff;
+.button svg {
+  margin: 0 0.3em;
+  width: 1.5em;
+  fill: #fff;
 }
 
-.button:hover{
-    cursor: pointer
+.button:hover {
+  cursor: pointer;
 }
