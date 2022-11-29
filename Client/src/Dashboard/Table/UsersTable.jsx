@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { updateUser } from '../../redux/Actions/Actions';
 
 import "../Dashboard.css"
+import ModalDelete from './ModalDelete';
 
 
 
@@ -26,6 +27,20 @@ export default function DataTable() {
     const [info, setInfo] = useState({})
 
     let modal
+    const [open2, setOpen2] = useState(false)
+    const [info2, setInfo2] = useState({})
+    const [user, setUser] = useState(false)
+
+    let modal2
+
+    const deleteUser = (e, params) => {
+        setInfo2(params.id)
+        setOpen2(true)
+        setUser(true)
+        e.stopPropagation();
+    }
+
+    if(open2 == true) modal = <ModalDelete close={setOpen2} info={info2} user={user}/>
 
     const editProduct = (e, params) => {
         setInfo(params.row)
@@ -64,7 +79,7 @@ export default function DataTable() {
                     <GridActionsCellItem
                     icon={<DeleteIcon />}
                     label="Delete"
-                    // onClick={deleteUser(params.id)}
+                    onClick={(e) => deleteUser(e, params)}
                     />
                 </Tooltip>,
                 <Tooltip title="Edit">
@@ -104,6 +119,7 @@ export default function DataTable() {
             }
         </div>
         {modal}
+        {modal2}
         </>
     
     )
