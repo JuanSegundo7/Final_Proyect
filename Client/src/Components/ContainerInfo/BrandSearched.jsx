@@ -13,7 +13,7 @@ import Filter from "../Filter/Filter";
 import Error from "../Card/imgs/error.webp";
 
 const BransSearched = ({ info }) => {
-  window.scrollTo(0, 150);
+  window.scrollTo(0,40);
   const { params } = useParams();
   const dispatch = useDispatch();
 

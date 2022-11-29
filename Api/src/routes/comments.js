@@ -14,7 +14,7 @@ router.get('/', async (req,res)=>{
 })
 
 router.post('/' , async (req,res) =>{
-    
+    console.log(req.body,"soy req.body");
     try {
         const response = await createComment(req.body);
         res.send(response);

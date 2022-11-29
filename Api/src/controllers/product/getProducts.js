@@ -31,6 +31,7 @@ const getProducts = async function (options) {
 
   //Armo el parámetro del Find
   const findOptions = {};
+  
   if (name) {
     findOptions.name = new RegExp(name, "i");
   }
@@ -51,7 +52,7 @@ const getProducts = async function (options) {
     if (brandComplete) findOptions.brand = brandComplete._id;
   }
   if (enabled) {
-    findOptions.enabled = true;
+    findOptions.enabled = enabled;
   }
 
   //Ahora sí, realizo la búsqueda...

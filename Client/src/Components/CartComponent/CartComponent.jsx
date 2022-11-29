@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardCart from "./CardCart";
 import Error from "../Card/imgs/error.webp";
-import { updateUser } from "../../redux/Actions/Actions";
+import { getOneUser, updateUser } from "../../redux/Actions/Actions";
 import "./CartComponent.css";
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -12,11 +12,9 @@ export default function CartComponent() {
   const allCart = useSelector((state) => state.cart);
   const MercadoPagoUrl = useSelector((state) => state.MercadoPagoUrl);
   const dispatch = useDispatch();
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState(true);
   const { isAuthenticated } = useAuth0();
   const datosEnMiBD = useSelector((state) => state.User);
-
-  // console.log("es mp:", MercadoPagoUrl);
 
   let precioTotal = 0;
   let total = 0;
@@ -34,37 +32,31 @@ export default function CartComponent() {
         dispatch(updateUser(datosEnMiBD._id, { cart: allCart }));
       }
     }
-    if (isAuthenticated) {
-      if (!allCart.length) {
-        setDisabled(true);
-      }
-    } else if (allCart.length) {
-      setDisabled(true);
-    }
   }, [allCart]);
 
-  async function mercadopago() {
-    //if (theLink) window.location.href = theLink;
+  useEffect(() => {
+    if (isAuthenticated) {
+      if (allCart.length) {
+        setDisabled(false);
+      } else if (!allCart.length) setDisabled(true);
+    }
+  }, [allCart.length]);
+
+  function mercadopago() {
     const data = {
       name: datosEnMiBD.name + " " + datosEnMiBD.lastname,
       email: datosEnMiBD._id,
-      cart: datosEnMiBD.cart,
+      cart: /* datosEnMiBD.cart */ allCart,
     };
-    //console.log("hice click en el boton de comprar - data:",data)
     dispatch(linkMp(data));
-    /* if (MercadoPagoUrl.length) {
-      return (window.location.href = MercadoPagoUrl);
-    } */
   }
 
-  useEffect(()=>{
-    if (MercadoPagoUrl.length){
+  useEffect(() => {
+    if (MercadoPagoUrl.length) {
       //console.log("ahora si tengo URL, y soy:",MercadoPagoUrl)
-      window.location.href = MercadoPagoUrl
+      window.location.href = MercadoPagoUrl;
     }
-    
-  },[MercadoPagoUrl])
-
+  }, [MercadoPagoUrl]);
 
   return (
     <div id="Cart">

@@ -19,6 +19,7 @@ import {
   getOneUser,
 } from "./redux/Actions/Actions";
 import Dashboard from "./Dashboard/Dashboard";
+import Locked from "./Locked/Locked";
 import "./App.css";
 
 function App() {
@@ -52,6 +53,15 @@ function App() {
   }, [allCart]);
 
   const datosEnMiBD = useSelector((state) => state.User);
+  
+  if (datosEnMiBD.enabled == false) {
+    return (
+      <BrowserRouter>
+        <Locked />
+      </BrowserRouter>
+    );
+  }
+  
   if (datosEnMiBD.admin == true) {
     return (
       <BrowserRouter>
@@ -59,6 +69,7 @@ function App() {
       </BrowserRouter>
     );
   }
+
 
   if (window.location.pathname == "/about") {
     return (
