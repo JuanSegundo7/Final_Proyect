@@ -228,13 +228,6 @@ const rootReducer = (state = initialState, action) => {
         Product: action.payload,
       };
 
-    case UPDATE_PRODUCT: {
-      // cambio el stock y lo guardo en mi estado global
-      return {
-        ...state,
-      };
-    }
-
     //case POST_PRODUCT:
     //return {
     //...state,
@@ -405,12 +398,6 @@ const rootReducer = (state = initialState, action) => {
         User: action.payload,
         updateFilter: state.updateFilter + 1,
       };
-
-    case UPDATE_USER: {
-      return {
-        ...state,
-      };
-    }
 
     case MERCADOPAGO:
       return {
