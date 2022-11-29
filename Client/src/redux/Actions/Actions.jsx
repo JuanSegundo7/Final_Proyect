@@ -58,6 +58,8 @@ export const MERCADOPAGO = "MERCADOPAGO";
 
 export const GET_COMMENTS = "GET_COMMENTS";
 
+export const POST_COMMENT = "POST_COMMENT";
+
 const baseUrl = `http://localhost:3001/`;
 
 /*****************************************************************************************************/
@@ -84,15 +86,15 @@ export const postProduct = (payload) => {
   };
 };
 
-export const updateProduct = (_id, body) => {
+export const updateProduct = (id, body) => {
   return async function (dispatch) {
-    try {
-      await axios.put(`${baseUrl}products/${_id}`, body);
-      return dispatch({
-        type: UPDATE_PRODUCT,
-      });
-    } catch (error) {
-      console.log("error", error);
+    if (id) {
+      try {
+        await axios.put(`${baseUrl}products/${id}`, body);
+        return dispatch(getProducts())
+      } catch (error) {
+        console.log("error", error);
+      }
     }
   };
 };
@@ -231,12 +233,8 @@ export const updateUser = (id, body) => {
   return async function (dispatch) {
     if (id) {
       try {
-        let resp = await axios.put(`${baseUrl}users/${id}`, body);
-        //console.log("soy resp.data en el action:",resp.data)
-        return dispatch({
-          type: UPDATE_USER,
-          payload: resp.data,
-        });
+        await axios.put(`${baseUrl}users/${id}`, body);
+        return dispatch(getUsers())
       } catch (error) {
         console.log("error", error);
       }
@@ -328,8 +326,17 @@ export const linkMp = (payload) => (dispatch) => {
 //COMMENTS
 
 export const getComments = () => (dispatch) => {
+  return (
+    axios
+      .get(`${baseUrl}comments`)
+      // .then(info => console.log(info))
+      .then((data) => dispatch({ type: GET_COMMENTS, payload: data.data }))
+  );
+};
+
+export const postComment = (payload) => (dispatch) => {
+  // console.log(payload,"soy payload en actions");
   return axios
-    .get(`${baseUrl}comments`)
-    // .then(info => console.log(info))
-    .then((data) => dispatch({ type: GET_COMMENTS, payload: data.data }));
+    .post(`${baseUrl}comments`,payload)
+    .then((data) => dispatch({ type: POST_COMMENT, payload: data.data }));
 };

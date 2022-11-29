@@ -11,6 +11,9 @@ import {
 import Paginated from "../Paginated/Paginated";
 
 export default function ContainerBrands({ info }) {
+
+  window.scrollTo(0,20)
+
   const location = useLocation();
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.Brands);

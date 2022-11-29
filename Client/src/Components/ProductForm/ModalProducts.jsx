@@ -8,12 +8,6 @@ const ModalComponent = ({openModal, closeModal, info, close}) => {
   const brand = useSelector((state) => state.Brands)
   const [categoryId, setCategoryId] = useState(info.category2);
   const [brandId, setBrandId] = useState(info.brand2)
-  //console.log('category', category);
-  console.log('info', info)
-  console.log('info.category', info.category)
-  console.log('info.category2', info.category2)
-  //console.log('info.category._id', info.category._id)
-
 
 
   const handleChange=(e)=>{
@@ -58,6 +52,7 @@ const ModalComponent = ({openModal, closeModal, info, close}) => {
     }
     console.log('data',data)
     dispatch(updateProduct(info.id, data))
+    close(false)
     e.preventDefault();
   }
 
@@ -65,8 +60,8 @@ const ModalComponent = ({openModal, closeModal, info, close}) => {
   return (
     <article id="wrapper">
     <article id="wrapper-container">
-        <article id="wrapper-x" onClick={() => close(false)}>
-          la concha tuya marqutos        
+        <article id="wrapper-x" onClick={() => close(false)}> 
+          X
         </article>
         <form>
           <fieldset>

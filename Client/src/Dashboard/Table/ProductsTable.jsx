@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import { DataGrid, GridActionsCellItem} from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -6,19 +6,23 @@ import Clear from '@mui/icons-material/Clear';
 import Tooltip from "@mui/material/Tooltip";
 import { useDispatch, useSelector } from "react-redux"
 import Delete from "../../Components/Alert/Delete"
-import Modal from "../../Components/ProductForm/Modal"
+import Modal from "../../Components/ProductForm/ModalProducts"
 import "../Dashboard.css"
-import { updateProduct } from '../../redux/Actions/Actions';
+import { updateProduct } from "../../redux/Actions/Actions"
 
 
 export default function DataTable() {
-    const State = useSelector((state) => state.Products)        
-    const finalArray = State.map((product) => {return ( {id: product._id, name: product.name, description: product.description, brand: product.brand.name, brand2: product.brand._id ,category: product.category.name, category2: product.category._id , price: product.price, stock: product.stock} )})
+    const dispatch = useDispatch();
+
+    const State = useSelector((state) => state.Products)   
+    const finalArray = State && State.map((product) => {return ( {id: product._id, name: product.name, description: product.description, brand: product.brand.name, brand2: product.brand._id ,category: product.category.name, category2: product.category._id , price: product.price, stock: product.stock, enabled: product.enabled} )})
+    useEffect(() => {}, [State, finalArray])
+
     const [open, setOpen] = useState(false)
     const [info, setInfo] = useState({})
+    
     let modal
 
-    const dispatch = useDispatch()
 
     const deleteProduct = (e, params) => {
         Delete(params.row.id)
@@ -56,7 +60,7 @@ export default function DataTable() {
         { field: 'brand', headerName: 'Brand', width: 120 },
         { field: 'stock', headerName: 'Stock', type: 'number', width: 70},
         { field: 'price', headerName: 'Price', type: 'number', width: 90},
-        { field: 'enabled', headerName: 'Enabled', width: 110},
+        { field: 'enabled', headerName: 'Enabled', width: 100},
         {
             field: 'actions',
             type: 'actions',
@@ -91,8 +95,7 @@ export default function DataTable() {
     return (
         <>
         <div id="table" style={{ height: 525, width: '98%', backgroundColor: '#fff', borderRadius: "20px"}}>
-            {finalArray.length > 0 ?
-            
+            {finalArray && finalArray.length > 0 ?
             <DataGrid
             
             rows={finalArray}

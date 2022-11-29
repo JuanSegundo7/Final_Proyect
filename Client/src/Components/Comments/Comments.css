@@ -1,0 +1,21 @@
+#button-send {
+  height: 5%;
+  width: 5%;
+  border-radius: 10px;
+  background-color: var(--brown);
+  color: #fff;
+  padding: 7px 12px;
+  box-shadow: 0 2.5px 7.5px rgb(0 0 0 / 10%);
+  margin: 0 5px;
+  border: none;
+  cursor: pointer;
+}
+
+#textArea-comment {
+  width: 790px;
+  height: 88px;
+  border: none;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}

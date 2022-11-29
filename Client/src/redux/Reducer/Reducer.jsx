@@ -29,6 +29,7 @@ import {
   UPDATE_PRODUCT,
   CLEAN_BRANDS,
   GET_COMMENTS,
+  POST_COMMENT,
 } from "../Actions/Actions";
 
 const initialState = {
@@ -114,6 +115,7 @@ const rootReducer = (state = initialState, action) => {
     case MATCH_FAVORITE: {
       const allProducts = state.Products;
       const favorites =
+        allProducts &&
         allProducts.length &&
         state.Favorites?.map((fav) => {
           return allProducts?.find((p) => p._id === fav);
@@ -136,23 +138,18 @@ const rootReducer = (state = initialState, action) => {
       let itemInCart = state.cart.find((product) => {
         return product._id === newCoffe._id;
       });
-
       return itemInCart
         ? {
             ...state,
-            cart:
-              // [
-              // ...state.cart, //ACA SACO LA COPIA Y EL ARRAY PORQUE SINO SE GUARADABA COMO UN ARRAY NUEVO ([..[]])
-              state.cart.map((product) => {
-                return product._id === newCoffe._id
-                  ? {
-                      ...product,
-                      quantity: product.quantity + 1,
-                      stock: product.stock - 1,
-                    }
-                  : product;
-              }),
-            // ],
+            cart: state.cart.map((product) => {
+              return product._id === newCoffe._id
+                ? {
+                    ...product,
+                    quantity: product.quantity + 1,
+                    // stock: product.stock - 1,
+                  }
+                : product;
+            }),
             update: state.update + 1,
           }
         : {
@@ -169,12 +166,12 @@ const rootReducer = (state = initialState, action) => {
 
       if (findProduct.quantity > 1) {
         findProduct.quantity = findProduct.quantity - 1;
-        findProduct.stock = findProduct.stock + 1;
+        // findProduct.stock = findProduct.stock + 1;
         return {
           ...state,
           cart: [...state.cart],
         };
-      } else if (findProduct.quantity < 1) {
+      } else if (findProduct.quantity === 0) {
         const filterCart = allCart.filter(
           (coffe) => coffe._id !== action.payload
         );
@@ -235,7 +232,6 @@ const rootReducer = (state = initialState, action) => {
       // cambio el stock y lo guardo en mi estado global
       return {
         ...state,
-        Products: action.payload,
       };
     }
 
@@ -423,10 +419,14 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case GET_COMMENTS:
-      console.log("llegue reducer");
       return {
         ...state,
         Comments: action.payload,
+      };
+
+    case POST_COMMENT:
+      return {
+        ...state,
       };
 
     default:

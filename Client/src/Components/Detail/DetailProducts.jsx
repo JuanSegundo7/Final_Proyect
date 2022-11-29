@@ -2,16 +2,14 @@ import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import {
-  getOneProduct,
-  cleanDetail,
-  addToCart,
-} from "../../redux/Actions/Actions";
+import { getOneProduct, cleanDetail, addToCart } from "../../redux/Actions/Actions";
 import AddCart from "../Alert/AddProduct"
+import Stars from "../Detail/Stars"
 import "./Detail.css";
 
+
 export default function DetailProduct() {
-  window.scrollTo(0, 250);
+  window.scrollTo(0, 0);
 
   const dispatch = useDispatch();
   const product = useSelector((state) => state.Product);
@@ -26,7 +24,7 @@ export default function DetailProduct() {
     dispatch(getOneProduct(idCoffee.id));
 
     return () => {
-      dispatch(cleanDetail()); // para que se limpie el estado de detalle cuando lo saco y caundo aprete otro se ponga el nuevo y no qeude ese dilay del anterior
+      dispatch(cleanDetail()); // para que se limpie el estado de detalle cuando lo saco y cuando apriete otro se ponga el nuevo y no quede ese delay del anterior
     };
   }, [dispatch]);
 
@@ -34,32 +32,18 @@ export default function DetailProduct() {
     <article id="containerDetail">
       {Object.keys(product).length ? (
         <>
+        <article id="container-row">
           <img src={product.image && product.image.url} className="imgDetail" />
           <article id="detail_flex_info">
             <h2>{product.name.toUpperCase()}</h2>
             <p>Price: US${product.price}</p>
-            <p>{product.description}</p>
             <p>
-              Type:{" "}
-              {product.grinding_type ? (
-                product.grinding_type
-              ) : (
-                <p>There is note type available</p>
-              )}
-            </p>
-            <p>
-              Brand:{" "}
-              {!product.brand
-                ? "There is not name provided"
-                : product.brand.name.toUpperCase()}
-            </p>
-            <p>
-              Average Rating:{" "}
               {(!product.total_accumulated || !product.total_purchases || !product.total_purchases>0)
-                ? "This product has not been rated yet"
-                : product.total_accumulated / product.total_purchases}
+                ? "This product has not been rated yet "
+                : <p><Stars average={product.total_accumulated / product.total_purchases}/> ({product.total_purchases})</p>          
+              }
+                
             </p>
-            <p>Stock: {product.stock} units</p>
             <button
               type="submit"
               id="button-cart"
@@ -72,7 +56,48 @@ export default function DetailProduct() {
               </svg>
             </button>
           </article>
-        </>
+        </article>
+        <article>
+          <h2>Description</h2>
+        <p>{product.description}</p>
+          </article>
+        <article id="characteristics">
+          <h2>Characteristics</h2>
+          <div>
+          {/* <table >
+            <tbody>
+            <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            </tbody>
+          </table> */}
+            <p>
+              Brand:{" "}
+              {!product.brand
+                ? "There is not name provided"
+                : product.brand.name.toUpperCase()}
+            </p>
+            <p>
+              Type:{" "}
+              {product.grinding_type ? (
+                product.grinding_type.toUpperCase()
+              ) : (
+                <p>There is note type available</p>
+              )}
+            </p>
+            <p>Stock: {product.stock} units</p>
+          </div>
+        </article>
+          </>
       ) : (
         <h1>Sorry there was an error :(</h1>
       )}
