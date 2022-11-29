@@ -4,6 +4,7 @@ import { postComment } from "../../redux/Actions/Actions";
 import { useState } from "react";
 import DetailComment from "./DetailCardComment";
 import { useNavigate } from "react-router-dom";
+import "./Comments.css";
 
 export default function CreateComments() {
   const [input, setInput] = useState("");
@@ -45,7 +46,7 @@ export default function CreateComments() {
       </div>
       {user.cart &&
         user.cart.map((product) => {
-          console.log(product);
+          // console.log(product);
           return (
             <DetailComment
               img={
@@ -67,9 +68,13 @@ export default function CreateComments() {
           {" "}
           Let us know what you thought of the page's service, if you found what
           you were looking for and more...{" "}
-          <input onChange={(e) => handleOnChange(e)} />
         </h3>
-        <button type="submit">Ok</button>
+        <div>
+          <textarea onChange={(e) => handleOnChange(e)} id="textArea-comment" />
+        </div>
+        <button type="submit" id="button-send">
+          Ok
+        </button>
       </form>
     </div>
   );

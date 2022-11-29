@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
-  clearCart,
   removeAllToCart,
   removeOneToCart,
   updateUser,
@@ -14,7 +13,6 @@ export default function CardCart(props) {
   const UserDb = useSelector((state) => state.User);
   const cart = useSelector((state) => state.cart);
   const products = useSelector((state) => state.Products);
-  // const stock = 0
   const findProduct = products.find((product) => product._id === props._id);
 
   function addOne(e) {
@@ -59,7 +57,7 @@ export default function CardCart(props) {
               <p>{props.quantity}</p>
               <button onClick={(e) => addOne(e)}>+</button>
             </div>
-            <p id="card-stock">{props.stock - 1} available</p>
+            <p id="card-stock">{props.stock} available</p>
           </div>
           <p id="cart-card-price">${props.price * props.quantity}</p>
         </div>
