@@ -4,7 +4,13 @@ import { BsStarFill, BsStar, BsStarHalf } from "react-icons/bs";
 export default function Stars({average}) {
   
   let parteEntera = Math.trunc(average)
-  let parteDecimal = average%parteEntera;
+  let parteDecimal = 0;
+  if (parteEntera>0){
+    parteDecimal = average%parteEntera;
+  }else{
+    parteDecimal = average%1;
+  }
+  
   const starArray = [0,0,0,0,0]
   
   for (let i=0;i<parteEntera;i++){
@@ -18,7 +24,7 @@ export default function Stars({average}) {
       starArray[parteEntera]=0
   }
   
-  //console.log("starArray",starArray)
+  console.log("starArray",starArray)
   
 
   return (
