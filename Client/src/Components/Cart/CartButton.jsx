@@ -20,8 +20,6 @@ export default function Cart({ id }) {
     dispatch(addToCart(id));
   }
 
-  // findProduct.stock === 0 && setDisabled(true);
-
   useEffect(() => {
     if (allCart.length) {
       localStorage.setItem("Cart-pf", JSON.stringify(allCart));
