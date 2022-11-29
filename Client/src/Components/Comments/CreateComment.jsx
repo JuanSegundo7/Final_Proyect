@@ -66,8 +66,8 @@ export default function CreateComments() {
       <form onSubmit={(e) => handleOnSubmit(e)}>
         <h3>
           {" "}
-          Let us know what you thought of the page's service, if you found what
-          you were looking for and more...{" "}
+          Let us know what you think about our service! We really hope you've found what you were looking for and more...
+          {" "}
         </h3>
         <div>
           <textarea onChange={(e) => handleOnChange(e)} id="textArea-comment" />
