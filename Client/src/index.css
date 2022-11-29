@@ -12,21 +12,21 @@
   --light-blue: #e7ebf0;
 }
 
-.button-dashboard{
+.button-dashboard {
   padding: 1em 2em;
   width: 200px;
   border-radius: 15px;
   cursor: pointer;
   color: #fff;
   border: none;
-  background-color: var(--brown)
+  background-color: var(--brown);
 }
 
-body::-webkit-scrollbar{
+body::-webkit-scrollbar {
   width: 2px;
 }
 
-body::-webkit-scrollbar-thumb{
+body::-webkit-scrollbar-thumb {
   background: var(--brown);
   border-radius: 20px;
   overflow: hidden;

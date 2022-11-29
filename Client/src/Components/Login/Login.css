@@ -47,68 +47,69 @@
   fill: #000;
 }
 
-#wrapper-container #form-user{
-    padding: 2em;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
+#wrapper-container #form-user {
+  padding: 2em;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
-#wrapper-container form{
-    padding: 2em;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+#wrapper-container form {
+  padding: 2em;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
-
-#wrapper-container form fieldset{
-    margin: 0;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    border: none;
-    justify-content: space-around;
+#wrapper-container form fieldset {
+  margin: 0;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  border: none;
+  justify-content: space-around;
 }
 
 #wrapper-container label {
   margin: 0.5em 0;
 }
 
-#wrapper-container form input, #wrapper-container form textarea, #wrapper-container form select{
-    padding: 1em;
-    width: 135px;
-    border-radius: 12px;
-    border: none;
-    box-shadow: var(--shadow);
+#wrapper-container form input,
+#wrapper-container form textarea,
+#wrapper-container form select {
+  padding: 1em;
+  width: 135px;
+  border-radius: 12px;
+  border: none;
+  box-shadow: var(--shadow);
 }
 
-#wrapper-container form select{
-    width: 250px;
+#wrapper-container form select {
+  width: 250px;
 }
 
-#wrapper-container #form-user fieldset, #wrapper-container #form-user input{
-    width: 90%;
+#wrapper-container #form-user fieldset,
+#wrapper-container #form-user input {
+  width: 90%;
 }
 
-
-#wrapper-container #flex-buttons-modal{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
+#wrapper-container #flex-buttons-modal {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 }
 
-#wrapper-container form textarea{
-    height: 142px;
-    width: 500px;
-    font-size: 15px;
+#wrapper-container form textarea {
+  height: 142px;
+  width: 500px;
+  font-size: 15px;
 }
 
 #wrapper-container form fieldset p {
@@ -151,6 +152,23 @@ textarea:focus {
   background-color: rgb(42, 140, 173);
 }
 
-#login-btn-google:hover{
-    cursor: pointer;
+#login-btn-google:hover {
+  cursor: pointer;
+}
+
+.button-login {
+  border-radius: 10px;
+  background-color: var(--grey);
+  color: #fff;
+  padding: 7px 12px;
+  box-shadow: 0 2.5px 7.5px rgb(0 0 0 / 10%);
+  margin: 0 5px;
+  border: none;
+  cursor: pointer;
+  transition: 0.7s;
+}
+
+.button-login:hover {
+  background-color: var(--brown);
+  transition: 1s;
 }
