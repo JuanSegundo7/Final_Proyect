@@ -90,7 +90,7 @@
 
 
 
-.containerInfo  .logos  a {
+.containerInfo > .logos > a {
   cursor: pointer;
   text-decoration: none;
   color: black;
