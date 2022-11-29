@@ -12,6 +12,7 @@ import {
   sendEmail,
   updateProduct,
   getProducts,
+  getComments,
 } from "../../redux/Actions/Actions";
 import CommentsCarousel from "../Comments/Comments";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -84,6 +85,9 @@ export default function Home() {
     }
     
   }, [updateFilter]);
+  useEffect(()=>{
+    dispatch(getComments())
+  },[updateFilter])
 
   return (
     <section id="Home">

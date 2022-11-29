@@ -93,9 +93,7 @@ export const updateProduct = (id, body) => {
     if (id) {
       try {
         await axios.put(`${baseUrl}products/${id}`, body);
-        return dispatch({
-          type: UPDATE_PRODUCT,
-        });
+        return dispatch(getProducts())
       } catch (error) {
         console.log("error", error);
       }
@@ -237,12 +235,8 @@ export const updateUser = (id, body) => {
   return async function (dispatch) {
     if (id) {
       try {
-        let resp = await axios.put(`${baseUrl}users/${id}`, body);
-        //console.log("soy resp.data en el action:",resp.data)
-        return dispatch({
-          type: UPDATE_USER,
-          payload: resp.data,
-        });
+        await axios.put(`${baseUrl}users/${id}`, body);
+        return dispatch(getUsers())
       } catch (error) {
         console.log("error", error);
       }

@@ -232,7 +232,6 @@ const rootReducer = (state = initialState, action) => {
       // cambio el stock y lo guardo en mi estado global
       return {
         ...state,
-        Products: action.payload,
       };
     }
 
@@ -428,6 +427,7 @@ const rootReducer = (state = initialState, action) => {
     case POST_COMMENT:
       return {
         ...state,
+        updateFilter: state.updateFilter + 1,
       };
 
     default:
