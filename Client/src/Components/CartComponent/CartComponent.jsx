@@ -15,7 +15,6 @@ export default function CartComponent() {
   const [disabled, setDisabled] = useState(true);
   const { isAuthenticated } = useAuth0();
   const datosEnMiBD = useSelector((state) => state.User);
-  console.log("SPY CART:", allCart);
 
   let precioTotal = 0;
   let total = 0;
