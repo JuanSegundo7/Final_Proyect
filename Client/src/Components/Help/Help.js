@@ -6,7 +6,9 @@ const Help = () => {
 
   const handleClick = () => {
     setState(1);
-    window.location.assign("https://tigercoffee.vercel.app/about");
+    const baseUrl=process.env.REACT_APP_BASE_FRONT_URL
+    window.location.assign(baseUrl+"about");
+    //window.location.assign("https://tigercoffee.vercel.app/about");
   };
 
   return (
