@@ -71,7 +71,7 @@
 }
 
 #user-img {
-  max-width: 3em;
+  max-width: 3.5em;
   border-radius: 50%;
 }
 
@@ -118,10 +118,10 @@
   z-index: 99;
 }
 
-/* .nav.active img {
-  -webkit-filter: invert(100%); /* Safari/Chrome 
+.nav.active #logo img{
+  -webkit-filter: invert(100%); /* Safari/Chrome */
   filter: invert(100%);
-} */
+} 
 
 .nav.active .number {
   color: #fff;

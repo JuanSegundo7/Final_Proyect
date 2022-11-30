@@ -60,7 +60,9 @@ export const GET_COMMENTS = "GET_COMMENTS";
 
 export const POST_COMMENT = "POST_COMMENT";
 
-const baseUrl = `http://localhost:3001/`;
+const baseUrl=process.env.REACT_APP_BASE_API_URL
+ //const baseUrl = `http://localhost:3001/`;
+//const baseUrl = `https://pf-tiger-coffee-back-production.up.railway.app/`;
 
 /*****************************************************************************************************/
 
@@ -87,13 +89,11 @@ export const postProduct = (payload) => {
 };
 
 export const updateProduct = (id, body) => {
-  console.log("id:",id)
-  console.log("body:",body)
   return async function (dispatch) {
     if (id) {
       try {
         await axios.put(`${baseUrl}products/${id}`, body);
-        return dispatch(getProducts())
+        return dispatch(getProducts());
       } catch (error) {
         console.log("error", error);
       }
@@ -244,7 +244,7 @@ export const updateUser = (id, body) => {
     if (id) {
       try {
         await axios.put(`${baseUrl}users/${id}`, body);
-        return dispatch(getUsers())
+        return dispatch(getUsers());
       } catch (error) {
         console.log("error", error);
       }
@@ -359,6 +359,6 @@ export const getComments = () => (dispatch) => {
 export const postComment = (payload) => (dispatch) => {
   // console.log(payload,"soy payload en actions");
   return axios
-    .post(`${baseUrl}comments`,payload)
+    .post(`${baseUrl}comments`, payload)
     .then((data) => dispatch({ type: POST_COMMENT, payload: data.data }));
 };

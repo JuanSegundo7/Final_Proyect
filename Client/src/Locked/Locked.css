@@ -1,6 +1,28 @@
-.userLocked{
+#Locked{
+    background-image: url(./Locked.jpg);
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* .userLocked{
     padding: 0;
     margin: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: auto;
+} */
+
+#button-contact{
+    margin: 5em 1em 0 0;
+    border: none;
+    font-size: 20px;
+    color: #fff;
+    padding: 1em 2em;
+    border-radius: 15px;
+    cursor: pointer;
+    background-color:#EB1C36
 }

@@ -4,6 +4,7 @@ import { postProduct, postImage } from '../../redux/Actions/Actions';
 import { useNavigate } from 'react-router-dom';
 import "./ProductForm.css";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 
 const Form = () => {
@@ -200,7 +201,12 @@ const Form = () => {
             "image": input.image,
             "brand": input.brand
         }));
-
+        Swal.fire({
+            title:"New Product Created!",
+            text:'A new product has just been created',
+            icon:'success',
+            timer: 2000
+        })
         navigate("/");
     }
 
@@ -278,6 +284,18 @@ const Form = () => {
                     {error.stock && <span>{error.stock}</span>}
                 </fieldset>
                 <fieldset className="product-flex-info">
+                    <select onChange={handleCategory} value={input.category}>
+                        <option disabled>Category</option>
+                        {allCategories.map(unaOpcion => <option value={unaOpcion._id} key={unaOpcion._id}>{unaOpcion.name}</option>)}
+                    </select>
+                </fieldset>
+                <fieldset className="product-flex-info">
+                    <select onChange={handleBrand} value={input.brand}>
+                        <option>Brand (Optional)</option>
+                        {allBrands.map(unaOpcion => <option value={unaOpcion._id} key={unaOpcion._id}>{unaOpcion.name}</option>)}
+                    </select>
+                </fieldset>
+                <fieldset className="product-flex-info">
                     <input
                         disabled={disableOriginAndGrinding}
                         name="origin"
@@ -295,18 +313,7 @@ const Form = () => {
                         onChange={(e) => handleGrindingType(e)} />
                     {error.grindingtype && <span>{error.grindingtype}</span>}
                 </fieldset>
-                <fieldset className="product-flex-info">
-                    <select onChange={handleCategory} value={input.category}>
-                        <option disabled>Category</option>
-                        {allCategories.map(unaOpcion => <option value={unaOpcion._id} key={unaOpcion._id}>{unaOpcion.name}</option>)}
-                    </select>
-                </fieldset>
-                <fieldset className="product-flex-info">
-                    <select onChange={handleBrand} value={input.brand}>
-                        <option>Brand (Optional)</option>
-                        {allBrands.map(unaOpcion => <option value={unaOpcion._id} key={unaOpcion._id}>{unaOpcion.name}</option>)}
-                    </select>
-                </fieldset>
+                
             </fieldset>
                 <fieldset className="product-flex-info" id="product-image" disabled={disableImageUpload}>
                     <label className="custom-file-upload">

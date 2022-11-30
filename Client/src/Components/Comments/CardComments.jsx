@@ -2,7 +2,7 @@ import React from "react";
 import Error from "../Card/imgs/error.webp"
 import "../Card/Card.css";
 
-export function Card({ comment,user }) {
+export function Card({ comment, user }) {
 
   return (
       <div id="CardComment">
