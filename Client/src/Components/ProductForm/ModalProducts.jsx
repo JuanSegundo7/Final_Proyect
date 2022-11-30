@@ -10,7 +10,7 @@ const ModalComponent = ({ openModal, closeModal, info, close }) => {
   const [brandId, setBrandId] = useState(info.brand2);
 
   const handleChange = (e) => {
-    console.log(e, "E");
+    //console.log(e, "E");
     const { name, value } = e.target;
 
     setSelectedProduct((prevState) => ({
@@ -49,7 +49,7 @@ const ModalComponent = ({ openModal, closeModal, info, close }) => {
       price: parseInt(selectedProduct.price),
       stock: parseInt(selectedProduct.stock),
     };
-    console.log("data", data);
+    //console.log("data", data);
     dispatch(updateProduct(info.id, data));
     close(false);
     e.preventDefault();
