@@ -1,4 +1,5 @@
 #About {
+  margin-top: -50px;
   height: 100%;
   width: 100%;
   background-color: #c4ccde;
@@ -49,12 +50,14 @@
 }
 
 #icono{
-  width: 60px;
-  height: 60px;
+  width: 55px;
+  height: 55px;
+  background-color: transparent;
 }
 
 
 .containerInfo {
+
   align-content: center;
   width: 15%;
   display: flex;
