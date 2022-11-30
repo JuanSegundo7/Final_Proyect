@@ -188,16 +188,16 @@ export default function ({ info, order }) {
           <div>
             <select onChange={(e) => handleOrderStock(e)} id="order2">
               <option disabled={disabled.orderStock}>Stock</option>
-              <option value="ASC"> Less Stock</option>
-              <option value="DES"> More Stock</option>
+              <option value="ASC"> Low to High</option>
+              <option value="DES"> High to Low</option>
             </select>
           </div>
 
           <div>
             <select onChange={(e) => handleOrderPrice(e)} id="order3">
               <option disabled={disabled.orderPrice}>Price</option>
-              <option value="ASC"> Less Price</option>
-              <option value="DES"> More Price</option>
+              <option value="ASC"> Low to High</option>
+              <option value="DES"> High to Low</option>
             </select>
           </div>
         </div>
