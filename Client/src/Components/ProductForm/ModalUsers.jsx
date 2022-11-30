@@ -5,10 +5,10 @@ import { updateUser } from "../../redux/Actions/Actions";
 const ModalComponent = ({ info, close }) => {
   const dispatch = useDispatch();
 
-  console.log(info);
+  //console.log(info);
 
   const handleChange = (e) => {
-    console.log(e, "E");
+    //console.log(e, "E");
     const { name, value } = e.target;
 
     setSelectedProduct((prevState) => ({

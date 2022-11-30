@@ -60,8 +60,9 @@ export const GET_COMMENTS = "GET_COMMENTS";
 
 export const POST_COMMENT = "POST_COMMENT";
 
-const baseUrl = `http://localhost:3001/`;
-// const baseUrl = `https://pf-tiger-coffee-back-production.up.railway.app/`;
+const baseUrl = process.env.REACT_APP_BASE_API_URL;
+//const baseUrl = `http://localhost:3001/`;
+//const baseUrl = `https://pf-tiger-coffee-back-production.up.railway.app/`;
 
 /*****************************************************************************************************/
 
@@ -79,8 +80,8 @@ export const getProducts = () => async (dispatch) => {
 export const postProduct = (payload) => {
   return async function (dispatch) {
     try {
-      const response = await axios.post(`${baseUrl}products`, payload);
-      return response;
+      await axios.post(`${baseUrl}products`, payload);
+      return dispatch(getProducts());
     } catch (error) {
       console.log("error", error);
     }
@@ -239,6 +240,7 @@ export const matchFavorite = () => (dispatch) => {
 // USERS
 
 export const updateUser = (id, body) => {
+  //console.log('body', body)
   return async function (dispatch) {
     if (id) {
       try {
