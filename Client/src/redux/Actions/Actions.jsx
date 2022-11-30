@@ -240,6 +240,7 @@ export const matchFavorite = () => (dispatch) => {
 // USERS
 
 export const updateUser = (id, body) => {
+  //console.log('body', body)
   return async function (dispatch) {
     if (id) {
       try {

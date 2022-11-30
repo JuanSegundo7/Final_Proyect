@@ -91,7 +91,7 @@ export default function ContainerInfo({ info, order }) {
               );
             })
           ) : (
-            <h1>There is nothing, sorry for that :(</h1>
+            <h1>You haven't selected any favorites so far</h1>
           )}
         </div>
       </section>

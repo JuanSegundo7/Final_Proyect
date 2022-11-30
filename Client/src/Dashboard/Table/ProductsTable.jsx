@@ -10,6 +10,7 @@ import Modal from "../../Components/ProductForm/ModalProducts"
 import "../Dashboard.css"
 import { updateProduct } from "../../redux/Actions/Actions"
 import ModalDelete from './ModalDelete';
+import Loader from '../../Components/Loader/Loader';
 
 
 export default function DataTable() {
@@ -89,7 +90,7 @@ export default function DataTable() {
                     onClick={(e) => editProduct(e, params)}
                     />
                 </Tooltip>,
-                <Tooltip title="Make disabled">
+                <Tooltip title="Make disabled/enabled">
                     <GridActionsCellItem
                     icon={<Clear />}
                     label="Toggle Admin"
@@ -112,7 +113,9 @@ export default function DataTable() {
             pageSize={8}
             rowsPerPageOptions={[7]}
             
-            /> : <h1>Cargando..</h1>
+            /> : 
+            <Loader/>
+
             }   
         </div>
         {modal}
