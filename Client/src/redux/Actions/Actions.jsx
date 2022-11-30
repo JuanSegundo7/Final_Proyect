@@ -87,13 +87,11 @@ export const postProduct = (payload) => {
 };
 
 export const updateProduct = (id, body) => {
-  console.log("id:",id)
-  console.log("body:",body)
   return async function (dispatch) {
     if (id) {
       try {
         await axios.put(`${baseUrl}products/${id}`, body);
-        return dispatch(getProducts())
+        return dispatch(getProducts());
       } catch (error) {
         console.log("error", error);
       }
@@ -244,7 +242,7 @@ export const updateUser = (id, body) => {
     if (id) {
       try {
         await axios.put(`${baseUrl}users/${id}`, body);
-        return dispatch(getUsers())
+        return dispatch(getUsers());
       } catch (error) {
         console.log("error", error);
       }
@@ -359,6 +357,6 @@ export const getComments = () => (dispatch) => {
 export const postComment = (payload) => (dispatch) => {
   // console.log(payload,"soy payload en actions");
   return axios
-    .post(`${baseUrl}comments`,payload)
+    .post(`${baseUrl}comments`, payload)
     .then((data) => dispatch({ type: POST_COMMENT, payload: data.data }));
 };
