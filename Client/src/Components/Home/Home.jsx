@@ -16,6 +16,7 @@ import {
 } from "../../redux/Actions/Actions";
 import CommentsCarousel from "../Comments/Comments";
 import { useAuth0 } from "@auth0/auth0-react";
+import Contact from "../Contact/Contact"
 import Swal from "sweetalert2";
 
 export default function Home() {
@@ -93,13 +94,14 @@ export default function Home() {
     <section id="Home">
       <Carousel />
       <ProductCarousel array={Coffees} title="Our Selection Of Coffees" />
+      <TigerInfo />
       <ProductCarousel
         array={CoffeeMaker}
         title="Our Selection Of Coffee Makers"
       />
-      <TigerInfo />
-      <ProductCarousel array={Accesories} title="Accessories" />
       <CommentsCarousel array={Comments} title="Comments" />
+      <ProductCarousel array={Accesories} title="Accessories" />
+      <Contact />
       <ProductCarousel array={Others} title="Other items" />
       <Help />
     </section>
