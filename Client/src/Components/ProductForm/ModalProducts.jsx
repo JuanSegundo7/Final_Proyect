@@ -115,7 +115,7 @@ const ModalComponent = ({ openModal, closeModal, info, close }) => {
           ></textarea>
           <fieldset id="flex-buttons-modal">
             <button className="button-dashboard" onClick={handleSubmit}>
-              Edit
+              Save
             </button>
             <button
               className="button-dashboard-cancel"
