@@ -15,10 +15,12 @@ export default function About() {
         </a>
         <p>
           We are Henry graduates who, in the final project instance, decided to
-          start an e-commerce because most of us like coffee. It was a very nice
-          stage where we learned how to work as a team and overcome different
-          conflicts. For this project we decided to use the following
-          technologies: React, Redux, Mongoose/MongoDb, Javascript and Css
+          start an e-commerce because most of us liked coffee. It was a very nice
+          stage in where we had to learn how to work as a team and overcome different
+          conflicts, both personal and regarding the project itself. 
+          Regarding this project, we decided to use the following technologies: 
+          React, Redux, Mongoose/MongoDb, Javascript, Express, Css
+          and several libraries such as Auth0, MercadoPago, Nodemailer, Material UI among others.
         </p>
       </div>
       <section className="cards">
