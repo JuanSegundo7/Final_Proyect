@@ -1,0 +1,51 @@
+#contact{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--background-color-top);  
+    height: 700px;  
+    justify-content: center;
+}
+
+#contact h2{
+    margin: 0.2em 0;
+    font-size: 50px;
+    font-family: 'Pacifico', cursive;
+    color: var(--brown);
+}
+
+#contact form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#contact input, #contact textarea{
+    box-shadow: var(--shadow);
+    background-color: #fff;
+    padding: 1em;
+    width: 550px;
+    border-radius: 12px;
+    border: none;
+    margin: 1em 0;
+}
+
+#contact textarea{
+    height: 200px;
+}
+
+#error-form{
+    display: flex;
+    align-items: center;
+    margin: 0.5em 0;
+    color:  #D0342C;
+    font-size: 30px;
+}
+
+#error-form svg{
+    width: 1em;
+    margin: 0 0.3em;
+    fill: #D0342C;
+}

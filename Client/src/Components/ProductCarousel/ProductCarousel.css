@@ -6,7 +6,7 @@
 #Product-carousel-comments{
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     margin: 2em 0;
     padding: 0;
     background-color: var(--background-color-top);
