@@ -20,7 +20,7 @@ export default function About() {
           conflicts, both personal and regarding the project itself. 
           Regarding this project, we decided to use the following technologies: 
           React, Redux, Mongoose/MongoDb, Javascript, Express, Css
-          and several libraries such as Auth0, MercadoPago, Nodemailer, Material UI among others.
+          and several libraries such as Auth0, MercadoPago, Nodemailer, Material UI, Cloudinary among others.
         </p>
       </div>
       <section className="cards">

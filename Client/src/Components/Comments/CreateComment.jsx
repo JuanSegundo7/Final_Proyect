@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postComment, updateProduct, getOneProduct } from "../../redux/Actions/Actions";
+import { postComment, updateProduct } from "../../redux/Actions/Actions";
 import { useState } from "react";
 import DetailCardComment from "./DetailCardComment";
 import { useNavigate } from "react-router-dom";
@@ -24,7 +24,7 @@ export default function CreateComments() {
   
   const handleOnChange = (e) => {
     setInput(e.target.value);
-    console.log(input);
+    //console.log(input);
   };
   
   const handleOnSubmit = (e) => {

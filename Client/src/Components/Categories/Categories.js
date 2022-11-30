@@ -1,7 +1,7 @@
 import React from "react";
 import "./Categories.css";
 import Dropdown from "../Dropdown/Dropdown";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Categories = ({navbar}) => {
