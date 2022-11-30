@@ -11,9 +11,9 @@ export default function TigerInfo() {
       <div id="tiger_left_side">
         <h1>Tiger coffee</h1>
         <p>
-          Tiger coffee is a project that was designed and thought exclusively
+          Tiger coffee is a project designed and thought exclusively
           for you, coffee lovers. We hope you like our page and especially our
-          products, you can leave us feedback once the purchase is made so you
+          products. You can leave us a feedback once the purchase is made so you
           help us grow and find the best quality products for you.
         </p>
       </div>
