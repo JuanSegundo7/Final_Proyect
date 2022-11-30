@@ -6,11 +6,11 @@
 #Product-carousel-comments{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     margin: 2em 0;
     padding: 0;
     background-color: var(--background-color-top);
-    height: 700px;
+    height: 650px;
 }
 
 #Product-carousel #card, #Product-carousel-comments #card{
