@@ -117,7 +117,7 @@ export default function DetailProduct() {
                 )}) : <h1>There is nothing</h1>}
               </article>
             </article>
-  </>) : (<h1>Sorry there was an error :( </h1>)}
+  </>) : (<Loader/>)}
   </section>)
 }
 
