@@ -121,7 +121,7 @@
 .nav.active #logo img{
   -webkit-filter: invert(100%); /* Safari/Chrome */
   filter: invert(100%);
-} */
+} 
 
 .nav.active .number {
   color: #fff;
