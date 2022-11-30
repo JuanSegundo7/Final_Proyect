@@ -12,13 +12,15 @@ import { updateUser } from '../../redux/Actions/Actions';
 
 import "../Dashboard.css"
 import ModalDelete from './ModalDelete';
+import Loader from '../../Components/Loader/Loader';
+import Clear from '@mui/icons-material/Clear';
 
 
 
 export default function DataTable() {
 
     const State = useSelector((state) => state.Users)        
-    const finalArray = State.map((user) => {return ( {id: user._id, name: user.name, lastname: user.lastname, admin: user.admin} )})
+    const finalArray = State.map((user) => {return ( {id: user._id, name: user.name, lastname: user.lastname, admin: user.admin, enabled: user.enabled} )})
     useEffect(() => {}, [State, finalArray])
 
     const dispatch = useDispatch()
@@ -63,6 +65,17 @@ export default function DataTable() {
             }
         }
     }
+
+    const toggleEnable = (e, id) => {
+        const findProduct = State?.find((user) => user._id === id);
+        if(findProduct.enabled){
+            findProduct.enabled = false;
+            dispatch(updateUser(id,{enabled:findProduct.enabled}));
+        } else {
+            findProduct.enabled = true;
+            dispatch(updateUser(id,{enabled:findProduct.enabled}));
+        }
+    }
     if(open == true) modal = <ModalUsers close={setOpen} info={info}/>
 
     const columns = [
@@ -70,6 +83,7 @@ export default function DataTable() {
         { field: 'name', headerName: 'Name', width: 250 },
         { field: 'lastname', headerName: 'Last name', width: 250 },
         { field: 'admin', headerName: 'Admin', width: 120 },
+        { field: 'enabled', headerName: 'Enabled', width: 120 },
         {
             field: 'actions',
             type: 'actions',
@@ -96,6 +110,13 @@ export default function DataTable() {
                     onClick={(e) => toggleAdmin(e ,params.id)}
                     />
                 </Tooltip>,
+                <Tooltip title="Make disabled/enabled">
+                <GridActionsCellItem
+                    icon={<Clear />}
+                    label="Make disabled/enabled"
+                    onClick={(e) => toggleEnable(e, params.id)}
+                />
+                </Tooltip>,
 
             ],
         },
@@ -115,7 +136,7 @@ export default function DataTable() {
                 pageSize={8}
                 rowsPerPageOptions={[7]}
                 /> 
-                : <h1>Cargando..</h1>
+                : <Loader/>
             }
         </div>
         {modal}
