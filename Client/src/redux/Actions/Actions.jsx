@@ -78,8 +78,8 @@ export const getProducts = () => async (dispatch) => {
 export const postProduct = (payload) => {
   return async function (dispatch) {
     try {
-      const response = await axios.post(`${baseUrl}products`, payload);
-      return response;
+      await axios.post(`${baseUrl}products`, payload);
+      return dispatch(getProducts());
     } catch (error) {
       console.log("error", error);
     }
