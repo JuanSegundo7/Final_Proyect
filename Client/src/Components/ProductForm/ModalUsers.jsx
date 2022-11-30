@@ -57,7 +57,7 @@ const ModalComponent = ({ info, close }) => {
           </fieldset>
           <fieldset id="flex-buttons-modal">
             <button className="button-dashboard" onClick={handleSubmit}>
-              Edit
+              Save
             </button>
             <button className="button-dashboard" onClick={() => close(false)}>
               Cancel

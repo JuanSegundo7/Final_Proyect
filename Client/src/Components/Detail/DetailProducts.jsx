@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import RandomizerDetail from "../Functions/RandomizerDetail"
 import { useParams } from "react-router-dom";
 import {
   getOneProduct,
@@ -9,6 +10,7 @@ import {
 } from "../../redux/Actions/Actions";
 import Stars from "../Detail/Stars";
 import "./Detail.css";
+import {Card} from "../Card/CardForDetail"
 import CartButton from "../Cart/CartButton";
 
 export default function DetailProduct() {
@@ -16,6 +18,15 @@ export default function DetailProduct() {
 
   const dispatch = useDispatch();
   const product = useSelector((state) => state.Product);
+  const Products = useSelector((state) => state.Products);
+  let array
+
+  console.log(product)
+
+  if(Products) array = RandomizerDetail(product._id, Products)
+
+  console.log(array);
+
   const idCoffee = useParams();
 
   // const handleAddToCart = (e) => {
@@ -32,7 +43,7 @@ export default function DetailProduct() {
   }, [dispatch]);
 
   return (
-    <article id="containerDetail">
+    <section id="containerDetail">
       {Object.keys(product).length ? (
         <>
           <article id="container-row">
@@ -73,50 +84,50 @@ export default function DetailProduct() {
               <CartButton id={idCoffee.id} />
             </article>
           </article>
-          <article>
+          <article id="Description">
             <h2>Description</h2>
             <p>{product.description}</p>
           </article>
           <article id="characteristics">
             <h2>Characteristics</h2>
-            <div>
-              {/* <table >
-            <tbody>
-            <tr>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-            </tbody>
-          </table> */}
-              <p>
-                Brand:{" "}
-                {!product.brand
-                  ? "There is not name provided"
-                  : product.brand.name.toUpperCase()}
-              </p>
-              <p>
-                Type:{" "}
-                {product.grinding_type ? (
-                  product.grinding_type.toUpperCase()
-                ) : (
-                  <p>There is note type available</p>
-                )}
-              </p>
-              <p>Stock: {product.stock} units</p>
-            </div>
+            <div id="flex-characteristics">
+              <div className="div-info">
+                <p className="left-info background-1">Brand</p>
+                <p className="right-info">{!product.brand ? "There is not name provided": product.brand.name.toUpperCase()}</p>
+              </div>
+              <div className="div-info">
+                <p className="left-info background-2">Type</p>
+                <p className="right-info">{product.grinding_type ? (product.grinding_type.toUpperCase()) : (<p>There is note type available</p>)}</p>
+              </div>
+              <div className="div-info">
+                <p className="left-info background-1">Stock</p>
+                <p className="right-info"> {product.stock} units</p>
+              </div>
+          </div>
           </article>
-        </>
-      ) : (
-        <h1>Sorry there was an error :(</h1>
-      )}
-    </article>
-  );
+          <article id="OtherProducts">
+            <h1>Other Products you may be interested</h1>
+            <article id="flex-detail-products"> 
+            {array[0] !== undefined ? array.map((cardCoffe) => {
+                return (
+                  <Card
+                  img={
+                    !cardCoffe.image || cardCoffe.image === null
+                    ? Error
+                    : cardCoffe.image.url
+                  }
+                  img2={cardCoffe.image && cardCoffe.image}
+                  key={cardCoffe._id}
+                  _id={cardCoffe._id}
+                  name={cardCoffe.name}
+                  origin={cardCoffe.origin}
+                  type={cardCoffe.grinding_type}
+                  price={cardCoffe.price}
+                  />
+                )}) : <h1>There is nothing</h1>}
+              </article>
+            </article>
+  </>) : (<h1>Sorry there was an error :( </h1>)}
+  </section>)
 }
+
