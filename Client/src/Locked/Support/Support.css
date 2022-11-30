@@ -1,0 +1,68 @@
+#contact-support {
+  background-image: url(../img/LockedContact.jpg);
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#contact-support h2 {
+  margin: 0.2em 0;
+  font-size: 50px;
+  font-family: "Pacifico", cursive;
+  color: var(--brown);
+}
+
+#contact-support form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: -18%;
+}
+
+#contact-support input,
+#contact-support textarea {
+  box-shadow: var(--shadow);
+  background-color: #fff;
+  padding: 1em;
+  width: 550px;
+  border-radius: 12px;
+  border: none;
+  margin: 1em 0;
+}
+
+.button-back {
+  padding: 1em 2em;
+  width: 200px;
+  border-radius: 15px;
+  cursor: pointer;
+  color: #fff;
+  border: none;
+  background-color: var(--brown);
+  transition: 0.7s;
+  margin-left: 30px;
+}
+
+#container-button-support {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#error-form-support {
+  display: flex;
+  align-items: center;
+  margin: 0.5em 0;
+  color: #d0342c;
+  font-size: 30px;
+}
+
+#error-form-support svg {
+  width: 1em;
+  margin: 0 0.3em;
+  fill: #d0342c;
+}
