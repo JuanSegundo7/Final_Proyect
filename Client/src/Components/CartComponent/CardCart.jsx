@@ -1,11 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addToCart,
-  removeAllToCart,
-  removeOneToCart,
-  updateUser,
-} from "../../redux/Actions/Actions";
+import { addToCart, removeAllToCart, removeOneToCart, updateUser } from "../../redux/Actions/Actions";
 
 export default function CardCart(props) {
   const dispatch = useDispatch();

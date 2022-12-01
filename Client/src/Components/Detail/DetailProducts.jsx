@@ -1,16 +1,11 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import RandomizerDetail from "../Functions/RandomizerDetail"
 import { useParams } from "react-router-dom";
-import {
-  getOneProduct,
-  cleanDetail,
-  /* addToCart, */
-} from "../../redux/Actions/Actions";
+import RandomizerDetail from "../Functions/RandomizerDetail"
+import { getOneProduct, cleanDetail } from "../../redux/Actions/Actions";
 import Stars from "../Detail/Stars";
 import "./Detail.css";
-import {Card} from "../Card/CardForDetail"
+import { Card } from "../Card/CardForDetail"
 import CartButton from "../Cart/CartButton";
 import Loader from "../Loader/Loader";
 
