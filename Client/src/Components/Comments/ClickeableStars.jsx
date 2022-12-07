@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BsStarFill, BsStar, BsStarHalf } from "react-icons/bs";
+import { BsStarFill, BsStar } from "react-icons/bs";
 import { useState } from "react";
 
 

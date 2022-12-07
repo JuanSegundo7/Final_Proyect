@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardCart from "./CardCart";
 import Error from "../Card/imgs/error.webp";
-import { getOneUser, updateUser } from "../../redux/Actions/Actions";
+import { updateUser, linkMp } from "../../redux/Actions/Actions";
 import "./CartComponent.css";
-import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { linkMp } from "../../redux/Actions/Actions";
 
 export default function CartComponent() {
   const allCart = useSelector((state) => state.cart);

@@ -1,14 +1,24 @@
 import React from 'react'
 import { useForm, ValidationError } from '@formspree/react';
-import "./Contact.css"
-export default function Contact() {
-    const [state, handleSubmit] = useForm("moqbolbr");
+import "./Contact.css";
+import Swal from "sweetalert2";
 
-    if (state.succeeded) {
-        return <h2>Tu mensaje ha sido enviado con exito! :)</h2>;
+
+export default function Contact() {
+
+    const [state, handleSubmit] = useForm("moqbolbr");
+    
+    if (state.succeeded && state.submitting===false) {
+        state.succeeded = false;
+        Swal.fire({
+            title:"Message Sent!",
+            text:'Your message has been sent successfully!',
+            icon:'success',
+            timer: 2000
+        })
     }
 
-    console.log(state)
+    //console.log(state)
 
   return (
     <section id="contact">
