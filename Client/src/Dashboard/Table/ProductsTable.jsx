@@ -14,10 +14,22 @@ import Loader from '../../Components/Loader/Loader';
 
 
 export default function DataTable() {
+
     const dispatch = useDispatch();
 
     const State = useSelector((state) => state.Products)   
-    const finalArray = State && State.map((product) => {return ( {id: product._id, name: product.name, description: product.description, brand: product.brand.name, brand2: product.brand._id ,category: product.category.name, category2: product.category._id , price: product.price, stock: product.stock, enabled: product.enabled} )})
+    const finalArray = State && State.length && State.map((product) => {return ( {
+        id: product._id, 
+        name: product.name, 
+        description: product.description, 
+        brand: product.brand ? product.brand.name : "", //since brand is an optional field within the DB, we should control whether it has something or not
+        brand2: product.brand? product.brand._id : "", //same case
+        category: product.category.name, 
+        category2: product.category._id, 
+        price: product.price, 
+        stock: product.stock, 
+        enabled: product.enabled
+    } )})
     useEffect(() => {}, [State, finalArray])
 
     const [open, setOpen] = useState(false)
