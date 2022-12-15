@@ -97,7 +97,7 @@ const Header = () => {
           myLocalStgCart && myLocalStgCart.length
             ? myLocalStgCart.map((unObjeto) => {
                 let Obj = {};
-                Obj._id = unObjeto;
+                Obj._id = unObjeto._id;
                 Obj.quantity = unObjeto.quantity;
                 return Obj;
               })
