@@ -86,23 +86,25 @@ const Header = () => {
     }
 
     if (datosEnMiBD.hasOwnProperty("error")) {
+      const myLocalStgCart = localStorage.getItem("Cart-pf");
       const userToBeCreated = {
         _id: user.email,
         name: user.given_name ? user.given_name : user.email, //for local users only
         lastname: user.family_name ? user.family_name : user.email, //for local users only
         picture: user.picture,
         favorites: favArray,
-        // ABAJO
         cart:
-          myLocalStgCart && myLocalStgCart.length
+          myLocalStgCart &&
+          myLocalStgCart.length &&
+          Array.isArray(myLocalStgCart)
             ? myLocalStgCart.map((unObjeto) => {
+                /* console.log("soy un Objeto,", unObjeto); */
                 let Obj = {};
                 Obj._id = unObjeto._id;
                 Obj.quantity = unObjeto.quantity;
                 return Obj;
               })
             : [],
-        // ^^ ME PARECE QUE HAY QUE CORREGIR ESTO ^^
       };
       dispatch(postUser(userToBeCreated));
     }
